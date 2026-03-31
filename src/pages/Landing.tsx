@@ -59,30 +59,54 @@ function TypewriterHeading({ text, className = "", as = "h2", once = true }: { t
   const [displayText, setDisplayText] = useState(reduceMotion ? text : "");
   const [isTyping, setIsTyping] = useState(false);
   const hasTypedRef = useRef(false);
+  const hoverTimerRef = useRef<{ timeout?: number; interval?: number }>({});
+
+  const startTyping = () => {
+    if (reduceMotion) { setDisplayText(text); return; }
+    setDisplayText("");
+    setIsTyping(true);
+    let index = 0;
+    clearTypingTimers();
+    hoverTimerRef.current.timeout = window.setTimeout(() => {
+      hoverTimerRef.current.interval = window.setInterval(() => {
+        index += 1;
+        setDisplayText(text.slice(0, index));
+        if (index >= text.length) {
+          if (hoverTimerRef.current.interval !== undefined) window.clearInterval(hoverTimerRef.current.interval);
+          setIsTyping(false);
+        }
+      }, 28);
+    }, 80);
+  };
+
+  const clearTypingTimers = () => {
+    if (hoverTimerRef.current.timeout !== undefined) window.clearTimeout(hoverTimerRef.current.timeout);
+    if (hoverTimerRef.current.interval !== undefined) window.clearInterval(hoverTimerRef.current.interval);
+  };
 
   useEffect(() => {
     if (reduceMotion) { setDisplayText(text); setIsTyping(false); hasTypedRef.current = true; return; }
     if (!isInView) { if (!once && !hasTypedRef.current) setDisplayText(""); return; }
     if (once && hasTypedRef.current) { setDisplayText(text); setIsTyping(false); return; }
     hasTypedRef.current = true;
-    setDisplayText("");
-    setIsTyping(true);
-    let index = 0;
-    let intervalId: number | undefined;
-    const timeoutId = window.setTimeout(() => {
-      intervalId = window.setInterval(() => {
-        index += 1;
-        setDisplayText(text.slice(0, index));
-        if (index >= text.length) { if (intervalId !== undefined) window.clearInterval(intervalId); setIsTyping(false); }
-      }, 28);
-    }, 120);
-    return () => { window.clearTimeout(timeoutId); if (intervalId !== undefined) window.clearInterval(intervalId); };
+    startTyping();
+    return clearTypingTimers;
   }, [isInView, once, reduceMotion, text]);
 
+  const handleMouseEnter = () => {
+    if (reduceMotion || isTyping) return;
+    startTyping();
+  };
+
   const HeadingTag = as;
-  const renderedText = reduceMotion || hasTypedRef.current ? displayText || text : displayText || "\u00A0";
+  const renderedText = displayText || "\u00A0";
   return (
-    <HeadingTag ref={headingRef} className={["bright-typewriter-heading", isTyping ? "is-typing" : "", className].filter(Boolean).join(" ")}>
+    <HeadingTag
+      ref={headingRef}
+      className={["bright-typewriter-heading", isTyping ? "is-typing" : "", className].filter(Boolean).join(" ")}
+      onMouseEnter={handleMouseEnter}
+      style={{ cursor: "default" }}
+    >
       {renderedText}
     </HeadingTag>
   );
