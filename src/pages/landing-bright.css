@@ -792,7 +792,7 @@
   width: 6px;
   height: 6px;
   border-radius: 999px;
-  background: var(--accent-red);
+  background: #a78bfa;
   animation: brightBounce 1.4s infinite ease-in-out both;
 }
 
