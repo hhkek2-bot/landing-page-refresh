@@ -589,10 +589,6 @@
   gap: 12px;
 }
 
-.bright-chat-body {
-  position: relative;
-  z-index: 1;
-}
 
 .bright-status-dot {
   width: 12px;
