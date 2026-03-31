@@ -220,7 +220,7 @@ function EquipmentIllustration({ type }: { type: "excavator-1" | "excavator-2" |
   );
 }
 
-
+function StepGraphic({ visual }: { visual: ProcessStep["visual"] }) {
   if (visual === "profile") return (<div className="bright-step-graphic"><div className="bright-anim-ring" /><div className="bright-anim-avatar"><User size={20} /></div></div>);
   if (visual === "ingest") return (<div className="bright-step-graphic"><div className="bright-anim-doc bright-doc-one" /><div className="bright-anim-doc bright-doc-two" /><div className="bright-anim-folder" /></div>);
   if (visual === "rules") return (<div className="bright-step-graphic"><div className="bright-anim-slider-bg" /><div className="bright-anim-slider-knob" /></div>);
