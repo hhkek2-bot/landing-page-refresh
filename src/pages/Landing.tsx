@@ -592,12 +592,10 @@ export default function Landing() {
 
       {/* Logo Strip */}
       <section className="bright-logo-strip" aria-label="Trusted companies">
-        <div className="bright-container bright-logo-marquee-shell">
-          <div className="bright-logo-marquee">
-            {[0, 1].map((loopIndex) => (
-              <ul className="bright-logo-list" key={loopIndex} aria-hidden={loopIndex === 1}>
-                {logoWordmarks.map((logo) => (<li key={`${loopIndex}-${logo.name}`} className="bright-logo-chip">{renderLogoWordmark(logo)}</li>))}
-              </ul>
+        <div className="bright-container">
+          <div className="bright-logo-grid-static">
+            {logoWordmarks.map((logo) => (
+              <div key={logo.name} className="bright-logo-grid-item">{renderLogoWordmark(logo)}</div>
             ))}
           </div>
         </div>
