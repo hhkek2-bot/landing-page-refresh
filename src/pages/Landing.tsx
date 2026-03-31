@@ -304,8 +304,32 @@ function StatCard({ stat }: { stat: StatItem }) {
     </article>
   );
 }
+function FaqAccordionItem({ question, answer }: { question: string; answer: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className={`bright-faq-item ${isOpen ? "bright-faq-item-open" : ""}`}>
+      <button type="button" className="bright-faq-item-trigger" onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen}>
+        <span>{question}</span>
+        <span className="bright-faq-item-icon">{isOpen ? "[−]" : "[+]"}</span>
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="bright-faq-item-content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+          >
+            <p>{answer}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
-function SolutionPanel({ activeItem, reduceMotion, mobile = false }: { activeItem: PainResolution; reduceMotion: boolean; mobile?: boolean }) {
+
   return (
     <div className={`bright-solution-panel ${mobile ? "bright-solution-panel-mobile" : ""}`.trim()} aria-live="polite">
       <div className="bright-solution-glow" aria-hidden="true" />
