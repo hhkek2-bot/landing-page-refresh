@@ -24,6 +24,7 @@ type PricingPoint = { label: string; value: string };
 type ChatCardData = {
   title: string;
   image: string;
+  illustrationType?: "excavator-1" | "excavator-2" | "excavator-3" | "breaker";
   rating: string;
   verified: boolean;
   location: string;
@@ -160,9 +161,9 @@ const chatScript: ChatScriptStep[] = [
   { type: "ai", delay: 0, text: "For a 3-month KL project, I recommend the <strong>Hitachi ZAXIS 200</strong>. I also prepared a quick rental view for you:" },
   {
     type: "ai-cards", delay: 1200, cards: [
-      { title: "2020 CAT 320 Crawler Excavator", image: "/cat-320.jpg", rating: "4.9/5", verified: true, location: "Kuala Lumpur Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 520" }, { label: "Weekly", value: "RM 2,900" }, { label: "Monthly", value: "RM 9,800" }], action: "Get Quote" },
-      { title: "2019 Hitachi ZX200-7 Crawler Excavator", image: "https://images.pexels.com/photos/14452156/pexels-photo-14452156.jpeg?auto=compress&cs=tinysrgb&w=600", rating: "4.8/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 500" }, { label: "Weekly", value: "RM 2,800" }, { label: "Monthly", value: "RM 9,500" }], action: "Get Quote" },
-      { title: "2021 SANY SY215C Crawler Excavator", image: "/sany-sy215.jpg", rating: "4.7/5", verified: true, location: "Johor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 460" }, { label: "Weekly", value: "RM 2,600" }, { label: "Monthly", value: "RM 8,800" }], action: "Get Quote" },
+      { title: "2020 CAT 320 Crawler Excavator", image: "/cat-320.jpg", illustrationType: "excavator-1" as const, rating: "4.9/5", verified: true, location: "Kuala Lumpur Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 520" }, { label: "Weekly", value: "RM 2,900" }, { label: "Monthly", value: "RM 9,800" }], action: "Get Quote" },
+      { title: "2019 Hitachi ZX200-7 Crawler Excavator", image: "", illustrationType: "excavator-2" as const, rating: "4.8/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 500" }, { label: "Weekly", value: "RM 2,800" }, { label: "Monthly", value: "RM 9,500" }], action: "Get Quote" },
+      { title: "2021 SANY SY215C Crawler Excavator", image: "", illustrationType: "excavator-3" as const, rating: "4.7/5", verified: true, location: "Johor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 460" }, { label: "Weekly", value: "RM 2,600" }, { label: "Monthly", value: "RM 8,800" }], action: "Get Quote" },
     ],
   },
   { type: "user", delay: 4500, text: "Do you have compatible hydraulic breaker attachments and Monday delivery?" },
@@ -170,11 +171,55 @@ const chatScript: ChatScriptStep[] = [
   { type: "ai", delay: 0, text: "Yes. NPK GH9 is compatible and available. Monday morning delivery to KL is available." },
   {
     type: "ai-card", delay: 1100, data: {
-      title: "2022 NPK GH9 Hydraulic Breaker Attachment", image: "https://images.pexels.com/photos/30519990/pexels-photo-30519990.jpeg?auto=compress&cs=tinysrgb&w=720&h=720&fit=crop", rating: "5.0/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg",
+      title: "2022 NPK GH9 Hydraulic Breaker", image: "", illustrationType: "breaker" as const, rating: "5.0/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg",
       pricing: [{ label: "Daily", value: "RM 150" }, { label: "Weekly", value: "RM 600" }, { label: "Monthly", value: "RM 1,200" }], action: "Add to Active Quote",
     },
   },
 ];
+
+function EquipmentIllustration({ type }: { type: "excavator-1" | "excavator-2" | "excavator-3" | "breaker" }) {
+  const colors = {
+    "excavator-1": { body: "#F5A623", arm: "#E8961C", track: "#3D3D3D", cabin: "#2C2C2C" },
+    "excavator-2": { body: "#E87040", arm: "#D4612E", track: "#3D3D3D", cabin: "#2C2C2C" },
+    "excavator-3": { body: "#F5C842", arm: "#E0B630", track: "#3D3D3D", cabin: "#2C2C2C" },
+    breaker: { body: "#E63B2E", arm: "#333", track: "#3D3D3D", cabin: "#555" },
+  };
+  const c = colors[type];
+  if (type === "breaker") {
+    return (
+      <svg viewBox="0 0 200 160" fill="none" className="bright-equip-svg">
+        <rect x="60" y="20" width="28" height="100" rx="4" fill={c.body} />
+        <rect x="64" y="120" width="20" height="30" rx="2" fill={c.arm} />
+        <rect x="70" y="148" width="8" height="12" rx="1" fill="#888" />
+        <rect x="50" y="10" width="48" height="16" rx="3" fill={c.cabin} />
+        <rect x="66" y="40" width="16" height="6" rx="2" fill="rgba(255,255,255,0.3)" />
+        <rect x="66" y="56" width="16" height="6" rx="2" fill="rgba(255,255,255,0.2)" />
+        <circle cx="74" cy="15" r="3" fill="#F5A623" opacity="0.8" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 200 160" fill="none" className="bright-equip-svg">
+      {/* Tracks */}
+      <rect x="20" y="120" width="120" height="28" rx="14" fill={c.track} />
+      <circle cx="36" cy="134" r="10" fill="#555" /><circle cx="60" cy="134" r="7" fill="#555" />
+      <circle cx="80" cy="134" r="7" fill="#555" /><circle cx="100" cy="134" r="7" fill="#555" />
+      <circle cx="124" cy="134" r="10" fill="#555" />
+      {/* Body */}
+      <rect x="30" y="82" width="100" height="40" rx="6" fill={c.body} />
+      <rect x="32" y="84" width="40" height="28" rx="4" fill={c.cabin} />
+      <rect x="36" y="88" width="32" height="18" rx="3" fill="rgba(180,220,255,0.35)" />
+      {/* Arm */}
+      <line x1="100" y1="90" x2="155" y2="50" stroke={c.arm} strokeWidth="8" strokeLinecap="round" />
+      <line x1="155" y1="50" x2="180" y2="90" stroke={c.arm} strokeWidth="6" strokeLinecap="round" />
+      {/* Bucket */}
+      <path d="M172 86 L188 92 L184 104 L168 98 Z" fill={c.arm} />
+      {/* Details */}
+      <rect x="90" y="88" width="30" height="6" rx="2" fill="rgba(0,0,0,0.15)" />
+      <circle cx="78" cy="108" r="4" fill="rgba(0,0,0,0.12)" />
+    </svg>
+  );
+}
 
 function StepGraphic({ visual }: { visual: ProcessStep["visual"] }) {
   if (visual === "profile") return (<div className="bright-step-graphic"><div className="bright-anim-ring" /><div className="bright-anim-avatar"><User size={20} /></div></div>);
@@ -483,7 +528,7 @@ export default function Landing() {
     if (item.type === "ai-card" && item.data) return (
       <div className="bright-chat-row" key={item.id}><div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
         <div className="bright-chat-msg bright-chat-msg-ai bright-card-msg"><div className="bright-chat-card">
-          <div className="bright-card-image-wrap"><img src={item.data.image} alt={item.data.title} /><div className="bright-card-badges"><span className="bright-badge-rating"><Star size={13} fill="currentColor" color="currentColor" /> {item.data.rating}</span>{item.data.verified && <span className="bright-badge-verified"><CheckCircle2 size={14} /> Verified</span>}</div></div>
+          <div className="bright-card-image-wrap">{item.data.illustrationType ? <EquipmentIllustration type={item.data.illustrationType} /> : <img src={item.data.image} alt={item.data.title} />}<div className="bright-card-badges"><span className="bright-badge-rating"><Star size={13} fill="currentColor" color="currentColor" /> {item.data.rating}</span>{item.data.verified && <span className="bright-badge-verified"><CheckCircle2 size={14} /> Verified</span>}</div></div>
           <div className="bright-card-body"><p className="bright-card-title">{item.data.title}</p><p className="bright-card-location"><img src={item.data.flag} alt="country" /> {item.data.location}</p><div className="bright-price-grid">{item.data.pricing.map((p) => (<div className="bright-price-col" key={p.label}><span className="bright-price-label">{p.label}</span><span className="bright-price-value">{p.value}</span></div>))}</div><button type="button" className="bright-card-action">{item.data.action}</button></div>
         </div></div>
       </div>
@@ -492,7 +537,7 @@ export default function Landing() {
       <div className="bright-chat-row" key={item.id}><div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
         <div className="bright-cards-row">{item.cards.map((card, ci) => (
           <div className="bright-chat-card bright-chat-card-sm" key={ci}>
-            <div className="bright-card-image-wrap"><img src={card.image} alt={card.title} /><div className="bright-card-badges"><span className="bright-badge-rating"><Star size={11} fill="currentColor" color="currentColor" /> {card.rating}</span>{card.verified && <span className="bright-badge-verified"><CheckCircle2 size={12} /> Verified</span>}</div></div>
+            <div className="bright-card-image-wrap">{card.illustrationType ? <EquipmentIllustration type={card.illustrationType} /> : <img src={card.image} alt={card.title} />}<div className="bright-card-badges"><span className="bright-badge-rating"><Star size={11} fill="currentColor" color="currentColor" /> {card.rating}</span>{card.verified && <span className="bright-badge-verified"><CheckCircle2 size={12} /> Verified</span>}</div></div>
             <div className="bright-card-body"><p className="bright-card-title">{card.title}</p><p className="bright-card-location"><img src={card.flag} alt="country" /> {card.location}</p><div className="bright-price-grid">{card.pricing.map((p) => (<div className="bright-price-col" key={p.label}><span className="bright-price-label">{p.label}</span><span className="bright-price-value">{p.value}</span></div>))}</div><button type="button" className="bright-card-action">{card.action}</button></div>
           </div>
         ))}</div>
