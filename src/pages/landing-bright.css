@@ -1318,101 +1318,115 @@
   .bright-launch-trail, .bright-launch-stars circle { animation: none; }
 }
 
-.bright-metrics {
-  padding: clamp(80px, 10vw, 120px) 0;
-  background: var(--bg-canvas);
+/* ===== Stats Section (Stripe-inspired) ===== */
+.bright-stats-section {
+  padding: clamp(80px, 12vw, 140px) 0;
+  background: linear-gradient(180deg, #f8f9fc 0%, #eef1f8 100%);
   border-top: 1px solid var(--border-subtle);
 }
 
-.bright-metrics-heading { max-width: 980px; margin-bottom: 52px; }
-.bright-metrics-heading h2 { margin: 0; color: var(--text-heading); font-size: clamp(2.6rem, 4.6vw, 4.5rem); line-height: 1.0; letter-spacing: -0.05em; }
+.bright-stats-title-block {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 56px;
+}
 
-/* Top row: story + featured metric */
-.bright-metrics-top {
+.bright-stats-title-block h2 {
+  margin: 0;
+  color: #0a2540;
+  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+.bright-stats-accent-line {
+  width: 64px;
+  height: 4px;
+  margin: 28px auto 0;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #635bff, #a855f7, #ec4899);
+}
+
+.bright-stats-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 24px;
-  margin-bottom: 24px;
-  align-items: stretch;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(99, 91, 255, 0.15);
+  border-bottom: 1px solid rgba(99, 91, 255, 0.15);
 }
 
-.bright-metrics-story {
-  border-radius: 24px;
-  padding: 40px;
-  background: linear-gradient(180deg, rgb(var(--color-bg-rgb) / 0.99), rgb(var(--color-surface-rgb) / 0.96));
-  border: 1px solid var(--border-subtle);
-  box-shadow: 0 20px 60px -30px rgb(var(--color-text-primary-rgb) / 0.08);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.bright-stat-card {
+  padding: 48px 32px;
+  text-align: center;
+  position: relative;
+  cursor: default;
+  transition: background 0.3s ease, transform 0.25s ease;
 }
 
-.bright-metrics-story-copy, .bright-metrics-story-list { position: relative; z-index: 1; }
+.bright-stat-card:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(99, 91, 255, 0.2), transparent);
+}
 
-.bright-metrics-kicker {
-  margin: 0 0 14px;
-  color: var(--brand-accent);
-  font-size: 0.82rem;
+.bright-stat-card:hover {
+  background: rgba(99, 91, 255, 0.04);
+}
+
+.bright-stat-value {
+  margin: 0 0 12px;
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: linear-gradient(135deg, #0a2540 0%, #425a80 50%, #635bff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bright-stat-card:hover .bright-stat-value {
+  background: linear-gradient(135deg, #635bff 0%, #a855f7 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bright-stat-label {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  color: #0a2540;
+  letter-spacing: -0.01em;
 }
 
-.bright-metrics-story h3 { margin: 0 0 16px; max-width: 460px; color: var(--text-heading); font-size: clamp(1.8rem, 2.6vw, 2.6rem); line-height: 1.08; letter-spacing: -0.04em; }
-.bright-metrics-story-copy > p:last-child { margin: 0; max-width: 430px; color: var(--text-muted); font-size: 1rem; line-height: 1.72; }
-
-.bright-metrics-story-list { display: flex; flex-wrap: wrap; gap: 10px; max-width: 460px; margin-top: 28px; }
-.bright-metrics-story-list span {
-  display: inline-flex;
-  align-items: center;
-  padding: 9px 14px;
-  border-radius: 999px;
-  background: rgb(var(--color-secondary-rgb) / 0.08);
-  border: 1px solid rgb(var(--color-secondary-rgb) / 0.16);
-  color: var(--brand-accent);
+.bright-stat-sublabel {
+  margin: 0;
   font-size: 0.88rem;
-  font-weight: 500;
-}
-
-/* Metric cards (shared) */
-.bright-metric-card {
-  border-radius: 24px;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: linear-gradient(180deg, rgb(var(--color-bg-rgb) / 0.99), rgb(var(--color-surface-rgb) / 0.97));
-  border: 1px solid var(--border-subtle);
-  box-shadow: 0 16px 48px -28px rgb(var(--color-text-primary-rgb) / 0.08);
-}
-
-.bright-metric-card.bright-metric-featured {
-  min-height: 280px;
-}
-
-.bright-metric-head { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-.bright-metric-head svg { color: var(--brand-accent); flex-shrink: 0; }
-.bright-metric-head strong { font-size: clamp(2.4rem, 4vw, 3.6rem); line-height: 1; letter-spacing: -0.05em; color: var(--text-heading); white-space: nowrap; }
-.bright-metric-copy { margin-top: auto; }
-.bright-metric-card p { margin: 0 0 6px; font-size: 1.05rem; font-weight: 600; color: var(--text-heading); }
-.bright-metric-card small { color: var(--text-muted); font-size: 0.9rem; line-height: 1.55; display: block; }
-
-/* Bottom row: 3 metric cards in equal columns */
-.bright-metrics-bottom {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  line-height: 1.55;
+  color: #64748b;
+  max-width: 240px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 960px) {
-  .bright-metrics-top { grid-template-columns: 1fr; }
-  .bright-metrics-bottom { grid-template-columns: 1fr 1fr; }
+  .bright-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .bright-stat-card:nth-child(2)::after { display: none; }
+  .bright-stat-card:nth-child(1),
+  .bright-stat-card:nth-child(2) { border-bottom: 1px solid rgba(99, 91, 255, 0.12); }
 }
 
 @media (max-width: 600px) {
-  .bright-metrics-bottom { grid-template-columns: 1fr; }
-  .bright-metrics-story { padding: 28px 24px; }
-  .bright-metric-card { padding: 24px 20px; }
+  .bright-stats-grid { grid-template-columns: 1fr; }
+  .bright-stat-card::after { display: none !important; }
+  .bright-stat-card:not(:last-child) { border-bottom: 1px solid rgba(99, 91, 255, 0.12); }
+  .bright-stat-card { padding: 36px 24px; }
 }
 
 .bright-cta-section {
