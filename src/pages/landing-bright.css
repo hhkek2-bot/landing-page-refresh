@@ -431,14 +431,13 @@
 .bright-hero-mockup-wrap::after {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 140px;
-  background: linear-gradient(to bottom, transparent 0%, var(--bg-canvas) 100%);
+  bottom: 40px;
+  left: -10px;
+  right: -10px;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent 0%, var(--bg-canvas) 70%, var(--bg-canvas) 100%);
   z-index: 3;
   pointer-events: none;
-  border-radius: 0 0 24px 24px;
 }
 
 .bright-mockup-glow {
