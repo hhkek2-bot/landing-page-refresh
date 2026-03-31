@@ -309,13 +309,26 @@
   display: flex;
   align-items: flex-start;
   padding: 96px 0 0;
-  overflow: hidden;
+  overflow: visible;
   background:
     radial-gradient(ellipse 70% 50% at 15% 20%,  rgba(186, 104, 200, 0.18), transparent),
     radial-gradient(ellipse 55% 45% at 85% 15%,  rgba(129, 87, 255, 0.14), transparent),
     radial-gradient(ellipse 60% 55% at 70% 90%,  rgba(251, 191, 36,  0.12), transparent),
     radial-gradient(ellipse 50% 40% at 10% 80%,  rgba(66, 99, 235,   0.10), transparent),
     #f8f7ff;
+}
+
+/* Full-width fade from hero bg to white */
+.bright-hero::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 250px;
+  background: linear-gradient(to bottom, transparent 0%, #fff 100%);
+  z-index: 2;
+  pointer-events: none;
 }
 
 .bright-canvas-container {
