@@ -47,7 +47,7 @@ type RenderedChatItem = {
 type Feature = { icon: LucideIcon; title: string; body: string; variant?: "default" | "workflow" };
 type ProcessStep = { id: number; title: string; body: string; visual: "profile" | "ingest" | "rules" | "test" | "launch" };
 type LogoWordmark = { name: string; variant: "cat" | "komatsu" | "hitachi" | "volvo" | "liebherr" | "jcb" | "john-deere" | "sany" | "xcmg" | "bobcat" | "kubota" | "case" };
-type MetricHighlight = { icon: LucideIcon; value: string; label: string; subtitle: string };
+type MetricHighlight = { icon: LucideIcon; value: string; label: string; subtitle: string }; // kept for compat
 type FaqHighlight = { question: string; answer: string };
 type PainResolution = { title: string; description: string; impact: string; solutionTitle: string; solutionDescription: string; keyword: string };
 
