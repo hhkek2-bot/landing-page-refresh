@@ -478,37 +478,31 @@
 .bright-logo-strip {
   position: relative;
   z-index: 2;
-  margin-top: 24px;
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
-  background: linear-gradient(180deg, rgb(var(--color-bg-rgb) / 0.98) 0%, rgb(var(--color-surface-rgb) / 0.94) 100%);
+  padding: clamp(48px, 6vw, 80px) 0;
+  background: #fff;
 }
 
-.bright-logo-marquee-shell {
-  overflow: hidden;
+.bright-logo-grid-static {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
-.bright-logo-marquee {
+.bright-logo-grid-item {
   display: flex;
-  width: max-content;
-  will-change: transform;
-  animation: brightLogoMarquee 40s linear infinite;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
 }
 
-.bright-logo-list {
-  margin: 0;
-  padding: 28px 0;
-  list-style: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 46px;
-  flex-shrink: 0;
-  min-width: max-content;
+@media (max-width: 768px) {
+  .bright-logo-grid-static { grid-template-columns: repeat(3, 1fr); }
 }
-
-.bright-logo-chip {
-  display: inline-flex;
-  align-items: center;
+@media (max-width: 480px) {
+  .bright-logo-grid-static { grid-template-columns: repeat(2, 1fr); }
+  .bright-logo-grid-item { padding: 18px 12px; }
 }
 
 .bright-brand {
