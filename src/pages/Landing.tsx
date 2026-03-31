@@ -153,21 +153,21 @@ const painResolutions: PainResolution[] = [
 ];
 
 const chatScript: ChatScriptStep[] = [
-  { type: "user", delay: 1000, text: "I need a 20-ton excavator for a 3-month project in KL. What do you recommend?" },
-  { type: "typing", delay: 600, duration: 1800 },
+  { type: "user", delay: 1800, text: "I need a 20-ton excavator for a 3-month project in KL. What do you recommend?" },
+  { type: "typing", delay: 800, duration: 2800 },
   { type: "ai", delay: 0, text: "For a 3-month KL project, I recommend the <strong>Hitachi ZAXIS 200</strong>. I also prepared a quick rental view for you:" },
   {
-    type: "ai-cards", delay: 900, cards: [
+    type: "ai-cards", delay: 1200, cards: [
       { title: "2020 CAT 320 Crawler Excavator", image: "/cat-320.jpg", rating: "4.9/5", verified: true, location: "Kuala Lumpur Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 520" }, { label: "Weekly", value: "RM 2,900" }, { label: "Monthly", value: "RM 9,800" }], action: "Get Quote" },
       { title: "2019 Hitachi ZX200-7 Crawler Excavator", image: "https://images.pexels.com/photos/14452156/pexels-photo-14452156.jpeg?auto=compress&cs=tinysrgb&w=600", rating: "4.8/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 500" }, { label: "Weekly", value: "RM 2,800" }, { label: "Monthly", value: "RM 9,500" }], action: "Get Quote" },
       { title: "2021 SANY SY215C Crawler Excavator", image: "/sany-sy215.jpg", rating: "4.7/5", verified: true, location: "Johor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 460" }, { label: "Weekly", value: "RM 2,600" }, { label: "Monthly", value: "RM 8,800" }], action: "Get Quote" },
     ],
   },
-  { type: "user", delay: 3800, text: "Do you have compatible hydraulic breaker attachments and Monday delivery?" },
-  { type: "typing", delay: 700, duration: 1700 },
+  { type: "user", delay: 4500, text: "Do you have compatible hydraulic breaker attachments and Monday delivery?" },
+  { type: "typing", delay: 1000, duration: 2400 },
   { type: "ai", delay: 0, text: "Yes. NPK GH9 is compatible and available. Monday morning delivery to KL is available." },
   {
-    type: "ai-card", delay: 850, data: {
+    type: "ai-card", delay: 1100, data: {
       title: "2022 NPK GH9 Hydraulic Breaker Attachment", image: "https://images.pexels.com/photos/30519990/pexels-photo-30519990.jpeg?auto=compress&cs=tinysrgb&w=720&h=720&fit=crop", rating: "5.0/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg",
       pricing: [{ label: "Daily", value: "RM 150" }, { label: "Weekly", value: "RM 600" }, { label: "Monthly", value: "RM 1,200" }], action: "Add to Active Quote",
     },
@@ -351,14 +351,31 @@ export default function Landing() {
     return () => { window.cancelAnimationFrame(frameId); window.removeEventListener("resize", resize); };
   }, []);
 
-  // Chat script animation
+  // Chat script animation with word-by-word AI rendering
   useEffect(() => {
     let alive = true;
     const timers: number[] = [];
     const queue = (cb: () => void, delay: number) => { const id = window.setTimeout(() => { if (!alive) return; cb(); }, delay); timers.push(id); };
+
+    const typeAiText = (msgId: string, fullHtml: string, onDone: () => void) => {
+      // Strip HTML tags for word splitting, but preserve them in output
+      const words = fullHtml.split(/(?<=\s)|(?=\s)/);
+      let currentIndex = 0;
+      const typeNext = () => {
+        if (!alive) return;
+        if (currentIndex >= words.length) { onDone(); return; }
+        currentIndex++;
+        const partial = words.slice(0, currentIndex).join("");
+        setChatItems((prev) => prev.map((item) => item.id === msgId ? { ...item, text: partial } : item));
+        const delay = 25 + Math.random() * 35;
+        queue(typeNext, delay);
+      };
+      typeNext();
+    };
+
     const runStep = (index: number) => {
       if (!alive) return;
-      if (index >= chatScript.length) { queue(() => { setChatItems([]); runStep(0); }, 7000); return; }
+      if (index >= chatScript.length) { queue(() => { setChatItems([]); runStep(0); }, 8000); return; }
       const step = chatScript[index];
       queue(() => {
         if (step.type === "typing") {
@@ -367,13 +384,24 @@ export default function Landing() {
           queue(() => { setChatItems((prev) => prev.filter((i) => i.id !== typingId)); runStep(index + 1); }, step.duration);
           return;
         }
+        if (step.type === "ai" || step.type === "user") {
+          const ts = step as { type: "user" | "ai"; text: string };
+          const msgId = `msg-${Date.now()}-${index}`;
+          if (ts.type === "ai") {
+            setChatItems((prev) => [...prev, { id: msgId, type: "ai", text: "" }]);
+            typeAiText(msgId, ts.text, () => runStep(index + 1));
+          } else {
+            setChatItems((prev) => [...prev, { id: msgId, type: "user", text: ts.text }]);
+            runStep(index + 1);
+          }
+          return;
+        }
         if (step.type === "ai-card") setChatItems((prev) => [...prev, { id: `card-${Date.now()}-${index}`, type: "ai-card", data: step.data }]);
         else if (step.type === "ai-cards") setChatItems((prev) => [...prev, { id: `cards-${Date.now()}-${index}`, type: "ai-cards", cards: step.cards }]);
-        else { const ts = step as { type: "user" | "ai"; text: string }; setChatItems((prev) => [...prev, { id: `msg-${Date.now()}-${index}`, type: ts.type, text: ts.text }]); }
         runStep(index + 1);
       }, step.delay);
     };
-    queue(() => runStep(0), 1000);
+    queue(() => runStep(0), 1200);
     return () => { alive = false; timers.forEach((id) => window.clearTimeout(id)); };
   }, []);
 
@@ -459,7 +487,7 @@ export default function Landing() {
         <div className="bright-canvas-container"><canvas ref={canvasRef} /></div>
         <div className="bright-container bright-hero-centered">
           <div className="bright-hero-content bright-hero-content-centered">
-            <h1 className="bright-text-gradient"><span className="bright-typewriter">The 24/7 AI Sales Agent</span><br />for Equipment Businesses</h1>
+            <h1 className="bright-text-gradient">The 24/7 AI Sales Agent<br />for Equipment Businesses</h1>
             <p className="bright-subtitle">Deploy a digital sales expert that answers technical questions, recommends suitable machinery, and converts inquiries into qualified leads instantly.</p>
             <div className="bright-hero-actions">
               <Link to="/" className="bright-btn bright-btn-primary">Build Your AI Agent <ArrowRight size={18} /></Link>
