@@ -24,6 +24,7 @@ type PricingPoint = { label: string; value: string };
 type ChatCardData = {
   title: string;
   image: string;
+  illustrationType?: "excavator-1" | "excavator-2" | "excavator-3" | "breaker";
   rating: string;
   verified: boolean;
   location: string;
