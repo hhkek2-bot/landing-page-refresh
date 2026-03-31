@@ -260,7 +260,7 @@ function StatCard({ stat }: { stat: StatItem }) {
   );
 }
 
-
+function SolutionPanel({ activeItem, reduceMotion, mobile = false }: { activeItem: PainResolution; reduceMotion: boolean; mobile?: boolean }) {
   return (
     <div className={`bright-solution-panel ${mobile ? "bright-solution-panel-mobile" : ""}`.trim()} aria-live="polite">
       <div className="bright-solution-glow" aria-hidden="true" />
