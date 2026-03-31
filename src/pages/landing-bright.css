@@ -546,7 +546,7 @@
 .bright-chat-mockup {
   position: relative;
   z-index: 1;
-  background: linear-gradient(135deg, #fff9e6 0%, #fff 30%, #f0f4ff 60%, #fef0f5 85%, #fff 100%);
+  background: linear-gradient(145deg, #f3e8ff 0%, #ede4ff 18%, #e8e0ff 35%, #f5f0ff 55%, #fce4ec 75%, #fff0f5 90%, #fff 100%);
   border: 1.5px solid rgba(34, 21, 0, 0.08);
   border-radius: 22px;
   box-shadow:
