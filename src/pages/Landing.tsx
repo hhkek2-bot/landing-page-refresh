@@ -47,7 +47,7 @@ type RenderedChatItem = {
 type Feature = { icon: LucideIcon; title: string; body: string; variant?: "default" | "workflow" };
 type ProcessStep = { id: number; title: string; body: string; visual: "profile" | "ingest" | "rules" | "test" | "launch" };
 type LogoWordmark = { name: string; variant: "cat" | "komatsu" | "hitachi" | "volvo" | "liebherr" | "jcb" | "john-deere" | "sany" | "xcmg" | "bobcat" | "kubota" | "case" };
-type MetricHighlight = { icon: LucideIcon; value: string; label: string; subtitle: string };
+type MetricHighlight = { icon: LucideIcon; value: string; label: string; subtitle: string }; // kept for compat
 type FaqHighlight = { question: string; answer: string };
 type PainResolution = { title: string; description: string; impact: string; solutionTitle: string; solutionDescription: string; keyword: string };
 
@@ -129,11 +129,13 @@ function renderLogoWordmark(logo: LogoWordmark) {
   }
 }
 
-const metricHighlights: MetricHighlight[] = [
-  { icon: Database, value: "21x", label: "Higher Lead Qualification", subtitle: "when responding under 5 mins vs 30 mins" },
-  { icon: Zap, value: "< 15s", label: "Typical AI Response Time", subtitle: "compared to industry average of days" },
-  { icon: Target, value: "3-4x", label: "Higher Conversion Rates", subtitle: "driven by rich conversational engagement" },
-  { icon: CheckCircle2, value: "2.5x", label: "Faster Quote Turnaround", subtitle: "from inquiry to quote-ready draft" },
+type StatItem = { value: string; numericEnd: number; suffix: string; prefix: string; label: string; sublabel: string };
+
+const statItems: StatItem[] = [
+  { value: "2–3x", numericEnd: 3, suffix: "x", prefix: "", label: "More Qualified Leads", sublabel: "Capture buyer intent, specs, and urgency from the first interaction" },
+  { value: "< 10s", numericEnd: 10, suffix: "s", prefix: "< ", label: "First Response Time", sublabel: "Engage every lead instantly — before competitors even reply" },
+  { value: "50%", numericEnd: 50, suffix: "%", prefix: "", label: "Faster Quote-Ready Output", sublabel: "From inquiry to structured, accurate quotation in one conversation" },
+  { value: "65%+", numericEnd: 65, suffix: "%+", prefix: "", label: "Open to AI-Guided Decisions", sublabel: "Buyers increasingly rely on AI — when backed by real data and logic" },
 ];
 
 const faqHighlights: FaqHighlight[] = [
@@ -211,6 +213,50 @@ function StepGraphic({ visual }: { visual: ProcessStep["visual"] }) {
         </g>
       </svg>
     </div>
+  );
+}
+function StatCard({ stat }: { stat: StatItem }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [displayNum, setDisplayNum] = useState(0);
+  const animRef = useRef<number | null>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, amount: 0.5 });
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    if (isInView && !hasAnimated) {
+      setHasAnimated(true);
+      setIsHovered(true); // trigger initial count
+    }
+  }, [isInView, hasAnimated]);
+
+  useEffect(() => {
+    if (!isHovered && hasAnimated) { setDisplayNum(stat.numericEnd); return; }
+    if (!isHovered) return;
+    const duration = 1200;
+    const start = performance.now();
+    const animate = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayNum(Math.round(eased * stat.numericEnd));
+      if (progress < 1) animRef.current = requestAnimationFrame(animate);
+    };
+    setDisplayNum(0);
+    animRef.current = requestAnimationFrame(animate);
+    return () => { if (animRef.current) cancelAnimationFrame(animRef.current); };
+  }, [isHovered, stat.numericEnd, hasAnimated]);
+
+  return (
+    <article
+      ref={cardRef}
+      className="bright-stat-card"
+      role="listitem"
+      onMouseEnter={() => { setIsHovered(false); requestAnimationFrame(() => setIsHovered(true)); }}
+    >
+      <p className="bright-stat-value">{stat.prefix}{displayNum}{stat.suffix}</p>
+      <p className="bright-stat-label">{stat.label}</p>
+      <p className="bright-stat-sublabel">{stat.sublabel}</p>
+    </article>
   );
 }
 
@@ -305,10 +351,6 @@ export default function Landing() {
   const [activePainIndex, setActivePainIndex] = useState(0);
   const [connectorPosition, setConnectorPosition] = useState({ top: 140, left: 0, width: 0 });
   const reduceMotion = useReducedMotion();
-
-  const featuredMetric = metricHighlights[0];
-  const secondaryMetrics = metricHighlights.slice(1);
-  const FeaturedMetricIcon = featuredMetric.icon;
 
   // Canvas particle animation
   useEffect(() => {
@@ -559,30 +601,16 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Metrics */}
-      <section className="bright-metrics">
+      {/* Metrics — Stripe-inspired */}
+      <section className="bright-stats-section">
         <div className="bright-container">
-          <div className="bright-metrics-heading"><TypewriterHeading text={"Built to convert more equipment inquiries into\nrevenue-ready conversations."} /></div>
-          <div className="bright-metrics-top">
-            <article className="bright-metrics-story">
-              <div className="bright-metrics-story-copy">
-                <p className="bright-metrics-kicker">Operational impact</p>
-                <h3>Scalable sales performance for rental, equipment, and parts teams.</h3>
-                <p>Antbuildz AI Agent helps teams respond faster, qualify intent earlier, and move from technical questions to quotation-ready conversations without adding extra headcount.</p>
-              </div>
-              <div className="bright-metrics-story-list" aria-label="Key outcomes"><span>Specification guidance</span><span>Instant quote capture</span><span>Inventory-aware responses</span><span>Buyer intent analysis</span></div>
-            </article>
-            <article className="bright-metric-card bright-metric-featured" role="listitem" aria-label={featuredMetric.label}>
-              <div className="bright-metric-head"><FeaturedMetricIcon size={20} /><strong>{featuredMetric.value}</strong></div>
-              <div className="bright-metric-copy"><p>{featuredMetric.label}</p><small>{featuredMetric.subtitle}</small></div>
-            </article>
+          <div className="bright-stats-title-block">
+            <TypewriterHeading text="The backbone of AI-driven equipment sales" as="h2" />
+            <div className="bright-stats-accent-line" aria-hidden="true" />
           </div>
-          <div className="bright-metrics-bottom" role="list" aria-label="Performance highlights">
-            {secondaryMetrics.map((metric) => (
-              <article className="bright-metric-card" key={metric.label} role="listitem">
-                <div className="bright-metric-head"><metric.icon size={20} /><strong>{metric.value}</strong></div>
-                <div className="bright-metric-copy"><p>{metric.label}</p><small>{metric.subtitle}</small></div>
-              </article>
+          <div className="bright-stats-grid" role="list" aria-label="Key statistics">
+            {statItems.map((stat) => (
+              <StatCard key={stat.label} stat={stat} />
             ))}
           </div>
         </div>
