@@ -487,7 +487,7 @@ export default function Landing() {
         <div className="bright-canvas-container"><canvas ref={canvasRef} /></div>
         <div className="bright-container bright-hero-centered">
           <div className="bright-hero-content bright-hero-content-centered">
-            <h1 className="bright-text-gradient"><span className="bright-typewriter">The 24/7 AI Sales Agent</span><br />for Equipment Businesses</h1>
+            <h1 className="bright-text-gradient">The 24/7 AI Sales Agent<br />for Equipment Businesses</h1>
             <p className="bright-subtitle">Deploy a digital sales expert that answers technical questions, recommends suitable machinery, and converts inquiries into qualified leads instantly.</p>
             <div className="bright-hero-actions">
               <Link to="/" className="bright-btn bright-btn-primary">Build Your AI Agent <ArrowRight size={18} /></Link>
