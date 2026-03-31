@@ -171,7 +171,7 @@ const chatScript: ChatScriptStep[] = [
   { type: "ai", delay: 0, text: "Yes. NPK GH9 is compatible and available. Monday morning delivery to KL is available." },
   {
     type: "ai-card", delay: 1100, data: {
-      title: "2022 NPK GH9 Hydraulic Breaker Attachment", image: "https://images.pexels.com/photos/30519990/pexels-photo-30519990.jpeg?auto=compress&cs=tinysrgb&w=720&h=720&fit=crop", rating: "5.0/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg",
+      title: "2022 NPK GH9 Hydraulic Breaker", image: "", illustrationType: "breaker" as const, rating: "5.0/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg",
       pricing: [{ label: "Daily", value: "RM 150" }, { label: "Weekly", value: "RM 600" }, { label: "Monthly", value: "RM 1,200" }], action: "Add to Active Quote",
     },
   },
