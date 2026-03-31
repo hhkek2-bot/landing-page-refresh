@@ -727,14 +727,14 @@
 .bright-chat-card {
   width: min(100%, 680px);
   max-width: 100%;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  border: 1px solid rgba(34, 21, 0, 0.08);
-  box-shadow: 0 4px 15px -5px rgba(15, 23, 42, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 
-.bright-card-image-wrap { position: relative; aspect-ratio: 5 / 4; background: #f1f5f9; }
+.bright-card-image-wrap { position: relative; aspect-ratio: 5 / 4; background: rgba(255,255,255,0.05); }
 .bright-card-image-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 
 .bright-card-badges { position: absolute; left: 16px; bottom: -12px; display: flex; gap: 8px; z-index: 3; }
@@ -747,22 +747,22 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.bright-badge-rating { background: #fff; color: #1e293b; }
-.bright-badge-verified { background: var(--accent-yellow); color: #111111; border: 2px solid #fff; }
+.bright-badge-rating { background: rgba(255,255,255,0.15); color: #e2e8f0; }
+.bright-badge-verified { background: var(--accent-yellow); color: #111111; border: 2px solid rgba(255,255,255,0.2); }
 
 .bright-card-body { padding: 22px 16px 16px; }
-.bright-card-title { color: #1e293b; font-weight: 600; font-size: 0.96rem; line-height: 1.4; margin-bottom: 12px; }
-.bright-card-location { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; color: #475569; font-size: 0.88rem; }
-.bright-card-location img { width: 22px; height: 22px; border-radius: 999px; border: 1px solid #e2e8f0; object-fit: cover; }
+.bright-card-title { color: #f1f5f9; font-weight: 600; font-size: 0.96rem; line-height: 1.4; margin-bottom: 12px; }
+.bright-card-location { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; color: #94a3b8; font-size: 0.88rem; }
+.bright-card-location img { width: 22px; height: 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); object-fit: cover; }
 
-.bright-price-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
-.bright-price-col { padding: 8px 7px; border-right: 1px solid #e2e8f0; background: #fafafa; display: flex; flex-direction: column; }
+.bright-price-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden; }
+.bright-price-col { padding: 8px 7px; border-right: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); display: flex; flex-direction: column; }
 .bright-price-col:last-child { border-right: 0; }
-.bright-price-label { font-size: 0.74rem; color: #475569; }
-.bright-price-value { font-size: 0.88rem; color: #1e293b; font-weight: 700; }
+.bright-price-label { font-size: 0.74rem; color: #94a3b8; }
+.bright-price-value { font-size: 0.88rem; color: #f1f5f9; font-weight: 700; }
 
 .bright-card-action {
   width: 100%;
