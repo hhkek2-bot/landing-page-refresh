@@ -1023,7 +1023,7 @@
   display: grid;
   grid-template-columns: 2fr 3fr;
   gap: 40px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .bright-pain-column, .bright-solution-column { position: relative; }
