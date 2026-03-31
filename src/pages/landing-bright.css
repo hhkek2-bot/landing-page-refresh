@@ -1567,12 +1567,14 @@
   font-weight: 800;
   color: #0a2540;
   letter-spacing: -0.03em;
-  margin: 0 0 48px;
+  margin: 0 auto 48px;
   max-width: 700px;
+  text-align: center;
 }
 
 .bright-faq-accordion-list {
   max-width: 700px;
+  margin: 0 auto;
 }
 
 .bright-faq-item {
