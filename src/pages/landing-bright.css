@@ -673,9 +673,10 @@
   overflow-x: auto;
   padding: 0 0 6px 0;
   scrollbar-width: none;
-  max-width: 100%;
+  max-width: calc(100% - 40px);
   flex-wrap: nowrap;
   align-items: flex-start;
+  margin-left: 40px;
 }
 
 .bright-cards-row::-webkit-scrollbar { display: none; }

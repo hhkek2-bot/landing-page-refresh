@@ -351,14 +351,31 @@ export default function Landing() {
     return () => { window.cancelAnimationFrame(frameId); window.removeEventListener("resize", resize); };
   }, []);
 
-  // Chat script animation
+  // Chat script animation with word-by-word AI rendering
   useEffect(() => {
     let alive = true;
     const timers: number[] = [];
     const queue = (cb: () => void, delay: number) => { const id = window.setTimeout(() => { if (!alive) return; cb(); }, delay); timers.push(id); };
+
+    const typeAiText = (msgId: string, fullHtml: string, onDone: () => void) => {
+      // Strip HTML tags for word splitting, but preserve them in output
+      const words = fullHtml.split(/(?<=\s)|(?=\s)/);
+      let currentIndex = 0;
+      const typeNext = () => {
+        if (!alive) return;
+        if (currentIndex >= words.length) { onDone(); return; }
+        currentIndex++;
+        const partial = words.slice(0, currentIndex).join("");
+        setChatItems((prev) => prev.map((item) => item.id === msgId ? { ...item, text: partial } : item));
+        const delay = 25 + Math.random() * 35;
+        queue(typeNext, delay);
+      };
+      typeNext();
+    };
+
     const runStep = (index: number) => {
       if (!alive) return;
-      if (index >= chatScript.length) { queue(() => { setChatItems([]); runStep(0); }, 7000); return; }
+      if (index >= chatScript.length) { queue(() => { setChatItems([]); runStep(0); }, 8000); return; }
       const step = chatScript[index];
       queue(() => {
         if (step.type === "typing") {
@@ -367,13 +384,24 @@ export default function Landing() {
           queue(() => { setChatItems((prev) => prev.filter((i) => i.id !== typingId)); runStep(index + 1); }, step.duration);
           return;
         }
+        if (step.type === "ai" || step.type === "user") {
+          const ts = step as { type: "user" | "ai"; text: string };
+          const msgId = `msg-${Date.now()}-${index}`;
+          if (ts.type === "ai") {
+            setChatItems((prev) => [...prev, { id: msgId, type: "ai", text: "" }]);
+            typeAiText(msgId, ts.text, () => runStep(index + 1));
+          } else {
+            setChatItems((prev) => [...prev, { id: msgId, type: "user", text: ts.text }]);
+            runStep(index + 1);
+          }
+          return;
+        }
         if (step.type === "ai-card") setChatItems((prev) => [...prev, { id: `card-${Date.now()}-${index}`, type: "ai-card", data: step.data }]);
         else if (step.type === "ai-cards") setChatItems((prev) => [...prev, { id: `cards-${Date.now()}-${index}`, type: "ai-cards", cards: step.cards }]);
-        else { const ts = step as { type: "user" | "ai"; text: string }; setChatItems((prev) => [...prev, { id: `msg-${Date.now()}-${index}`, type: ts.type, text: ts.text }]); }
         runStep(index + 1);
       }, step.delay);
     };
-    queue(() => runStep(0), 1000);
+    queue(() => runStep(0), 1200);
     return () => { alive = false; timers.forEach((id) => window.clearTimeout(id)); };
   }, []);
 
