@@ -557,30 +557,16 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Metrics */}
-      <section className="bright-metrics">
+      {/* Metrics — Stripe-inspired */}
+      <section className="bright-stats-section">
         <div className="bright-container">
-          <div className="bright-metrics-heading"><TypewriterHeading text={"Built to convert more equipment inquiries into\nrevenue-ready conversations."} /></div>
-          <div className="bright-metrics-top">
-            <article className="bright-metrics-story">
-              <div className="bright-metrics-story-copy">
-                <p className="bright-metrics-kicker">Operational impact</p>
-                <h3>Scalable sales performance for rental, equipment, and parts teams.</h3>
-                <p>Antbuildz AI Agent helps teams respond faster, qualify intent earlier, and move from technical questions to quotation-ready conversations without adding extra headcount.</p>
-              </div>
-              <div className="bright-metrics-story-list" aria-label="Key outcomes"><span>Specification guidance</span><span>Instant quote capture</span><span>Inventory-aware responses</span><span>Buyer intent analysis</span></div>
-            </article>
-            <article className="bright-metric-card bright-metric-featured" role="listitem" aria-label={featuredMetric.label}>
-              <div className="bright-metric-head"><FeaturedMetricIcon size={20} /><strong>{featuredMetric.value}</strong></div>
-              <div className="bright-metric-copy"><p>{featuredMetric.label}</p><small>{featuredMetric.subtitle}</small></div>
-            </article>
+          <div className="bright-stats-title-block">
+            <TypewriterHeading text="The backbone of AI-driven equipment sales" as="h2" />
+            <div className="bright-stats-accent-line" aria-hidden="true" />
           </div>
-          <div className="bright-metrics-bottom" role="list" aria-label="Performance highlights">
-            {secondaryMetrics.map((metric) => (
-              <article className="bright-metric-card" key={metric.label} role="listitem">
-                <div className="bright-metric-head"><metric.icon size={20} /><strong>{metric.value}</strong></div>
-                <div className="bright-metric-copy"><p>{metric.label}</p><small>{metric.subtitle}</small></div>
-              </article>
+          <div className="bright-stats-grid" role="list" aria-label="Key statistics">
+            {statItems.map((stat) => (
+              <StatCard key={stat.label} stat={stat} />
             ))}
           </div>
         </div>
