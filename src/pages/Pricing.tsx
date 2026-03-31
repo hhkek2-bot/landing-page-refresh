@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Bot, Check } from "lucide-react";
+import "./pricing.css";
 
 type BillingCycle = "monthly" | "annual";
 type WebstoreMode = "rental-sales" | "rental" | "sales";
