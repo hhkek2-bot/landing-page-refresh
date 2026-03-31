@@ -672,19 +672,14 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* FAQ Summary */}
-      <section className="bright-faq-summary" id="faq-summary">
+      {/* FAQ */}
+      <section className="bright-faq-accordion" id="faq-summary">
         <div className="bright-container">
-          <div className="bright-faq-summary-head">
-            <div>
-              <p className="bright-faq-summary-kicker">FAQ Summary</p>
-              <TypewriterHeading text="Important answers before you deploy" />
-              <p>A short summary of the most important questions from the full FAQ page, focused on setup, quoting, inventory, security, and day-to-day usage.</p>
-            </div>
-            <a href="#faq-summary" className="bright-faq-summary-link">View all FAQs <ArrowRight size={16} /></a>
-          </div>
-          <div className="bright-faq-summary-grid">
-            {faqHighlights.map((item) => (<article className="bright-faq-summary-card" key={item.question}><h3>{item.question}</h3><p>{item.answer}</p></article>))}
+          <h2 className="bright-faq-accordion-title">Frequently asked questions.</h2>
+          <div className="bright-faq-accordion-list">
+            {faqHighlights.map((item) => (
+              <FaqAccordionItem key={item.question} question={item.question} answer={item.answer} />
+            ))}
           </div>
         </div>
       </section>
