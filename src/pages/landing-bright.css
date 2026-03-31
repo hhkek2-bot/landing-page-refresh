@@ -678,13 +678,15 @@
 }
 
 .bright-chat-msg-user {
-  background: rgb(var(--color-secondary-rgb) / 0.08);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
   color: var(--text-primary);
   border-bottom-right-radius: 4px;
 }
 
 .bright-chat-msg-ai {
-  background: rgb(var(--color-primary-rgb) / 0.16);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
   color: var(--text-primary);
   border-bottom-left-radius: 4px;
 }
