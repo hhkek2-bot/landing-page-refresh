@@ -29,10 +29,10 @@ All colors MUST be HSL.
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
-    --cta-bright: 46 96% 58%;
-    --cta-bright-foreground: 222.2 47.4% 11.2%;
-    --cta-surface: 0 0% 100%;
-    --cta-surface-foreground: 222.2 47.4% 11.2%;
+    --cta-primary: 0 0% 100%;
+    --cta-primary-foreground: 222.2 47.4% 11.2%;
+    --cta-secondary: 222.2 30% 14%;
+    --cta-secondary-foreground: 0 0% 100%;
     --cta-border-strong: 0 0% 100%;
     --cta-shadow: 222.2 47.4% 11.2%;
 
