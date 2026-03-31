@@ -528,7 +528,7 @@ export default function Landing() {
     if (item.type === "ai-card" && item.data) return (
       <div className="bright-chat-row" key={item.id}><div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
         <div className="bright-chat-msg bright-chat-msg-ai bright-card-msg"><div className="bright-chat-card">
-          <div className="bright-card-image-wrap"><img src={item.data.image} alt={item.data.title} /><div className="bright-card-badges"><span className="bright-badge-rating"><Star size={13} fill="currentColor" color="currentColor" /> {item.data.rating}</span>{item.data.verified && <span className="bright-badge-verified"><CheckCircle2 size={14} /> Verified</span>}</div></div>
+          <div className="bright-card-image-wrap">{item.data.illustrationType ? <EquipmentIllustration type={item.data.illustrationType} /> : <img src={item.data.image} alt={item.data.title} />}<div className="bright-card-badges"><span className="bright-badge-rating"><Star size={13} fill="currentColor" color="currentColor" /> {item.data.rating}</span>{item.data.verified && <span className="bright-badge-verified"><CheckCircle2 size={14} /> Verified</span>}</div></div>
           <div className="bright-card-body"><p className="bright-card-title">{item.data.title}</p><p className="bright-card-location"><img src={item.data.flag} alt="country" /> {item.data.location}</p><div className="bright-price-grid">{item.data.pricing.map((p) => (<div className="bright-price-col" key={p.label}><span className="bright-price-label">{p.label}</span><span className="bright-price-value">{p.value}</span></div>))}</div><button type="button" className="bright-card-action">{item.data.action}</button></div>
         </div></div>
       </div>
