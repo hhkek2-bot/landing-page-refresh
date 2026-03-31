@@ -563,7 +563,7 @@ export default function Landing() {
       <section className="bright-metrics">
         <div className="bright-container">
           <div className="bright-metrics-heading"><TypewriterHeading text={"Built to convert more equipment inquiries into\nrevenue-ready conversations."} /></div>
-          <div className="bright-metrics-layout">
+          <div className="bright-metrics-top">
             <article className="bright-metrics-story">
               <div className="bright-metrics-story-copy">
                 <p className="bright-metrics-kicker">Operational impact</p>
@@ -572,21 +572,18 @@ export default function Landing() {
               </div>
               <div className="bright-metrics-story-list" aria-label="Key outcomes"><span>Specification guidance</span><span>Instant quote capture</span><span>Inventory-aware responses</span><span>Buyer intent analysis</span></div>
             </article>
-            <article className="bright-metric-item bright-metric-item-visual" role="listitem" aria-label={featuredMetric.label}>
-              <div className="bright-metric-image" />
-              <div className="bright-metric-overlay">
-                <div className="bright-metric-head"><FeaturedMetricIcon size={22} /><strong>{featuredMetric.value}</strong></div>
-                <div className="bright-metric-copy"><p>{featuredMetric.label}</p><small>{featuredMetric.subtitle}</small></div>
-              </div>
+            <article className="bright-metric-card bright-metric-featured" role="listitem" aria-label={featuredMetric.label}>
+              <div className="bright-metric-head"><FeaturedMetricIcon size={20} /><strong>{featuredMetric.value}</strong></div>
+              <div className="bright-metric-copy"><p>{featuredMetric.label}</p><small>{featuredMetric.subtitle}</small></div>
             </article>
-            <div className="bright-metrics-grid" role="list" aria-label="Performance highlights">
-              {secondaryMetrics.map((metric, index) => (
-                <article className={`bright-metric-item ${index === 0 ? "bright-metric-item-graph" : index === 1 ? "bright-metric-item-dots" : ""}`.trim()} key={metric.label} role="listitem">
-                  <div className="bright-metric-head"><metric.icon size={22} /><strong>{metric.value}</strong></div>
-                  <div className="bright-metric-copy"><p>{metric.label}</p><small>{metric.subtitle}</small></div>
-                </article>
-              ))}
-            </div>
+          </div>
+          <div className="bright-metrics-bottom" role="list" aria-label="Performance highlights">
+            {secondaryMetrics.map((metric) => (
+              <article className="bright-metric-card" key={metric.label} role="listitem">
+                <div className="bright-metric-head"><metric.icon size={20} /><strong>{metric.value}</strong></div>
+                <div className="bright-metric-copy"><p>{metric.label}</p><small>{metric.subtitle}</small></div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
