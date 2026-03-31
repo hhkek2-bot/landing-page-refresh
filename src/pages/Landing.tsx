@@ -153,21 +153,21 @@ const painResolutions: PainResolution[] = [
 ];
 
 const chatScript: ChatScriptStep[] = [
-  { type: "user", delay: 1000, text: "I need a 20-ton excavator for a 3-month project in KL. What do you recommend?" },
-  { type: "typing", delay: 600, duration: 1800 },
+  { type: "user", delay: 1800, text: "I need a 20-ton excavator for a 3-month project in KL. What do you recommend?" },
+  { type: "typing", delay: 800, duration: 2800 },
   { type: "ai", delay: 0, text: "For a 3-month KL project, I recommend the <strong>Hitachi ZAXIS 200</strong>. I also prepared a quick rental view for you:" },
   {
-    type: "ai-cards", delay: 900, cards: [
+    type: "ai-cards", delay: 1200, cards: [
       { title: "2020 CAT 320 Crawler Excavator", image: "/cat-320.jpg", rating: "4.9/5", verified: true, location: "Kuala Lumpur Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 520" }, { label: "Weekly", value: "RM 2,900" }, { label: "Monthly", value: "RM 9,800" }], action: "Get Quote" },
       { title: "2019 Hitachi ZX200-7 Crawler Excavator", image: "https://images.pexels.com/photos/14452156/pexels-photo-14452156.jpeg?auto=compress&cs=tinysrgb&w=600", rating: "4.8/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 500" }, { label: "Weekly", value: "RM 2,800" }, { label: "Monthly", value: "RM 9,500" }], action: "Get Quote" },
       { title: "2021 SANY SY215C Crawler Excavator", image: "/sany-sy215.jpg", rating: "4.7/5", verified: true, location: "Johor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 460" }, { label: "Weekly", value: "RM 2,600" }, { label: "Monthly", value: "RM 8,800" }], action: "Get Quote" },
     ],
   },
-  { type: "user", delay: 3800, text: "Do you have compatible hydraulic breaker attachments and Monday delivery?" },
-  { type: "typing", delay: 700, duration: 1700 },
+  { type: "user", delay: 4500, text: "Do you have compatible hydraulic breaker attachments and Monday delivery?" },
+  { type: "typing", delay: 1000, duration: 2400 },
   { type: "ai", delay: 0, text: "Yes. NPK GH9 is compatible and available. Monday morning delivery to KL is available." },
   {
-    type: "ai-card", delay: 850, data: {
+    type: "ai-card", delay: 1100, data: {
       title: "2022 NPK GH9 Hydraulic Breaker Attachment", image: "https://images.pexels.com/photos/30519990/pexels-photo-30519990.jpeg?auto=compress&cs=tinysrgb&w=720&h=720&fit=crop", rating: "5.0/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg",
       pricing: [{ label: "Daily", value: "RM 150" }, { label: "Weekly", value: "RM 600" }, { label: "Monthly", value: "RM 1,200" }], action: "Add to Active Quote",
     },
