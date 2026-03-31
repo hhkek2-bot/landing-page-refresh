@@ -623,7 +623,7 @@ export default function Landing() {
             <h1 className="bright-text-gradient">The 24/7 AI Sales Agent for Equipment Businesses</h1>
             <p className="bright-subtitle">Deploy a digital sales expert that answers technical questions, recommends suitable machinery, and converts inquiries into qualified leads instantly.</p>
             <div className="bright-hero-actions">
-              <Link to="/" className="bright-btn bright-btn-primary">Build Your AI Agent <ArrowRight size={18} /></Link>
+              <Link to="/pricing" className="bright-btn bright-btn-primary">Build Your AI Agent <ArrowRight size={18} /></Link>
             </div>
           </div>
           <div className="bright-hero-mockup-wrap">
