@@ -1640,13 +1640,7 @@
   .bright-brand-volvo-pill { min-height: 34px; padding: 0 12px; font-size: clamp(0.9rem, 4.4vw, 1.18rem); }
   .bright-brand-volvo-ce { min-height: 28px; padding: 0 8px; font-size: 0.72rem; }
   .bright-brand-jcb span { width: 29px; height: 28px; font-size: 0.88rem; }
-  .bright-metrics { padding: 80px 0; }
-  .bright-metrics-heading h2 { font-size: 2.2rem; }
-  .bright-metrics-story { padding: 28px 24px; }
-  .bright-metrics-story h3 { font-size: 1.7rem; }
-  .bright-metrics-bottom { grid-template-columns: 1fr; gap: 14px; }
-  .bright-metric-card { padding: 22px 20px; }
-  .bright-metric-head strong { font-size: clamp(1.9rem, 9vw, 2.75rem); }
+  /* old metrics refs removed */
   .bright-logo-marquee { animation-duration: 48s; }
   .bright-cta-section { padding: 92px 0; }
   .bright-faq-summary { padding: 84px 0 74px; }
