@@ -423,7 +423,22 @@
   width: 100%;
   max-width: 900px;
   margin: 52px auto 0;
+  padding-bottom: 60px;
   animation: mockupFloatUp 0.9s 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Fade-out gradient at the bottom of the conversation mockup */
+.bright-hero-mockup-wrap::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, transparent 0%, var(--bg-canvas) 100%);
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 0 0 24px 24px;
 }
 
 .bright-mockup-glow {
@@ -463,6 +478,7 @@
 .bright-logo-strip {
   position: relative;
   z-index: 2;
+  margin-top: 24px;
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
   background: linear-gradient(180deg, rgb(var(--color-bg-rgb) / 0.98) 0%, rgb(var(--color-surface-rgb) / 0.94) 100%);
