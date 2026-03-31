@@ -568,12 +568,12 @@
   border-radius: 24px;
   z-index: 0;
   background:
-    radial-gradient(ellipse 55% 60% at 25% 70%, rgba(210, 180, 140, 0.6) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 55% at 70% 60%, rgba(255, 200, 100, 0.45) 0%, transparent 70%),
-    radial-gradient(ellipse 45% 50% at 50% 45%, rgba(200, 180, 230, 0.5) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 45% at 30% 35%, rgba(230, 200, 210, 0.4) 0%, transparent 70%),
-    radial-gradient(ellipse 35% 40% at 75% 30%, rgba(210, 200, 240, 0.35) 0%, transparent 70%);
-  filter: blur(30px);
+    radial-gradient(ellipse 55% 60% at 25% 70%, rgba(200, 160, 100, 0.8) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 55% at 70% 60%, rgba(255, 185, 50, 0.7) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 50% at 50% 45%, rgba(175, 140, 220, 0.7) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 45% at 30% 35%, rgba(220, 160, 180, 0.6) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 40% at 75% 30%, rgba(180, 160, 230, 0.55) 0%, transparent 70%);
+  filter: blur(35px);
   pointer-events: none;
 }
 
