@@ -537,7 +537,7 @@ export default function Landing() {
       <div className="bright-chat-row" key={item.id}><div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
         <div className="bright-cards-row">{item.cards.map((card, ci) => (
           <div className="bright-chat-card bright-chat-card-sm" key={ci}>
-            <div className="bright-card-image-wrap"><img src={card.image} alt={card.title} /><div className="bright-card-badges"><span className="bright-badge-rating"><Star size={11} fill="currentColor" color="currentColor" /> {card.rating}</span>{card.verified && <span className="bright-badge-verified"><CheckCircle2 size={12} /> Verified</span>}</div></div>
+            <div className="bright-card-image-wrap">{card.illustrationType ? <EquipmentIllustration type={card.illustrationType} /> : <img src={card.image} alt={card.title} />}<div className="bright-card-badges"><span className="bright-badge-rating"><Star size={11} fill="currentColor" color="currentColor" /> {card.rating}</span>{card.verified && <span className="bright-badge-verified"><CheckCircle2 size={12} /> Verified</span>}</div></div>
             <div className="bright-card-body"><p className="bright-card-title">{card.title}</p><p className="bright-card-location"><img src={card.flag} alt="country" /> {card.location}</p><div className="bright-price-grid">{card.pricing.map((p) => (<div className="bright-price-col" key={p.label}><span className="bright-price-label">{p.label}</span><span className="bright-price-value">{p.value}</span></div>))}</div><button type="button" className="bright-card-action">{card.action}</button></div>
           </div>
         ))}</div>
