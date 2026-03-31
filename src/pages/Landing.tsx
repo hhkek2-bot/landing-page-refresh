@@ -149,10 +149,10 @@ const faqHighlights: FaqHighlight[] = [
 ];
 
 const painResolutions: PainResolution[] = [
-  { title: "Response Delay", description: "Enquiries come in outside working hours or during busy periods", impact: "High-intent buyers move on before your team replies", solutionTitle: "Instant Response, 24/7", solutionDescription: "Engage every enquiry the moment it arrives—so no opportunity is lost", keyword: "24/7" },
-  { title: "Limited Capacity", description: "Your team can only handle a limited number of conversations at once", impact: "New enquiries queue up, slow down, or get ignored", solutionTitle: "Unlimited Parallel Conversations", solutionDescription: "Handle multiple buyers simultaneously without queue delays", keyword: "Concurrent" },
-  { title: "Knowledge Bottleneck", description: "Sales knowledge lives in people, not systems", impact: "Training takes time and answers become inconsistent", solutionTitle: "Always Up-to-Date Knowledge", solutionDescription: "AI learns from your catalogues and updates instantly with your data", keyword: "Instant" },
-  { title: "Inconsistent Responses", description: "Different staff give different answers", impact: "Creates confusion and reduces buyer confidence", solutionTitle: "Consistent, Rule-Driven Answers", solutionDescription: "Every response follows your business logic and sales rules", keyword: "Standardized" },
+  { title: "Delayed Responses", description: "Leads arrive anytime, but your team can't respond instantly", impact: "", solutionTitle: "Instant Response, 24/7", solutionDescription: "Engage every enquiry the moment it arrives — no missed opportunities", keyword: "24/7" },
+  { title: "Limited Handling Capacity", description: "Too many enquiries overwhelm your team and slow everything down", impact: "", solutionTitle: "Scale Without Hiring", solutionDescription: "Handle multiple enquiries simultaneously without increasing headcount", keyword: "Scale" },
+  { title: "Incomplete & Unqualified Enquiries", description: "Leads lack specs, details, and clarity — causing delays and confusion", impact: "", solutionTitle: "Structured Requirement Capture", solutionDescription: "Automatically capture specs, use-case, and intent in one conversation", keyword: "Capture" },
+  { title: "Sales Knowledge Dependency", description: "Critical knowledge lives in people, not systems or processes", impact: "", solutionTitle: "Built-In Sales Intelligence", solutionDescription: "Standardize specs, pricing logic, and workflows into one system", keyword: "Intel" },
 ];
 
 const chatScript: ChatScriptStep[] = [
