@@ -215,8 +215,52 @@ function StepGraphic({ visual }: { visual: ProcessStep["visual"] }) {
     </div>
   );
 }
+function StatCard({ stat }: { stat: StatItem }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [displayNum, setDisplayNum] = useState(0);
+  const animRef = useRef<number | null>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, amount: 0.5 });
+  const [hasAnimated, setHasAnimated] = useState(false);
 
-function SolutionPanel({ activeItem, reduceMotion, mobile = false }: { activeItem: PainResolution; reduceMotion: boolean; mobile?: boolean }) {
+  useEffect(() => {
+    if (isInView && !hasAnimated) {
+      setHasAnimated(true);
+      setIsHovered(true); // trigger initial count
+    }
+  }, [isInView, hasAnimated]);
+
+  useEffect(() => {
+    if (!isHovered && hasAnimated) { setDisplayNum(stat.numericEnd); return; }
+    if (!isHovered) return;
+    const duration = 1200;
+    const start = performance.now();
+    const animate = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayNum(Math.round(eased * stat.numericEnd));
+      if (progress < 1) animRef.current = requestAnimationFrame(animate);
+    };
+    setDisplayNum(0);
+    animRef.current = requestAnimationFrame(animate);
+    return () => { if (animRef.current) cancelAnimationFrame(animRef.current); };
+  }, [isHovered, stat.numericEnd, hasAnimated]);
+
+  return (
+    <article
+      ref={cardRef}
+      className="bright-stat-card"
+      role="listitem"
+      onMouseEnter={() => { setIsHovered(false); requestAnimationFrame(() => setIsHovered(true)); }}
+    >
+      <p className="bright-stat-value">{stat.prefix}{displayNum}{stat.suffix}</p>
+      <p className="bright-stat-label">{stat.label}</p>
+      <p className="bright-stat-sublabel">{stat.sublabel}</p>
+    </article>
+  );
+}
+
+
   return (
     <div className={`bright-solution-panel ${mobile ? "bright-solution-panel-mobile" : ""}`.trim()} aria-live="polite">
       <div className="bright-solution-glow" aria-hidden="true" />
