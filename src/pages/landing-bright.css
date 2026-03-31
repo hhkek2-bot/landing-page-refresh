@@ -1411,24 +1411,37 @@
   padding: clamp(80px, 10vw, 120px) 0;
   min-height: auto;
   text-align: center;
-  color: var(--text-heading);
-  background: radial-gradient(circle at 60% 50%, rgb(var(--color-primary-rgb) / 0.07), transparent 40%), radial-gradient(circle at 28% 40%, rgb(var(--color-secondary-rgb) / 0.05), transparent 36%), var(--bg-canvas);
-  border-top: 1px solid var(--border-subtle);
+  color: #ffffff;
+  background: url('/hero-bg.png') center/cover no-repeat;
+  position: relative;
   display: flex;
   align-items: center;
+}
+
+.bright-cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+}
+
+.bright-cta-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .bright-cta-content {
   max-width: 800px;
   margin: 0 auto;
-  background: linear-gradient(180deg, rgb(var(--color-bg-rgb) / 0.99), rgb(var(--color-surface-rgb) / 0.96));
-  border: 1.5px solid var(--border-subtle);
+  background: transparent;
+  border: none;
   border-radius: 28px;
   padding: clamp(40px, 6vw, 72px) clamp(32px, 5vw, 64px);
-  box-shadow: 0 36px 90px -48px rgb(var(--color-text-primary-rgb) / 0.1);
+  box-shadow: none;
 }
 
-.bright-cta-content h2 { color: var(--text-heading); font-size: clamp(2rem, 3.5vw, 3.4rem); line-height: 1.07; letter-spacing: -0.04em; margin-bottom: 32px; }
+.bright-cta-content h2 { color: #ffffff; font-size: clamp(2rem, 3.5vw, 3.4rem); line-height: 1.07; letter-spacing: -0.04em; margin-bottom: 32px; }
 
 .bright-cta-actions { display: inline-flex; gap: 14px; }
 
@@ -1442,10 +1455,10 @@
   transition: all 0.3s;
 }
 
-.bright-btn-outline-light { color: var(--brand-accent); border: 1px solid rgb(var(--color-secondary-rgb) / 0.22); background: rgb(var(--color-bg-rgb) / 0.92); }
-.bright-btn-outline-light:hover { background: rgb(var(--color-secondary-rgb) / 0.08); border-color: rgb(var(--color-secondary-rgb) / 0.32); }
-.bright-btn-dark { background: rgb(var(--color-secondary-rgb) / 0.08); color: var(--brand-accent); border: 1px solid rgb(var(--color-secondary-rgb) / 0.22); }
-.bright-btn-dark:hover { background: rgb(var(--color-secondary-rgb) / 0.12); }
+.bright-btn-outline-light { color: #ffffff; border: 2px solid rgba(255,255,255,0.6); background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); }
+.bright-btn-outline-light:hover { background: rgba(255,255,255,0.25); border-color: #ffffff; }
+.bright-btn-dark { background: #f59e0b; color: #0f172a; border: none; }
+.bright-btn-dark:hover { background: #fbbf24; }
 
 .bright-faq-summary {
   padding: clamp(72px, 9vw, 104px) 0 clamp(60px, 8vw, 88px);
