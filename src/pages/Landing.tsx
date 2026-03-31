@@ -308,10 +308,6 @@ export default function Landing() {
   const [connectorPosition, setConnectorPosition] = useState({ top: 140, left: 0, width: 0 });
   const reduceMotion = useReducedMotion();
 
-  const featuredMetric = metricHighlights[0];
-  const secondaryMetrics = metricHighlights.slice(1);
-  const FeaturedMetricIcon = featuredMetric.icon;
-
   // Canvas particle animation
   useEffect(() => {
     const canvas = canvasRef.current;
