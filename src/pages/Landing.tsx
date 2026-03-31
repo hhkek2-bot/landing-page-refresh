@@ -106,26 +106,26 @@ const processSteps: ProcessStep[] = [
 ];
 
 const logoWordmarks: LogoWordmark[] = [
-  { name: "CAT", variant: "cat" }, { name: "Komatsu", variant: "komatsu" }, { name: "Hitachi", variant: "hitachi" },
-  { name: "Volvo CE", variant: "volvo" }, { name: "Liebherr", variant: "liebherr" }, { name: "JCB", variant: "jcb" },
-  { name: "John Deere", variant: "john-deere" }, { name: "SANY", variant: "sany" }, { name: "XCMG", variant: "xcmg" },
-  { name: "Bobcat", variant: "bobcat" }, { name: "Kubota", variant: "kubota" }, { name: "CASE", variant: "case" },
+  { name: "granola", variant: "granola" }, { name: "Flow", variant: "flow" }, { name: "Listen", variant: "listen" },
+  { name: "Obvious", variant: "obvious" }, { name: "Modal", variant: "modal" }, { name: "USV", variant: "usv" },
+  { name: "Replicate", variant: "replicate" }, { name: "Railway", variant: "railway" }, { name: "public", variant: "public" },
+  { name: "WORDSMITH", variant: "wordsmith" }, { name: "Plain.", variant: "plain" }, { name: "passionfroot", variant: "passionfroot" },
 ];
 
 function renderLogoWordmark(logo: LogoWordmark) {
   switch (logo.variant) {
-    case "cat": return (<span className="bright-brand bright-brand-cat" aria-label="CAT"><span className="bright-brand-cat-text">C<span className="bright-brand-cat-a">A</span>T</span><span className="bright-brand-cat-triangle" aria-hidden="true" /></span>);
-    case "komatsu": return <span className="bright-brand bright-brand-komatsu">KOMATSU</span>;
-    case "hitachi": return (<span className="bright-brand bright-brand-hitachi"><span className="bright-brand-hitachi-mark" aria-hidden="true" /><span>Hitachi</span></span>);
-    case "volvo": return (<span className="bright-brand bright-brand-volvo"><span className="bright-brand-volvo-pill">VOLVO</span><span className="bright-brand-volvo-ce">CE</span></span>);
-    case "liebherr": return <span className="bright-brand bright-brand-liebherr">LIEBHERR</span>;
-    case "jcb": return (<span className="bright-brand bright-brand-jcb" aria-label="JCB"><span>J</span><span>C</span><span>B</span></span>);
-    case "john-deere": return (<span className="bright-brand bright-brand-johndeere"><span className="bright-brand-johndeere-shield" aria-hidden="true" /><span>John Deere</span></span>);
-    case "sany": return (<span className="bright-brand bright-brand-sany"><span className="bright-brand-sany-mark" aria-hidden="true" /><span>SANY</span></span>);
-    case "xcmg": return (<span className="bright-brand bright-brand-xcmg"><span className="bright-brand-xcmg-mark" aria-hidden="true" /><span>XCMG</span></span>);
-    case "bobcat": return (<span className="bright-brand bright-brand-bobcat"><span className="bright-brand-bobcat-mark" aria-hidden="true" /><span>Bobcat</span></span>);
-    case "kubota": return (<span className="bright-brand bright-brand-kubota"><span className="bright-brand-kubota-mark" aria-hidden="true" /><span>Kubota</span></span>);
-    case "case": return (<span className="bright-brand bright-brand-case"><span className="bright-brand-case-roof" aria-hidden="true" /><span>CASE</span></span>);
+    case "granola": return (<span className="bright-brand bright-brand-granola"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1a1a1a" strokeWidth="2"/><path d="M5 10h10M10 5v10" stroke="#1a1a1a" strokeWidth="1.5"/></svg><span>granola</span></span>);
+    case "flow": return (<span className="bright-brand bright-brand-flow"><svg width="22" height="18" viewBox="0 0 22 18" fill="none"><rect x="0" y="2" width="4" height="14" rx="1" fill="#1a1a1a"/><rect x="6" y="0" width="4" height="18" rx="1" fill="#1a1a1a"/><rect x="12" y="4" width="4" height="10" rx="1" fill="#1a1a1a"/><rect x="18" y="6" width="4" height="6" rx="1" fill="#1a1a1a"/></svg><span>Flow</span></span>);
+    case "listen": return (<span className="bright-brand bright-brand-listen"><svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M4 2C4 2 2 4 2 9s2 7 2 7" stroke="#7c3aed" strokeWidth="2.5" strokeLinecap="round"/><circle cx="8" cy="9" r="4" fill="#7c3aed"/></svg><span>Listen</span></span>);
+    case "obvious": return (<span className="bright-brand bright-brand-obvious"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1a1a1a" strokeWidth="2"/><circle cx="10" cy="10" r="4" stroke="#1a1a1a" strokeWidth="1.5"/><line x1="10" y1="1" x2="10" y2="5" stroke="#1a1a1a" strokeWidth="1.5"/><line x1="10" y1="15" x2="10" y2="19" stroke="#1a1a1a" strokeWidth="1.5"/><line x1="1" y1="10" x2="5" y2="10" stroke="#1a1a1a" strokeWidth="1.5"/><line x1="15" y1="10" x2="19" y2="10" stroke="#1a1a1a" strokeWidth="1.5"/></svg><span>Obvious</span></span>);
+    case "modal": return (<span className="bright-brand bright-brand-modal"><svg width="22" height="18" viewBox="0 0 22 18" fill="none"><path d="M1 17L6 1l5 12L16 5l5 12" stroke="#1a1a1a" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/></svg><span>Modal</span></span>);
+    case "usv": return (<span className="bright-brand bright-brand-usv"><span className="bright-brand-usv-box"><strong>USV</strong></span><span className="bright-brand-usv-text">Union<br/>Square<br/>Ventures</span></span>);
+    case "replicate": return (<span className="bright-brand bright-brand-replicate"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="0" y="0" width="8" height="8" rx="2" fill="#1a1a1a"/><rect x="10" y="0" width="8" height="8" rx="2" fill="#1a1a1a" opacity="0.5"/><rect x="0" y="10" width="8" height="8" rx="2" fill="#1a1a1a" opacity="0.5"/><rect x="10" y="10" width="8" height="8" rx="2" fill="#1a1a1a" opacity="0.25"/></svg><span>Replicate</span></span>);
+    case "railway": return (<span className="bright-brand bright-brand-railway"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#1a1a1a"/><circle cx="9" cy="9" r="3" fill="#fff"/></svg><span>Railway</span></span>);
+    case "public": return (<span className="bright-brand bright-brand-public"><svg width="14" height="18" viewBox="0 0 14 18" fill="none"><circle cx="7" cy="4" r="4" fill="#1a1a1a"/><path d="M0 18c0-4 3-7 7-7s7 3 7 7" fill="#1a1a1a"/></svg><span>public</span></span>);
+    case "wordsmith": return (<span className="bright-brand bright-brand-wordsmith">WORDSMITH</span>);
+    case "plain": return (<span className="bright-brand bright-brand-plain">Plain.</span>);
+    case "passionfroot": return (<span className="bright-brand bright-brand-passionfroot">passionfroot</span>);
     default: return <span className="bright-brand">{logo.name}</span>;
   }
 }
