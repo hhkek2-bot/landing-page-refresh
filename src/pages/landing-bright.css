@@ -1455,10 +1455,10 @@
   transition: all 0.3s;
 }
 
-.bright-btn-outline-light { color: #ffffff; border: 2px solid rgba(255,255,255,0.6); background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); }
-.bright-btn-outline-light:hover { background: rgba(255,255,255,0.25); border-color: #ffffff; }
-.bright-btn-dark { background: #f59e0b; color: #0f172a; border: none; }
-.bright-btn-dark:hover { background: #fbbf24; }
+.bright-btn-outline-light { color: #0f172a; border: none; background: #ffffff; font-weight: 700; box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
+.bright-btn-outline-light:hover { background: #f1f5f9; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.3); }
+.bright-btn-dark { background: #f59e0b; color: #0f172a; border: none; font-weight: 700; box-shadow: 0 4px 20px rgba(245,158,11,0.4); }
+.bright-btn-dark:hover { background: #fbbf24; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(245,158,11,0.5); }
 
 .bright-faq-summary {
   padding: clamp(72px, 9vw, 104px) 0 clamp(60px, 8vw, 88px);
