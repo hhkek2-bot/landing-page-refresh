@@ -1567,13 +1567,11 @@
   .bright-brand-jcb span { width: 29px; height: 28px; font-size: 0.88rem; }
   .bright-metrics { padding: 80px 0; }
   .bright-metrics-heading h2 { font-size: 2.2rem; }
-  .bright-metrics-story { min-height: 420px; padding: 28px 24px; }
+  .bright-metrics-story { padding: 28px 24px; }
   .bright-metrics-story h3 { font-size: 1.7rem; }
-  .bright-metrics-grid { grid-template-columns: 1fr; gap: 14px; }
-  .bright-metric-item { min-height: 160px; padding: 22px 20px; }
+  .bright-metrics-bottom { grid-template-columns: 1fr; gap: 14px; }
+  .bright-metric-card { padding: 22px 20px; }
   .bright-metric-head strong { font-size: clamp(1.9rem, 9vw, 2.75rem); }
-  .bright-metric-item p { font-size: 0.94rem; }
-  .bright-metric-item small { font-size: 0.82rem; }
   .bright-logo-marquee { animation-duration: 48s; }
   .bright-cta-section { padding: 92px 0; }
   .bright-faq-summary { padding: 84px 0 74px; }
