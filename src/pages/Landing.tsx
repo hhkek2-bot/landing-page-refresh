@@ -176,7 +176,51 @@ const chatScript: ChatScriptStep[] = [
   },
 ];
 
-function StepGraphic({ visual }: { visual: ProcessStep["visual"] }) {
+function EquipmentIllustration({ type }: { type: "excavator-1" | "excavator-2" | "excavator-3" | "breaker" }) {
+  const colors = {
+    "excavator-1": { body: "#F5A623", arm: "#E8961C", track: "#3D3D3D", cabin: "#2C2C2C" },
+    "excavator-2": { body: "#E87040", arm: "#D4612E", track: "#3D3D3D", cabin: "#2C2C2C" },
+    "excavator-3": { body: "#F5C842", arm: "#E0B630", track: "#3D3D3D", cabin: "#2C2C2C" },
+    breaker: { body: "#E63B2E", arm: "#333", track: "#3D3D3D", cabin: "#555" },
+  };
+  const c = colors[type];
+  if (type === "breaker") {
+    return (
+      <svg viewBox="0 0 200 160" fill="none" className="bright-equip-svg">
+        <rect x="60" y="20" width="28" height="100" rx="4" fill={c.body} />
+        <rect x="64" y="120" width="20" height="30" rx="2" fill={c.arm} />
+        <rect x="70" y="148" width="8" height="12" rx="1" fill="#888" />
+        <rect x="50" y="10" width="48" height="16" rx="3" fill={c.cabin} />
+        <rect x="66" y="40" width="16" height="6" rx="2" fill="rgba(255,255,255,0.3)" />
+        <rect x="66" y="56" width="16" height="6" rx="2" fill="rgba(255,255,255,0.2)" />
+        <circle cx="74" cy="15" r="3" fill="#F5A623" opacity="0.8" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 200 160" fill="none" className="bright-equip-svg">
+      {/* Tracks */}
+      <rect x="20" y="120" width="120" height="28" rx="14" fill={c.track} />
+      <circle cx="36" cy="134" r="10" fill="#555" /><circle cx="60" cy="134" r="7" fill="#555" />
+      <circle cx="80" cy="134" r="7" fill="#555" /><circle cx="100" cy="134" r="7" fill="#555" />
+      <circle cx="124" cy="134" r="10" fill="#555" />
+      {/* Body */}
+      <rect x="30" y="82" width="100" height="40" rx="6" fill={c.body} />
+      <rect x="32" y="84" width="40" height="28" rx="4" fill={c.cabin} />
+      <rect x="36" y="88" width="32" height="18" rx="3" fill="rgba(180,220,255,0.35)" />
+      {/* Arm */}
+      <line x1="100" y1="90" x2="155" y2="50" stroke={c.arm} strokeWidth="8" strokeLinecap="round" />
+      <line x1="155" y1="50" x2="180" y2="90" stroke={c.arm} strokeWidth="6" strokeLinecap="round" />
+      {/* Bucket */}
+      <path d="M172 86 L188 92 L184 104 L168 98 Z" fill={c.arm} />
+      {/* Details */}
+      <rect x="90" y="88" width="30" height="6" rx="2" fill="rgba(0,0,0,0.15)" />
+      <circle cx="78" cy="108" r="4" fill="rgba(0,0,0,0.12)" />
+    </svg>
+  );
+}
+
+
   if (visual === "profile") return (<div className="bright-step-graphic"><div className="bright-anim-ring" /><div className="bright-anim-avatar"><User size={20} /></div></div>);
   if (visual === "ingest") return (<div className="bright-step-graphic"><div className="bright-anim-doc bright-doc-one" /><div className="bright-anim-doc bright-doc-two" /><div className="bright-anim-folder" /></div>);
   if (visual === "rules") return (<div className="bright-step-graphic"><div className="bright-anim-slider-bg" /><div className="bright-anim-slider-knob" /></div>);
