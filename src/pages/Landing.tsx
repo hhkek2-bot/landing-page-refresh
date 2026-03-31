@@ -359,7 +359,6 @@ function SolutionPanel({ activeItem, reduceMotion, mobile = false }: { activeIte
 function PainList({ activeIndex, setActiveIndex, reduceMotion, painRefs }: { activeIndex: number; setActiveIndex: (i: number) => void; reduceMotion: boolean; painRefs: MutableRefObject<Array<HTMLButtonElement | null>> }) {
   return (
     <div className="bright-pain-column">
-      <div className="bright-pain-column-kicker">Where Sales Break Down</div>
       <div className="bright-pain-list" role="tablist" aria-label="Sales pain points">
         {painResolutions.map((item, index) => {
           const isActive = activeIndex === index;
@@ -373,7 +372,6 @@ function PainList({ activeIndex, setActiveIndex, reduceMotion, painRefs }: { act
               transition={{ duration: reduceMotion ? 0.12 : 0.2, ease: "easeOut" }}>
               <div className="bright-pain-item-head"><h3>{item.title}</h3></div>
               <p className="bright-pain-description">{item.description}</p>
-              <p className="bright-pain-impact">{item.impact}</p>
               {isActive && <div id={`pain-solution-${index}`} className="bright-pain-mobile-panel"><SolutionPanel activeItem={item} reduceMotion={reduceMotion} mobile /></div>}
             </motion.button>
           );
