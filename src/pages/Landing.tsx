@@ -129,11 +129,13 @@ function renderLogoWordmark(logo: LogoWordmark) {
   }
 }
 
-const metricHighlights: MetricHighlight[] = [
-  { icon: Database, value: "21x", label: "Higher Lead Qualification", subtitle: "when responding under 5 mins vs 30 mins" },
-  { icon: Zap, value: "< 15s", label: "Typical AI Response Time", subtitle: "compared to industry average of days" },
-  { icon: Target, value: "3-4x", label: "Higher Conversion Rates", subtitle: "driven by rich conversational engagement" },
-  { icon: CheckCircle2, value: "2.5x", label: "Faster Quote Turnaround", subtitle: "from inquiry to quote-ready draft" },
+type StatItem = { value: string; numericEnd: number; suffix: string; prefix: string; label: string; sublabel: string };
+
+const statItems: StatItem[] = [
+  { value: "2–3x", numericEnd: 3, suffix: "x", prefix: "", label: "More Qualified Leads", sublabel: "Capture buyer intent, specs, and urgency from the first interaction" },
+  { value: "< 10s", numericEnd: 10, suffix: "s", prefix: "< ", label: "First Response Time", sublabel: "Engage every lead instantly — before competitors even reply" },
+  { value: "50%", numericEnd: 50, suffix: "%", prefix: "", label: "Faster Quote-Ready Output", sublabel: "From inquiry to structured, accurate quotation in one conversation" },
+  { value: "65%+", numericEnd: 65, suffix: "%+", prefix: "", label: "Open to AI-Guided Decisions", sublabel: "Buyers increasingly rely on AI — when backed by real data and logic" },
 ];
 
 const faqHighlights: FaqHighlight[] = [
