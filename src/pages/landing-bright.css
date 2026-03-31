@@ -478,6 +478,7 @@
 .bright-logo-strip {
   position: relative;
   z-index: 2;
+  margin-top: 24px;
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
   background: linear-gradient(180deg, rgb(var(--color-bg-rgb) / 0.98) 0%, rgb(var(--color-surface-rgb) / 0.94) 100%);
