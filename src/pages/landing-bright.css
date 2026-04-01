@@ -479,11 +479,11 @@
 }
 
 .bright-subtitle {
-  font-size: 1.22rem;
+  font-size: 1.05rem;
   color: var(--text-muted);
-  margin-bottom: 38px;
-  line-height: 1.78;
-  max-width: 50ch;
+  margin-bottom: 32px;
+  line-height: 1.7;
+  max-width: 54ch;
 }
 
 .bright-hero-content-centered .bright-subtitle {
