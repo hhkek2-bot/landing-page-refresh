@@ -621,11 +621,11 @@ export default function Landing() {
         </div>
       </div>
     );
-    if (item.type === "product-card" && item.data) return (
+    if (item.type === "product-cards" && item.cards) return (
       <div className="bright-chat-row" key={item.id}>
         <div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
         <div className="bright-chat-msg bright-chat-msg-ai bright-card-msg">
-          <ProductCard data={item.data} />
+          <ProductCarousel cards={item.cards} />
         </div>
       </div>
     );
