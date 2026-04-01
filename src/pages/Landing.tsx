@@ -129,28 +129,28 @@ const chatScenarios: ChatScenario[] = [
   {
     id: "boom-lift",
     steps: [
-      { type: "user", text: "Need boom lift around 40m for site in Tuas, 2 weeks" },
-      { type: "ai", text: "Got it — diesel or electric? Outdoor use?" },
-      { type: "user", text: "Outdoor, diesel" },
-      { type: "ai", text: "Here are 3 suitable options:" },
+      { type: "user", text: "Need a boom lift for outdoor works at Tuas, around 40m working height, 2 weeks" },
+      { type: "ai", text: "40m range — that's telescopic territory. Diesel is standard for outdoor. Any site access constraints?" },
+      { type: "user", text: "Open yard, no weight limit issues" },
+      { type: "ai", text: "Perfect. Here are 3 units available for your dates:" },
       {
         type: "product-cards",
         cards: [
           { title: "2021 JLG 1350SJP Telescopic Boom Lift", image: boomLiftImg, specs: [], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$380", weekly: "$2,200", monthly: "$7,500" } },
-          { title: "2019 Genie S-85 XC Articulating Boom Lift", image: boomLift2Img, specs: [], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$290", weekly: "$1,700", monthly: "$5,800" } },
+          { title: "2019 Genie S-85 XC Telescopic Boom Lift", image: boomLift2Img, specs: [], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$290", weekly: "$1,700", monthly: "$5,800" } },
           { title: "2022 Manitou 280TJ Telescopic Boom Lift", image: boomLift3Img, specs: [], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$450", weekly: "$2,800", monthly: "$9,200" } },
         ],
       },
-      { type: "ai", text: "Shall I generate a quotation for 2 weeks?" },
+      { type: "ai", text: "Shall I generate a 2-week rental quotation with delivery to Tuas?" },
     ],
   },
   {
     id: "forklift",
     steps: [
-      { type: "user", text: "Need forklift for warehouse, 3 ton, indoor" },
-      { type: "ai", text: "Electric or diesel? Any height requirement?" },
-      { type: "user", text: "Electric, around 5m lift" },
-      { type: "ai", text: "Here are matching options:" },
+      { type: "user", text: "Need a 3-ton forklift for warehouse material handling, indoor use" },
+      { type: "ai", text: "Indoor warehouse — electric counterbalance would be ideal. What kind of loads? Pallets, crates, or heavy rolls?" },
+      { type: "user", text: "Mainly palletised goods, standard racking up to 5m" },
+      { type: "ai", text: "3-ton electric with 5m mast — here are matching units:" },
       {
         type: "product-cards",
         cards: [
@@ -159,16 +159,16 @@ const chatScenarios: ChatScenario[] = [
           { title: "2022 Linde E50 Counterbalance Forklift", image: forklift3Img, specs: [], tag: "In Transit", tagColor: "amber", cta: "Reserve", price: "$32,800" },
         ],
       },
-      { type: "ai", text: "Want me to check availability this week?" },
+      { type: "ai", text: "Want me to check stock availability for this week?" },
     ],
   },
   {
     id: "floor-scrubber",
     steps: [
-      { type: "user", text: "Looking for floor scrubber for factory, around 2000 sqm" },
-      { type: "ai", text: "Walk-behind or ride-on preferred?" },
-      { type: "user", text: "Ride-on" },
-      { type: "ai", text: "Here are our recommendations:" },
+      { type: "user", text: "Looking for a floor scrubber for a 2,000 sqm factory floor" },
+      { type: "ai", text: "For that area, a ride-on scrubber is most efficient. Is the floor sealed concrete or epoxy-coated?" },
+      { type: "user", text: "Sealed concrete, daily cleaning needed" },
+      { type: "ai", text: "Got it — here are ride-on units suited for industrial concrete floors:" },
       {
         type: "product-cards",
         cards: [
@@ -177,7 +177,7 @@ const chatScenarios: ChatScenario[] = [
           { title: "2022 Kärcher B 250 R Industrial Scrubber", image: floorScrubber3Img, specs: [], tag: "For Sale", tagColor: "amber", cta: "Buy Now", price: "$31,200" },
         ],
       },
-      { type: "ai", text: "I can share specs or arrange purchase." },
+      { type: "ai", text: "I can arrange a site demo or share detailed specs. Interested?" },
     ],
   },
 ];
