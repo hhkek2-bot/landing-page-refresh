@@ -183,7 +183,7 @@ const trustItems = [
 
 function fmtPrice(price: number, billing: BillingCycle) {
   const val = billing === "annual" ? Math.round(price * (1 - annualDiscount)) : price;
-  return `$${val}`;
+  return `S$${val}`;
 }
 
 /* ═══════════════════════ COMPONENTS ═══════════════════════ */
@@ -199,7 +199,7 @@ function AgentCard({ plan, billing }: { plan: typeof agentPlans[0]; billing: Bil
         <span className="pricing-price-period">/ month</span>
       </div>
       {billing === "annual" && (
-        <p className="pricing-annual-note">${Math.round(plan.price * 12 * (1 - annualDiscount))} billed annually</p>
+        <p className="pricing-annual-note">S${Math.round(plan.price * 12 * (1 - annualDiscount))} billed annually</p>
       )}
       <div className="pricing-divider" />
       <div className="pricing-included-list">
@@ -241,7 +241,7 @@ function WebstoreCard({ plan, billing }: { plan: typeof bundlePlans[0]; billing:
         <span className="pricing-price-period">/ month</span>
       </div>
       {billing === "annual" && (
-        <p className="pricing-annual-note">${Math.round(plan.price * 12 * (1 - annualDiscount))} billed annually</p>
+        <p className="pricing-annual-note">S${Math.round(plan.price * 12 * (1 - annualDiscount))} billed annually</p>
       )}
       <div className="pricing-divider" />
       <div className="pricing-included-list">
@@ -302,10 +302,8 @@ export default function PricingPage() {
       <div className="pricing-container">
         {/* Hero */}
         <header className="pricing-hero">
-          <h1>Scale Your Sales — Not Your Headcount</h1>
-          <p className="pricing-hero-sub">From handling inquiries to generating quotations — choose the plan that fits your sales volume and growth.</p>
-          <p className="pricing-hero-microcopy">One conversation can convert into a deal worth thousands.</p>
-          <p className="pricing-hero-trust">No hidden fees. Scale as you grow.</p>
+          <h1>One Conversation. Thousands in Revenue.</h1>
+          <p className="pricing-hero-sub">Your AI sales agent qualifies enquiries, matches the right products, and generates quotations automatically — turning every conversation into a real sales opportunity.</p>
         </header>
 
         {/* Billing Toggle */}
@@ -395,7 +393,7 @@ export default function PricingPage() {
                   {topUps.map((t) => (
                     <tr key={t.qty}>
                       <td>{t.qty} conversations</td>
-                      <td>${t.price}</td>
+                      <td>S${t.price}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -405,7 +403,7 @@ export default function PricingPage() {
             <div className="pricing-addon-card">
               <h3>Additional AI Agent</h3>
               <p className="pricing-addon-desc">Deploy another AI sales agent with a separate knowledge base — ideal for different product lines, brands, or business units.</p>
-              <div className="pricing-agent-price">$49 <span>/ month</span></div>
+              <div className="pricing-agent-price">S$49 <span>/ month</span></div>
               <div style={{ marginTop: 16 }}>
                 <button className="pricing-cta">Add Agent</button>
               </div>
