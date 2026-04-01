@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import type { MutableRefObject, RefObject } from "react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -20,35 +20,41 @@ import {
 import type { LucideIcon } from "lucide-react";
 import "./landing-bright.css";
 
-type PricingPoint = { label: string; value: string };
-type ChatCardData = {
+import boomLiftImg from "@/assets/boom-lift.jpg";
+import forkliftImg from "@/assets/forklift.jpg";
+import floorScrubberImg from "@/assets/floor-scrubber.jpg";
+
+type ProductCardData = {
   title: string;
   image: string;
-  illustrationType?: "excavator-1" | "excavator-2" | "excavator-3" | "breaker";
-  rating: string;
-  verified: boolean;
-  location: string;
-  flag: string;
-  pricing: PricingPoint[];
-  action: string;
+  specs: { label: string; value: string }[];
+  tag: string;
+  tagColor: "green" | "blue" | "amber";
+  cta: string;
 };
-type ChatCardsData = ChatCardData[];
-type ChatScriptStep =
-  | { type: "user" | "ai"; delay: number; text: string }
-  | { type: "typing"; delay: number; duration: number }
-  | { type: "ai-card"; delay: number; data: ChatCardData }
-  | { type: "ai-cards"; delay: number; cards: ChatCardsData };
+
+type ChatScenarioStep =
+  | { type: "user"; text: string }
+  | { type: "ai"; text: string }
+  | { type: "product-card"; data: ProductCardData };
+
+type ChatScenario = {
+  id: string;
+  steps: ChatScenarioStep[];
+};
+
 type RenderedChatItem = {
   id: string;
-  type: "user" | "ai" | "typing" | "ai-card" | "ai-cards";
+  type: "user" | "ai" | "typing" | "product-card";
   text?: string;
-  data?: ChatCardData;
-  cards?: ChatCardsData;
+  data?: ProductCardData;
+  imageLoaded?: boolean;
 };
+
 type Feature = { icon: LucideIcon; title: string; body: string; variant?: "default" | "workflow" };
 type ProcessStep = { id: number; title: string; body: string; visual: "profile" | "ingest" | "rules" | "test" | "launch" };
 type LogoWordmark = { name: string; variant: string };
-type MetricHighlight = { icon: LucideIcon; value: string; label: string; subtitle: string }; // kept for compat
+type MetricHighlight = { icon: LucideIcon; value: string; label: string; subtitle: string };
 type FaqHighlight = { question: string; answer: string };
 type PainResolution = { title: string; description: string; impact: string; solutionTitle: string; solutionDescription: string; keyword: string };
 
@@ -109,6 +115,133 @@ function TypewriterHeading({ text, className = "", as = "h2", once = true }: { t
     >
       {renderedText}
     </HeadingTag>
+  );
+}
+
+const chatScenarios: ChatScenario[] = [
+  {
+    id: "boom-lift",
+    steps: [
+      { type: "user", text: "Need boom lift around 40m for site in Tuas, 2 weeks" },
+      { type: "ai", text: "Got it — diesel or electric? Outdoor use?" },
+      { type: "user", text: "Outdoor, diesel" },
+      { type: "ai", text: "Here's a suitable option:" },
+      {
+        type: "product-card",
+        data: {
+          title: "42m Telescopic Boom Lift (Diesel)",
+          image: boomLiftImg,
+          specs: [
+            { label: "Working Height", value: "~42m" },
+            { label: "Type", value: "Telescopic" },
+            { label: "Power", value: "Diesel" },
+          ],
+          tag: "Available in Singapore",
+          tagColor: "green",
+          cta: "Generate Quote",
+        },
+      },
+      { type: "ai", text: "Shall I generate a quotation for 2 weeks?" },
+    ],
+  },
+  {
+    id: "forklift",
+    steps: [
+      { type: "user", text: "Need forklift for warehouse, 3 ton, indoor" },
+      { type: "ai", text: "Electric or diesel? Any height requirement?" },
+      { type: "user", text: "Electric, around 5m lift" },
+      { type: "ai", text: "Recommended:" },
+      {
+        type: "product-card",
+        data: {
+          title: "3 Ton Electric Forklift",
+          image: forkliftImg,
+          specs: [
+            { label: "Capacity", value: "3 Ton" },
+            { label: "Lift Height", value: "~5m" },
+            { label: "Power", value: "Electric" },
+          ],
+          tag: "Ready Stock",
+          tagColor: "blue",
+          cta: "Check Availability",
+        },
+      },
+      { type: "ai", text: "Want me to check availability this week?" },
+    ],
+  },
+  {
+    id: "floor-scrubber",
+    steps: [
+      { type: "user", text: "Looking for floor scrubber for factory, around 2000 sqm" },
+      { type: "ai", text: "Walk-behind or ride-on preferred?" },
+      { type: "user", text: "Ride-on" },
+      { type: "ai", text: "Recommended:" },
+      {
+        type: "product-card",
+        data: {
+          title: "Ride-On Floor Scrubber",
+          image: floorScrubberImg,
+          specs: [
+            { label: "Type", value: "Ride-On" },
+            { label: "Coverage", value: "2000–3000 sqm/hr" },
+            { label: "Use", value: "Factory" },
+          ],
+          tag: "For Sale",
+          tagColor: "amber",
+          cta: "Buy Now",
+        },
+      },
+      { type: "ai", text: "I can share specs or arrange purchase." },
+    ],
+  },
+];
+
+function ProductCard({ data }: { data: ProductCardData }) {
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const tagColors = {
+    green: { bg: "#ecfdf5", color: "#065f46", border: "#a7f3d0" },
+    blue: { bg: "#eff6ff", color: "#1e40af", border: "#bfdbfe" },
+    amber: { bg: "#fffbeb", color: "#92400e", border: "#fde68a" },
+  };
+  const tc = tagColors[data.tagColor];
+  return (
+    <motion.div
+      className="bright-product-card"
+      initial={{ opacity: 0, x: 30 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+    >
+      <div className="bright-product-img-wrap">
+        {!imgLoaded && <div className="bright-product-img-skeleton" />}
+        <motion.img
+          src={data.image}
+          alt={data.title}
+          loading="lazy"
+          width={800}
+          height={800}
+          onLoad={() => setImgLoaded(true)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: imgLoaded ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
+          style={{ position: imgLoaded ? "relative" : "absolute" }}
+        />
+      </div>
+      <div className="bright-product-body">
+        <p className="bright-product-title">{data.title}</p>
+        <div className="bright-product-specs">
+          {data.specs.map((s) => (
+            <div key={s.label} className="bright-product-spec">
+              <span className="bright-product-spec-label">{s.label}</span>
+              <span className="bright-product-spec-value">{s.value}</span>
+            </div>
+          ))}
+        </div>
+        <span className="bright-product-tag" style={{ background: tc.bg, color: tc.color, border: `1px solid ${tc.border}` }}>
+          {data.tag}
+        </span>
+        <button type="button" className="bright-product-cta">{data.cta}</button>
+      </div>
+    </motion.div>
   );
 }
 
@@ -178,73 +311,6 @@ const painResolutions: PainResolution[] = [
   { title: "Incomplete & Unqualified Enquiries", description: "Leads lack specs, details, and clarity — causing delays and confusion", impact: "", solutionTitle: "Structured Requirement Capture", solutionDescription: "Automatically capture specs, use-case, and intent in one conversation", keyword: "Capture" },
   { title: "Sales Knowledge Dependency", description: "Critical knowledge lives in people, not systems or processes", impact: "", solutionTitle: "Built-In Sales Intelligence", solutionDescription: "Standardize specs, pricing logic, and workflows into one system", keyword: "Intel" },
 ];
-
-const chatScript: ChatScriptStep[] = [
-  { type: "user", delay: 1800, text: "I need a 20-ton excavator for a 3-month project in KL. What do you recommend?" },
-  { type: "typing", delay: 800, duration: 2800 },
-  { type: "ai", delay: 0, text: "For a 3-month KL project, I recommend the <strong>Hitachi ZAXIS 200</strong>. I also prepared a quick rental view for you:" },
-  {
-    type: "ai-cards", delay: 1200, cards: [
-      { title: "2020 CAT 320 Crawler Excavator", image: "/cat-320.jpg", illustrationType: "excavator-1" as const, rating: "4.9/5", verified: true, location: "Kuala Lumpur Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 520" }, { label: "Weekly", value: "RM 2,900" }, { label: "Monthly", value: "RM 9,800" }], action: "Get Quote" },
-      { title: "2019 Hitachi ZX200-7 Crawler Excavator", image: "", illustrationType: "excavator-2" as const, rating: "4.8/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 500" }, { label: "Weekly", value: "RM 2,800" }, { label: "Monthly", value: "RM 9,500" }], action: "Get Quote" },
-      { title: "2021 SANY SY215C Crawler Excavator", image: "", illustrationType: "excavator-3" as const, rating: "4.7/5", verified: true, location: "Johor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 460" }, { label: "Weekly", value: "RM 2,600" }, { label: "Monthly", value: "RM 8,800" }], action: "Get Quote" },
-    ],
-  },
-  { type: "user", delay: 4500, text: "Do you have compatible hydraulic breaker attachments and Monday delivery?" },
-  { type: "typing", delay: 1000, duration: 2400 },
-  { type: "ai", delay: 0, text: "Yes. NPK GH9 is compatible and available. Monday morning delivery to KL is available." },
-  {
-    type: "ai-card", delay: 1100, data: {
-      title: "2022 NPK GH9 Hydraulic Breaker", image: "", illustrationType: "breaker" as const, rating: "5.0/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg",
-      pricing: [{ label: "Daily", value: "RM 150" }, { label: "Weekly", value: "RM 600" }, { label: "Monthly", value: "RM 1,200" }], action: "Add to Active Quote",
-    },
-  },
-];
-
-function EquipmentIllustration({ type }: { type: "excavator-1" | "excavator-2" | "excavator-3" | "breaker" }) {
-  const colors = {
-    "excavator-1": { body: "#F5A623", arm: "#E8961C", track: "#3D3D3D", cabin: "#2C2C2C" },
-    "excavator-2": { body: "#E87040", arm: "#D4612E", track: "#3D3D3D", cabin: "#2C2C2C" },
-    "excavator-3": { body: "#F5C842", arm: "#E0B630", track: "#3D3D3D", cabin: "#2C2C2C" },
-    breaker: { body: "#E63B2E", arm: "#333", track: "#3D3D3D", cabin: "#555" },
-  };
-  const c = colors[type];
-  if (type === "breaker") {
-    return (
-      <svg viewBox="0 0 200 160" fill="none" className="bright-equip-svg">
-        <rect x="60" y="20" width="28" height="100" rx="4" fill={c.body} />
-        <rect x="64" y="120" width="20" height="30" rx="2" fill={c.arm} />
-        <rect x="70" y="148" width="8" height="12" rx="1" fill="#888" />
-        <rect x="50" y="10" width="48" height="16" rx="3" fill={c.cabin} />
-        <rect x="66" y="40" width="16" height="6" rx="2" fill="rgba(255,255,255,0.3)" />
-        <rect x="66" y="56" width="16" height="6" rx="2" fill="rgba(255,255,255,0.2)" />
-        <circle cx="74" cy="15" r="3" fill="#F5A623" opacity="0.8" />
-      </svg>
-    );
-  }
-  return (
-    <svg viewBox="0 0 200 160" fill="none" className="bright-equip-svg">
-      {/* Tracks */}
-      <rect x="20" y="120" width="120" height="28" rx="14" fill={c.track} />
-      <circle cx="36" cy="134" r="10" fill="#555" /><circle cx="60" cy="134" r="7" fill="#555" />
-      <circle cx="80" cy="134" r="7" fill="#555" /><circle cx="100" cy="134" r="7" fill="#555" />
-      <circle cx="124" cy="134" r="10" fill="#555" />
-      {/* Body */}
-      <rect x="30" y="82" width="100" height="40" rx="6" fill={c.body} />
-      <rect x="32" y="84" width="40" height="28" rx="4" fill={c.cabin} />
-      <rect x="36" y="88" width="32" height="18" rx="3" fill="rgba(180,220,255,0.35)" />
-      {/* Arm */}
-      <line x1="100" y1="90" x2="155" y2="50" stroke={c.arm} strokeWidth="8" strokeLinecap="round" />
-      <line x1="155" y1="50" x2="180" y2="90" stroke={c.arm} strokeWidth="6" strokeLinecap="round" />
-      {/* Bucket */}
-      <path d="M172 86 L188 92 L184 104 L168 98 Z" fill={c.arm} />
-      {/* Details */}
-      <rect x="90" y="88" width="30" height="6" rx="2" fill="rgba(0,0,0,0.15)" />
-      <circle cx="78" cy="108" r="4" fill="rgba(0,0,0,0.12)" />
-    </svg>
-  );
-}
-
 function StepGraphic({ visual }: { visual: ProcessStep["visual"] }) {
   if (visual === "profile") return (<div className="bright-step-graphic"><div className="bright-anim-ring" /><div className="bright-anim-avatar"><User size={20} /></div></div>);
   if (visual === "ingest") return (<div className="bright-step-graphic"><div className="bright-anim-doc bright-doc-one" /><div className="bright-anim-doc bright-doc-two" /><div className="bright-anim-folder" /></div>);
@@ -484,15 +550,17 @@ export default function Landing() {
     return () => { window.cancelAnimationFrame(frameId); window.removeEventListener("resize", resize); };
   }, []);
 
-  // Chat script animation with word-by-word AI rendering
+  // Rotating chat scenario animation
+  const [scenarioIndex, setScenarioIndex] = useState(0);
+  const [chatFadeIn, setChatFadeIn] = useState(true);
+
   useEffect(() => {
     let alive = true;
     const timers: number[] = [];
     const queue = (cb: () => void, delay: number) => { const id = window.setTimeout(() => { if (!alive) return; cb(); }, delay); timers.push(id); };
 
-    const typeAiText = (msgId: string, fullHtml: string, onDone: () => void) => {
-      // Strip HTML tags for word splitting, but preserve them in output
-      const words = fullHtml.split(/(?<=\s)|(?=\s)/);
+    const typeAiText = (msgId: string, fullText: string, onDone: () => void) => {
+      const words = fullText.split(/(?<=\s)|(?=\s)/);
       let currentIndex = 0;
       const typeNext = () => {
         if (!alive) return;
@@ -500,103 +568,95 @@ export default function Landing() {
         currentIndex++;
         const partial = words.slice(0, currentIndex).join("");
         setChatItems((prev) => prev.map((item) => item.id === msgId ? { ...item, text: partial } : item));
-        const delay = 25 + Math.random() * 35;
-        queue(typeNext, delay);
+        queue(typeNext, 25 + Math.random() * 35);
       };
       typeNext();
     };
 
-    const runStep = (index: number) => {
+    const runScenario = (sIdx: number) => {
       if (!alive) return;
-      if (index >= chatScript.length) { queue(() => { setChatItems([]); runStep(0); }, 8000); return; }
-      const step = chatScript[index];
-      queue(() => {
-        if (step.type === "typing") {
-          const typingId = `typing-${Date.now()}-${index}`;
-          setChatItems((prev) => [...prev, { id: typingId, type: "typing" }]);
-          queue(() => { setChatItems((prev) => prev.filter((i) => i.id !== typingId)); runStep(index + 1); }, step.duration);
+      const scenario = chatScenarios[sIdx % chatScenarios.length];
+      setScenarioIndex(sIdx % chatScenarios.length);
+      setChatFadeIn(true);
+      setChatItems([]);
+
+      let stepIndex = 0;
+      const runStep = () => {
+        if (!alive || stepIndex >= scenario.steps.length) {
+          // Wait then transition to next scenario
+          queue(() => {
+            setChatFadeIn(false);
+            queue(() => runScenario(sIdx + 1), 200);
+          }, 3000);
           return;
         }
-        if (step.type === "ai" || step.type === "user") {
-          const ts = step as { type: "user" | "ai"; text: string };
-          const msgId = `msg-${Date.now()}-${index}`;
-          if (ts.type === "ai") {
-            setChatItems((prev) => [...prev, { id: msgId, type: "ai", text: "" }]);
-            typeAiText(msgId, ts.text, () => runStep(index + 1));
-          } else {
-            setChatItems((prev) => [...prev, { id: msgId, type: "user", text: ts.text }]);
-            runStep(index + 1);
-          }
-          return;
+        const step = scenario.steps[stepIndex];
+        stepIndex++;
+
+        if (step.type === "user") {
+          queue(() => {
+            const msgId = `msg-${Date.now()}-${stepIndex}`;
+            setChatItems((prev) => [...prev, { id: msgId, type: "user", text: step.text }]);
+            queue(runStep, 800 + Math.random() * 400);
+          }, 800 + Math.random() * 400);
+        } else if (step.type === "ai") {
+          // Show typing indicator first
+          const typingId = `typing-${Date.now()}-${stepIndex}`;
+          queue(() => {
+            setChatItems((prev) => [...prev, { id: typingId, type: "typing" }]);
+            queue(() => {
+              setChatItems((prev) => prev.filter((i) => i.id !== typingId));
+              const msgId = `ai-${Date.now()}-${stepIndex}`;
+              setChatItems((prev) => [...prev, { id: msgId, type: "ai", text: "" }]);
+              typeAiText(msgId, step.text, () => {
+                queue(runStep, 600);
+              });
+            }, 600 + Math.random() * 300);
+          }, 200);
+        } else if (step.type === "product-card") {
+          queue(() => {
+            setChatItems((prev) => [...prev, { id: `card-${Date.now()}-${stepIndex}`, type: "product-card", data: step.data }]);
+            queue(runStep, 1200);
+          }, 300);
         }
-        if (step.type === "ai-card") setChatItems((prev) => [...prev, { id: `card-${Date.now()}-${index}`, type: "ai-card", data: step.data }]);
-        else if (step.type === "ai-cards") setChatItems((prev) => [...prev, { id: `cards-${Date.now()}-${index}`, type: "ai-cards", cards: step.cards }]);
-        runStep(index + 1);
-      }, step.delay);
+      };
+      queue(runStep, 400);
     };
-    queue(() => runStep(0), 1200);
+
+    queue(() => runScenario(0), 800);
     return () => { alive = false; timers.forEach((id) => window.clearTimeout(id)); };
   }, []);
 
   useEffect(() => { const cb = chatBodyRef.current; if (cb) cb.scrollTop = cb.scrollHeight; }, [chatItems]);
 
-  // Intersection observer for steps
-  useEffect(() => {
-    const targets = document.querySelectorAll(".bright-step-hidden");
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => { if (!entry.isIntersecting) return; entry.target.classList.add("visible", "bright-step-visible"); obs.unobserve(entry.target); });
-    }, { threshold: 0.1, rootMargin: "0px 0px -12% 0px" });
-    targets.forEach((t) => observer.observe(t));
-    return () => observer.disconnect();
-  }, []);
-
-  // Connector beam positioning
-  useEffect(() => {
-    const updateConnector = () => {
-      const activeItem = painRefs.current[activePainIndex];
-      const solutionColumn = solutionColumnRef.current;
-      const shell = solutionColumn?.closest(".bright-comparison-shell") as HTMLElement | null;
-      if (!activeItem || !solutionColumn || !shell || window.innerWidth <= 980) { setConnectorPosition((p) => (p.width === 0 ? p : { top: p.top, left: 0, width: 0 })); return; }
-      const shellRect = shell.getBoundingClientRect();
-      const itemRect = activeItem.getBoundingClientRect();
-      const solutionRect = solutionColumn.getBoundingClientRect();
-      setConnectorPosition({ top: itemRect.top - shellRect.top + itemRect.height / 2, left: itemRect.right - shellRect.left + 18, width: Math.max(solutionRect.left - itemRect.right - 32, 48) });
-    };
-    updateConnector();
-    window.addEventListener("resize", updateConnector);
-    return () => window.removeEventListener("resize", updateConnector);
-  }, [activePainIndex]);
-
   const renderChatItem = (item: RenderedChatItem) => {
     if (item.type === "typing") return (
-      <div className="bright-chat-row" key={item.id}><div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div><div className="bright-chat-msg bright-chat-msg-ai bright-typing-shell"><div className="bright-typing-indicator"><span className="bright-dot" /><span className="bright-dot" /><span className="bright-dot" /></div></div></div>
-    );
-    if (item.type === "ai-card" && item.data) return (
-      <div className="bright-chat-row" key={item.id}><div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
-        <div className="bright-chat-msg bright-chat-msg-ai bright-card-msg"><div className="bright-chat-card">
-          <div className="bright-card-image-wrap">{item.data.illustrationType ? <EquipmentIllustration type={item.data.illustrationType} /> : <img src={item.data.image} alt={item.data.title} />}<div className="bright-card-badges"><span className="bright-badge-rating"><Star size={13} fill="currentColor" color="currentColor" /> {item.data.rating}</span>{item.data.verified && <span className="bright-badge-verified"><CheckCircle2 size={14} /> Verified</span>}</div></div>
-          <div className="bright-card-body"><p className="bright-card-title">{item.data.title}</p><p className="bright-card-location"><img src={item.data.flag} alt="country" /> {item.data.location}</p><div className="bright-price-grid">{item.data.pricing.map((p) => (<div className="bright-price-col" key={p.label}><span className="bright-price-label">{p.label}</span><span className="bright-price-value">{p.value}</span></div>))}</div><button type="button" className="bright-card-action">{item.data.action}</button></div>
-        </div></div>
+      <div className="bright-chat-row" key={item.id}>
+        <div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
+        <div className="bright-chat-msg bright-chat-msg-ai bright-typing-shell">
+          <div className="bright-typing-indicator"><span className="bright-dot" /><span className="bright-dot" /><span className="bright-dot" /></div>
+        </div>
       </div>
     );
-    if (item.type === "ai-cards" && item.cards) return (
-      <div className="bright-chat-row" key={item.id}><div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
-        <div className="bright-cards-row">{item.cards.map((card, ci) => (
-          <div className="bright-chat-card bright-chat-card-sm" key={ci}>
-            <div className="bright-card-image-wrap">{card.illustrationType ? <EquipmentIllustration type={card.illustrationType} /> : <img src={card.image} alt={card.title} />}<div className="bright-card-badges"><span className="bright-badge-rating"><Star size={11} fill="currentColor" color="currentColor" /> {card.rating}</span>{card.verified && <span className="bright-badge-verified"><CheckCircle2 size={12} /> Verified</span>}</div></div>
-            <div className="bright-card-body"><p className="bright-card-title">{card.title}</p><p className="bright-card-location"><img src={card.flag} alt="country" /> {card.location}</p><div className="bright-price-grid">{card.pricing.map((p) => (<div className="bright-price-col" key={p.label}><span className="bright-price-label">{p.label}</span><span className="bright-price-value">{p.value}</span></div>))}</div><button type="button" className="bright-card-action">{card.action}</button></div>
-          </div>
-        ))}</div>
+    if (item.type === "product-card" && item.data) return (
+      <div className="bright-chat-row" key={item.id}>
+        <div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
+        <div className="bright-chat-msg bright-chat-msg-ai bright-card-msg">
+          <ProductCard data={item.data} />
+        </div>
       </div>
     );
     return (
       <div className={`bright-chat-row ${item.type === "user" ? "bright-user-row" : ""}`} key={item.id}>
-        <div className={`bright-chat-avatar ${item.type === "user" ? "bright-avatar-user" : "bright-avatar-ai"}`}>{item.type === "user" ? "U" : <Bot size={14} />}</div>
-        <div className={`bright-chat-msg ${item.type === "user" ? "bright-chat-msg-user" : "bright-chat-msg-ai"}`}><span dangerouslySetInnerHTML={{ __html: item.text ?? "" }} /></div>
+        <div className={`bright-chat-avatar ${item.type === "user" ? "bright-avatar-user" : "bright-avatar-ai"}`}>
+          {item.type === "user" ? "U" : <Bot size={14} />}
+        </div>
+        <div className={`bright-chat-msg ${item.type === "user" ? "bright-chat-msg-user" : "bright-chat-msg-ai"}`}>
+          <span dangerouslySetInnerHTML={{ __html: item.text ?? "" }} />
+        </div>
       </div>
     );
   };
-
   return (
     <div className="bright-landing">
       {/* Nav */}
@@ -620,16 +680,20 @@ export default function Landing() {
         <div className="bright-canvas-container"><canvas ref={canvasRef} /></div>
         <div className="bright-container bright-hero-split">
           <div className="bright-hero-content bright-hero-content-left">
-            <h1 className="bright-text-gradient">The 24/7 AI Sales Agent for Equipment Businesses</h1>
-            <p className="bright-subtitle">Deploy a digital sales expert that answers technical questions, recommends suitable machinery, and converts inquiries into qualified leads instantly.</p>
+            <h1>
+              Turn Every Website Visitor Into a{" "}
+              <span className="bright-hero-gradient-text">Qualified Equipment Buyer</span>
+              {" "}— Automatically
+            </h1>
+            <p className="bright-subtitle">Your AI Sales Agent answers inquiries, recommends the right equipment, and generates quotes instantly — trained on your catalog, pricing, and business logic.</p>
             <div className="bright-hero-actions">
-              <Link to="/pricing" className="bright-btn bright-btn-primary">Build Your AI Agent <ArrowRight size={18} /></Link>
+              <Link to="/pricing" className="bright-btn bright-btn-primary bright-btn-glow">Build Your AI Agent <ArrowRight size={18} /></Link>
               <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="bright-btn bright-btn-secondary">Book Demo</a>
             </div>
           </div>
           <div className="bright-hero-mockup-wrap bright-hero-mockup-right">
             <div className="bright-mockup-glow" aria-hidden="true" />
-            <div className="bright-chat-mockup" id="demo">
+            <div className={`bright-chat-mockup ${chatFadeIn ? "bright-chat-fade-in" : "bright-chat-fade-out"}`} id="demo">
               <div className="bright-chat-header"><span className="bright-status-dot" /><span className="bright-chat-title"><Bot size={18} /> Antbuildz Sales Agent</span><span className="bright-online-status"><span /> Online</span></div>
               <div className="bright-chat-body" ref={chatBodyRef}>{chatItems.map(renderChatItem)}</div>
             </div>
