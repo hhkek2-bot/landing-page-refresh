@@ -321,16 +321,21 @@ export default function PricingPage() {
           <p className="pricing-hero-sub">Your AI sales agent qualifies enquiries, matches the right products, and generates quotations automatically — turning every conversation into a real sales opportunity.</p>
         </header>
 
-        {/* Billing & Currency Toggles */}
-        <div className="pricing-billing-row">
-          <div className="pricing-toggle">
-            <button className={`pricing-toggle-btn ${billing === "monthly" ? "is-active" : ""}`} onClick={() => setBilling("monthly")}>Monthly</button>
-            <button className={`pricing-toggle-btn ${billing === "annual" ? "is-active" : ""}`} onClick={() => setBilling("annual")}>Annual</button>
+        {/* Billing & Currency Controls */}
+        <div className="pricing-controls-row">
+          <div className="pricing-billing-toggle">
+            <button className={`pricing-billing-btn ${billing === "monthly" ? "is-active" : ""}`} onClick={() => setBilling("monthly")}>Monthly</button>
+            <button className={`pricing-billing-btn ${billing === "annual" ? "is-active" : ""}`} onClick={() => setBilling("annual")}>Annual <span className="pricing-billing-save">Save 20%</span></button>
           </div>
-          {billing === "annual" && <span className="pricing-save-badge">Save 20%</span>}
-          <div className="pricing-toggle pricing-currency-toggle">
-            <button className={`pricing-toggle-btn ${currency === "SGD" ? "is-active" : ""}`} onClick={() => setCurrency("SGD")}>SGD</button>
-            <button className={`pricing-toggle-btn ${currency === "USD" ? "is-active" : ""}`} onClick={() => setCurrency("USD")}>USD</button>
+          <div className="pricing-currency-select-wrap">
+            <select
+              className="pricing-currency-select"
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as Currency)}
+            >
+              <option value="SGD">SGD</option>
+              <option value="USD">USD</option>
+            </select>
           </div>
         </div>
         <p className="pricing-currency-note">
