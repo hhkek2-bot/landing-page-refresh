@@ -162,7 +162,7 @@
 /* ===== PRICING CONTROLS ===== */
 .pricing-controls-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 48px;
   max-width: 1200px;
