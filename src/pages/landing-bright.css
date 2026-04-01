@@ -1232,7 +1232,24 @@
 .bright-step-hidden { opacity: 0; transform: translateY(40px); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1); }
 .bright-step-visible { opacity: 1; transform: translateY(0); }
 
-.bright-step-num {
+.bright-step-arrow {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 8px 34px;
+}
+
+.bright-step-arrow-icon {
+  color: var(--cta-primary);
+  transform: rotate(90deg);
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.bright-step-visible + .bright-step-arrow .bright-step-arrow-icon,
+.bright-step-arrow.bright-step-visible .bright-step-arrow-icon {
+  opacity: 1;
+}
+
   width: 68px;
   height: 68px;
   border-radius: 999px;
