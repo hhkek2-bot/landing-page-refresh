@@ -391,7 +391,8 @@
 
 .bright-hero-mockup-right {
   margin: 0;
-  max-width: 100%;
+  max-width: 380px;
+  justify-self: center;
 }
 
 @media (max-width: 900px) {
