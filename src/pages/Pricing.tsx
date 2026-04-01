@@ -183,7 +183,7 @@ const trustItems = [
 
 function fmtPrice(price: number, billing: BillingCycle) {
   const val = billing === "annual" ? Math.round(price * (1 - annualDiscount)) : price;
-  return `$${val}`;
+  return `S$${val}`;
 }
 
 /* ═══════════════════════ COMPONENTS ═══════════════════════ */
