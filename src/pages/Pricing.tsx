@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+
+type Currency = "SGD" | "USD";
+const SGD_TO_USD = 0.74;
 import { Link } from "react-router-dom";
 import { ArrowLeft, Bot, Check, Zap, ShoppingBag, Settings } from "lucide-react";
 import "./pricing.css";
