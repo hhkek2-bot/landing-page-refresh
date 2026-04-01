@@ -335,10 +335,10 @@ const faqHighlights: FaqHighlight[] = [
 ];
 
 const painResolutions: PainResolution[] = [
-  { title: "Delayed Responses", description: "Leads arrive anytime, but your team can't respond instantly", impact: "", solutionTitle: "Instant Response, 24/7", solutionDescription: "Engage every enquiry the moment it arrives — no missed opportunities", keyword: "24/7" },
-  { title: "Limited Handling Capacity", description: "Too many enquiries overwhelm your team and slow everything down", impact: "", solutionTitle: "Scale Without Hiring", solutionDescription: "Handle multiple enquiries simultaneously without increasing headcount", keyword: "Scale" },
-  { title: "Incomplete & Unqualified Enquiries", description: "Leads lack specs, details, and clarity — causing delays and confusion", impact: "", solutionTitle: "Structured Requirement Capture", solutionDescription: "Automatically capture specs, use-case, and intent in one conversation", keyword: "Capture" },
-  { title: "Sales Knowledge Dependency", description: "Critical knowledge lives in people, not systems or processes", impact: "", solutionTitle: "Built-In Sales Intelligence", solutionDescription: "Standardize specs, pricing logic, and workflows into one system", keyword: "Intel" },
+  { title: "Slow Response", description: "Leads come in anytime — but your team can't respond instantly", impact: "", solutionTitle: "Instant Response, 24/7", solutionDescription: "Engage every enquiry the moment it arrives — no missed opportunities", keyword: "24/7" },
+  { title: "Capacity Bottleneck", description: "Too many enquiries overwhelm your team and slow down your entire operation", impact: "", solutionTitle: "Scale Without Hiring", solutionDescription: "Handle multiple enquiries simultaneously without increasing headcount", keyword: "Scale" },
+  { title: "Unqualified Leads", description: "Leads lack key details and clarity — causing delays, back-and-forth, and missed opportunities", impact: "", solutionTitle: "Structured Requirement Capture", solutionDescription: "Automatically capture specs, use-case, and intent in one conversation", keyword: "Capture" },
+  { title: "People Dependency", description: "Critical sales knowledge lives in people — not in scalable systems or processes", impact: "", solutionTitle: "Built-In Sales Intelligence", solutionDescription: "Standardize specs, pricing logic, and workflows into one system", keyword: "Intel" },
 ];
 function StepGraphic({ visual }: { visual: ProcessStep["visual"] }) {
   if (visual === "profile") return (<div className="bright-step-graphic"><div className="bright-anim-ring" /><div className="bright-anim-avatar"><User size={20} /></div></div>);
