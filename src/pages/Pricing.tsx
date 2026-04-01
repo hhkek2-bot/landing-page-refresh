@@ -426,6 +426,11 @@ export default function PricingPage() {
           </div>
         </section>
 
+        {/* ═══ Enterprise Note ═══ */}
+        <div className="pricing-enterprise-note">
+          <p>Need a custom enterprise solution with higher volume or tailored features? <a href="mailto:hello@antbuildz.com" className="pricing-enterprise-link">Contact us</a> — we'll build the right plan for your business.</p>
+        </div>
+
         {/* ═══ Bottom CTA ═══ */}
         <section className="pricing-section">
           <div className="pricing-bottom-cta">
