@@ -403,7 +403,7 @@ export default function PricingPage() {
             <div className="pricing-addon-card">
               <h3>Additional AI Agent</h3>
               <p className="pricing-addon-desc">Deploy another AI sales agent with a separate knowledge base — ideal for different product lines, brands, or business units.</p>
-              <div className="pricing-agent-price">$49 <span>/ month</span></div>
+              <div className="pricing-agent-price">S$49 <span>/ month</span></div>
               <div style={{ marginTop: 16 }}>
                 <button className="pricing-cta">Add Agent</button>
               </div>
