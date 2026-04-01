@@ -369,7 +369,7 @@
   position: relative;
   z-index: 3;
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: 1.3fr 1fr;
   grid-template-rows: auto auto;
   align-items: center;
   gap: 48px;
@@ -388,7 +388,7 @@
 }
 
 .bright-hero-text-block .bright-subtitle {
-  max-width: 48ch;
+  max-width: 52ch;
   text-align: left;
 }
 
@@ -404,7 +404,7 @@
 .bright-hero-mockup-right {
   margin: 0;
   max-width: 380px;
-  justify-self: center;
+  justify-self: end;
   grid-column: 2;
   grid-row: 1 / 3;
 }
