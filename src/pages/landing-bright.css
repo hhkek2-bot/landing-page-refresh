@@ -661,27 +661,27 @@
 }
 
 .bright-status-dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 999px;
   background: #34d399;
-  box-shadow: 0 0 8px rgba(52, 211, 153, 0.64);
+  box-shadow: 0 0 6px rgba(52, 211, 153, 0.5);
 }
 
 .bright-chat-title {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #ffffff;
+  color: #1a1a1a;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .bright-online-status {
   margin-left: auto;
-  color: #a5f3fc;
-  font-size: 0.8rem;
-  font-weight: 700;
+  color: #6b7280;
+  font-size: 0.75rem;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 5px;
