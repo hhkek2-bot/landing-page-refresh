@@ -1941,7 +1941,8 @@
   .bright-pain-item-head h3 { font-size: 1.02rem; }
   .bright-pain-description { font-size: 0.95rem; }
   .bright-pain-impact { font-size: 0.84rem; }
-  .bright-solution-panel-mobile { padding: 18px 18px 20px; border-radius: 14px; }
+  .bright-solution-panel-mobile { padding: 0; border-radius: 14px; }
+  .bright-solution-panel-mobile .bright-solution-glass { padding: 18px 18px 20px; min-height: 0; border-radius: 14px; }
   .bright-solution-kicker { margin-bottom: 12px; font-size: 0.75rem; letter-spacing: 0.14em; }
   .bright-solution-panel-mobile .bright-solution-copy h3 { font-size: 1.4rem; line-height: 1.14; }
   .bright-solution-panel-mobile .bright-solution-copy p { font-size: 0.92rem; line-height: 1.6; }
