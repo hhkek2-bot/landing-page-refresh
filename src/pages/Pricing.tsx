@@ -388,7 +388,7 @@ export default function PricingPage() {
 
           <div className="pricing-grid-3">
             {currentWebstorePlans.map((plan) => (
-              <WebstoreCard key={plan.name} plan={plan} billing={billing} />
+              <WebstoreCard key={plan.name} plan={plan} billing={billing} currency={currency} />
             ))}
           </div>
         </section>
