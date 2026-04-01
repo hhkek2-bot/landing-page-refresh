@@ -199,7 +199,7 @@ function AgentCard({ plan, billing }: { plan: typeof agentPlans[0]; billing: Bil
         <span className="pricing-price-period">/ month</span>
       </div>
       {billing === "annual" && (
-        <p className="pricing-annual-note">${Math.round(plan.price * 12 * (1 - annualDiscount))} billed annually</p>
+        <p className="pricing-annual-note">S${Math.round(plan.price * 12 * (1 - annualDiscount))} billed annually</p>
       )}
       <div className="pricing-divider" />
       <div className="pricing-included-list">
