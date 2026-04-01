@@ -223,6 +223,13 @@ function ProductCard({ data }: { data: ProductCardData }) {
         <span className="bright-product-tag" style={{ background: tc.bg, color: tc.color, border: `1px solid ${tc.border}` }}>
           {data.tag}
         </span>
+        {data.rentalPricing && (
+          <div className="bright-product-rental-pricing">
+            <div className="bright-rental-price-item"><span className="bright-rental-period">Daily</span><span className="bright-rental-amount">{data.rentalPricing.daily}</span></div>
+            <div className="bright-rental-price-item"><span className="bright-rental-period">Weekly</span><span className="bright-rental-amount">{data.rentalPricing.weekly}</span></div>
+            <div className="bright-rental-price-item"><span className="bright-rental-period">Monthly</span><span className="bright-rental-amount">{data.rentalPricing.monthly}</span></div>
+          </div>
+        )}
         <button type="button" className="bright-product-cta">{data.cta}</button>
       </div>
     </motion.div>
