@@ -213,14 +213,9 @@ function ProductCard({ data }: { data: ProductCardData }) {
       </div>
       <div className="bright-product-body">
         <p className="bright-product-title">{data.title}</p>
-        <div className="bright-product-specs">
-          {data.specs.map((s) => (
-            <div key={s.label} className="bright-product-spec">
-              <span className="bright-product-spec-label">{s.label}</span>
-              <span className="bright-product-spec-value">{s.value}</span>
-            </div>
-          ))}
-        </div>
+        {data.price && (
+          <p className="bright-product-price">{data.price}</p>
+        )}
         <span className="bright-product-tag" style={{ background: tc.bg, color: tc.color, border: `1px solid ${tc.border}` }}>
           {data.tag}
         </span>
