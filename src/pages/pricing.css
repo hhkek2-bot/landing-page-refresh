@@ -162,10 +162,10 @@
 /* ===== PRICING CONTROLS ===== */
 .pricing-controls-row {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 32px;
-  margin-bottom: 10px;
+  margin-bottom: 48px;
+  max-width: 1200px;
 }
 
 .pricing-billing-toggle {
