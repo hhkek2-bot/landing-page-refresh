@@ -1900,12 +1900,13 @@
   .bright-solution-column { display: none; }
   .bright-connector-beam { display: none; }
   .bright-pain-mobile-panel { display: block; margin-top: 18px; }
-  .bright-solution-panel-mobile { padding: 22px 22px 24px; }
+  .bright-solution-panel-mobile { padding: 0; }
+  .bright-solution-panel-mobile .bright-solution-glass { padding: 22px 22px 24px; min-height: 0; }
   .bright-solution-panel-mobile .bright-solution-content { min-height: 0; }
   .bright-solution-panel-mobile .bright-solution-copy { max-width: 100%; }
   .bright-solution-panel-mobile .bright-solution-copy h3 { font-size: 1.65rem; }
   .bright-solution-panel-mobile .bright-solution-copy p { font-size: 0.98rem; }
-  .bright-solution-panel-mobile .bright-solution-keyword { right: -2px; bottom: -4px; font-size: clamp(3.2rem, 14vw, 5rem); }
+  .bright-solution-panel-mobile .bright-solution-watermark { right: -2px; bottom: -4px; font-size: clamp(3.2rem, 14vw, 5rem); }
   .bright-hero-grid { grid-template-columns: 1fr; }
   .bright-hero-mockup-wrap { max-width: 340px; margin-top: 36px; }
   .bright-cta-section { min-height: 0; padding: 112px 0; }
