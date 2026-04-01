@@ -338,9 +338,6 @@ export default function PricingPage() {
             </select>
           </div>
         </div>
-        <p className="pricing-currency-note">
-          {currency === "SGD" ? "Billed in SGD." : "Prices shown in USD for reference. Billing is in SGD."}
-        </p>
 
         {/* ═══ SECTION 1: AI Agent Only ═══ */}
         <section className="pricing-section">
