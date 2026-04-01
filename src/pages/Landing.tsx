@@ -451,26 +451,39 @@ function FaqAccordionItem({ question, answer }: { question: string; answer: stri
 function SolutionPanel({ activeItem, reduceMotion, mobile = false }: { activeItem: PainResolution; reduceMotion: boolean; mobile?: boolean }) {
   return (
     <div className={`bright-solution-panel ${mobile ? "bright-solution-panel-mobile" : ""}`.trim()} aria-live="polite">
-      <div className="bright-solution-glow" aria-hidden="true" />
-      <div className="bright-solution-kicker">How Antbuildz AI Agent Fixes It</div>
+      {/* Layer 1: Ambient gradient glow */}
+      <div className="bright-solution-gradient-ambient" aria-hidden="true" />
+      {/* Layer 2: Watermark keyword */}
       <AnimatePresence mode="wait">
-        <motion.div key={`${mobile ? "mobile" : "desktop"}-${activeItem.solutionTitle}`} className="bright-solution-content"
-          initial={reduceMotion ? { opacity: 1 } : { opacity: 0, x: 20, scale: 0.98 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: -10, scale: 0.99 }}
-          transition={{ duration: reduceMotion ? 0.15 : 0.3, ease: "easeOut" }}>
-          <motion.span className="bright-solution-keyword"
-            initial={reduceMotion ? { opacity: 0.08 } : { opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 0.08, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduceMotion ? 0.15 : 0.5, ease: "easeOut" }}
-            aria-hidden="true">{activeItem.keyword}</motion.span>
-          <div className="bright-solution-copy">
-            <h3>{activeItem.solutionTitle}</h3>
-            <p>{activeItem.solutionDescription}</p>
-          </div>
-        </motion.div>
+        <motion.span
+          key={`watermark-${mobile ? "m" : "d"}-${activeItem.keyword}`}
+          className="bright-solution-watermark"
+          initial={reduceMotion ? { opacity: 0.06 } : { opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 0.06, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.02 }}
+          transition={{ duration: reduceMotion ? 0.15 : 0.5, ease: "easeOut" }}
+          aria-hidden="true"
+        >
+          {activeItem.keyword}
+        </motion.span>
       </AnimatePresence>
+      {/* Layer 3: Glass card */}
+      <div className="bright-solution-glass">
+        <div className="bright-solution-glass-highlight" aria-hidden="true" />
+        <div className="bright-solution-kicker">How Antbuildz AI Agent Fixes It</div>
+        <AnimatePresence mode="wait">
+          <motion.div key={`${mobile ? "mobile" : "desktop"}-${activeItem.solutionTitle}`} className="bright-solution-content"
+            initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
+            transition={{ duration: reduceMotion ? 0.15 : 0.28, ease: "easeOut" }}>
+            <div className="bright-solution-copy">
+              <h3>{activeItem.solutionTitle}</h3>
+              <p>{activeItem.solutionDescription}</p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
