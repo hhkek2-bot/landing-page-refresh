@@ -502,15 +502,7 @@
 
 /* Fade-out gradient at the bottom of the conversation mockup */
 .bright-hero-mockup-wrap::after {
-  content: "";
-  position: absolute;
-  bottom: 40px;
-  left: -10px;
-  right: -10px;
-  height: 200px;
-  background: linear-gradient(to bottom, transparent 0%, var(--bg-canvas) 70%, var(--bg-canvas) 100%);
-  z-index: 3;
-  pointer-events: none;
+  display: none;
 }
 
 .bright-mockup-glow {
