@@ -393,7 +393,7 @@ export default function PricingPage() {
                   {topUps.map((t) => (
                     <tr key={t.qty}>
                       <td>{t.qty} conversations</td>
-                      <td>${t.price}</td>
+                      <td>S${t.price}</td>
                     </tr>
                   ))}
                 </tbody>
