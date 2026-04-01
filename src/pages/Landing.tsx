@@ -130,21 +130,14 @@ const chatScenarios: ChatScenario[] = [
       { type: "user", text: "Need boom lift around 40m for site in Tuas, 2 weeks" },
       { type: "ai", text: "Got it — diesel or electric? Outdoor use?" },
       { type: "user", text: "Outdoor, diesel" },
-      { type: "ai", text: "Here's a suitable option:" },
+      { type: "ai", text: "Here are 3 suitable options:" },
       {
-        type: "product-card",
-        data: {
-          title: "42m Telescopic Boom Lift (Diesel)",
-          image: boomLiftImg,
-          specs: [
-            { label: "Working Height", value: "~42m" },
-            { label: "Type", value: "Telescopic" },
-            { label: "Power", value: "Diesel" },
-          ],
-          tag: "Available in Singapore",
-          tagColor: "green",
-          cta: "Generate Quote",
-        },
+        type: "product-cards",
+        cards: [
+          { title: "42m Telescopic Boom Lift", image: boomLiftImg, specs: [{ label: "Height", value: "~42m" }, { label: "Type", value: "Telescopic" }, { label: "Power", value: "Diesel" }], tag: "Available", tagColor: "green", cta: "Get Quote" },
+          { title: "34m Articulating Boom Lift", image: boomLift2Img, specs: [{ label: "Height", value: "~34m" }, { label: "Type", value: "Articulating" }, { label: "Power", value: "Diesel" }], tag: "Available", tagColor: "green", cta: "Get Quote" },
+          { title: "46m Telescopic Boom Lift", image: boomLift3Img, specs: [{ label: "Height", value: "~46m" }, { label: "Type", value: "Telescopic" }, { label: "Power", value: "Diesel" }], tag: "Available", tagColor: "green", cta: "Get Quote" },
+        ],
       },
       { type: "ai", text: "Shall I generate a quotation for 2 weeks?" },
     ],
@@ -155,21 +148,14 @@ const chatScenarios: ChatScenario[] = [
       { type: "user", text: "Need forklift for warehouse, 3 ton, indoor" },
       { type: "ai", text: "Electric or diesel? Any height requirement?" },
       { type: "user", text: "Electric, around 5m lift" },
-      { type: "ai", text: "Recommended:" },
+      { type: "ai", text: "Here are matching options:" },
       {
-        type: "product-card",
-        data: {
-          title: "3 Ton Electric Forklift",
-          image: forkliftImg,
-          specs: [
-            { label: "Capacity", value: "3 Ton" },
-            { label: "Lift Height", value: "~5m" },
-            { label: "Power", value: "Electric" },
-          ],
-          tag: "Ready Stock",
-          tagColor: "blue",
-          cta: "Check Availability",
-        },
+        type: "product-cards",
+        cards: [
+          { title: "3 Ton Electric Forklift", image: forkliftImg, specs: [{ label: "Capacity", value: "3 Ton" }, { label: "Lift", value: "~5m" }, { label: "Power", value: "Electric" }], tag: "Ready Stock", tagColor: "blue", cta: "Check Availability" },
+          { title: "2.5 Ton Electric Forklift", image: forklift2Img, specs: [{ label: "Capacity", value: "2.5 Ton" }, { label: "Lift", value: "~4.5m" }, { label: "Power", value: "Electric" }], tag: "Ready Stock", tagColor: "blue", cta: "Check Availability" },
+          { title: "5 Ton Counterbalance Forklift", image: forklift3Img, specs: [{ label: "Capacity", value: "5 Ton" }, { label: "Lift", value: "~6m" }, { label: "Power", value: "Electric" }], tag: "In Transit", tagColor: "amber", cta: "Reserve" },
+        ],
       },
       { type: "ai", text: "Want me to check availability this week?" },
     ],
@@ -180,27 +166,19 @@ const chatScenarios: ChatScenario[] = [
       { type: "user", text: "Looking for floor scrubber for factory, around 2000 sqm" },
       { type: "ai", text: "Walk-behind or ride-on preferred?" },
       { type: "user", text: "Ride-on" },
-      { type: "ai", text: "Recommended:" },
+      { type: "ai", text: "Here are our recommendations:" },
       {
-        type: "product-card",
-        data: {
-          title: "Ride-On Floor Scrubber",
-          image: floorScrubberImg,
-          specs: [
-            { label: "Type", value: "Ride-On" },
-            { label: "Coverage", value: "2000–3000 sqm/hr" },
-            { label: "Use", value: "Factory" },
-          ],
-          tag: "For Sale",
-          tagColor: "amber",
-          cta: "Buy Now",
-        },
+        type: "product-cards",
+        cards: [
+          { title: "Ride-On Floor Scrubber", image: floorScrubberImg, specs: [{ label: "Type", value: "Ride-On" }, { label: "Coverage", value: "2000–3000 sqm/hr" }, { label: "Use", value: "Factory" }], tag: "For Sale", tagColor: "amber", cta: "Buy Now" },
+          { title: "Compact Ride-On Scrubber", image: floorScrubber2Img, specs: [{ label: "Type", value: "Ride-On" }, { label: "Coverage", value: "1500–2500 sqm/hr" }, { label: "Use", value: "Factory" }], tag: "For Sale", tagColor: "amber", cta: "Buy Now" },
+          { title: "Heavy-Duty Floor Scrubber", image: floorScrubber3Img, specs: [{ label: "Type", value: "Ride-On" }, { label: "Coverage", value: "3000–4000 sqm/hr" }, { label: "Use", value: "Industrial" }], tag: "For Sale", tagColor: "amber", cta: "Buy Now" },
+        ],
       },
       { type: "ai", text: "I can share specs or arrange purchase." },
     ],
   },
 ];
-
 function ProductCard({ data }: { data: ProductCardData }) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const tagColors = {
