@@ -618,8 +618,8 @@ export default function Landing() {
       {/* Hero */}
       <section className="bright-hero" id="hero-section" ref={heroSectionRef}>
         <div className="bright-canvas-container"><canvas ref={canvasRef} /></div>
-        <div className="bright-container bright-hero-centered">
-          <div className="bright-hero-content bright-hero-content-centered">
+        <div className="bright-container bright-hero-split">
+          <div className="bright-hero-content bright-hero-content-left">
             <h1 className="bright-text-gradient">The 24/7 AI Sales Agent for Equipment Businesses</h1>
             <p className="bright-subtitle">Deploy a digital sales expert that answers technical questions, recommends suitable machinery, and converts inquiries into qualified leads instantly.</p>
             <div className="bright-hero-actions">
@@ -627,7 +627,7 @@ export default function Landing() {
               <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="bright-btn bright-btn-secondary">Book Demo</a>
             </div>
           </div>
-          <div className="bright-hero-mockup-wrap">
+          <div className="bright-hero-mockup-wrap bright-hero-mockup-right">
             <div className="bright-mockup-glow" aria-hidden="true" />
             <div className="bright-chat-mockup" id="demo">
               <div className="bright-chat-header"><span className="bright-status-dot" /><span className="bright-chat-title"><Bot size={18} /> Antbuildz Sales Agent</span><span className="bright-online-status"><span /> Online</span></div>
