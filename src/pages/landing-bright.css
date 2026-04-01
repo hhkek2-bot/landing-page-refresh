@@ -1963,14 +1963,18 @@
 
 /* ===== Product Card in Chat ===== */
 .bright-product-card {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 14px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   flex: 0 0 50%;
   min-width: 0;
   max-width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 .bright-product-img-wrap {
