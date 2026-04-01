@@ -38,6 +38,7 @@ type ProductCardData = {
   tagColor: "green" | "blue" | "amber";
   cta: string;
   rentalPricing?: { daily: string; weekly: string; monthly: string };
+  price?: string;
 };
 
 type ChatScenarioStep =
