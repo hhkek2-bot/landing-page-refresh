@@ -302,10 +302,8 @@ export default function PricingPage() {
       <div className="pricing-container">
         {/* Hero */}
         <header className="pricing-hero">
-          <h1>Scale Your Sales — Not Your Headcount</h1>
-          <p className="pricing-hero-sub">From handling inquiries to generating quotations — choose the plan that fits your sales volume and growth.</p>
-          <p className="pricing-hero-microcopy">One conversation can convert into a deal worth thousands.</p>
-          <p className="pricing-hero-trust">No hidden fees. Scale as you grow.</p>
+          <h1>One Conversation. Thousands in Revenue.</h1>
+          <p className="pricing-hero-sub">Your AI sales agent qualifies enquiries, matches the right products, and generates quotations automatically — turning every conversation into a real sales opportunity.</p>
         </header>
 
         {/* Billing Toggle */}
