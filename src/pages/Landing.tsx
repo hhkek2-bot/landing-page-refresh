@@ -724,9 +724,8 @@ export default function Landing() {
         <div className="bright-container bright-hero-split">
           <div className="bright-hero-text-block">
             <h1>
-              Turn Every Website Visitor Into a{" "}
-              <span className="bright-hero-gradient-text">Qualified Equipment Buyer</span>
-              {" "}— Automatically
+              Turn Every Business Conversation Into{" "}
+              <span className="bright-hero-gradient-text">Revenue</span>
             </h1>
             <p className="bright-subtitle">Your AI Sales Agent answers inquiries, recommends the right equipment, and generates quotes instantly — trained on your catalog, pricing, and business logic.</p>
           </div>
