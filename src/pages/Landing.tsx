@@ -172,9 +172,9 @@ const chatScenarios: ChatScenario[] = [
       {
         type: "product-cards",
         cards: [
-          { title: "Ride-On Floor Scrubber", image: floorScrubberImg, specs: [{ label: "Type", value: "Ride-On" }, { label: "Coverage", value: "2000–3000 sqm/hr" }, { label: "Use", value: "Factory" }], tag: "For Sale", tagColor: "amber", cta: "Buy Now" },
-          { title: "Compact Ride-On Scrubber", image: floorScrubber2Img, specs: [{ label: "Type", value: "Ride-On" }, { label: "Coverage", value: "1500–2500 sqm/hr" }, { label: "Use", value: "Factory" }], tag: "For Sale", tagColor: "amber", cta: "Buy Now" },
-          { title: "Heavy-Duty Floor Scrubber", image: floorScrubber3Img, specs: [{ label: "Type", value: "Ride-On" }, { label: "Coverage", value: "3000–4000 sqm/hr" }, { label: "Use", value: "Industrial" }], tag: "For Sale", tagColor: "amber", cta: "Buy Now" },
+          { title: "2021 Tennant T16 Ride-On Scrubber", image: floorScrubberImg, specs: [], tag: "For Sale", tagColor: "amber", cta: "Buy Now", price: "$24,500" },
+          { title: "2020 Nilfisk SC6000 Ride-On Scrubber", image: floorScrubber2Img, specs: [], tag: "For Sale", tagColor: "amber", cta: "Buy Now", price: "$19,800" },
+          { title: "2022 Kärcher B 250 R Industrial Scrubber", image: floorScrubber3Img, specs: [], tag: "For Sale", tagColor: "amber", cta: "Buy Now", price: "$31,200" },
         ],
       },
       { type: "ai", text: "I can share specs or arrange purchase." },
