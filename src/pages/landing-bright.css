@@ -1690,7 +1690,16 @@
 
 .bright-cta-content h2 { color: #ffffff; font-size: clamp(2rem, 3.5vw, 3.4rem); line-height: 1.07; letter-spacing: -0.04em; margin-bottom: 32px; }
 
-.bright-cta-actions { display: inline-flex; gap: 14px; }
+.bright-cta-actions { display: inline-flex; gap: 14px; margin-bottom: 12px; }
+
+.bright-cta-supporting {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+  max-width: 380px;
+  margin: 0 auto;
+}
 
 .bright-cta-section .bright-btn-outline-light,
 .bright-cta-section .bright-btn-dark {
