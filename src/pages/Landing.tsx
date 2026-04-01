@@ -780,10 +780,17 @@ export default function Landing() {
         <div className="bright-container">
           <div className="bright-section-header"><TypewriterHeading text="Implementation in Minutes" /><p>The exact process to deploy your digital sales expert.</p></div>
           <div className="bright-vertical-steps">
-            {processSteps.map((step) => (
-              <div className="bright-step bright-step-hidden" key={step.id}>
-                <div className="bright-step-num">{step.id}</div>
-                <div className="bright-step-content"><div className="bright-step-text"><h4>{step.title}</h4><p>{step.body}</p></div><StepGraphic visual={step.visual} /></div>
+            {processSteps.map((step, idx) => (
+              <div key={step.id}>
+                <div className="bright-step bright-step-hidden">
+                  <div className="bright-step-num">{step.id}</div>
+                  <div className="bright-step-content"><div className="bright-step-text"><h4>{step.title}</h4><p>{step.body}</p></div><StepGraphic visual={step.visual} /></div>
+                </div>
+                {idx < processSteps.length - 1 && (
+                  <div className="bright-step-arrow bright-step-hidden" aria-hidden="true">
+                    <ArrowRight size={20} className="bright-step-arrow-icon" />
+                  </div>
+                )}
               </div>
             ))}
           </div>
