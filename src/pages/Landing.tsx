@@ -654,6 +654,16 @@ export default function Landing() {
 
   useEffect(() => { const cb = chatBodyRef.current; if (cb) cb.scrollTop = cb.scrollHeight; }, [chatItems]);
 
+  // Intersection observer for steps
+  useEffect(() => {
+    const targets = document.querySelectorAll(".bright-step-hidden");
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => { if (!entry.isIntersecting) return; entry.target.classList.add("visible", "bright-step-visible"); obs.unobserve(entry.target); });
+    }, { threshold: 0.1, rootMargin: "0px 0px -12% 0px" });
+    targets.forEach((t) => observer.observe(t));
+    return () => observer.disconnect();
+  }, []);
+
   const renderChatItem = (item: RenderedChatItem) => {
     if (item.type === "typing") return (
       <div className="bright-chat-row" key={item.id}>
