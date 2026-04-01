@@ -1,316 +1,449 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Bot, Check } from "lucide-react";
 import "./pricing.css";
 
 type BillingCycle = "monthly" | "annual";
-type WebstoreMode = "rental-sales" | "rental" | "sales";
-type Plan = {
-  code: string;
-  title: string;
-  badge: string;
-  monthlyPrice: number | null;
-  customPriceLabel?: string;
-  positioning: string;
-  summary: string;
-  included: string[];
-  features: string[];
-  ctaLabel: string;
-  highlightLabel?: string;
-  note?: string;
-};
+type TopTab = "agent" | "webstore";
+type WebstoreTab = "bundle" | "sales" | "rental";
 
 const annualDiscount = 0.2;
 
-const agentPlans: Plan[] = [
+/* ═══════════════════════ DATA ═══════════════════════ */
+
+const agentPlans = [
   {
-    code: "starter",
-    title: "Starter",
-    badge: "Starter",
-    monthlyPrice: 149,
-    positioning: "For smaller teams starting with AI sales",
-    summary: "A focused AI sales agent for enquiry handling, recommendation, and quote support.",
-    included: ["200 AI conversations", "500MB knowledge base", "1 AI Sales Agent"],
-    features: ["Equipment recommendation engine", "Quotation assistance", "Lead intent detection", "1 AI Sales Agent"],
-    ctaLabel: "Start Pilot",
+    name: "Pilot",
+    price: 59,
+    conversations: 50,
+    storage: "200 MB",
+    playground: 20,
+    target: "Testing & individuals",
+    features: ["AI equipment recommendation", "Quotation assistance", "1 AI Sales Agent"],
+    cta: "Get Started",
   },
   {
-    code: "growth",
-    title: "Growth",
-    badge: "Growth",
-    monthlyPrice: 299,
-    positioning: "For growing suppliers ready to automate more inquiries",
-    summary: "The strongest core plan for teams that want more coverage and better sales visibility.",
-    included: ["600 AI conversations", "1GB knowledge base", "1 AI Sales Agent"],
-    features: ["Equipment recommendation engine", "Quotation automation", "Lead intent analytics", "CRM integration", "1 AI Sales Agent"],
-    ctaLabel: "Start Pilot",
-    highlightLabel: "Most Popular",
+    name: "Starter",
+    price: 149,
+    conversations: 150,
+    storage: "500 MB",
+    playground: 75,
+    target: "Small teams",
+    features: ["Everything in Pilot", "Lead intent detection", "Email notifications", "1 AI Sales Agent"],
+    cta: "Get Started",
   },
   {
-    code: "pro",
-    title: "Pro",
-    badge: "Pro",
-    monthlyPrice: 599,
-    positioning: "For larger operations with higher inquiry volume",
-    summary: "Designed for teams that need deeper automation across quotation, booking, and lead routing.",
-    included: ["1500 AI conversations", "3GB knowledge base", "2 AI Sales Agents"],
-    features: ["Advanced AI quotation workflow", "Booking automation", "Buyer intent analytics", "CRM integration", "2 AI Sales Agents"],
-    ctaLabel: "Start Pilot",
+    name: "Growth",
+    price: 399,
+    conversations: 450,
+    storage: "2 GB",
+    playground: 200,
+    target: "Scaling SMEs",
+    popular: true,
+    features: ["Everything in Starter", "CRM integration", "Advanced analytics", "Priority support", "1 AI Sales Agent"],
+    cta: "Get Started",
+  },
+  {
+    name: "Pro",
+    price: 799,
+    conversations: 1000,
+    storage: "10 GB",
+    playground: 500,
+    target: "Heavy users & enterprises",
+    features: ["Everything in Growth", "Booking automation", "Multi-agent support", "Dedicated account manager", "2 AI Sales Agents"],
+    cta: "Get Started",
   },
 ];
 
-const webstorePlans: Plan[] = [
+const salesPlans = [
   {
-    code: "basic",
-    title: "Basic",
-    badge: "Basic",
-    monthlyPrice: 299,
-    positioning: "Best for lean digital setup",
-    summary: "Launch your first equipment webstore with AI-powered sales support built in.",
-    included: ["200 AI conversations", "500MB knowledge base", "30 listings"],
-    features: ["Equipment Webstore", "Rental or Sales store", "AI equipment recommendation", "Quotation assistance"],
-    ctaLabel: "Launch Webstore",
+    name: "Basic",
+    price: 119,
+    conversations: 50,
+    storage: "500 MB",
+    listings: 30,
+    value: "Product catalog + AI sales assist",
+    features: ["Equipment Webstore", "AI recommendation engine", "Quotation assistance", "1 AI Sales Agent"],
+    cta: "Start Sales Store",
   },
   {
-    code: "premium",
-    title: "Premium",
-    badge: "Premium",
-    monthlyPrice: 499,
-    positioning: "Best for active equipment businesses",
-    summary: "The strongest package for companies running a more serious digital catalog and sales motion.",
-    included: ["600 AI conversations", "1GB knowledge base", "150 listings"],
-    features: ["Equipment Webstore", "Rental + Sales store", "AI quotation automation", "Lead analytics dashboard"],
-    ctaLabel: "Launch Webstore",
-    highlightLabel: "Most Popular",
+    name: "Premium",
+    price: 199,
+    conversations: 100,
+    storage: "1 GB",
+    listings: 150,
+    value: "Scalable product selling",
+    popular: true,
+    features: ["Everything in Basic", "AI quotation automation", "Lead analytics", "CRM integration"],
+    cta: "Start Sales Store",
   },
   {
-    code: "enterprise",
-    title: "Enterprise",
-    badge: "Enterprise",
-    monthlyPrice: null,
-    customPriceLabel: "Custom",
-    positioning: "Best for complex operations and integrations",
-    summary: "For large catalogs, custom workflows, deeper integrations, and multi-team deployment.",
-    included: ["Unlimited AI conversations", "Custom knowledge capacity", "Unlimited listings"],
-    features: ["Custom AI workflow", "ERP / CRM integration", "Dedicated support"],
-    ctaLabel: "Contact Sales",
-    note: "Commercial terms are structured around your catalog scale and workflow complexity.",
+    name: "Pro",
+    price: 399,
+    conversations: 300,
+    storage: "2 GB",
+    listings: 300,
+    value: "Full sales operations",
+    features: ["Everything in Premium", "Advanced workflows", "Priority support", "Custom integrations"],
+    cta: "Start Sales Store",
   },
 ];
 
-const addOns = [
-  { title: "Additional Conversations", price: "$0.80 / conversation", description: "For plans exceeding the included monthly AI conversation quota." },
-  { title: "Additional AI Sales Agent", price: "$99 / month", description: "Deploy an additional AI agent for another business unit, brand, or category." },
-  { title: "Additional Knowledge Storage", price: "$5 / GB", description: "Expand your AI knowledge capacity as your catalogue and documentation grow." },
+const rentalPlans = [
+  {
+    name: "Basic",
+    price: 299,
+    conversations: 50,
+    storage: "1 GB",
+    listings: 30,
+    value: "Availability + booking system",
+    features: ["Rental Webstore", "Availability management", "AI recommendation engine", "1 AI Sales Agent"],
+    cta: "Start Rental Store",
+  },
+  {
+    name: "Premium",
+    price: 499,
+    conversations: 100,
+    storage: "2 GB",
+    listings: 150,
+    value: "Full rental operations",
+    popular: true,
+    features: ["Everything in Basic", "Booking automation", "AI quotation", "Lead analytics"],
+    cta: "Start Rental Store",
+  },
+  {
+    name: "Pro",
+    price: 699,
+    conversations: 200,
+    storage: "3 GB",
+    listings: 300,
+    value: "Enterprise rental platform",
+    features: ["Everything in Premium", "CRM integration", "Priority support", "Custom workflows"],
+    cta: "Start Rental Store",
+  },
+];
+
+const bundlePlans = [
+  {
+    name: "Basic",
+    price: 399,
+    conversations: 100,
+    storage: "1.5 GB",
+    listings: 100,
+    value: "Hybrid operations",
+    features: ["Sales + Rental Webstore", "AI recommendation engine", "Quotation assistance", "Availability management", "1 AI Sales Agent"],
+    cta: "Start with Bundle",
+  },
+  {
+    name: "Premium",
+    price: 599,
+    conversations: 200,
+    storage: "3 GB",
+    listings: 300,
+    value: "Full business engine",
+    popular: true,
+    features: ["Everything in Basic", "AI quotation automation", "Booking automation", "Lead analytics", "CRM integration"],
+    cta: "Start with Bundle",
+  },
+  {
+    name: "Pro",
+    price: 899,
+    conversations: 500,
+    storage: "5 GB",
+    listings: 600,
+    value: "Complete enterprise solution",
+    features: ["Everything in Premium", "Multi-agent support", "Priority support", "Custom integrations", "Dedicated account manager"],
+    cta: "Start with Bundle",
+  },
+];
+
+const topUps = [
+  { qty: 25, price: 30 },
+  { qty: 50, price: 55 },
+  { qty: 100, price: 100 },
+  { qty: 200, price: 180 },
 ];
 
 const faqs = [
-  { question: "What does the AI Sales Agent do?", answer: "It helps answer customer inquiries, recommend equipment, support quotation flow, capture leads, and guide booking-related conversations around the clock." },
-  { question: "Can I train the AI with my equipment catalogue and documents?", answer: "Yes. You can train it with your catalogue, listings, manuals, FAQs, and other business documents so the responses reflect your real products and processes." },
-  { question: "Does the AI support multiple languages?", answer: "Yes. The AI can support multilingual conversations so your team can serve customers in different markets more effectively." },
-  { question: "What happens if I exceed my conversation limit?", answer: "You can continue operating by adding conversation capacity as an add-on, rather than rebuilding or changing plans immediately." },
-  { question: "Can the AI assist with quotations and bookings?", answer: "Yes. The AI is positioned as a sales and quotation assistant, not just a chatbot. It can help structure quotation flow and support booking-related workflows." },
-  { question: "What is the difference between AI Agent Only and Webstore + AI?", answer: "AI Agent Only is for teams that want sales automation without launching a webstore. Webstore + AI combines catalog storefront capability with AI-powered inquiry handling." },
-  { question: "What is Managed AI Sales for Singapore?", answer: "It is a higher-touch option where AI automation is paired with Antbuildz operational support for quotation assistance, lead handling, and deal coordination in Singapore." },
+  { q: "What does the AI Sales Agent do?", a: "It answers customer inquiries, recommends equipment, supports quotation flow, captures leads, and guides booking conversations — 24/7." },
+  { q: "Can I train the AI with my catalogue?", a: "Yes. Upload your product catalogue, manuals, FAQs, and pricing documents. The AI will respond based on your real products and business logic." },
+  { q: "What happens if I exceed my conversation limit?", a: "You can purchase top-up packs anytime without changing plans. Conversations roll over within the billing cycle." },
+  { q: "What's the difference between AI Agent Only and Webstore + AI?", a: "AI Agent Only adds sales automation to your existing website. Webstore + AI gives you a full equipment storefront with AI built in." },
+  { q: "Does the AI support multiple languages?", a: "Yes. The AI handles multilingual conversations so you can serve customers across different markets." },
+  { q: "Can I add more AI agents later?", a: "Yes. Each additional agent costs $49/month and gets its own knowledge base — great for different product lines or brands." },
 ];
 
 const trustItems = [
-  "Multilingual AI conversations for equipment buyers and renters",
-  "Private knowledge base trained on your catalogues and documents",
-  "Buyer intent tagging and lead-quality visibility",
-  "Encrypted company knowledge with isolated tenant storage",
+  "Multilingual AI conversations",
+  "Private knowledge base per tenant",
+  "Buyer intent detection & analytics",
+  "Encrypted & isolated data storage",
 ];
 
-function formatPrice(monthlyPrice: number | null, billing: BillingCycle, customLabel?: string) {
-  if (monthlyPrice === null) return customLabel || "Custom";
-  const value = billing === "annual" ? monthlyPrice * (1 - annualDiscount) : monthlyPrice;
-  return `$${Math.round(value)}`;
+/* ═══════════════════════ HELPERS ═══════════════════════ */
+
+function fmtPrice(price: number, billing: BillingCycle) {
+  const val = billing === "annual" ? Math.round(price * (1 - annualDiscount)) : price;
+  return `$${val}`;
 }
 
-function PlanCard({ plan, billing, featured = false }: { plan: Plan; billing: BillingCycle; featured?: boolean }) {
+/* ═══════════════════════ COMPONENTS ═══════════════════════ */
+
+function AgentCard({ plan, billing }: { plan: typeof agentPlans[0]; billing: BillingCycle }) {
   return (
-    <div className={`pricing-card ${featured ? "pricing-card-featured" : ""}`}>
-      {plan.highlightLabel && (
-        <div className="pricing-highlight-badge">{plan.highlightLabel}</div>
+    <div className={`pricing-card ${plan.popular ? "pricing-card-featured" : ""}`}>
+      {plan.popular && <div className="pricing-popular-badge">Most Popular</div>}
+      <div className="pricing-plan-name">{plan.name}</div>
+      <div className="pricing-target">{plan.target}</div>
+      <div className="pricing-price-row">
+        <span className="pricing-price">{fmtPrice(plan.price, billing)}</span>
+        <span className="pricing-price-period">/ month</span>
+      </div>
+      {billing === "annual" && (
+        <p className="pricing-annual-note">${Math.round(plan.price * 12 * (1 - annualDiscount))} billed annually</p>
       )}
-      <div className="pricing-card-top">
-        <div className="pricing-badge">{plan.badge}</div>
-        <h3 className="pricing-card-title">{plan.title}</h3>
-        <div className="pricing-price-row">
-          <span className="pricing-price">{formatPrice(plan.monthlyPrice, billing, plan.customPriceLabel)}</span>
-          {plan.monthlyPrice !== null && <span className="pricing-price-period">/ month</span>}
+      <div className="pricing-divider" />
+      <div className="pricing-included-list">
+        <div className="pricing-included-item">
+          <span className="pricing-included-label">Conversations</span>
+          <span className="pricing-included-value">{plan.conversations}</span>
         </div>
-        {billing === "annual" && plan.monthlyPrice !== null && (
-          <p className="pricing-annual-note">${Math.round(plan.monthlyPrice * 12 * (1 - annualDiscount))} billed annually</p>
-        )}
-        <p className="pricing-positioning">{plan.positioning}</p>
-        <p className="pricing-summary">{plan.summary}</p>
+        <div className="pricing-included-item">
+          <span className="pricing-included-label">Storage</span>
+          <span className="pricing-included-value">{plan.storage}</span>
+        </div>
+        <div className="pricing-included-item">
+          <span className="pricing-included-label">Playground</span>
+          <span className="pricing-included-value">{plan.playground}</span>
+        </div>
       </div>
-
-      <div className="pricing-included-block">
-        {plan.included.map((item) => (
-          <div key={item} className="pricing-included-row">
-            <span className="pricing-included-label">Included</span>
-            <span className="pricing-included-value">{item}</span>
-          </div>
-        ))}
-      </div>
-
+      <div className="pricing-divider" />
       <div className="pricing-features">
-        {plan.features.map((item) => (
-          <div key={item} className="pricing-feature-row">
-            <span className="pricing-feature-check"><Check size={13} strokeWidth={3} /></span>
-            <span>{item}</span>
+        {plan.features.map((f) => (
+          <div key={f} className="pricing-feature-row">
+            <span className="pricing-feature-check"><Check size={12} strokeWidth={3} /></span>
+            <span>{f}</span>
           </div>
         ))}
       </div>
-
-      <button className={`pricing-cta ${featured ? "pricing-cta-featured" : ""}`}>
-        {plan.ctaLabel}
-      </button>
-      {plan.note && <p className="pricing-note">{plan.note}</p>}
+      <button className={`pricing-cta ${plan.popular ? "pricing-cta-featured" : ""}`}>{plan.cta}</button>
     </div>
   );
 }
 
-function FaqItem({ question, answer }: { question: string; answer: string }) {
+function WebstoreCard({ plan, billing }: { plan: typeof bundlePlans[0]; billing: BillingCycle }) {
+  return (
+    <div className={`pricing-card ${plan.popular ? "pricing-card-featured" : ""}`}>
+      {plan.popular && <div className="pricing-popular-badge">Most Popular</div>}
+      <div className="pricing-plan-name">{plan.name}</div>
+      <div className="pricing-target">{plan.value}</div>
+      <div className="pricing-price-row">
+        <span className="pricing-price">{fmtPrice(plan.price, billing)}</span>
+        <span className="pricing-price-period">/ month</span>
+      </div>
+      {billing === "annual" && (
+        <p className="pricing-annual-note">${Math.round(plan.price * 12 * (1 - annualDiscount))} billed annually</p>
+      )}
+      <div className="pricing-divider" />
+      <div className="pricing-included-list">
+        <div className="pricing-included-item">
+          <span className="pricing-included-label">Listings</span>
+          <span className="pricing-included-value">{plan.listings}</span>
+        </div>
+        <div className="pricing-included-item">
+          <span className="pricing-included-label">AI Conversations</span>
+          <span className="pricing-included-value">{plan.conversations}</span>
+        </div>
+        <div className="pricing-included-item">
+          <span className="pricing-included-label">Storage</span>
+          <span className="pricing-included-value">{plan.storage}</span>
+        </div>
+      </div>
+      <div className="pricing-divider" />
+      <div className="pricing-features">
+        {plan.features.map((f) => (
+          <div key={f} className="pricing-feature-row">
+            <span className="pricing-feature-check"><Check size={12} strokeWidth={3} /></span>
+            <span>{f}</span>
+          </div>
+        ))}
+      </div>
+      <button className={`pricing-cta ${plan.popular ? "pricing-cta-featured" : ""}`}>{plan.cta}</button>
+    </div>
+  );
+}
+
+function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className={`pricing-faq-item ${open ? "is-open" : ""}`}>
+    <div className="pricing-faq-item">
       <button type="button" className="pricing-faq-trigger" onClick={() => setOpen(!open)}>
-        <span>{question}</span>
+        <span>{q}</span>
         <span className="pricing-faq-icon">{open ? "−" : "+"}</span>
       </button>
-      {open && (
-        <div className="pricing-faq-answer">
-          <p>{answer}</p>
-        </div>
-      )}
+      {open && <div className="pricing-faq-answer"><p>{a}</p></div>}
     </div>
   );
 }
+
+/* ═══════════════════════ PAGE ═══════════════════════ */
 
 export default function PricingPage() {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
-  const [webstoreMode, setWebstoreMode] = useState<WebstoreMode>("sales");
+  const [topTab, setTopTab] = useState<TopTab>("webstore");
+  const [webstoreTab, setWebstoreTab] = useState<WebstoreTab>("bundle");
 
-  const webstoreModeLabel = useMemo(() => {
-    if (webstoreMode === "rental-sales") return "Rental + Sales store";
-    if (webstoreMode === "rental") return "Rental store";
-    return "Sales store";
-  }, [webstoreMode]);
-
-  const computedWebstorePlans = useMemo(() => {
-    return webstorePlans.map((plan) => {
-      if (plan.code !== "basic") return plan;
-      return { ...plan, features: plan.features.map((f) => (f === "Rental or Sales store" ? webstoreModeLabel : f)) };
-    });
-  }, [webstoreModeLabel]);
+  const currentWebstorePlans = webstoreTab === "bundle" ? bundlePlans : webstoreTab === "sales" ? salesPlans : rentalPlans;
 
   return (
     <div className="pricing-page">
-      {/* Nav */}
       <nav className="pricing-nav">
-        <Link to="/" className="pricing-back-link"><ArrowLeft size={18} /> <Bot size={22} /> Antbuildz</Link>
+        <Link to="/" className="pricing-back-link"><ArrowLeft size={18} /> <Bot size={20} /> Antbuildz</Link>
       </nav>
 
       <div className="pricing-container">
-        {/* Header */}
-        <header className="pricing-header">
-          <h1>Pricing for AI Sales Agents and Equipment Webstores</h1>
-          <p className="pricing-header-sub">Launch a modern equipment webstore or deploy an AI sales agent that can answer inquiries, recommend products, assist with quotations, and support bookings around the clock.</p>
-          <p className="pricing-header-note">Built for equipment, tools, and spare-parts businesses.</p>
+        {/* Hero */}
+        <header className="pricing-hero">
+          <h1>Pricing built for equipment businesses to scale with AI</h1>
+          <p className="pricing-hero-sub">From AI-powered conversations to full business operations — choose what fits your growth.</p>
+          <p className="pricing-hero-trust">No hidden fees. Scale as you grow.</p>
+        </header>
 
+        {/* Top Tabs */}
+        <div className="pricing-top-tabs">
+          <button className={`pricing-top-tab ${topTab === "agent" ? "is-active" : ""}`} onClick={() => setTopTab("agent")}>AI Agent Only</button>
+          <button className={`pricing-top-tab ${topTab === "webstore" ? "is-active" : ""}`} onClick={() => setTopTab("webstore")}>Webstore + AI</button>
+        </div>
+
+        {/* Billing Toggle */}
+        <div className="pricing-billing-row">
           <div className="pricing-toggle">
             <button className={`pricing-toggle-btn ${billing === "monthly" ? "is-active" : ""}`} onClick={() => setBilling("monthly")}>Monthly</button>
             <button className={`pricing-toggle-btn ${billing === "annual" ? "is-active" : ""}`} onClick={() => setBilling("annual")}>Annual</button>
           </div>
-          <p className="pricing-save-note">Annual billing saves 20%</p>
-        </header>
+          {billing === "annual" && <span className="pricing-save-badge">Save 20%</span>}
+        </div>
 
-        {/* AI Agent Only */}
+        {/* ═══ AI Agent Only ═══ */}
+        {topTab === "agent" && (
+          <section className="pricing-section">
+            <div className="pricing-section-header">
+              <span className="pricing-section-label">AI Agent Only</span>
+              <h2>Automate inquiries with an AI sales agent on your existing website</h2>
+              <p>No webstore needed. Deploy a trained AI agent that handles equipment inquiries, quotes, and leads.</p>
+            </div>
+            <div className="pricing-grid-4">
+              {agentPlans.map((plan) => (
+                <AgentCard key={plan.name} plan={plan} billing={billing} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ═══ Webstore + AI ═══ */}
+        {topTab === "webstore" && (
+          <section className="pricing-section">
+            <div className="pricing-section-header">
+              <span className="pricing-section-label">Webstore + AI</span>
+              <h2>A complete digital storefront with AI-powered sales built in</h2>
+              <p>Launch your equipment webstore with AI that handles inquiries, recommendations, and quotes automatically.</p>
+            </div>
+
+            <div className="pricing-sub-tabs">
+              <button className={`pricing-sub-tab ${webstoreTab === "bundle" ? "is-active" : ""}`} onClick={() => setWebstoreTab("bundle")}>Bundle</button>
+              <button className={`pricing-sub-tab ${webstoreTab === "sales" ? "is-active" : ""}`} onClick={() => setWebstoreTab("sales")}>Sales Store</button>
+              <button className={`pricing-sub-tab ${webstoreTab === "rental" ? "is-active" : ""}`} onClick={() => setWebstoreTab("rental")}>Rental Store</button>
+            </div>
+
+            {webstoreTab === "bundle" && (
+              <p className="pricing-webstore-note">Includes AI agent + webstore infrastructure</p>
+            )}
+            {webstoreTab === "rental" && (
+              <p className="pricing-webstore-note">Built for rental operations & availability management</p>
+            )}
+
+            <div className="pricing-grid-3">
+              {currentWebstorePlans.map((plan) => (
+                <WebstoreCard key={plan.name} plan={plan} billing={billing} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ═══ Usage & Add-Ons ═══ */}
         <section className="pricing-section">
           <div className="pricing-section-header">
-            <h2>AI Agent Only</h2>
-            <p>For companies that already have a website and want to automate inquiries, quotations, and buyer engagement with AI.</p>
+            <span className="pricing-section-label">Usage & Add-Ons</span>
+            <h2>Scale as you grow — add capacity anytime</h2>
           </div>
-          <div className="pricing-grid">
-            {agentPlans.map((plan) => (
-              <PlanCard key={plan.code} plan={plan} billing={billing} featured={plan.code === "growth"} />
-            ))}
-          </div>
-        </section>
 
-        {/* Webstore + AI */}
-        <section className="pricing-section">
-          <div className="pricing-webstore-modes">
-            {(["rental-sales", "rental", "sales"] as WebstoreMode[]).map((mode) => (
-              <button key={mode} className={`pricing-mode-btn ${webstoreMode === mode ? "is-active" : ""}`} onClick={() => setWebstoreMode(mode)}>
-                {mode === "rental-sales" ? "Rental + Sales store" : mode === "rental" ? "Rental store" : "Sales store"}
-              </button>
-            ))}
-          </div>
-          <div className="pricing-section-header">
-            <h2>Webstore + AI</h2>
-            <p>For equipment businesses that want a complete digital storefront combined with AI-powered sales automation.</p>
-          </div>
-          <div className="pricing-grid">
-            {computedWebstorePlans.map((plan) => (
-              <PlanCard key={plan.code} plan={plan} billing={billing} featured={plan.code === "premium"} />
-            ))}
-          </div>
-        </section>
+          <div className="pricing-addons-grid">
+            {/* Top-up packs */}
+            <div className="pricing-addon-card">
+              <h3>Conversation Top-ups</h3>
+              <p className="pricing-addon-desc">Add more AI conversations anytime without changing your plan.</p>
+              <table className="pricing-topup-table">
+                <thead>
+                  <tr>
+                    <th>Conversations</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {topUps.map((t) => (
+                    <tr key={t.qty}>
+                      <td>{t.qty} conversations</td>
+                      <td>${t.price}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-        {/* Add-ons */}
-        <section className="pricing-section">
-          <div className="pricing-section-header pricing-section-header-left">
-            <p className="pricing-kicker">Add-Ons</p>
-            <h2>Scale capacity without changing your base plan.</h2>
-          </div>
-          <div className="pricing-grid">
-            {addOns.map((item) => (
-              <div key={item.title} className="pricing-addon-card">
-                <h3>{item.title}</h3>
-                <p className="pricing-addon-price">{item.price}</p>
-                <p className="pricing-addon-desc">{item.description}</p>
+            {/* Additional Agent */}
+            <div className="pricing-addon-card">
+              <h3>Additional AI Agent</h3>
+              <p className="pricing-addon-desc">Deploy another AI sales agent with a separate knowledge base — ideal for different product lines, brands, or business units.</p>
+              <div className="pricing-agent-price">$49 <span>/ month</span></div>
+              <div style={{ marginTop: 16 }}>
+                <button className="pricing-cta">Add Agent</button>
               </div>
-            ))}
+            </div>
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* ═══ FAQ ═══ */}
         <section className="pricing-section">
           <div className="pricing-section-header">
-            <p className="pricing-kicker">FAQ</p>
-            <h2>Common questions from equipment businesses.</h2>
+            <span className="pricing-section-label">FAQ</span>
+            <h2>Common questions</h2>
           </div>
           <div className="pricing-faq-list">
             {faqs.map((item) => (
-              <FaqItem key={item.question} question={item.question} answer={item.answer} />
+              <FaqItem key={item.q} q={item.q} a={item.a} />
             ))}
           </div>
         </section>
 
-        {/* CTA */}
+        {/* ═══ Bottom CTA ═══ */}
         <section className="pricing-section">
           <div className="pricing-bottom-cta">
-            <h2>Ready to turn inquiries into real sales?</h2>
-            <p>Choose the setup that fits your business — from AI sales automation to a complete digital equipment webstore.</p>
+            <h2>Ready to turn inquiries into sales?</h2>
+            <p>Choose the plan that fits your business and start converting equipment buyers today.</p>
             <div className="pricing-bottom-cta-actions">
-              <button className="pricing-cta pricing-cta-featured">Start Pilot</button>
-              <button className="pricing-cta">Contact Sales</button>
+              <button className="pricing-cta-white">Get Started</button>
+              <button className="pricing-cta-outline-white">Contact Sales</button>
             </div>
           </div>
-        </section>
 
-        {/* Trust */}
-        <section className="pricing-trust-grid">
-          {trustItems.map((item) => (
-            <div key={item} className="pricing-trust-item">
-              <span className="pricing-trust-check">✓</span>
-              <span>{item}</span>
-            </div>
-          ))}
+          <div className="pricing-trust-grid">
+            {trustItems.map((item) => (
+              <div key={item} className="pricing-trust-item">
+                <span className="pricing-trust-check">✓</span>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
     </div>
