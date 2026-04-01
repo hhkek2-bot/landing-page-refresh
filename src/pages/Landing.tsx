@@ -788,7 +788,7 @@ export default function Landing() {
             <p>Every missed reply, delayed response, or inconsistent answer creates friction in your sales process. Not because your team isn't capable—but because human-led workflows cannot scale with demand.</p>
           </div>
           <ComparisonInteractive activeIndex={activePainIndex} setActiveIndex={setActivePainIndex} beamTop={connectorPosition.top} beamLeft={connectorPosition.left} beamWidth={connectorPosition.width} reduceMotion={!!reduceMotion} painRefs={painRefs} solutionRef={solutionColumnRef} />
-          <p className="bright-comparison-closing">More enquiries engaged. More buyers converted. Without increasing headcount.</p>
+          
         </div>
       </section>
 
