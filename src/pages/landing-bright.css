@@ -2006,6 +2006,13 @@
 
 .bright-product-body {
   padding: 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.bright-product-body .bright-product-cta {
+  margin-top: auto;
 }
 
 .bright-product-title {
