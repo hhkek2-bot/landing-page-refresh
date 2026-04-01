@@ -1705,9 +1705,9 @@
   .bright-solution-panel-mobile .bright-solution-copy p { font-size: 0.98rem; }
   .bright-solution-panel-mobile .bright-solution-keyword { right: -2px; bottom: -4px; font-size: clamp(3.2rem, 14vw, 5rem); }
   .bright-hero-grid { grid-template-columns: 1fr; }
-  .bright-hero-mockup-wrap { max-width: 100%; margin-top: 36px; }
+  .bright-hero-mockup-wrap { max-width: 340px; margin-top: 36px; }
   .bright-cta-section { min-height: 0; padding: 112px 0; }
-  .bright-chat-mockup { max-width: 100%; height: 440px; }
+  .bright-chat-mockup { max-width: 340px; height: 520px; }
   .bright-vertical-steps::before { left: 24px; }
   .bright-step-num { width: 50px; height: 50px; font-size: 1.2rem; margin-right: 18px; }
   .bright-step-content { flex-direction: column; align-items: flex-start; gap: 18px; }
