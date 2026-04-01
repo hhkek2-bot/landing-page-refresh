@@ -21,8 +21,14 @@ import type { LucideIcon } from "lucide-react";
 import "./landing-bright.css";
 
 import boomLiftImg from "@/assets/boom-lift.jpg";
+import boomLift2Img from "@/assets/boom-lift-2.jpg";
+import boomLift3Img from "@/assets/boom-lift-3.jpg";
 import forkliftImg from "@/assets/forklift.jpg";
+import forklift2Img from "@/assets/forklift-2.jpg";
+import forklift3Img from "@/assets/forklift-3.jpg";
 import floorScrubberImg from "@/assets/floor-scrubber.jpg";
+import floorScrubber2Img from "@/assets/floor-scrubber-2.jpg";
+import floorScrubber3Img from "@/assets/floor-scrubber-3.jpg";
 
 type ProductCardData = {
   title: string;
@@ -36,7 +42,7 @@ type ProductCardData = {
 type ChatScenarioStep =
   | { type: "user"; text: string }
   | { type: "ai"; text: string }
-  | { type: "product-card"; data: ProductCardData };
+  | { type: "product-cards"; cards: ProductCardData[] };
 
 type ChatScenario = {
   id: string;
@@ -45,10 +51,9 @@ type ChatScenario = {
 
 type RenderedChatItem = {
   id: string;
-  type: "user" | "ai" | "typing" | "product-card";
+  type: "user" | "ai" | "typing" | "product-cards";
   text?: string;
-  data?: ProductCardData;
-  imageLoaded?: boolean;
+  cards?: ProductCardData[];
 };
 
 type Feature = { icon: LucideIcon; title: string; body: string; variant?: "default" | "workflow" };
