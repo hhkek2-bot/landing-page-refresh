@@ -680,16 +680,20 @@ export default function Landing() {
         <div className="bright-canvas-container"><canvas ref={canvasRef} /></div>
         <div className="bright-container bright-hero-split">
           <div className="bright-hero-content bright-hero-content-left">
-            <h1 className="bright-text-gradient">The 24/7 AI Sales Agent for Equipment Businesses</h1>
-            <p className="bright-subtitle">Deploy a digital sales expert that answers technical questions, recommends suitable machinery, and converts inquiries into qualified leads instantly.</p>
+            <h1>
+              Turn Every Website Visitor Into a{" "}
+              <span className="bright-hero-gradient-text">Qualified Equipment Buyer</span>
+              {" "}— Automatically
+            </h1>
+            <p className="bright-subtitle">Your AI Sales Agent answers inquiries, recommends the right equipment, and generates quotes instantly — trained on your catalog, pricing, and business logic.</p>
             <div className="bright-hero-actions">
-              <Link to="/pricing" className="bright-btn bright-btn-primary">Build Your AI Agent <ArrowRight size={18} /></Link>
+              <Link to="/pricing" className="bright-btn bright-btn-primary bright-btn-glow">Build Your AI Agent <ArrowRight size={18} /></Link>
               <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="bright-btn bright-btn-secondary">Book Demo</a>
             </div>
           </div>
           <div className="bright-hero-mockup-wrap bright-hero-mockup-right">
             <div className="bright-mockup-glow" aria-hidden="true" />
-            <div className="bright-chat-mockup" id="demo">
+            <div className={`bright-chat-mockup ${chatFadeIn ? "bright-chat-fade-in" : "bright-chat-fade-out"}`} id="demo">
               <div className="bright-chat-header"><span className="bright-status-dot" /><span className="bright-chat-title"><Bot size={18} /> Antbuildz Sales Agent</span><span className="bright-online-status"><span /> Online</span></div>
               <div className="bright-chat-body" ref={chatBodyRef}>{chatItems.map(renderChatItem)}</div>
             </div>
