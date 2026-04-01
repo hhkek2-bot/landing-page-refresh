@@ -38,6 +38,7 @@ type ProductCardData = {
   tagColor: "green" | "blue" | "amber";
   cta: string;
   rentalPricing?: { daily: string; weekly: string; monthly: string };
+  price?: string;
 };
 
 type ChatScenarioStep =
@@ -135,9 +136,9 @@ const chatScenarios: ChatScenario[] = [
       {
         type: "product-cards",
         cards: [
-          { title: "42m Telescopic Boom Lift", image: boomLiftImg, specs: [{ label: "Height", value: "~42m" }, { label: "Type", value: "Telescopic" }, { label: "Power", value: "Diesel" }], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$380", weekly: "$2,200", monthly: "$7,500" } },
-          { title: "34m Articulating Boom Lift", image: boomLift2Img, specs: [{ label: "Height", value: "~34m" }, { label: "Type", value: "Articulating" }, { label: "Power", value: "Diesel" }], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$290", weekly: "$1,700", monthly: "$5,800" } },
-          { title: "46m Telescopic Boom Lift", image: boomLift3Img, specs: [{ label: "Height", value: "~46m" }, { label: "Type", value: "Telescopic" }, { label: "Power", value: "Diesel" }], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$450", weekly: "$2,800", monthly: "$9,200" } },
+          { title: "2021 JLG 1350SJP Telescopic Boom Lift", image: boomLiftImg, specs: [], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$380", weekly: "$2,200", monthly: "$7,500" } },
+          { title: "2019 Genie S-85 XC Articulating Boom Lift", image: boomLift2Img, specs: [], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$290", weekly: "$1,700", monthly: "$5,800" } },
+          { title: "2022 Manitou 280TJ Telescopic Boom Lift", image: boomLift3Img, specs: [], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$450", weekly: "$2,800", monthly: "$9,200" } },
         ],
       },
       { type: "ai", text: "Shall I generate a quotation for 2 weeks?" },
@@ -153,9 +154,9 @@ const chatScenarios: ChatScenario[] = [
       {
         type: "product-cards",
         cards: [
-          { title: "3 Ton Electric Forklift", image: forkliftImg, specs: [{ label: "Capacity", value: "3 Ton" }, { label: "Lift", value: "~5m" }, { label: "Power", value: "Electric" }], tag: "Ready Stock", tagColor: "blue", cta: "Check Availability" },
-          { title: "2.5 Ton Electric Forklift", image: forklift2Img, specs: [{ label: "Capacity", value: "2.5 Ton" }, { label: "Lift", value: "~4.5m" }, { label: "Power", value: "Electric" }], tag: "Ready Stock", tagColor: "blue", cta: "Check Availability" },
-          { title: "5 Ton Counterbalance Forklift", image: forklift3Img, specs: [{ label: "Capacity", value: "5 Ton" }, { label: "Lift", value: "~6m" }, { label: "Power", value: "Electric" }], tag: "In Transit", tagColor: "amber", cta: "Reserve" },
+          { title: "2020 Toyota 8FBN30 Electric Forklift", image: forkliftImg, specs: [], tag: "Ready Stock", tagColor: "blue", cta: "Check Availability", price: "$18,500" },
+          { title: "2021 Hyster E2.5XN Electric Forklift", image: forklift2Img, specs: [], tag: "Ready Stock", tagColor: "blue", cta: "Check Availability", price: "$15,200" },
+          { title: "2022 Linde E50 Counterbalance Forklift", image: forklift3Img, specs: [], tag: "In Transit", tagColor: "amber", cta: "Reserve", price: "$32,800" },
         ],
       },
       { type: "ai", text: "Want me to check availability this week?" },
@@ -171,9 +172,9 @@ const chatScenarios: ChatScenario[] = [
       {
         type: "product-cards",
         cards: [
-          { title: "Ride-On Floor Scrubber", image: floorScrubberImg, specs: [{ label: "Type", value: "Ride-On" }, { label: "Coverage", value: "2000–3000 sqm/hr" }, { label: "Use", value: "Factory" }], tag: "For Sale", tagColor: "amber", cta: "Buy Now" },
-          { title: "Compact Ride-On Scrubber", image: floorScrubber2Img, specs: [{ label: "Type", value: "Ride-On" }, { label: "Coverage", value: "1500–2500 sqm/hr" }, { label: "Use", value: "Factory" }], tag: "For Sale", tagColor: "amber", cta: "Buy Now" },
-          { title: "Heavy-Duty Floor Scrubber", image: floorScrubber3Img, specs: [{ label: "Type", value: "Ride-On" }, { label: "Coverage", value: "3000–4000 sqm/hr" }, { label: "Use", value: "Industrial" }], tag: "For Sale", tagColor: "amber", cta: "Buy Now" },
+          { title: "2021 Tennant T16 Ride-On Scrubber", image: floorScrubberImg, specs: [], tag: "For Sale", tagColor: "amber", cta: "Buy Now", price: "$24,500" },
+          { title: "2020 Nilfisk SC6000 Ride-On Scrubber", image: floorScrubber2Img, specs: [], tag: "For Sale", tagColor: "amber", cta: "Buy Now", price: "$19,800" },
+          { title: "2022 Kärcher B 250 R Industrial Scrubber", image: floorScrubber3Img, specs: [], tag: "For Sale", tagColor: "amber", cta: "Buy Now", price: "$31,200" },
         ],
       },
       { type: "ai", text: "I can share specs or arrange purchase." },
@@ -212,14 +213,9 @@ function ProductCard({ data }: { data: ProductCardData }) {
       </div>
       <div className="bright-product-body">
         <p className="bright-product-title">{data.title}</p>
-        <div className="bright-product-specs">
-          {data.specs.map((s) => (
-            <div key={s.label} className="bright-product-spec">
-              <span className="bright-product-spec-label">{s.label}</span>
-              <span className="bright-product-spec-value">{s.value}</span>
-            </div>
-          ))}
-        </div>
+        {data.price && (
+          <p className="bright-product-price">{data.price}</p>
+        )}
         <span className="bright-product-tag" style={{ background: tc.bg, color: tc.color, border: `1px solid ${tc.border}` }}>
           {data.tag}
         </span>
