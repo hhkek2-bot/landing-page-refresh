@@ -59,12 +59,63 @@
   color: #555;
 }
 
+.pricing-hero-microcopy {
+  margin-top: 14px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #333;
+  font-style: italic;
+}
+
 .pricing-hero-trust {
-  margin-top: 12px;
+  margin-top: 10px;
   font-size: 0.82rem;
   font-weight: 600;
   color: #999;
   letter-spacing: 0.02em;
+}
+
+/* ===== SECTION DIVIDER ===== */
+.pricing-section-divider {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 80px 0;
+}
+
+.pricing-divider-line {
+  flex: 1;
+  height: 1px;
+  background: #e5e5e5;
+}
+
+.pricing-divider-text {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #999;
+  white-space: nowrap;
+}
+
+/* ===== BENEFIT BULLETS ===== */
+.pricing-benefit-bullets {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.pricing-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.pricing-benefit-item svg {
+  color: #facc15;
 }
 
 /* ===== TOP TABS (AI Agent / Webstore+AI) ===== */
