@@ -245,50 +245,72 @@ function ProductCard({ data }: { data: ProductCardData }) {
   );
 }
 
-function EquipmentIllustration({ type }: { type: "excavator-1" | "excavator-2" | "excavator-3" | "breaker" }) {
-  const colors = {
-    "excavator-1": { body: "#F5A623", arm: "#E8961C", track: "#3D3D3D", cabin: "#2C2C2C" },
-    "excavator-2": { body: "#E87040", arm: "#D4612E", track: "#3D3D3D", cabin: "#2C2C2C" },
-    "excavator-3": { body: "#F5C842", arm: "#E0B630", track: "#3D3D3D", cabin: "#2C2C2C" },
-    breaker: { body: "#E63B2E", arm: "#333", track: "#3D3D3D", cabin: "#555" },
-  };
-  const c = colors[type];
-  if (type === "breaker") {
-    return (
-      <svg viewBox="0 0 200 160" fill="none" className="bright-equip-svg">
-        <rect x="60" y="20" width="28" height="100" rx="4" fill={c.body} />
-        <rect x="64" y="120" width="20" height="30" rx="2" fill={c.arm} />
-        <rect x="70" y="148" width="8" height="12" rx="1" fill="#888" />
-        <rect x="50" y="10" width="48" height="16" rx="3" fill={c.cabin} />
-        <rect x="66" y="40" width="16" height="6" rx="2" fill="rgba(255,255,255,0.3)" />
-        <rect x="66" y="56" width="16" height="6" rx="2" fill="rgba(255,255,255,0.2)" />
-        <circle cx="74" cy="15" r="3" fill="#F5A623" opacity="0.8" />
-      </svg>
-    );
+const featureCards: Feature[] = [
+  { icon: Database, title: "Industry Knowledge", body: "Built on marketplace intelligence from thousands of equipment listings, the AI understands machine specifications, model naming conventions, payload limits, and industry terminology from day one." },
+  { icon: UploadCloud, title: "Knowledge Training", body: "Upload catalogues, manuals, PDFs, or sync Google Sheets to train the AI with your inventory, pricing logic, policies, and operational workflows." },
+  { icon: SearchCheck, title: "Equipment Matching", body: "Matches project requirements with suitable equipment using specifications, availability, and operational constraints to recommend the most relevant options." },
+  { icon: Activity, title: "Buyer Signals", body: "Analyzes conversations and engagement patterns to detect purchasing intent and highlight high-value opportunities for your sales team." },
+  { icon: ShieldCheck, title: "Data Security", body: "Company knowledge bases are encrypted and isolated by organization to ensure proprietary information remains private and protected." },
+  { icon: Sparkles, title: "Workflow Agent", body: "Executes operational tasks such as sharing quotations, comparing specifications, generating invoices, and creating reservations directly from customer conversations.", variant: "workflow" },
+];
+
+const processSteps: ProcessStep[] = [
+  { id: 1, title: "Personalize Your Agent", body: "Set agent name, voice, and response style to mirror your strongest sales rep.", visual: "profile" },
+  { id: 2, title: "Ingest Your Data", body: "Upload manuals, product lists, and pricing tables or connect live sources.", visual: "ingest" },
+  { id: 3, title: "Instruct & Align", body: "Define quote boundaries, fallback rules, and escalation logic for high-risk answers.", visual: "rules" },
+  { id: 4, title: "Test in Playground", body: "Simulate real customer prompts before launch, including pricing and technical scenarios.", visual: "test" },
+  { id: 5, title: "Launch & Integrate", body: "Share your public chat link and embed in your site for immediate lead capture.", visual: "launch" },
+];
+
+const logoWordmarks: LogoWordmark[] = [
+  { name: "granola", variant: "granola" }, { name: "Flow", variant: "flow" }, { name: "Listen", variant: "listen" },
+  { name: "Obvious", variant: "obvious" }, { name: "Modal", variant: "modal" }, { name: "USV", variant: "usv" },
+  { name: "Replicate", variant: "replicate" }, { name: "Railway", variant: "railway" }, { name: "public", variant: "public" },
+  { name: "WORDSMITH", variant: "wordsmith" }, { name: "Plain.", variant: "plain" }, { name: "passionfroot", variant: "passionfroot" },
+];
+
+function renderLogoWordmark(logo: LogoWordmark) {
+  switch (logo.variant) {
+    case "granola": return (<span className="bright-brand bright-brand-granola"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1a1a1a" strokeWidth="2"/><path d="M5 10h10M10 5v10" stroke="#1a1a1a" strokeWidth="1.5"/></svg><span>granola</span></span>);
+    case "flow": return (<span className="bright-brand bright-brand-flow"><svg width="22" height="18" viewBox="0 0 22 18" fill="none"><rect x="0" y="2" width="4" height="14" rx="1" fill="#1a1a1a"/><rect x="6" y="0" width="4" height="18" rx="1" fill="#1a1a1a"/><rect x="12" y="4" width="4" height="10" rx="1" fill="#1a1a1a"/><rect x="18" y="6" width="4" height="6" rx="1" fill="#1a1a1a"/></svg><span>Flow</span></span>);
+    case "listen": return (<span className="bright-brand bright-brand-listen"><svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M4 2C4 2 2 4 2 9s2 7 2 7" stroke="#7c3aed" strokeWidth="2.5" strokeLinecap="round"/><circle cx="8" cy="9" r="4" fill="#7c3aed"/></svg><span>Listen</span></span>);
+    case "obvious": return (<span className="bright-brand bright-brand-obvious"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1a1a1a" strokeWidth="2"/><circle cx="10" cy="10" r="4" stroke="#1a1a1a" strokeWidth="1.5"/><line x1="10" y1="1" x2="10" y2="5" stroke="#1a1a1a" strokeWidth="1.5"/><line x1="10" y1="15" x2="10" y2="19" stroke="#1a1a1a" strokeWidth="1.5"/><line x1="1" y1="10" x2="5" y2="10" stroke="#1a1a1a" strokeWidth="1.5"/><line x1="15" y1="10" x2="19" y2="10" stroke="#1a1a1a" strokeWidth="1.5"/></svg><span>Obvious</span></span>);
+    case "modal": return (<span className="bright-brand bright-brand-modal"><svg width="22" height="18" viewBox="0 0 22 18" fill="none"><path d="M1 17L6 1l5 12L16 5l5 12" stroke="#1a1a1a" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/></svg><span>Modal</span></span>);
+    case "usv": return (<span className="bright-brand bright-brand-usv"><span className="bright-brand-usv-box"><strong>USV</strong></span><span className="bright-brand-usv-text">Union<br/>Square<br/>Ventures</span></span>);
+    case "replicate": return (<span className="bright-brand bright-brand-replicate"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="0" y="0" width="8" height="8" rx="2" fill="#1a1a1a"/><rect x="10" y="0" width="8" height="8" rx="2" fill="#1a1a1a" opacity="0.5"/><rect x="0" y="10" width="8" height="8" rx="2" fill="#1a1a1a" opacity="0.5"/><rect x="10" y="10" width="8" height="8" rx="2" fill="#1a1a1a" opacity="0.25"/></svg><span>Replicate</span></span>);
+    case "railway": return (<span className="bright-brand bright-brand-railway"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#1a1a1a"/><circle cx="9" cy="9" r="3" fill="#fff"/></svg><span>Railway</span></span>);
+    case "public": return (<span className="bright-brand bright-brand-public"><svg width="14" height="18" viewBox="0 0 14 18" fill="none"><circle cx="7" cy="4" r="4" fill="#1a1a1a"/><path d="M0 18c0-4 3-7 7-7s7 3 7 7" fill="#1a1a1a"/></svg><span>public</span></span>);
+    case "wordsmith": return (<span className="bright-brand bright-brand-wordsmith">WORDSMITH</span>);
+    case "plain": return (<span className="bright-brand bright-brand-plain">Plain.</span>);
+    case "passionfroot": return (<span className="bright-brand bright-brand-passionfroot">passionfroot</span>);
+    default: return <span className="bright-brand">{logo.name}</span>;
   }
-  return (
-    <svg viewBox="0 0 200 160" fill="none" className="bright-equip-svg">
-      {/* Tracks */}
-      <rect x="20" y="120" width="120" height="28" rx="14" fill={c.track} />
-      <circle cx="36" cy="134" r="10" fill="#555" /><circle cx="60" cy="134" r="7" fill="#555" />
-      <circle cx="80" cy="134" r="7" fill="#555" /><circle cx="100" cy="134" r="7" fill="#555" />
-      <circle cx="124" cy="134" r="10" fill="#555" />
-      {/* Body */}
-      <rect x="30" y="82" width="100" height="40" rx="6" fill={c.body} />
-      <rect x="32" y="84" width="40" height="28" rx="4" fill={c.cabin} />
-      <rect x="36" y="88" width="32" height="18" rx="3" fill="rgba(180,220,255,0.35)" />
-      {/* Arm */}
-      <line x1="100" y1="90" x2="155" y2="50" stroke={c.arm} strokeWidth="8" strokeLinecap="round" />
-      <line x1="155" y1="50" x2="180" y2="90" stroke={c.arm} strokeWidth="6" strokeLinecap="round" />
-      {/* Bucket */}
-      <path d="M172 86 L188 92 L184 104 L168 98 Z" fill={c.arm} />
-      {/* Details */}
-      <rect x="90" y="88" width="30" height="6" rx="2" fill="rgba(0,0,0,0.15)" />
-      <circle cx="78" cy="108" r="4" fill="rgba(0,0,0,0.12)" />
-    </svg>
-  );
 }
 
+type StatItem = { value: string; numericEnd: number; suffix: string; prefix: string; label: string; sublabel: string };
+
+const statItems: StatItem[] = [
+  { value: "3x", numericEnd: 3, suffix: "×", prefix: "", label: "Higher-Quality Leads", sublabel: "Capture buyer intent, specs, and urgency from the first interaction" },
+  { value: "<10s", numericEnd: 10, suffix: "s", prefix: "<", label: "Instant First Response", sublabel: "Engage every lead instantly, before competitors have time to reply" },
+  { value: "50%", numericEnd: 50, suffix: "%", prefix: "", label: "Faster Quote Output", sublabel: "Turn inquiries into structured, accurate quotations within one conversation" },
+  { value: "65%+", numericEnd: 65, suffix: "%+", prefix: "", label: "Shift to AI Decisions", sublabel: "Buyers increasingly rely on AI when backed by real data" },
+];
+
+const faqHighlights: FaqHighlight[] = [
+  { question: "What is the Antbuildz AI Agent?", answer: "It is an AI sales agent built for equipment businesses to answer technical questions, guide discovery, and move enquiries toward quotation." },
+  { question: "How long does setup typically take?", answer: "Basic deployment can be done quickly, while more advanced setups depend on catalog size, data quality, and scenario complexity." },
+  { question: "Can the AI Agent assist with quotation requests?", answer: "Yes. It can collect structured quote details, guide users through the required fields, and support your sales workflow." },
+  { question: "Can the AI Agent integrate with inventory systems?", answer: "Yes. It can use inventory and availability signals so responses stay relevant to stock and operational conditions." },
+  { question: "Does it support multilingual conversations?", answer: "Yes. The platform supports multilingual conversations when the model setup and knowledge coverage are configured appropriately." },
+  { question: "Is company knowledge encrypted?", answer: "Yes. Company knowledge is protected with tenant isolation and encryption controls so proprietary information remains private." },
+];
+
+const painResolutions: PainResolution[] = [
+  { title: "Delayed Responses", description: "Leads arrive anytime, but your team can't respond instantly", impact: "", solutionTitle: "Instant Response, 24/7", solutionDescription: "Engage every enquiry the moment it arrives — no missed opportunities", keyword: "24/7" },
+  { title: "Limited Handling Capacity", description: "Too many enquiries overwhelm your team and slow everything down", impact: "", solutionTitle: "Scale Without Hiring", solutionDescription: "Handle multiple enquiries simultaneously without increasing headcount", keyword: "Scale" },
+  { title: "Incomplete & Unqualified Enquiries", description: "Leads lack specs, details, and clarity — causing delays and confusion", impact: "", solutionTitle: "Structured Requirement Capture", solutionDescription: "Automatically capture specs, use-case, and intent in one conversation", keyword: "Capture" },
+  { title: "Sales Knowledge Dependency", description: "Critical knowledge lives in people, not systems or processes", impact: "", solutionTitle: "Built-In Sales Intelligence", solutionDescription: "Standardize specs, pricing logic, and workflows into one system", keyword: "Intel" },
+];
 function StepGraphic({ visual }: { visual: ProcessStep["visual"] }) {
   if (visual === "profile") return (<div className="bright-step-graphic"><div className="bright-anim-ring" /><div className="bright-anim-avatar"><User size={20} /></div></div>);
   if (visual === "ingest") return (<div className="bright-step-graphic"><div className="bright-anim-doc bright-doc-one" /><div className="bright-anim-doc bright-doc-two" /><div className="bright-anim-folder" /></div>);
