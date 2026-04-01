@@ -1905,6 +1905,7 @@
   .bright-logo { font-size: 1.25rem; }
   .bright-nav-actions { width: 100%; }
   .bright-nav-actions .bright-btn { width: 100%; }
+  .bright-hero-actions-block .bright-btn { padding: 12px 22px; font-size: 0.9rem; }
   .bright-hero-content h1 { font-size: 2.3rem; }
   .bright-comparison-header { margin-bottom: 28px; text-align: left; }
   .bright-comparison-header p { font-size: 0.98rem; }
