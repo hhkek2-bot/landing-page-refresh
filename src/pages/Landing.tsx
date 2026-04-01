@@ -550,15 +550,17 @@ export default function Landing() {
     return () => { window.cancelAnimationFrame(frameId); window.removeEventListener("resize", resize); };
   }, []);
 
-  // Chat script animation with word-by-word AI rendering
+  // Rotating chat scenario animation
+  const [scenarioIndex, setScenarioIndex] = useState(0);
+  const [chatFadeIn, setChatFadeIn] = useState(true);
+
   useEffect(() => {
     let alive = true;
     const timers: number[] = [];
     const queue = (cb: () => void, delay: number) => { const id = window.setTimeout(() => { if (!alive) return; cb(); }, delay); timers.push(id); };
 
-    const typeAiText = (msgId: string, fullHtml: string, onDone: () => void) => {
-      // Strip HTML tags for word splitting, but preserve them in output
-      const words = fullHtml.split(/(?<=\s)|(?=\s)/);
+    const typeAiText = (msgId: string, fullText: string, onDone: () => void) => {
+      const words = fullText.split(/(?<=\s)|(?=\s)/);
       let currentIndex = 0;
       const typeNext = () => {
         if (!alive) return;
@@ -566,103 +568,95 @@ export default function Landing() {
         currentIndex++;
         const partial = words.slice(0, currentIndex).join("");
         setChatItems((prev) => prev.map((item) => item.id === msgId ? { ...item, text: partial } : item));
-        const delay = 25 + Math.random() * 35;
-        queue(typeNext, delay);
+        queue(typeNext, 25 + Math.random() * 35);
       };
       typeNext();
     };
 
-    const runStep = (index: number) => {
+    const runScenario = (sIdx: number) => {
       if (!alive) return;
-      if (index >= chatScript.length) { queue(() => { setChatItems([]); runStep(0); }, 8000); return; }
-      const step = chatScript[index];
-      queue(() => {
-        if (step.type === "typing") {
-          const typingId = `typing-${Date.now()}-${index}`;
-          setChatItems((prev) => [...prev, { id: typingId, type: "typing" }]);
-          queue(() => { setChatItems((prev) => prev.filter((i) => i.id !== typingId)); runStep(index + 1); }, step.duration);
+      const scenario = chatScenarios[sIdx % chatScenarios.length];
+      setScenarioIndex(sIdx % chatScenarios.length);
+      setChatFadeIn(true);
+      setChatItems([]);
+
+      let stepIndex = 0;
+      const runStep = () => {
+        if (!alive || stepIndex >= scenario.steps.length) {
+          // Wait then transition to next scenario
+          queue(() => {
+            setChatFadeIn(false);
+            queue(() => runScenario(sIdx + 1), 200);
+          }, 3000);
           return;
         }
-        if (step.type === "ai" || step.type === "user") {
-          const ts = step as { type: "user" | "ai"; text: string };
-          const msgId = `msg-${Date.now()}-${index}`;
-          if (ts.type === "ai") {
-            setChatItems((prev) => [...prev, { id: msgId, type: "ai", text: "" }]);
-            typeAiText(msgId, ts.text, () => runStep(index + 1));
-          } else {
-            setChatItems((prev) => [...prev, { id: msgId, type: "user", text: ts.text }]);
-            runStep(index + 1);
-          }
-          return;
+        const step = scenario.steps[stepIndex];
+        stepIndex++;
+
+        if (step.type === "user") {
+          queue(() => {
+            const msgId = `msg-${Date.now()}-${stepIndex}`;
+            setChatItems((prev) => [...prev, { id: msgId, type: "user", text: step.text }]);
+            queue(runStep, 800 + Math.random() * 400);
+          }, 800 + Math.random() * 400);
+        } else if (step.type === "ai") {
+          // Show typing indicator first
+          const typingId = `typing-${Date.now()}-${stepIndex}`;
+          queue(() => {
+            setChatItems((prev) => [...prev, { id: typingId, type: "typing" }]);
+            queue(() => {
+              setChatItems((prev) => prev.filter((i) => i.id !== typingId));
+              const msgId = `ai-${Date.now()}-${stepIndex}`;
+              setChatItems((prev) => [...prev, { id: msgId, type: "ai", text: "" }]);
+              typeAiText(msgId, step.text, () => {
+                queue(runStep, 600);
+              });
+            }, 600 + Math.random() * 300);
+          }, 200);
+        } else if (step.type === "product-card") {
+          queue(() => {
+            setChatItems((prev) => [...prev, { id: `card-${Date.now()}-${stepIndex}`, type: "product-card", data: step.data }]);
+            queue(runStep, 1200);
+          }, 300);
         }
-        if (step.type === "ai-card") setChatItems((prev) => [...prev, { id: `card-${Date.now()}-${index}`, type: "ai-card", data: step.data }]);
-        else if (step.type === "ai-cards") setChatItems((prev) => [...prev, { id: `cards-${Date.now()}-${index}`, type: "ai-cards", cards: step.cards }]);
-        runStep(index + 1);
-      }, step.delay);
+      };
+      queue(runStep, 400);
     };
-    queue(() => runStep(0), 1200);
+
+    queue(() => runScenario(0), 800);
     return () => { alive = false; timers.forEach((id) => window.clearTimeout(id)); };
   }, []);
 
   useEffect(() => { const cb = chatBodyRef.current; if (cb) cb.scrollTop = cb.scrollHeight; }, [chatItems]);
 
-  // Intersection observer for steps
-  useEffect(() => {
-    const targets = document.querySelectorAll(".bright-step-hidden");
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => { if (!entry.isIntersecting) return; entry.target.classList.add("visible", "bright-step-visible"); obs.unobserve(entry.target); });
-    }, { threshold: 0.1, rootMargin: "0px 0px -12% 0px" });
-    targets.forEach((t) => observer.observe(t));
-    return () => observer.disconnect();
-  }, []);
-
-  // Connector beam positioning
-  useEffect(() => {
-    const updateConnector = () => {
-      const activeItem = painRefs.current[activePainIndex];
-      const solutionColumn = solutionColumnRef.current;
-      const shell = solutionColumn?.closest(".bright-comparison-shell") as HTMLElement | null;
-      if (!activeItem || !solutionColumn || !shell || window.innerWidth <= 980) { setConnectorPosition((p) => (p.width === 0 ? p : { top: p.top, left: 0, width: 0 })); return; }
-      const shellRect = shell.getBoundingClientRect();
-      const itemRect = activeItem.getBoundingClientRect();
-      const solutionRect = solutionColumn.getBoundingClientRect();
-      setConnectorPosition({ top: itemRect.top - shellRect.top + itemRect.height / 2, left: itemRect.right - shellRect.left + 18, width: Math.max(solutionRect.left - itemRect.right - 32, 48) });
-    };
-    updateConnector();
-    window.addEventListener("resize", updateConnector);
-    return () => window.removeEventListener("resize", updateConnector);
-  }, [activePainIndex]);
-
   const renderChatItem = (item: RenderedChatItem) => {
     if (item.type === "typing") return (
-      <div className="bright-chat-row" key={item.id}><div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div><div className="bright-chat-msg bright-chat-msg-ai bright-typing-shell"><div className="bright-typing-indicator"><span className="bright-dot" /><span className="bright-dot" /><span className="bright-dot" /></div></div></div>
-    );
-    if (item.type === "ai-card" && item.data) return (
-      <div className="bright-chat-row" key={item.id}><div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
-        <div className="bright-chat-msg bright-chat-msg-ai bright-card-msg"><div className="bright-chat-card">
-          <div className="bright-card-image-wrap">{item.data.illustrationType ? <EquipmentIllustration type={item.data.illustrationType} /> : <img src={item.data.image} alt={item.data.title} />}<div className="bright-card-badges"><span className="bright-badge-rating"><Star size={13} fill="currentColor" color="currentColor" /> {item.data.rating}</span>{item.data.verified && <span className="bright-badge-verified"><CheckCircle2 size={14} /> Verified</span>}</div></div>
-          <div className="bright-card-body"><p className="bright-card-title">{item.data.title}</p><p className="bright-card-location"><img src={item.data.flag} alt="country" /> {item.data.location}</p><div className="bright-price-grid">{item.data.pricing.map((p) => (<div className="bright-price-col" key={p.label}><span className="bright-price-label">{p.label}</span><span className="bright-price-value">{p.value}</span></div>))}</div><button type="button" className="bright-card-action">{item.data.action}</button></div>
-        </div></div>
+      <div className="bright-chat-row" key={item.id}>
+        <div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
+        <div className="bright-chat-msg bright-chat-msg-ai bright-typing-shell">
+          <div className="bright-typing-indicator"><span className="bright-dot" /><span className="bright-dot" /><span className="bright-dot" /></div>
+        </div>
       </div>
     );
-    if (item.type === "ai-cards" && item.cards) return (
-      <div className="bright-chat-row" key={item.id}><div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
-        <div className="bright-cards-row">{item.cards.map((card, ci) => (
-          <div className="bright-chat-card bright-chat-card-sm" key={ci}>
-            <div className="bright-card-image-wrap">{card.illustrationType ? <EquipmentIllustration type={card.illustrationType} /> : <img src={card.image} alt={card.title} />}<div className="bright-card-badges"><span className="bright-badge-rating"><Star size={11} fill="currentColor" color="currentColor" /> {card.rating}</span>{card.verified && <span className="bright-badge-verified"><CheckCircle2 size={12} /> Verified</span>}</div></div>
-            <div className="bright-card-body"><p className="bright-card-title">{card.title}</p><p className="bright-card-location"><img src={card.flag} alt="country" /> {card.location}</p><div className="bright-price-grid">{card.pricing.map((p) => (<div className="bright-price-col" key={p.label}><span className="bright-price-label">{p.label}</span><span className="bright-price-value">{p.value}</span></div>))}</div><button type="button" className="bright-card-action">{card.action}</button></div>
-          </div>
-        ))}</div>
+    if (item.type === "product-card" && item.data) return (
+      <div className="bright-chat-row" key={item.id}>
+        <div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
+        <div className="bright-chat-msg bright-chat-msg-ai bright-card-msg">
+          <ProductCard data={item.data} />
+        </div>
       </div>
     );
     return (
       <div className={`bright-chat-row ${item.type === "user" ? "bright-user-row" : ""}`} key={item.id}>
-        <div className={`bright-chat-avatar ${item.type === "user" ? "bright-avatar-user" : "bright-avatar-ai"}`}>{item.type === "user" ? "U" : <Bot size={14} />}</div>
-        <div className={`bright-chat-msg ${item.type === "user" ? "bright-chat-msg-user" : "bright-chat-msg-ai"}`}><span dangerouslySetInnerHTML={{ __html: item.text ?? "" }} /></div>
+        <div className={`bright-chat-avatar ${item.type === "user" ? "bright-avatar-user" : "bright-avatar-ai"}`}>
+          {item.type === "user" ? "U" : <Bot size={14} />}
+        </div>
+        <div className={`bright-chat-msg ${item.type === "user" ? "bright-chat-msg-user" : "bright-chat-msg-ai"}`}>
+          <span dangerouslySetInnerHTML={{ __html: item.text ?? "" }} />
+        </div>
       </div>
     );
   };
-
   return (
     <div className="bright-landing">
       {/* Nav */}
