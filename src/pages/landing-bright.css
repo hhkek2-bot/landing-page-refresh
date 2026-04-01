@@ -876,17 +876,23 @@
 }
 
 .bright-chat-msg-user {
-  background: #f3f4f6;
-  border: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   color: #1a1a1a;
   border-bottom-right-radius: 4px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04);
 }
 
 .bright-chat-msg-ai {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background: rgba(249, 250, 251, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   color: #374151;
   border-bottom-left-radius: 4px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04);
 }
 
 .bright-card-msg { background: transparent; padding: 0; max-width: min(90%, 680px); }
