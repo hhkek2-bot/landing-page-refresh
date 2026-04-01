@@ -317,7 +317,7 @@ export default function PricingPage() {
       <div className="pricing-container">
         {/* Hero */}
         <header className="pricing-hero">
-          <h1>One Conversation.<br />Thousands in Revenue.</h1>
+          <h1>One Conversation.<br />Thousands in <span className="pricing-gradient-text">Revenue.</span></h1>
           <p className="pricing-hero-sub">Your AI sales agent qualifies enquiries, matches the right products, and generates quotations automatically — turning every conversation into a real sales opportunity.</p>
         </header>
 

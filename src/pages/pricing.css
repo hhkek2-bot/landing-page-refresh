@@ -52,6 +52,13 @@
   color: #000;
 }
 
+.pricing-gradient-text {
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 40%, #facc15 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .pricing-hero-sub {
   margin-top: 16px;
   font-size: 1.05rem;
