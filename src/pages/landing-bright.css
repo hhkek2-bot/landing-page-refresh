@@ -392,6 +392,13 @@
   text-align: left;
 }
 
+.bright-hero-text-block h1 {
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  margin-bottom: 20px;
+}
+
 .bright-hero-actions-block {
   grid-column: 1;
   grid-row: 2;
