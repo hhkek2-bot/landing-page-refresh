@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Bot, Check } from "lucide-react";
+import { ArrowLeft, Bot, Check, Zap, ShoppingBag, Settings } from "lucide-react";
 import "./pricing.css";
 
 type BillingCycle = "monthly" | "annual";
-type TopTab = "agent" | "webstore";
 type WebstoreTab = "bundle" | "sales" | "rental";
 
 const annualDiscount = 0.2;
@@ -18,7 +17,7 @@ const agentPlans = [
     conversations: 50,
     storage: "200 MB",
     playground: 20,
-    target: "Testing & individuals",
+    target: "For Testing & Validation",
     features: ["AI equipment recommendation", "Quotation assistance", "1 AI Sales Agent"],
     cta: "Get Started",
   },
@@ -28,7 +27,7 @@ const agentPlans = [
     conversations: 150,
     storage: "500 MB",
     playground: 75,
-    target: "Small teams",
+    target: "For Growing Sales Teams",
     features: ["Everything in Pilot", "Lead intent detection", "Email notifications", "1 AI Sales Agent"],
     cta: "Get Started",
   },
@@ -38,7 +37,7 @@ const agentPlans = [
     conversations: 450,
     storage: "2 GB",
     playground: 200,
-    target: "Scaling SMEs",
+    target: "For Scaling Operations",
     popular: true,
     features: ["Everything in Starter", "CRM integration", "Advanced analytics", "Priority support", "1 AI Sales Agent"],
     cta: "Get Started",
@@ -49,7 +48,7 @@ const agentPlans = [
     conversations: 1000,
     storage: "10 GB",
     playground: 500,
-    target: "Heavy users & enterprises",
+    target: "For High-Volume Businesses",
     features: ["Everything in Growth", "Booking automation", "Multi-agent support", "Dedicated account manager", "2 AI Sales Agents"],
     cta: "Get Started",
   },
@@ -290,7 +289,6 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export default function PricingPage() {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
-  const [topTab, setTopTab] = useState<TopTab>("webstore");
   const [webstoreTab, setWebstoreTab] = useState<WebstoreTab>("bundle");
 
   const currentWebstorePlans = webstoreTab === "bundle" ? bundlePlans : webstoreTab === "sales" ? salesPlans : rentalPlans;
@@ -304,16 +302,11 @@ export default function PricingPage() {
       <div className="pricing-container">
         {/* Hero */}
         <header className="pricing-hero">
-          <h1>Pricing built for equipment businesses to scale with AI</h1>
-          <p className="pricing-hero-sub">From AI-powered conversations to full business operations — choose what fits your growth.</p>
+          <h1>Scale Your Sales — Not Your Headcount</h1>
+          <p className="pricing-hero-sub">From handling inquiries to generating quotations — choose the plan that fits your sales volume and growth.</p>
+          <p className="pricing-hero-microcopy">One conversation can convert into a deal worth thousands.</p>
           <p className="pricing-hero-trust">No hidden fees. Scale as you grow.</p>
         </header>
-
-        {/* Top Tabs */}
-        <div className="pricing-top-tabs">
-          <button className={`pricing-top-tab ${topTab === "agent" ? "is-active" : ""}`} onClick={() => setTopTab("agent")}>AI Agent Only</button>
-          <button className={`pricing-top-tab ${topTab === "webstore" ? "is-active" : ""}`} onClick={() => setTopTab("webstore")}>Webstore + AI</button>
-        </div>
 
         {/* Billing Toggle */}
         <div className="pricing-billing-row">
@@ -324,51 +317,61 @@ export default function PricingPage() {
           {billing === "annual" && <span className="pricing-save-badge">Save 20%</span>}
         </div>
 
-        {/* ═══ AI Agent Only ═══ */}
-        {topTab === "agent" && (
-          <section className="pricing-section">
-            <div className="pricing-section-header">
-              <span className="pricing-section-label">AI Agent Only</span>
-              <h2>Automate inquiries with an AI sales agent on your existing website</h2>
-              <p>No webstore needed. Deploy a trained AI agent that handles equipment inquiries, quotes, and leads.</p>
-            </div>
-            <div className="pricing-grid-4">
-              {agentPlans.map((plan) => (
-                <AgentCard key={plan.name} plan={plan} billing={billing} />
-              ))}
-            </div>
-          </section>
-        )}
+        {/* ═══ SECTION 1: AI Agent Only ═══ */}
+        <section className="pricing-section">
+          <div className="pricing-section-header">
+            <span className="pricing-section-label">AI Agent Only</span>
+            <h2>Deploy an AI Sales Agent on Your Existing Website</h2>
+            <p>No webstore needed. Handle inquiries, qualify leads, and generate quotes automatically.</p>
+          </div>
+          <div className="pricing-grid-4">
+            {agentPlans.map((plan) => (
+              <AgentCard key={plan.name} plan={plan} billing={billing} />
+            ))}
+          </div>
+        </section>
 
-        {/* ═══ Webstore + AI ═══ */}
-        {topTab === "webstore" && (
-          <section className="pricing-section">
-            <div className="pricing-section-header">
-              <span className="pricing-section-label">Webstore + AI</span>
-              <h2>A complete digital storefront with AI-powered sales built in</h2>
-              <p>Launch your equipment webstore with AI that handles inquiries, recommendations, and quotes automatically.</p>
-            </div>
+        {/* ═══ DIVIDER ═══ */}
+        <div className="pricing-section-divider">
+          <div className="pricing-divider-line" />
+          <span className="pricing-divider-text">Or go further with a complete digital sales system</span>
+          <div className="pricing-divider-line" />
+        </div>
 
-            <div className="pricing-sub-tabs">
-              <button className={`pricing-sub-tab ${webstoreTab === "bundle" ? "is-active" : ""}`} onClick={() => setWebstoreTab("bundle")}>Bundle</button>
-              <button className={`pricing-sub-tab ${webstoreTab === "sales" ? "is-active" : ""}`} onClick={() => setWebstoreTab("sales")}>Sales Store</button>
-              <button className={`pricing-sub-tab ${webstoreTab === "rental" ? "is-active" : ""}`} onClick={() => setWebstoreTab("rental")}>Rental Store</button>
-            </div>
+        {/* ═══ SECTION 2: Webstore + AI ═══ */}
+        <section className="pricing-section">
+          <div className="pricing-section-header">
+            <span className="pricing-section-label">Webstore + AI</span>
+            <h2>Launch a Full Equipment Webstore — Powered by AI</h2>
+            <p>Sell and rent equipment with a complete digital sales system — including AI agent, listings, and transaction workflows.</p>
+          </div>
 
-            {webstoreTab === "bundle" && (
-              <p className="pricing-webstore-note">Includes AI agent + webstore infrastructure</p>
-            )}
-            {webstoreTab === "rental" && (
-              <p className="pricing-webstore-note">Built for rental operations & availability management</p>
-            )}
+          {/* Benefit bullets */}
+          <div className="pricing-benefit-bullets">
+            <div className="pricing-benefit-item"><Zap size={16} /> Includes AI Sales Agent</div>
+            <div className="pricing-benefit-item"><ShoppingBag size={16} /> Manage listings and pricing</div>
+            <div className="pricing-benefit-item"><Settings size={16} /> Handle rental and sales workflows</div>
+          </div>
 
-            <div className="pricing-grid-3">
-              {currentWebstorePlans.map((plan) => (
-                <WebstoreCard key={plan.name} plan={plan} billing={billing} />
-              ))}
-            </div>
-          </section>
-        )}
+          <div className="pricing-sub-tabs">
+            <button className={`pricing-sub-tab ${webstoreTab === "bundle" ? "is-active" : ""}`} onClick={() => setWebstoreTab("bundle")}>Bundle</button>
+            <button className={`pricing-sub-tab ${webstoreTab === "sales" ? "is-active" : ""}`} onClick={() => setWebstoreTab("sales")}>Sales Store</button>
+            <button className={`pricing-sub-tab ${webstoreTab === "rental" ? "is-active" : ""}`} onClick={() => setWebstoreTab("rental")}>Rental Store</button>
+          </div>
+
+          {webstoreTab === "bundle" && (
+            <p className="pricing-webstore-note">Includes AI agent + webstore infrastructure</p>
+          )}
+          {webstoreTab === "rental" && (
+            <p className="pricing-webstore-note">Built for rental operations & availability management</p>
+          )}
+
+          <div className="pricing-grid-3">
+            {currentWebstorePlans.map((plan) => (
+              <WebstoreCard key={plan.name} plan={plan} billing={billing} />
+            ))}
+          </div>
+        </section>
 
         {/* ═══ Usage & Add-Ons ═══ */}
         <section className="pricing-section">
@@ -378,7 +381,6 @@ export default function PricingPage() {
           </div>
 
           <div className="pricing-addons-grid">
-            {/* Top-up packs */}
             <div className="pricing-addon-card">
               <h3>Conversation Top-ups</h3>
               <p className="pricing-addon-desc">Add more AI conversations anytime without changing your plan.</p>
@@ -400,7 +402,6 @@ export default function PricingPage() {
               </table>
             </div>
 
-            {/* Additional Agent */}
             <div className="pricing-addon-card">
               <h3>Additional AI Agent</h3>
               <p className="pricing-addon-desc">Deploy another AI sales agent with a separate knowledge base — ideal for different product lines, brands, or business units.</p>
@@ -440,7 +441,7 @@ export default function PricingPage() {
             {trustItems.map((item) => (
               <div key={item} className="pricing-trust-item">
                 <span className="pricing-trust-check">✓</span>
-                <span>{item}</span>
+                {item}
               </div>
             ))}
           </div>
