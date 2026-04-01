@@ -136,9 +136,9 @@ const chatScenarios: ChatScenario[] = [
       {
         type: "product-cards",
         cards: [
-          { title: "42m Telescopic Boom Lift", image: boomLiftImg, specs: [{ label: "Height", value: "~42m" }, { label: "Type", value: "Telescopic" }, { label: "Power", value: "Diesel" }], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$380", weekly: "$2,200", monthly: "$7,500" } },
-          { title: "34m Articulating Boom Lift", image: boomLift2Img, specs: [{ label: "Height", value: "~34m" }, { label: "Type", value: "Articulating" }, { label: "Power", value: "Diesel" }], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$290", weekly: "$1,700", monthly: "$5,800" } },
-          { title: "46m Telescopic Boom Lift", image: boomLift3Img, specs: [{ label: "Height", value: "~46m" }, { label: "Type", value: "Telescopic" }, { label: "Power", value: "Diesel" }], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$450", weekly: "$2,800", monthly: "$9,200" } },
+          { title: "2021 JLG 1350SJP Telescopic Boom Lift", image: boomLiftImg, specs: [], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$380", weekly: "$2,200", monthly: "$7,500" } },
+          { title: "2019 Genie S-85 XC Articulating Boom Lift", image: boomLift2Img, specs: [], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$290", weekly: "$1,700", monthly: "$5,800" } },
+          { title: "2022 Manitou 280TJ Telescopic Boom Lift", image: boomLift3Img, specs: [], tag: "Available", tagColor: "green", cta: "Get Quote", rentalPricing: { daily: "$450", weekly: "$2,800", monthly: "$9,200" } },
         ],
       },
       { type: "ai", text: "Shall I generate a quotation for 2 weeks?" },
