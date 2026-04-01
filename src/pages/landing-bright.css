@@ -1204,9 +1204,9 @@
   overflow: hidden;
 }
 
-.bright-comparison-header { max-width: 880px; margin: 0 auto 56px; text-align: center; }
+.bright-comparison-header { max-width: 960px; margin: 0 auto 56px; text-align: center; }
 .bright-comparison-header h2 { margin-bottom: 18px; }
-.bright-comparison-header p { max-width: 820px; margin: 0 auto; color: #5f6b7c; font-size: 1.12rem; line-height: 1.7; }
+.bright-comparison-header p { max-width: 960px; margin: 0 auto; color: #5f6b7c; font-size: 1.12rem; line-height: 1.7; }
 
 .bright-comparison-shell { position: relative; max-width: 1200px; margin: 0 auto; }
 
