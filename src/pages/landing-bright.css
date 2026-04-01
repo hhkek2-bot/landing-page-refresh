@@ -633,12 +633,9 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 24px;
+  border-radius: 36px;
   z-index: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 50% at 80% 20%, rgba(168, 85, 247, 0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 45% 45% at 50% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+  background: none;
   pointer-events: none;
 }
 
