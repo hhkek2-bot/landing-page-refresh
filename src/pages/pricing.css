@@ -166,6 +166,12 @@
   align-items: center;
   margin-bottom: 48px;
   max-width: 1200px;
+  position: relative;
+}
+
+.pricing-controls-row .pricing-currency-select-wrap {
+  position: absolute;
+  right: 0;
 }
 
 .pricing-billing-toggle {
