@@ -726,10 +726,24 @@ export default function Landing() {
             <p className="bright-subtitle">Your AI Sales Agent answers inquiries, recommends the right equipment, and generates quotes instantly — trained on your catalog, pricing, and business logic.</p>
           </div>
           <div className="bright-hero-mockup-wrap bright-hero-mockup-right">
-            <div className="bright-mockup-glow" aria-hidden="true" />
-            <div className={`bright-chat-mockup ${chatFadeIn ? "bright-chat-fade-in" : "bright-chat-fade-out"}`} id="demo">
-              <div className="bright-chat-header"><span className="bright-status-dot" /><span className="bright-chat-title"><Bot size={18} /> Antbuildz Sales Agent</span><span className="bright-online-status"><span /> Online</span></div>
-              <div className="bright-chat-body" ref={chatBodyRef}>{chatItems.map(renderChatItem)}</div>
+            {/* Ambient gradient blobs */}
+            <div className="bright-glass-ambient" aria-hidden="true">
+              <div className="bright-glass-blob bright-glass-blob-1" />
+              <div className="bright-glass-blob bright-glass-blob-2" />
+              <div className="bright-glass-blob bright-glass-blob-3" />
+              <div className="bright-glass-blob bright-glass-blob-4" />
+              <div className="bright-glass-blob bright-glass-blob-5" />
+            </div>
+            <div className={`bright-chat-mockup bright-glass-chat ${chatFadeIn ? "bright-chat-fade-in" : "bright-chat-fade-out"}`} id="demo">
+              <div className="bright-chat-header bright-glass-header">
+                <span className="bright-status-dot" />
+                <span className="bright-chat-title"><Bot size={18} /> Antbuildz Sales Agent</span>
+                <span className="bright-online-status"><span /> Online</span>
+              </div>
+              <div className="bright-chat-body bright-glass-body" ref={chatBodyRef}>{chatItems.map(renderChatItem)}</div>
+              <div className="bright-glass-input-bar" aria-hidden="true">
+                <span>Type your question...</span>
+              </div>
             </div>
           </div>
           <div className="bright-hero-actions-block">
