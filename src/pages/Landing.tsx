@@ -833,10 +833,11 @@ export default function Landing() {
       <section className="bright-cta-section">
         <div className="bright-container">
           <div className="bright-cta-content">
-            <div className="bright-cta-actions">
-              <Link to="/" className="bright-btn-outline-light">Build Your AI Sales Agent</Link>
-            </div>
+            <h2>Build Your AI Sales Agent</h2>
             <p className="bright-cta-supporting">Turn enquiries into qualified deals and quotations — automatically.</p>
+            <div className="bright-cta-actions">
+              <Link to="/" className="bright-btn-outline-light">Get Started</Link>
+            </div>
           </div>
         </div>
       </section>

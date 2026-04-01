@@ -1696,9 +1696,9 @@
   box-shadow: none;
 }
 
-.bright-cta-content h2 { color: #ffffff; font-size: clamp(2rem, 3.5vw, 3.4rem); line-height: 1.07; letter-spacing: -0.04em; margin-bottom: 32px; }
+.bright-cta-content h2 { color: #ffffff; font-size: clamp(2.2rem, 3.8vw, 3.4rem); font-weight: 800; line-height: 1.07; letter-spacing: -0.04em; margin-bottom: 16px; }
 
-.bright-cta-actions { display: inline-flex; gap: 14px; margin-bottom: 12px; }
+.bright-cta-actions { display: inline-flex; gap: 14px; margin-top: 24px; }
 
 .bright-cta-supporting {
   font-size: 0.875rem;
