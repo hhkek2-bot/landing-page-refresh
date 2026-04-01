@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import type { MutableRefObject, RefObject } from "react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -20,35 +20,41 @@ import {
 import type { LucideIcon } from "lucide-react";
 import "./landing-bright.css";
 
-type PricingPoint = { label: string; value: string };
-type ChatCardData = {
+import boomLiftImg from "@/assets/boom-lift.jpg";
+import forkliftImg from "@/assets/forklift.jpg";
+import floorScrubberImg from "@/assets/floor-scrubber.jpg";
+
+type ProductCardData = {
   title: string;
   image: string;
-  illustrationType?: "excavator-1" | "excavator-2" | "excavator-3" | "breaker";
-  rating: string;
-  verified: boolean;
-  location: string;
-  flag: string;
-  pricing: PricingPoint[];
-  action: string;
+  specs: { label: string; value: string }[];
+  tag: string;
+  tagColor: "green" | "blue" | "amber";
+  cta: string;
 };
-type ChatCardsData = ChatCardData[];
-type ChatScriptStep =
-  | { type: "user" | "ai"; delay: number; text: string }
-  | { type: "typing"; delay: number; duration: number }
-  | { type: "ai-card"; delay: number; data: ChatCardData }
-  | { type: "ai-cards"; delay: number; cards: ChatCardsData };
+
+type ChatScenarioStep =
+  | { type: "user"; text: string }
+  | { type: "ai"; text: string }
+  | { type: "product-card"; data: ProductCardData };
+
+type ChatScenario = {
+  id: string;
+  steps: ChatScenarioStep[];
+};
+
 type RenderedChatItem = {
   id: string;
-  type: "user" | "ai" | "typing" | "ai-card" | "ai-cards";
+  type: "user" | "ai" | "typing" | "product-card";
   text?: string;
-  data?: ChatCardData;
-  cards?: ChatCardsData;
+  data?: ProductCardData;
+  imageLoaded?: boolean;
 };
+
 type Feature = { icon: LucideIcon; title: string; body: string; variant?: "default" | "workflow" };
 type ProcessStep = { id: number; title: string; body: string; visual: "profile" | "ingest" | "rules" | "test" | "launch" };
 type LogoWordmark = { name: string; variant: string };
-type MetricHighlight = { icon: LucideIcon; value: string; label: string; subtitle: string }; // kept for compat
+type MetricHighlight = { icon: LucideIcon; value: string; label: string; subtitle: string };
 type FaqHighlight = { question: string; answer: string };
 type PainResolution = { title: string; description: string; impact: string; solutionTitle: string; solutionDescription: string; keyword: string };
 
@@ -112,94 +118,132 @@ function TypewriterHeading({ text, className = "", as = "h2", once = true }: { t
   );
 }
 
-const featureCards: Feature[] = [
-  { icon: Database, title: "Industry Knowledge", body: "Built on marketplace intelligence from thousands of equipment listings, the AI understands machine specifications, model naming conventions, payload limits, and industry terminology from day one." },
-  { icon: UploadCloud, title: "Knowledge Training", body: "Upload catalogues, manuals, PDFs, or sync Google Sheets to train the AI with your inventory, pricing logic, policies, and operational workflows." },
-  { icon: SearchCheck, title: "Equipment Matching", body: "Matches project requirements with suitable equipment using specifications, availability, and operational constraints to recommend the most relevant options." },
-  { icon: Activity, title: "Buyer Signals", body: "Analyzes conversations and engagement patterns to detect purchasing intent and highlight high-value opportunities for your sales team." },
-  { icon: ShieldCheck, title: "Data Security", body: "Company knowledge bases are encrypted and isolated by organization to ensure proprietary information remains private and protected." },
-  { icon: Sparkles, title: "Workflow Agent", body: "Executes operational tasks such as sharing quotations, comparing specifications, generating invoices, and creating reservations directly from customer conversations.", variant: "workflow" },
-];
-
-const processSteps: ProcessStep[] = [
-  { id: 1, title: "Personalize Your Agent", body: "Set agent name, voice, and response style to mirror your strongest sales rep.", visual: "profile" },
-  { id: 2, title: "Ingest Your Data", body: "Upload manuals, product lists, and pricing tables or connect live sources.", visual: "ingest" },
-  { id: 3, title: "Instruct & Align", body: "Define quote boundaries, fallback rules, and escalation logic for high-risk answers.", visual: "rules" },
-  { id: 4, title: "Test in Playground", body: "Simulate real customer prompts before launch, including pricing and technical scenarios.", visual: "test" },
-  { id: 5, title: "Launch & Integrate", body: "Share your public chat link and embed in your site for immediate lead capture.", visual: "launch" },
-];
-
-const logoWordmarks: LogoWordmark[] = [
-  { name: "granola", variant: "granola" }, { name: "Flow", variant: "flow" }, { name: "Listen", variant: "listen" },
-  { name: "Obvious", variant: "obvious" }, { name: "Modal", variant: "modal" }, { name: "USV", variant: "usv" },
-  { name: "Replicate", variant: "replicate" }, { name: "Railway", variant: "railway" }, { name: "public", variant: "public" },
-  { name: "WORDSMITH", variant: "wordsmith" }, { name: "Plain.", variant: "plain" }, { name: "passionfroot", variant: "passionfroot" },
-];
-
-function renderLogoWordmark(logo: LogoWordmark) {
-  switch (logo.variant) {
-    case "granola": return (<span className="bright-brand bright-brand-granola"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1a1a1a" strokeWidth="2"/><path d="M5 10h10M10 5v10" stroke="#1a1a1a" strokeWidth="1.5"/></svg><span>granola</span></span>);
-    case "flow": return (<span className="bright-brand bright-brand-flow"><svg width="22" height="18" viewBox="0 0 22 18" fill="none"><rect x="0" y="2" width="4" height="14" rx="1" fill="#1a1a1a"/><rect x="6" y="0" width="4" height="18" rx="1" fill="#1a1a1a"/><rect x="12" y="4" width="4" height="10" rx="1" fill="#1a1a1a"/><rect x="18" y="6" width="4" height="6" rx="1" fill="#1a1a1a"/></svg><span>Flow</span></span>);
-    case "listen": return (<span className="bright-brand bright-brand-listen"><svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M4 2C4 2 2 4 2 9s2 7 2 7" stroke="#7c3aed" strokeWidth="2.5" strokeLinecap="round"/><circle cx="8" cy="9" r="4" fill="#7c3aed"/></svg><span>Listen</span></span>);
-    case "obvious": return (<span className="bright-brand bright-brand-obvious"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1a1a1a" strokeWidth="2"/><circle cx="10" cy="10" r="4" stroke="#1a1a1a" strokeWidth="1.5"/><line x1="10" y1="1" x2="10" y2="5" stroke="#1a1a1a" strokeWidth="1.5"/><line x1="10" y1="15" x2="10" y2="19" stroke="#1a1a1a" strokeWidth="1.5"/><line x1="1" y1="10" x2="5" y2="10" stroke="#1a1a1a" strokeWidth="1.5"/><line x1="15" y1="10" x2="19" y2="10" stroke="#1a1a1a" strokeWidth="1.5"/></svg><span>Obvious</span></span>);
-    case "modal": return (<span className="bright-brand bright-brand-modal"><svg width="22" height="18" viewBox="0 0 22 18" fill="none"><path d="M1 17L6 1l5 12L16 5l5 12" stroke="#1a1a1a" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/></svg><span>Modal</span></span>);
-    case "usv": return (<span className="bright-brand bright-brand-usv"><span className="bright-brand-usv-box"><strong>USV</strong></span><span className="bright-brand-usv-text">Union<br/>Square<br/>Ventures</span></span>);
-    case "replicate": return (<span className="bright-brand bright-brand-replicate"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="0" y="0" width="8" height="8" rx="2" fill="#1a1a1a"/><rect x="10" y="0" width="8" height="8" rx="2" fill="#1a1a1a" opacity="0.5"/><rect x="0" y="10" width="8" height="8" rx="2" fill="#1a1a1a" opacity="0.5"/><rect x="10" y="10" width="8" height="8" rx="2" fill="#1a1a1a" opacity="0.25"/></svg><span>Replicate</span></span>);
-    case "railway": return (<span className="bright-brand bright-brand-railway"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#1a1a1a"/><circle cx="9" cy="9" r="3" fill="#fff"/></svg><span>Railway</span></span>);
-    case "public": return (<span className="bright-brand bright-brand-public"><svg width="14" height="18" viewBox="0 0 14 18" fill="none"><circle cx="7" cy="4" r="4" fill="#1a1a1a"/><path d="M0 18c0-4 3-7 7-7s7 3 7 7" fill="#1a1a1a"/></svg><span>public</span></span>);
-    case "wordsmith": return (<span className="bright-brand bright-brand-wordsmith">WORDSMITH</span>);
-    case "plain": return (<span className="bright-brand bright-brand-plain">Plain.</span>);
-    case "passionfroot": return (<span className="bright-brand bright-brand-passionfroot">passionfroot</span>);
-    default: return <span className="bright-brand">{logo.name}</span>;
-  }
-}
-
-type StatItem = { value: string; numericEnd: number; suffix: string; prefix: string; label: string; sublabel: string };
-
-const statItems: StatItem[] = [
-  { value: "3x", numericEnd: 3, suffix: "×", prefix: "", label: "Higher-Quality Leads", sublabel: "Capture buyer intent, specs, and urgency from the first interaction" },
-  { value: "<10s", numericEnd: 10, suffix: "s", prefix: "<", label: "Instant First Response", sublabel: "Engage every lead instantly, before competitors have time to reply" },
-  { value: "50%", numericEnd: 50, suffix: "%", prefix: "", label: "Faster Quote Output", sublabel: "Turn inquiries into structured, accurate quotations within one conversation" },
-  { value: "65%+", numericEnd: 65, suffix: "%+", prefix: "", label: "Shift to AI Decisions", sublabel: "Buyers increasingly rely on AI when backed by real data" },
-];
-
-const faqHighlights: FaqHighlight[] = [
-  { question: "What is the Antbuildz AI Agent?", answer: "It is an AI sales agent built for equipment businesses to answer technical questions, guide discovery, and move enquiries toward quotation." },
-  { question: "How long does setup typically take?", answer: "Basic deployment can be done quickly, while more advanced setups depend on catalog size, data quality, and scenario complexity." },
-  { question: "Can the AI Agent assist with quotation requests?", answer: "Yes. It can collect structured quote details, guide users through the required fields, and support your sales workflow." },
-  { question: "Can the AI Agent integrate with inventory systems?", answer: "Yes. It can use inventory and availability signals so responses stay relevant to stock and operational conditions." },
-  { question: "Does it support multilingual conversations?", answer: "Yes. The platform supports multilingual conversations when the model setup and knowledge coverage are configured appropriately." },
-  { question: "Is company knowledge encrypted?", answer: "Yes. Company knowledge is protected with tenant isolation and encryption controls so proprietary information remains private." },
-];
-
-const painResolutions: PainResolution[] = [
-  { title: "Delayed Responses", description: "Leads arrive anytime, but your team can't respond instantly", impact: "", solutionTitle: "Instant Response, 24/7", solutionDescription: "Engage every enquiry the moment it arrives — no missed opportunities", keyword: "24/7" },
-  { title: "Limited Handling Capacity", description: "Too many enquiries overwhelm your team and slow everything down", impact: "", solutionTitle: "Scale Without Hiring", solutionDescription: "Handle multiple enquiries simultaneously without increasing headcount", keyword: "Scale" },
-  { title: "Incomplete & Unqualified Enquiries", description: "Leads lack specs, details, and clarity — causing delays and confusion", impact: "", solutionTitle: "Structured Requirement Capture", solutionDescription: "Automatically capture specs, use-case, and intent in one conversation", keyword: "Capture" },
-  { title: "Sales Knowledge Dependency", description: "Critical knowledge lives in people, not systems or processes", impact: "", solutionTitle: "Built-In Sales Intelligence", solutionDescription: "Standardize specs, pricing logic, and workflows into one system", keyword: "Intel" },
-];
-
-const chatScript: ChatScriptStep[] = [
-  { type: "user", delay: 1800, text: "I need a 20-ton excavator for a 3-month project in KL. What do you recommend?" },
-  { type: "typing", delay: 800, duration: 2800 },
-  { type: "ai", delay: 0, text: "For a 3-month KL project, I recommend the <strong>Hitachi ZAXIS 200</strong>. I also prepared a quick rental view for you:" },
+const chatScenarios: ChatScenario[] = [
   {
-    type: "ai-cards", delay: 1200, cards: [
-      { title: "2020 CAT 320 Crawler Excavator", image: "/cat-320.jpg", illustrationType: "excavator-1" as const, rating: "4.9/5", verified: true, location: "Kuala Lumpur Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 520" }, { label: "Weekly", value: "RM 2,900" }, { label: "Monthly", value: "RM 9,800" }], action: "Get Quote" },
-      { title: "2019 Hitachi ZX200-7 Crawler Excavator", image: "", illustrationType: "excavator-2" as const, rating: "4.8/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 500" }, { label: "Weekly", value: "RM 2,800" }, { label: "Monthly", value: "RM 9,500" }], action: "Get Quote" },
-      { title: "2021 SANY SY215C Crawler Excavator", image: "", illustrationType: "excavator-3" as const, rating: "4.7/5", verified: true, location: "Johor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg", pricing: [{ label: "Daily", value: "RM 460" }, { label: "Weekly", value: "RM 2,600" }, { label: "Monthly", value: "RM 8,800" }], action: "Get Quote" },
+    id: "boom-lift",
+    steps: [
+      { type: "user", text: "Need boom lift around 40m for site in Tuas, 2 weeks" },
+      { type: "ai", text: "Got it — diesel or electric? Outdoor use?" },
+      { type: "user", text: "Outdoor, diesel" },
+      { type: "ai", text: "Here's a suitable option:" },
+      {
+        type: "product-card",
+        data: {
+          title: "42m Telescopic Boom Lift (Diesel)",
+          image: boomLiftImg,
+          specs: [
+            { label: "Working Height", value: "~42m" },
+            { label: "Type", value: "Telescopic" },
+            { label: "Power", value: "Diesel" },
+          ],
+          tag: "Available in Singapore",
+          tagColor: "green",
+          cta: "Generate Quote",
+        },
+      },
+      { type: "ai", text: "Shall I generate a quotation for 2 weeks?" },
     ],
   },
-  { type: "user", delay: 4500, text: "Do you have compatible hydraulic breaker attachments and Monday delivery?" },
-  { type: "typing", delay: 1000, duration: 2400 },
-  { type: "ai", delay: 0, text: "Yes. NPK GH9 is compatible and available. Monday morning delivery to KL is available." },
   {
-    type: "ai-card", delay: 1100, data: {
-      title: "2022 NPK GH9 Hydraulic Breaker", image: "", illustrationType: "breaker" as const, rating: "5.0/5", verified: true, location: "Selangor Hub", flag: "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg",
-      pricing: [{ label: "Daily", value: "RM 150" }, { label: "Weekly", value: "RM 600" }, { label: "Monthly", value: "RM 1,200" }], action: "Add to Active Quote",
-    },
+    id: "forklift",
+    steps: [
+      { type: "user", text: "Need forklift for warehouse, 3 ton, indoor" },
+      { type: "ai", text: "Electric or diesel? Any height requirement?" },
+      { type: "user", text: "Electric, around 5m lift" },
+      { type: "ai", text: "Recommended:" },
+      {
+        type: "product-card",
+        data: {
+          title: "3 Ton Electric Forklift",
+          image: forkliftImg,
+          specs: [
+            { label: "Capacity", value: "3 Ton" },
+            { label: "Lift Height", value: "~5m" },
+            { label: "Power", value: "Electric" },
+          ],
+          tag: "Ready Stock",
+          tagColor: "blue",
+          cta: "Check Availability",
+        },
+      },
+      { type: "ai", text: "Want me to check availability this week?" },
+    ],
+  },
+  {
+    id: "floor-scrubber",
+    steps: [
+      { type: "user", text: "Looking for floor scrubber for factory, around 2000 sqm" },
+      { type: "ai", text: "Walk-behind or ride-on preferred?" },
+      { type: "user", text: "Ride-on" },
+      { type: "ai", text: "Recommended:" },
+      {
+        type: "product-card",
+        data: {
+          title: "Ride-On Floor Scrubber",
+          image: floorScrubberImg,
+          specs: [
+            { label: "Type", value: "Ride-On" },
+            { label: "Coverage", value: "2000–3000 sqm/hr" },
+            { label: "Use", value: "Factory" },
+          ],
+          tag: "For Sale",
+          tagColor: "amber",
+          cta: "Buy Now",
+        },
+      },
+      { type: "ai", text: "I can share specs or arrange purchase." },
+    ],
   },
 ];
+
+function ProductCard({ data }: { data: ProductCardData }) {
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const tagColors = {
+    green: { bg: "#ecfdf5", color: "#065f46", border: "#a7f3d0" },
+    blue: { bg: "#eff6ff", color: "#1e40af", border: "#bfdbfe" },
+    amber: { bg: "#fffbeb", color: "#92400e", border: "#fde68a" },
+  };
+  const tc = tagColors[data.tagColor];
+  return (
+    <motion.div
+      className="bright-product-card"
+      initial={{ opacity: 0, x: 30 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+    >
+      <div className="bright-product-img-wrap">
+        {!imgLoaded && <div className="bright-product-img-skeleton" />}
+        <motion.img
+          src={data.image}
+          alt={data.title}
+          loading="lazy"
+          width={800}
+          height={800}
+          onLoad={() => setImgLoaded(true)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: imgLoaded ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
+          style={{ position: imgLoaded ? "relative" : "absolute" }}
+        />
+      </div>
+      <div className="bright-product-body">
+        <p className="bright-product-title">{data.title}</p>
+        <div className="bright-product-specs">
+          {data.specs.map((s) => (
+            <div key={s.label} className="bright-product-spec">
+              <span className="bright-product-spec-label">{s.label}</span>
+              <span className="bright-product-spec-value">{s.value}</span>
+            </div>
+          ))}
+        </div>
+        <span className="bright-product-tag" style={{ background: tc.bg, color: tc.color, border: `1px solid ${tc.border}` }}>
+          {data.tag}
+        </span>
+        <button type="button" className="bright-product-cta">{data.cta}</button>
+      </div>
+    </motion.div>
+  );
+}
 
 function EquipmentIllustration({ type }: { type: "excavator-1" | "excavator-2" | "excavator-3" | "breaker" }) {
   const colors = {
