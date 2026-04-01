@@ -1755,3 +1755,144 @@
   .bright-section-header h2 { font-size: 2rem; }
   .bright-feature-grid { grid-template-columns: 1fr; }
 }
+
+/* ===== Hero Gradient Text ===== */
+.bright-hero-gradient-text {
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 40%, var(--cta-primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== CTA Glow Button ===== */
+@keyframes ctaGlowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgb(var(--color-primary-rgb) / 0.3), 0 14px 28px rgb(var(--color-primary-rgb) / 0.22); }
+  50% { box-shadow: 0 0 32px rgb(var(--color-primary-rgb) / 0.5), 0 18px 36px rgb(var(--color-primary-rgb) / 0.32); }
+}
+
+.bright-btn-glow {
+  animation: ctaGlowPulse 3s ease-in-out infinite;
+}
+
+.bright-btn-glow:hover {
+  animation: none;
+  box-shadow: 0 0 36px rgb(var(--color-primary-rgb) / 0.55), 0 18px 36px rgb(var(--color-primary-rgb) / 0.35);
+}
+
+/* ===== Chat Fade Transitions ===== */
+.bright-chat-fade-in {
+  animation: chatFadeIn 0.2s ease-out forwards;
+}
+
+.bright-chat-fade-out {
+  animation: chatFadeOut 0.2s ease-in forwards;
+}
+
+@keyframes chatFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes chatFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* ===== Product Card in Chat ===== */
+.bright-product-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  width: 100%;
+  max-width: 260px;
+}
+
+.bright-product-img-wrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #f3f4f6;
+  overflow: hidden;
+}
+
+.bright-product-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bright-product-img-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.bright-product-body {
+  padding: 12px;
+}
+
+.bright-product-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.bright-product-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.bright-product-spec {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+}
+
+.bright-product-spec-label {
+  color: #9ca3af;
+}
+
+.bright-product-spec-value {
+  color: #374151;
+  font-weight: 600;
+}
+
+.bright-product-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.bright-product-cta {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 0;
+  background: linear-gradient(135deg, var(--cta-primary), var(--cta-primary-hover));
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.bright-product-cta:hover {
+  background: linear-gradient(135deg, var(--cta-primary-hover), var(--cta-primary));
+  transform: translateY(-1px);
+}
