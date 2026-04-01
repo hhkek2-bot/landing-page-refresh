@@ -159,59 +159,92 @@
   color: #fff;
 }
 
-/* ===== BILLING TOGGLE ===== */
-.pricing-billing-row {
+/* ===== PRICING CONTROLS ===== */
+.pricing-controls-row {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
+  gap: 32px;
+  margin-bottom: 10px;
 }
 
-.pricing-currency-toggle {
-  margin-left: 8px;
-}
-
-.pricing-currency-note {
-  text-align: center;
-  font-size: 0.78rem;
-  color: #888;
-  margin-bottom: 48px;
-}
-
-.pricing-toggle {
+.pricing-billing-toggle {
   display: inline-flex;
   border-radius: 999px;
   border: 1.5px solid #e5e5e5;
   background: #fafafa;
-  padding: 3px;
+  padding: 4px;
 }
 
-.pricing-toggle-btn {
-  padding: 8px 20px;
+.pricing-billing-btn {
+  padding: 10px 24px;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
   border: none;
   background: transparent;
-  color: #888;
+  color: #999;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.pricing-toggle-btn.is-active {
+.pricing-billing-btn.is-active {
   background: #000;
   color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.pricing-save-badge {
-  padding: 4px 10px;
+.pricing-billing-save {
+  display: inline-block;
+  padding: 2px 8px;
   border-radius: 999px;
-  background: #fef9c3;
-  font-size: 0.72rem;
+  background: #facc15;
+  color: #000;
+  font-size: 0.65rem;
   font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.pricing-billing-btn:not(.is-active) .pricing-billing-save {
+  background: #fef9c3;
   color: #92400e;
+}
+
+.pricing-currency-select-wrap {
+  position: relative;
+}
+
+.pricing-currency-select {
+  appearance: none;
+  padding: 8px 32px 8px 14px;
+  border-radius: 999px;
+  border: 1.5px solid #e5e5e5;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+.pricing-currency-select:hover {
+  border-color: #ccc;
+}
+
+.pricing-currency-select:focus {
+  outline: none;
+  border-color: #000;
+}
+
+@media (max-width: 640px) {
+  .pricing-controls-row {
+    flex-direction: column;
+    gap: 12px;
+  }
 }
 
 /* ===== SECTION ===== */
