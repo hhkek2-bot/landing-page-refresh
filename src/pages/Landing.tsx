@@ -21,8 +21,14 @@ import type { LucideIcon } from "lucide-react";
 import "./landing-bright.css";
 
 import boomLiftImg from "@/assets/boom-lift.jpg";
+import boomLift2Img from "@/assets/boom-lift-2.jpg";
+import boomLift3Img from "@/assets/boom-lift-3.jpg";
 import forkliftImg from "@/assets/forklift.jpg";
+import forklift2Img from "@/assets/forklift-2.jpg";
+import forklift3Img from "@/assets/forklift-3.jpg";
 import floorScrubberImg from "@/assets/floor-scrubber.jpg";
+import floorScrubber2Img from "@/assets/floor-scrubber-2.jpg";
+import floorScrubber3Img from "@/assets/floor-scrubber-3.jpg";
 
 type ProductCardData = {
   title: string;
@@ -36,7 +42,7 @@ type ProductCardData = {
 type ChatScenarioStep =
   | { type: "user"; text: string }
   | { type: "ai"; text: string }
-  | { type: "product-card"; data: ProductCardData };
+  | { type: "product-cards"; cards: ProductCardData[] };
 
 type ChatScenario = {
   id: string;
@@ -45,10 +51,9 @@ type ChatScenario = {
 
 type RenderedChatItem = {
   id: string;
-  type: "user" | "ai" | "typing" | "product-card";
+  type: "user" | "ai" | "typing" | "product-cards";
   text?: string;
-  data?: ProductCardData;
-  imageLoaded?: boolean;
+  cards?: ProductCardData[];
 };
 
 type Feature = { icon: LucideIcon; title: string; body: string; variant?: "default" | "workflow" };
@@ -125,21 +130,14 @@ const chatScenarios: ChatScenario[] = [
       { type: "user", text: "Need boom lift around 40m for site in Tuas, 2 weeks" },
       { type: "ai", text: "Got it — diesel or electric? Outdoor use?" },
       { type: "user", text: "Outdoor, diesel" },
-      { type: "ai", text: "Here's a suitable option:" },
+      { type: "ai", text: "Here are 3 suitable options:" },
       {
-        type: "product-card",
-        data: {
-          title: "42m Telescopic Boom Lift (Diesel)",
-          image: boomLiftImg,
-          specs: [
-            { label: "Working Height", value: "~42m" },
-            { label: "Type", value: "Telescopic" },
-            { label: "Power", value: "Diesel" },
-          ],
-          tag: "Available in Singapore",
-          tagColor: "green",
-          cta: "Generate Quote",
-        },
+        type: "product-cards",
+        cards: [
+          { title: "42m Telescopic Boom Lift", image: boomLiftImg, specs: [{ label: "Height", value: "~42m" }, { label: "Type", value: "Telescopic" }, { label: "Power", value: "Diesel" }], tag: "Available", tagColor: "green", cta: "Get Quote" },
+          { title: "34m Articulating Boom Lift", image: boomLift2Img, specs: [{ label: "Height", value: "~34m" }, { label: "Type", value: "Articulating" }, { label: "Power", value: "Diesel" }], tag: "Available", tagColor: "green", cta: "Get Quote" },
+          { title: "46m Telescopic Boom Lift", image: boomLift3Img, specs: [{ label: "Height", value: "~46m" }, { label: "Type", value: "Telescopic" }, { label: "Power", value: "Diesel" }], tag: "Available", tagColor: "green", cta: "Get Quote" },
+        ],
       },
       { type: "ai", text: "Shall I generate a quotation for 2 weeks?" },
     ],
@@ -150,21 +148,14 @@ const chatScenarios: ChatScenario[] = [
       { type: "user", text: "Need forklift for warehouse, 3 ton, indoor" },
       { type: "ai", text: "Electric or diesel? Any height requirement?" },
       { type: "user", text: "Electric, around 5m lift" },
-      { type: "ai", text: "Recommended:" },
+      { type: "ai", text: "Here are matching options:" },
       {
-        type: "product-card",
-        data: {
-          title: "3 Ton Electric Forklift",
-          image: forkliftImg,
-          specs: [
-            { label: "Capacity", value: "3 Ton" },
-            { label: "Lift Height", value: "~5m" },
-            { label: "Power", value: "Electric" },
-          ],
-          tag: "Ready Stock",
-          tagColor: "blue",
-          cta: "Check Availability",
-        },
+        type: "product-cards",
+        cards: [
+          { title: "3 Ton Electric Forklift", image: forkliftImg, specs: [{ label: "Capacity", value: "3 Ton" }, { label: "Lift", value: "~5m" }, { label: "Power", value: "Electric" }], tag: "Ready Stock", tagColor: "blue", cta: "Check Availability" },
+          { title: "2.5 Ton Electric Forklift", image: forklift2Img, specs: [{ label: "Capacity", value: "2.5 Ton" }, { label: "Lift", value: "~4.5m" }, { label: "Power", value: "Electric" }], tag: "Ready Stock", tagColor: "blue", cta: "Check Availability" },
+          { title: "5 Ton Counterbalance Forklift", image: forklift3Img, specs: [{ label: "Capacity", value: "5 Ton" }, { label: "Lift", value: "~6m" }, { label: "Power", value: "Electric" }], tag: "In Transit", tagColor: "amber", cta: "Reserve" },
+        ],
       },
       { type: "ai", text: "Want me to check availability this week?" },
     ],
@@ -175,27 +166,19 @@ const chatScenarios: ChatScenario[] = [
       { type: "user", text: "Looking for floor scrubber for factory, around 2000 sqm" },
       { type: "ai", text: "Walk-behind or ride-on preferred?" },
       { type: "user", text: "Ride-on" },
-      { type: "ai", text: "Recommended:" },
+      { type: "ai", text: "Here are our recommendations:" },
       {
-        type: "product-card",
-        data: {
-          title: "Ride-On Floor Scrubber",
-          image: floorScrubberImg,
-          specs: [
-            { label: "Type", value: "Ride-On" },
-            { label: "Coverage", value: "2000–3000 sqm/hr" },
-            { label: "Use", value: "Factory" },
-          ],
-          tag: "For Sale",
-          tagColor: "amber",
-          cta: "Buy Now",
-        },
+        type: "product-cards",
+        cards: [
+          { title: "Ride-On Floor Scrubber", image: floorScrubberImg, specs: [{ label: "Type", value: "Ride-On" }, { label: "Coverage", value: "2000–3000 sqm/hr" }, { label: "Use", value: "Factory" }], tag: "For Sale", tagColor: "amber", cta: "Buy Now" },
+          { title: "Compact Ride-On Scrubber", image: floorScrubber2Img, specs: [{ label: "Type", value: "Ride-On" }, { label: "Coverage", value: "1500–2500 sqm/hr" }, { label: "Use", value: "Factory" }], tag: "For Sale", tagColor: "amber", cta: "Buy Now" },
+          { title: "Heavy-Duty Floor Scrubber", image: floorScrubber3Img, specs: [{ label: "Type", value: "Ride-On" }, { label: "Coverage", value: "3000–4000 sqm/hr" }, { label: "Use", value: "Industrial" }], tag: "For Sale", tagColor: "amber", cta: "Buy Now" },
+        ],
       },
       { type: "ai", text: "I can share specs or arrange purchase." },
     ],
   },
 ];
-
 function ProductCard({ data }: { data: ProductCardData }) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const tagColors = {
@@ -242,6 +225,48 @@ function ProductCard({ data }: { data: ProductCardData }) {
         <button type="button" className="bright-product-cta">{data.cta}</button>
       </div>
     </motion.div>
+  );
+}
+
+function ProductCarousel({ cards }: { cards: ProductCardData[] }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const scrollTo = (idx: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.scrollWidth / cards.length;
+    el.scrollTo({ left: cardWidth * idx, behavior: "smooth" });
+    setActiveIdx(idx);
+  };
+
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.scrollWidth / cards.length;
+    const newIdx = Math.round(el.scrollLeft / cardWidth);
+    setActiveIdx(Math.min(newIdx, cards.length - 1));
+  };
+
+  return (
+    <div className="bright-product-carousel">
+      <div className="bright-product-carousel-track" ref={scrollRef} onScroll={handleScroll}>
+        {cards.map((card, i) => (
+          <ProductCard key={i} data={card} />
+        ))}
+      </div>
+      <div className="bright-product-carousel-dots">
+        {cards.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            className={`bright-carousel-dot ${i === activeIdx ? "active" : ""}`}
+            onClick={() => scrollTo(i)}
+            aria-label={`Go to product ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -613,9 +638,9 @@ export default function Landing() {
               });
             }, 600 + Math.random() * 300);
           }, 200);
-        } else if (step.type === "product-card") {
+        } else if (step.type === "product-cards") {
           queue(() => {
-            setChatItems((prev) => [...prev, { id: `card-${Date.now()}-${stepIndex}`, type: "product-card", data: step.data }]);
+            setChatItems((prev) => [...prev, { id: `cards-${Date.now()}-${stepIndex}`, type: "product-cards" as const, cards: step.cards }]);
             queue(runStep, 1200);
           }, 300);
         }
@@ -638,11 +663,11 @@ export default function Landing() {
         </div>
       </div>
     );
-    if (item.type === "product-card" && item.data) return (
+    if (item.type === "product-cards" && item.cards) return (
       <div className="bright-chat-row" key={item.id}>
         <div className="bright-chat-avatar bright-avatar-ai"><Bot size={14} /></div>
         <div className="bright-chat-msg bright-chat-msg-ai bright-card-msg">
-          <ProductCard data={item.data} />
+          <ProductCarousel cards={item.cards} />
         </div>
       </div>
     );

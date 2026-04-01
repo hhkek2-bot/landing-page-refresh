@@ -1805,8 +1805,9 @@
   border: 1px solid #e5e7eb;
   box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.12);
   overflow: hidden;
-  width: 100%;
-  max-width: 260px;
+  flex: 0 0 50%;
+  min-width: 0;
+  max-width: 50%;
 }
 
 .bright-product-img-wrap {
@@ -1895,4 +1896,54 @@
 .bright-product-cta:hover {
   background: linear-gradient(135deg, var(--cta-primary-hover), var(--cta-primary));
   transform: translateY(-1px);
+}
+
+/* ===== Product Carousel ===== */
+.bright-product-carousel {
+  width: 100%;
+}
+
+.bright-product-carousel-track {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+
+.bright-product-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.bright-product-carousel-track .bright-product-card {
+  scroll-snap-align: start;
+}
+
+.bright-product-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.bright-carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  border: none;
+  background: #d1d5db;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.bright-carousel-dot.active {
+  background: var(--cta-primary);
+  transform: scale(1.3);
+}
+
+.bright-carousel-dot:hover {
+  background: #9ca3af;
 }
