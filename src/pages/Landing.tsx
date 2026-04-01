@@ -596,9 +596,9 @@ export default function Landing() {
               });
             }, 600 + Math.random() * 300);
           }, 200);
-        } else if (step.type === "product-card") {
+        } else if (step.type === "product-cards") {
           queue(() => {
-            setChatItems((prev) => [...prev, { id: `card-${Date.now()}-${stepIndex}`, type: "product-card", data: step.data }]);
+            setChatItems((prev) => [...prev, { id: `cards-${Date.now()}-${stepIndex}`, type: "product-cards" as const, cards: step.cards }]);
             queue(runStep, 1200);
           }, 300);
         }
