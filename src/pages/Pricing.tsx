@@ -208,7 +208,7 @@ function AgentCard({ plan, billing }: { plan: typeof agentPlans[0]; billing: Bil
           <span className="pricing-included-value">{plan.conversations}</span>
         </div>
         <div className="pricing-included-item">
-          <span className="pricing-included-label">Storage</span>
+          <span className="pricing-included-label">Knowledge Source</span>
           <span className="pricing-included-value">{plan.storage}</span>
         </div>
         <div className="pricing-included-item">
@@ -254,7 +254,7 @@ function WebstoreCard({ plan, billing }: { plan: typeof bundlePlans[0]; billing:
           <span className="pricing-included-value">{plan.conversations}</span>
         </div>
         <div className="pricing-included-item">
-          <span className="pricing-included-label">Storage</span>
+          <span className="pricing-included-label">Knowledge Source</span>
           <span className="pricing-included-value">{plan.storage}</span>
         </div>
       </div>
