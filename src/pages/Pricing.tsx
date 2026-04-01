@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+
+type Currency = "SGD" | "USD";
+const SGD_TO_USD = 0.74;
 import { Link } from "react-router-dom";
 import { ArrowLeft, Bot, Check, Zap, ShoppingBag, Settings } from "lucide-react";
 import "./pricing.css";
@@ -181,25 +184,36 @@ const trustItems = [
 
 /* ═══════════════════════ HELPERS ═══════════════════════ */
 
-function fmtPrice(price: number, billing: BillingCycle) {
+function fmtPrice(price: number, billing: BillingCycle, currency: Currency = "SGD") {
   const val = billing === "annual" ? Math.round(price * (1 - annualDiscount)) : price;
+  if (currency === "USD") {
+    return `$${Math.round(val * SGD_TO_USD)}`;
+  }
+  return `S$${val}`;
+}
+
+function fmtAnnual(price: number, currency: Currency = "SGD") {
+  const val = Math.round(price * 12 * (1 - annualDiscount));
+  if (currency === "USD") {
+    return `$${Math.round(val * SGD_TO_USD)}`;
+  }
   return `S$${val}`;
 }
 
 /* ═══════════════════════ COMPONENTS ═══════════════════════ */
 
-function AgentCard({ plan, billing }: { plan: typeof agentPlans[0]; billing: BillingCycle }) {
+function AgentCard({ plan, billing, currency }: { plan: typeof agentPlans[0]; billing: BillingCycle; currency: Currency }) {
   return (
     <div className={`pricing-card ${plan.popular ? "pricing-card-featured" : ""}`}>
       {plan.popular && <div className="pricing-popular-badge">Most Popular</div>}
       <div className="pricing-plan-name">{plan.name}</div>
       <div className="pricing-target">{plan.target}</div>
       <div className="pricing-price-row">
-        <span className="pricing-price">{fmtPrice(plan.price, billing)}</span>
+        <span className="pricing-price">{fmtPrice(plan.price, billing, currency)}</span>
         <span className="pricing-price-period">/ month</span>
       </div>
       {billing === "annual" && (
-        <p className="pricing-annual-note">S${Math.round(plan.price * 12 * (1 - annualDiscount))} billed annually</p>
+        <p className="pricing-annual-note">{fmtAnnual(plan.price, currency)} billed annually</p>
       )}
       <div className="pricing-divider" />
       <div className="pricing-included-list">
@@ -230,18 +244,18 @@ function AgentCard({ plan, billing }: { plan: typeof agentPlans[0]; billing: Bil
   );
 }
 
-function WebstoreCard({ plan, billing }: { plan: typeof bundlePlans[0]; billing: BillingCycle }) {
+function WebstoreCard({ plan, billing, currency }: { plan: typeof bundlePlans[0]; billing: BillingCycle; currency: Currency }) {
   return (
     <div className={`pricing-card ${plan.popular ? "pricing-card-featured" : ""}`}>
       {plan.popular && <div className="pricing-popular-badge">Most Popular</div>}
       <div className="pricing-plan-name">{plan.name}</div>
       <div className="pricing-target">{plan.value}</div>
       <div className="pricing-price-row">
-        <span className="pricing-price">{fmtPrice(plan.price, billing)}</span>
+        <span className="pricing-price">{fmtPrice(plan.price, billing, currency)}</span>
         <span className="pricing-price-period">/ month</span>
       </div>
       {billing === "annual" && (
-        <p className="pricing-annual-note">S${Math.round(plan.price * 12 * (1 - annualDiscount))} billed annually</p>
+        <p className="pricing-annual-note">{fmtAnnual(plan.price, currency)} billed annually</p>
       )}
       <div className="pricing-divider" />
       <div className="pricing-included-list">
@@ -290,6 +304,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 export default function PricingPage() {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
   const [webstoreTab, setWebstoreTab] = useState<WebstoreTab>("bundle");
+  const [currency, setCurrency] = useState<Currency>("SGD");
 
   const currentWebstorePlans = webstoreTab === "bundle" ? bundlePlans : webstoreTab === "sales" ? salesPlans : rentalPlans;
 
@@ -306,14 +321,21 @@ export default function PricingPage() {
           <p className="pricing-hero-sub">Your AI sales agent qualifies enquiries, matches the right products, and generates quotations automatically — turning every conversation into a real sales opportunity.</p>
         </header>
 
-        {/* Billing Toggle */}
+        {/* Billing & Currency Toggles */}
         <div className="pricing-billing-row">
           <div className="pricing-toggle">
             <button className={`pricing-toggle-btn ${billing === "monthly" ? "is-active" : ""}`} onClick={() => setBilling("monthly")}>Monthly</button>
             <button className={`pricing-toggle-btn ${billing === "annual" ? "is-active" : ""}`} onClick={() => setBilling("annual")}>Annual</button>
           </div>
           {billing === "annual" && <span className="pricing-save-badge">Save 20%</span>}
+          <div className="pricing-toggle pricing-currency-toggle">
+            <button className={`pricing-toggle-btn ${currency === "SGD" ? "is-active" : ""}`} onClick={() => setCurrency("SGD")}>SGD</button>
+            <button className={`pricing-toggle-btn ${currency === "USD" ? "is-active" : ""}`} onClick={() => setCurrency("USD")}>USD</button>
+          </div>
         </div>
+        <p className="pricing-currency-note">
+          {currency === "SGD" ? "Billed in SGD." : "Prices shown in USD for reference. Billing is in SGD."}
+        </p>
 
         {/* ═══ SECTION 1: AI Agent Only ═══ */}
         <section className="pricing-section">
@@ -324,7 +346,7 @@ export default function PricingPage() {
           </div>
           <div className="pricing-grid-4">
             {agentPlans.map((plan) => (
-              <AgentCard key={plan.name} plan={plan} billing={billing} />
+              <AgentCard key={plan.name} plan={plan} billing={billing} currency={currency} />
             ))}
           </div>
         </section>
@@ -366,7 +388,7 @@ export default function PricingPage() {
 
           <div className="pricing-grid-3">
             {currentWebstorePlans.map((plan) => (
-              <WebstoreCard key={plan.name} plan={plan} billing={billing} />
+              <WebstoreCard key={plan.name} plan={plan} billing={billing} currency={currency} />
             ))}
           </div>
         </section>
