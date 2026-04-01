@@ -624,6 +624,7 @@ export default function Landing() {
             <p className="bright-subtitle">Deploy a digital sales expert that answers technical questions, recommends suitable machinery, and converts inquiries into qualified leads instantly.</p>
             <div className="bright-hero-actions">
               <Link to="/pricing" className="bright-btn bright-btn-primary">Build Your AI Agent <ArrowRight size={18} /></Link>
+              <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="bright-btn bright-btn-secondary">Book Demo</a>
             </div>
           </div>
           <div className="bright-hero-mockup-wrap">
