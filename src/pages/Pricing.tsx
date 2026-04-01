@@ -304,6 +304,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 export default function PricingPage() {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
   const [webstoreTab, setWebstoreTab] = useState<WebstoreTab>("bundle");
+  const [currency, setCurrency] = useState<Currency>("SGD");
 
   const currentWebstorePlans = webstoreTab === "bundle" ? bundlePlans : webstoreTab === "sales" ? salesPlans : rentalPlans;
 
@@ -320,14 +321,21 @@ export default function PricingPage() {
           <p className="pricing-hero-sub">Your AI sales agent qualifies enquiries, matches the right products, and generates quotations automatically — turning every conversation into a real sales opportunity.</p>
         </header>
 
-        {/* Billing Toggle */}
+        {/* Billing & Currency Toggles */}
         <div className="pricing-billing-row">
           <div className="pricing-toggle">
             <button className={`pricing-toggle-btn ${billing === "monthly" ? "is-active" : ""}`} onClick={() => setBilling("monthly")}>Monthly</button>
             <button className={`pricing-toggle-btn ${billing === "annual" ? "is-active" : ""}`} onClick={() => setBilling("annual")}>Annual</button>
           </div>
           {billing === "annual" && <span className="pricing-save-badge">Save 20%</span>}
+          <div className="pricing-toggle pricing-currency-toggle">
+            <button className={`pricing-toggle-btn ${currency === "SGD" ? "is-active" : ""}`} onClick={() => setCurrency("SGD")}>SGD</button>
+            <button className={`pricing-toggle-btn ${currency === "USD" ? "is-active" : ""}`} onClick={() => setCurrency("USD")}>USD</button>
+          </div>
         </div>
+        <p className="pricing-currency-note">
+          {currency === "SGD" ? "Billed in SGD." : "Prices shown in USD for reference. Billing is in SGD."}
+        </p>
 
         {/* ═══ SECTION 1: AI Agent Only ═══ */}
         <section className="pricing-section">
