@@ -154,9 +154,9 @@ const chatScenarios: ChatScenario[] = [
       {
         type: "product-cards",
         cards: [
-          { title: "3 Ton Electric Forklift", image: forkliftImg, specs: [{ label: "Capacity", value: "3 Ton" }, { label: "Lift", value: "~5m" }, { label: "Power", value: "Electric" }], tag: "Ready Stock", tagColor: "blue", cta: "Check Availability" },
-          { title: "2.5 Ton Electric Forklift", image: forklift2Img, specs: [{ label: "Capacity", value: "2.5 Ton" }, { label: "Lift", value: "~4.5m" }, { label: "Power", value: "Electric" }], tag: "Ready Stock", tagColor: "blue", cta: "Check Availability" },
-          { title: "5 Ton Counterbalance Forklift", image: forklift3Img, specs: [{ label: "Capacity", value: "5 Ton" }, { label: "Lift", value: "~6m" }, { label: "Power", value: "Electric" }], tag: "In Transit", tagColor: "amber", cta: "Reserve" },
+          { title: "2020 Toyota 8FBN30 Electric Forklift", image: forkliftImg, specs: [], tag: "Ready Stock", tagColor: "blue", cta: "Check Availability", price: "$18,500" },
+          { title: "2021 Hyster E2.5XN Electric Forklift", image: forklift2Img, specs: [], tag: "Ready Stock", tagColor: "blue", cta: "Check Availability", price: "$15,200" },
+          { title: "2022 Linde E50 Counterbalance Forklift", image: forklift3Img, specs: [], tag: "In Transit", tagColor: "amber", cta: "Reserve", price: "$32,800" },
         ],
       },
       { type: "ai", text: "Want me to check availability this week?" },
