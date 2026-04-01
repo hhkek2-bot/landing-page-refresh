@@ -1809,11 +1809,6 @@
   min-width: 0;
   max-width: 50%;
 }
-  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.12);
-  overflow: hidden;
-  width: 100%;
-  max-width: 260px;
-}
 
 .bright-product-img-wrap {
   position: relative;
