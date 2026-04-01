@@ -244,18 +244,18 @@ function AgentCard({ plan, billing, currency }: { plan: typeof agentPlans[0]; bi
   );
 }
 
-function WebstoreCard({ plan, billing }: { plan: typeof bundlePlans[0]; billing: BillingCycle }) {
+function WebstoreCard({ plan, billing, currency }: { plan: typeof bundlePlans[0]; billing: BillingCycle; currency: Currency }) {
   return (
     <div className={`pricing-card ${plan.popular ? "pricing-card-featured" : ""}`}>
       {plan.popular && <div className="pricing-popular-badge">Most Popular</div>}
       <div className="pricing-plan-name">{plan.name}</div>
       <div className="pricing-target">{plan.value}</div>
       <div className="pricing-price-row">
-        <span className="pricing-price">{fmtPrice(plan.price, billing)}</span>
+        <span className="pricing-price">{fmtPrice(plan.price, billing, currency)}</span>
         <span className="pricing-price-period">/ month</span>
       </div>
       {billing === "annual" && (
-        <p className="pricing-annual-note">S${Math.round(plan.price * 12 * (1 - annualDiscount))} billed annually</p>
+        <p className="pricing-annual-note">{fmtAnnual(plan.price, currency)} billed annually</p>
       )}
       <div className="pricing-divider" />
       <div className="pricing-included-list">
