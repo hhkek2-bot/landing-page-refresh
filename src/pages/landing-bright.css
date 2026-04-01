@@ -494,8 +494,8 @@
 .bright-hero-mockup-wrap {
   position: relative;
   width: 100%;
-  max-width: 900px;
-  margin: 52px auto 0;
+  max-width: 380px;
+  margin: 0 auto;
   padding-bottom: 60px;
   animation: mockupFloatUp 0.9s 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
