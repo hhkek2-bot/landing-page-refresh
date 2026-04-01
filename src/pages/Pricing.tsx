@@ -346,7 +346,7 @@ export default function PricingPage() {
           </div>
           <div className="pricing-grid-4">
             {agentPlans.map((plan) => (
-              <AgentCard key={plan.name} plan={plan} billing={billing} />
+              <AgentCard key={plan.name} plan={plan} billing={billing} currency={currency} />
             ))}
           </div>
         </section>
