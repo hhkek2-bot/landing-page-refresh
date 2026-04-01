@@ -729,6 +729,10 @@ export default function Landing() {
               <div className="bright-chat-body" ref={chatBodyRef}>{chatItems.map(renderChatItem)}</div>
             </div>
           </div>
+          <div className="bright-hero-actions-block">
+            <Link to="/pricing" className="bright-btn bright-btn-primary bright-btn-glow">Build Your AI Agent <ArrowRight size={18} /></Link>
+            <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="bright-btn bright-btn-secondary">Book Demo</a>
+          </div>
         </div>
       </section>
 
