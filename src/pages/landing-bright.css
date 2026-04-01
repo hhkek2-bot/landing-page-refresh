@@ -1349,6 +1349,11 @@
   pointer-events: none;
 }
 
+.bright-solution-content { position: relative; min-height: 220px; display: flex; align-items: flex-end; flex: 1; }
+.bright-solution-copy { position: relative; z-index: 2; max-width: 460px; }
+.bright-solution-copy h3 { margin: 0 0 14px; font-size: clamp(1.75rem, 2.8vw, 2rem); line-height: 1.15; letter-spacing: -0.03em; font-weight: 700; }
+.bright-solution-copy p { margin: 0; color: #475569; font-size: 1.05rem; line-height: 1.65; }
+
 .bright-connector-beam {
   position: absolute;
   z-index: 0;
