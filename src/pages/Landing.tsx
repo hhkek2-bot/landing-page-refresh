@@ -228,6 +228,48 @@ function ProductCard({ data }: { data: ProductCardData }) {
   );
 }
 
+function ProductCarousel({ cards }: { cards: ProductCardData[] }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const scrollTo = (idx: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.scrollWidth / cards.length;
+    el.scrollTo({ left: cardWidth * idx, behavior: "smooth" });
+    setActiveIdx(idx);
+  };
+
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.scrollWidth / cards.length;
+    const newIdx = Math.round(el.scrollLeft / cardWidth);
+    setActiveIdx(Math.min(newIdx, cards.length - 1));
+  };
+
+  return (
+    <div className="bright-product-carousel">
+      <div className="bright-product-carousel-track" ref={scrollRef} onScroll={handleScroll}>
+        {cards.map((card, i) => (
+          <ProductCard key={i} data={card} />
+        ))}
+      </div>
+      <div className="bright-product-carousel-dots">
+        {cards.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            className={`bright-carousel-dot ${i === activeIdx ? "active" : ""}`}
+            onClick={() => scrollTo(i)}
+            aria-label={`Go to product ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const featureCards: Feature[] = [
   { icon: Database, title: "Industry Knowledge", body: "Built on marketplace intelligence from thousands of equipment listings, the AI understands machine specifications, model naming conventions, payload limits, and industry terminology from day one." },
   { icon: UploadCloud, title: "Knowledge Training", body: "Upload catalogues, manuals, PDFs, or sync Google Sheets to train the AI with your inventory, pricing logic, policies, and operational workflows." },
