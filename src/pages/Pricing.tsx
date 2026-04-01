@@ -184,8 +184,19 @@ const trustItems = [
 
 /* ═══════════════════════ HELPERS ═══════════════════════ */
 
-function fmtPrice(price: number, billing: BillingCycle) {
+function fmtPrice(price: number, billing: BillingCycle, currency: Currency = "SGD") {
   const val = billing === "annual" ? Math.round(price * (1 - annualDiscount)) : price;
+  if (currency === "USD") {
+    return `$${Math.round(val * SGD_TO_USD)}`;
+  }
+  return `S$${val}`;
+}
+
+function fmtAnnual(price: number, currency: Currency = "SGD") {
+  const val = Math.round(price * 12 * (1 - annualDiscount));
+  if (currency === "USD") {
+    return `$${Math.round(val * SGD_TO_USD)}`;
+  }
   return `S$${val}`;
 }
 
