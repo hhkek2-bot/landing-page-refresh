@@ -145,7 +145,6 @@
 
 .bright-landing .bright-status-dot,
 .bright-landing .bright-dot,
-.bright-landing .bright-solution-glow,
 .bright-landing .bright-connector-pulse {
   background: linear-gradient(135deg, var(--accent-yellow), var(--accent-brand));
 }
