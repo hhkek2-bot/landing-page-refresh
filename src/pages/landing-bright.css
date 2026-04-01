@@ -697,7 +697,8 @@
 .bright-chat-body {
   position: relative;
   z-index: 1;
-  padding: 24px;
+  padding: 20px 16px;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
   gap: 20px;
