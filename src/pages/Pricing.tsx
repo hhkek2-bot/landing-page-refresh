@@ -441,7 +441,7 @@ export default function PricingPage() {
           </div>
           <div className="pricing-grid-4">
             {agentPlans.map((plan) => (
-              <AgentCard key={plan.name} plan={plan} billing={billing} currency={currency} />
+              <AgentCard key={plan.name} plan={plan} billing={billing} currency={currency} onCompare={scrollToComparison} />
             ))}
           </div>
         </section>
@@ -483,7 +483,7 @@ export default function PricingPage() {
 
           <div className="pricing-grid-3">
             {currentWebstorePlans.map((plan) => (
-              <WebstoreCard key={plan.name} plan={plan} billing={billing} currency={currency} />
+              <WebstoreCard key={plan.name} plan={plan} billing={billing} currency={currency} onCompare={scrollToComparison} />
             ))}
           </div>
         </section>
