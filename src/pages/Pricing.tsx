@@ -393,6 +393,11 @@ export default function PricingPage() {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
   const [webstoreTab, setWebstoreTab] = useState<WebstoreTab>("bundle");
   const [currency, setCurrency] = useState<Currency>("SGD");
+  const comparisonRef = useRef<HTMLDivElement>(null);
+
+  const scrollToComparison = () => {
+    comparisonRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const currentWebstorePlans = webstoreTab === "bundle" ? bundlePlans : webstoreTab === "sales" ? salesPlans : rentalPlans;
 
