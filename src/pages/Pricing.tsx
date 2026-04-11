@@ -222,6 +222,8 @@ const webstoreComparisonFeatures: ComparisonFeature[] = [
   { label: "Reservation Order Panel", values: ["no", "yes", "yes"] },
   { label: "Google Sheet Live Sync", values: ["no", "yes", "yes"] },
 ];
+
+const trustItems = [
   "Multilingual AI conversations",
   "Private knowledge base per tenant",
   "Buyer intent detection & analytics",
