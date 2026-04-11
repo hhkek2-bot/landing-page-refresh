@@ -250,7 +250,7 @@ function fmtAnnual(price: number, currency: Currency = "SGD") {
 
 /* ═══════════════════════ COMPONENTS ═══════════════════════ */
 
-function AgentCard({ plan, billing, currency }: { plan: typeof agentPlans[0]; billing: BillingCycle; currency: Currency }) {
+function AgentCard({ plan, billing, currency, onCompare }: { plan: typeof agentPlans[0]; billing: BillingCycle; currency: Currency; onCompare: () => void }) {
   return (
     <div className={`pricing-card ${plan.popular ? "pricing-card-featured" : ""}`}>
       {plan.popular && <div className="pricing-popular-badge">Most Popular</div>}
@@ -288,6 +288,7 @@ function AgentCard({ plan, billing, currency }: { plan: typeof agentPlans[0]; bi
         ))}
       </div>
       <button className={`pricing-cta ${plan.popular ? "pricing-cta-featured" : ""}`}>{plan.cta}</button>
+      <button className="pricing-compare-btn" onClick={onCompare}>Compare Features</button>
     </div>
   );
 }
