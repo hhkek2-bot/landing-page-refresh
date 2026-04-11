@@ -293,7 +293,7 @@ function AgentCard({ plan, billing, currency, onCompare }: { plan: typeof agentP
   );
 }
 
-function WebstoreCard({ plan, billing, currency }: { plan: typeof bundlePlans[0]; billing: BillingCycle; currency: Currency }) {
+function WebstoreCard({ plan, billing, currency, onCompare }: { plan: typeof bundlePlans[0]; billing: BillingCycle; currency: Currency; onCompare: () => void }) {
   return (
     <div className={`pricing-card ${plan.popular ? "pricing-card-featured" : ""}`}>
       {plan.popular && <div className="pricing-popular-badge">Most Popular</div>}
@@ -331,6 +331,45 @@ function WebstoreCard({ plan, billing, currency }: { plan: typeof bundlePlans[0]
         ))}
       </div>
       <button className={`pricing-cta ${plan.popular ? "pricing-cta-featured" : ""}`}>{plan.cta}</button>
+      <button className="pricing-compare-btn" onClick={onCompare}>Compare Features</button>
+    </div>
+  );
+}
+
+function ComparisonTable({ title, planNames, features }: { title: string; planNames: string[]; features: ComparisonFeature[] }) {
+  return (
+    <div className="pricing-comparison-table-wrap">
+      <h3 className="pricing-comparison-title">{title}</h3>
+      <div className="pricing-comparison-scroll">
+        <table className="pricing-comparison-table">
+          <thead>
+            <tr>
+              <th className="pricing-comparison-feature-col">Feature</th>
+              {planNames.map((name) => (
+                <th key={name}>{name}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {features.map((feature) => (
+              <tr key={feature.label}>
+                <td className="pricing-comparison-feature-label">{feature.label}</td>
+                {feature.values.map((val, i) => (
+                  <td key={i} className="pricing-comparison-value">
+                    {val === "yes" ? (
+                      <span className="pricing-comparison-yes"><Check size={16} strokeWidth={3} /></span>
+                    ) : val === "no" ? (
+                      <span className="pricing-comparison-no"><X size={16} strokeWidth={3} /></span>
+                    ) : (
+                      <span className="pricing-comparison-text">{val}</span>
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
