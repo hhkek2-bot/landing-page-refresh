@@ -175,7 +175,53 @@ const faqs = [
   { q: "Can I add more AI agents later?", a: "Yes. Each additional agent costs $49/month and gets its own knowledge base — great for different product lines or brands." },
 ];
 
-const trustItems = [
+/* ═══════════════════════ FEATURE COMPARISON DATA ═══════════════════════ */
+
+type FeatureValue = "yes" | "no" | string;
+
+interface ComparisonFeature {
+  label: string;
+  values: FeatureValue[];
+}
+
+const agentComparisonFeatures: ComparisonFeature[] = [
+  { label: "Conversations", values: ["50", "150", "450", "1,000"] },
+  { label: "Knowledge Storage", values: ["50 MB", "100 MB", "300 MB", "1 GB"] },
+  { label: "Playground Sessions", values: ["20", "75", "200", "500"] },
+  { label: "Knowledge Base", values: ["yes", "yes", "yes", "yes"] },
+  { label: "Instruction/Scenario", values: ["yes", "yes", "yes", "yes"] },
+  { label: "Playground", values: ["yes", "yes", "yes", "yes"] },
+  { label: "Conversation Monitoring", values: ["yes", "yes", "yes", "yes"] },
+  { label: "Notification", values: ["no", "yes", "yes", "yes"] },
+  { label: "Inventory Sync", values: ["no", "yes", "yes", "yes"] },
+  { label: "Workflow Control", values: ["no", "yes", "yes", "yes"] },
+  { label: "Lead Intelligence", values: ["no", "yes", "yes", "yes"] },
+  { label: "Multi Agent Support", values: ["no", "no", "yes", "yes"] },
+  { label: "AI Learning", values: ["no", "no", "yes", "yes"] },
+  { label: "Behaviour Insight", values: ["no", "no", "yes", "yes"] },
+  { label: "Data Sync", values: ["no", "no", "yes", "yes"] },
+  { label: "Reservation Order Panel", values: ["no", "no", "yes", "yes"] },
+  { label: "Google Sheet Live Sync", values: ["no", "no", "yes", "yes"] },
+];
+
+const webstoreComparisonFeatures: ComparisonFeature[] = [
+  { label: "Storage", values: ["100 MB", "300 MB", "1 GB"] },
+  { label: "Total Listings (Bundle)", values: ["100", "300", "600"] },
+  { label: "Knowledge Base", values: ["yes", "yes", "yes"] },
+  { label: "Instruction/Scenario", values: ["yes", "yes", "yes"] },
+  { label: "Playground", values: ["yes", "yes", "yes"] },
+  { label: "Conversation Monitoring", values: ["yes", "yes", "yes"] },
+  { label: "Notification", values: ["yes", "yes", "yes"] },
+  { label: "Inventory Sync", values: ["yes", "yes", "yes"] },
+  { label: "Workflow Control", values: ["yes", "yes", "yes"] },
+  { label: "Lead Intelligence", values: ["yes", "yes", "yes"] },
+  { label: "Multi Agent Support", values: ["no", "yes", "yes"] },
+  { label: "AI Learning", values: ["no", "yes", "yes"] },
+  { label: "Behaviour Insight", values: ["no", "yes", "yes"] },
+  { label: "Data Sync", values: ["no", "yes", "yes"] },
+  { label: "Reservation Order Panel", values: ["no", "yes", "yes"] },
+  { label: "Google Sheet Live Sync", values: ["no", "yes", "yes"] },
+];
   "Multilingual AI conversations",
   "Private knowledge base per tenant",
   "Buyer intent detection & analytics",
