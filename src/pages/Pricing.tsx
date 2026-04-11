@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 type Currency = "SGD" | "USD";
 const SGD_TO_USD = 0.74;
 import { Link } from "react-router-dom";
-import { ArrowLeft, Bot, Check, Zap, ShoppingBag, Settings } from "lucide-react";
+import { ArrowLeft, Bot, Check, X, Zap, ShoppingBag, Settings } from "lucide-react";
 import "./pricing.css";
 
 type BillingCycle = "monthly" | "annual";
@@ -175,6 +175,54 @@ const faqs = [
   { q: "Can I add more AI agents later?", a: "Yes. Each additional agent costs $49/month and gets its own knowledge base — great for different product lines or brands." },
 ];
 
+/* ═══════════════════════ FEATURE COMPARISON DATA ═══════════════════════ */
+
+type FeatureValue = "yes" | "no" | string;
+
+interface ComparisonFeature {
+  label: string;
+  values: FeatureValue[];
+}
+
+const agentComparisonFeatures: ComparisonFeature[] = [
+  { label: "Conversations", values: ["50", "150", "450", "1,000"] },
+  { label: "Knowledge Storage", values: ["50 MB", "100 MB", "300 MB", "1 GB"] },
+  { label: "Playground Sessions", values: ["20", "75", "200", "500"] },
+  { label: "Knowledge Base", values: ["yes", "yes", "yes", "yes"] },
+  { label: "Instruction/Scenario", values: ["yes", "yes", "yes", "yes"] },
+  { label: "Playground", values: ["yes", "yes", "yes", "yes"] },
+  { label: "Conversation Monitoring", values: ["yes", "yes", "yes", "yes"] },
+  { label: "Notification", values: ["no", "yes", "yes", "yes"] },
+  { label: "Inventory Sync", values: ["no", "yes", "yes", "yes"] },
+  { label: "Workflow Control", values: ["no", "yes", "yes", "yes"] },
+  { label: "Lead Intelligence", values: ["no", "yes", "yes", "yes"] },
+  { label: "Multi Agent Support", values: ["no", "no", "yes", "yes"] },
+  { label: "AI Learning", values: ["no", "no", "yes", "yes"] },
+  { label: "Behaviour Insight", values: ["no", "no", "yes", "yes"] },
+  { label: "Data Sync", values: ["no", "no", "yes", "yes"] },
+  { label: "Reservation Order Panel", values: ["no", "no", "yes", "yes"] },
+  { label: "Google Sheet Live Sync", values: ["no", "no", "yes", "yes"] },
+];
+
+const webstoreComparisonFeatures: ComparisonFeature[] = [
+  { label: "Storage", values: ["100 MB", "300 MB", "1 GB"] },
+  { label: "Total Listings (Bundle)", values: ["100", "300", "600"] },
+  { label: "Knowledge Base", values: ["yes", "yes", "yes"] },
+  { label: "Instruction/Scenario", values: ["yes", "yes", "yes"] },
+  { label: "Playground", values: ["yes", "yes", "yes"] },
+  { label: "Conversation Monitoring", values: ["yes", "yes", "yes"] },
+  { label: "Notification", values: ["yes", "yes", "yes"] },
+  { label: "Inventory Sync", values: ["yes", "yes", "yes"] },
+  { label: "Workflow Control", values: ["yes", "yes", "yes"] },
+  { label: "Lead Intelligence", values: ["yes", "yes", "yes"] },
+  { label: "Multi Agent Support", values: ["no", "yes", "yes"] },
+  { label: "AI Learning", values: ["no", "yes", "yes"] },
+  { label: "Behaviour Insight", values: ["no", "yes", "yes"] },
+  { label: "Data Sync", values: ["no", "yes", "yes"] },
+  { label: "Reservation Order Panel", values: ["no", "yes", "yes"] },
+  { label: "Google Sheet Live Sync", values: ["no", "yes", "yes"] },
+];
+
 const trustItems = [
   "Multilingual AI conversations",
   "Private knowledge base per tenant",
@@ -202,7 +250,7 @@ function fmtAnnual(price: number, currency: Currency = "SGD") {
 
 /* ═══════════════════════ COMPONENTS ═══════════════════════ */
 
-function AgentCard({ plan, billing, currency }: { plan: typeof agentPlans[0]; billing: BillingCycle; currency: Currency }) {
+function AgentCard({ plan, billing, currency, onCompare }: { plan: typeof agentPlans[0]; billing: BillingCycle; currency: Currency; onCompare: () => void }) {
   return (
     <div className={`pricing-card ${plan.popular ? "pricing-card-featured" : ""}`}>
       {plan.popular && <div className="pricing-popular-badge">Most Popular</div>}
@@ -240,11 +288,12 @@ function AgentCard({ plan, billing, currency }: { plan: typeof agentPlans[0]; bi
         ))}
       </div>
       <button className={`pricing-cta ${plan.popular ? "pricing-cta-featured" : ""}`}>{plan.cta}</button>
+      <button className="pricing-compare-btn" onClick={onCompare}>Compare Features</button>
     </div>
   );
 }
 
-function WebstoreCard({ plan, billing, currency }: { plan: typeof bundlePlans[0]; billing: BillingCycle; currency: Currency }) {
+function WebstoreCard({ plan, billing, currency, onCompare }: { plan: typeof bundlePlans[0]; billing: BillingCycle; currency: Currency; onCompare: () => void }) {
   return (
     <div className={`pricing-card ${plan.popular ? "pricing-card-featured" : ""}`}>
       {plan.popular && <div className="pricing-popular-badge">Most Popular</div>}
@@ -282,6 +331,45 @@ function WebstoreCard({ plan, billing, currency }: { plan: typeof bundlePlans[0]
         ))}
       </div>
       <button className={`pricing-cta ${plan.popular ? "pricing-cta-featured" : ""}`}>{plan.cta}</button>
+      <button className="pricing-compare-btn" onClick={onCompare}>Compare Features</button>
+    </div>
+  );
+}
+
+function ComparisonTable({ title, planNames, features }: { title: string; planNames: string[]; features: ComparisonFeature[] }) {
+  return (
+    <div className="pricing-comparison-table-wrap">
+      <h3 className="pricing-comparison-title">{title}</h3>
+      <div className="pricing-comparison-scroll">
+        <table className="pricing-comparison-table">
+          <thead>
+            <tr>
+              <th className="pricing-comparison-feature-col">Feature</th>
+              {planNames.map((name) => (
+                <th key={name}>{name}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {features.map((feature) => (
+              <tr key={feature.label}>
+                <td className="pricing-comparison-feature-label">{feature.label}</td>
+                {feature.values.map((val, i) => (
+                  <td key={i} className="pricing-comparison-value">
+                    {val === "yes" ? (
+                      <span className="pricing-comparison-yes"><Check size={16} strokeWidth={3} /></span>
+                    ) : val === "no" ? (
+                      <span className="pricing-comparison-no"><X size={16} strokeWidth={3} /></span>
+                    ) : (
+                      <span className="pricing-comparison-text">{val}</span>
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -305,6 +393,11 @@ export default function PricingPage() {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
   const [webstoreTab, setWebstoreTab] = useState<WebstoreTab>("bundle");
   const [currency, setCurrency] = useState<Currency>("SGD");
+  const comparisonRef = useRef<HTMLDivElement>(null);
+
+  const scrollToComparison = () => {
+    comparisonRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const currentWebstorePlans = webstoreTab === "bundle" ? bundlePlans : webstoreTab === "sales" ? salesPlans : rentalPlans;
 
@@ -348,7 +441,7 @@ export default function PricingPage() {
           </div>
           <div className="pricing-grid-4">
             {agentPlans.map((plan) => (
-              <AgentCard key={plan.name} plan={plan} billing={billing} currency={currency} />
+              <AgentCard key={plan.name} plan={plan} billing={billing} currency={currency} onCompare={scrollToComparison} />
             ))}
           </div>
         </section>
@@ -390,7 +483,7 @@ export default function PricingPage() {
 
           <div className="pricing-grid-3">
             {currentWebstorePlans.map((plan) => (
-              <WebstoreCard key={plan.name} plan={plan} billing={billing} currency={currency} />
+              <WebstoreCard key={plan.name} plan={plan} billing={billing} currency={currency} onCompare={scrollToComparison} />
             ))}
           </div>
         </section>
@@ -435,7 +528,26 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* ═══ FAQ ═══ */}
+        {/* ═══ Feature Comparison ═══ */}
+        <section className="pricing-section" ref={comparisonRef}>
+          <div className="pricing-section-header">
+            <span className="pricing-section-label">Feature Comparison</span>
+            <h2>Compare all features across plans</h2>
+            <p>See exactly what's included in each plan at a glance.</p>
+          </div>
+          <ComparisonTable
+            title="AI Agent Features Comparison"
+            planNames={agentPlans.map((p) => p.name)}
+            features={agentComparisonFeatures}
+          />
+          <div style={{ marginTop: 48 }} />
+          <ComparisonTable
+            title="Webstore + AI Agent Features Comparison"
+            planNames={["Basic", "Premium", "Pro"]}
+            features={webstoreComparisonFeatures}
+          />
+        </section>
+
         <section className="pricing-section">
           <div className="pricing-section-header">
             <span className="pricing-section-label">FAQ</span>

@@ -789,3 +789,116 @@
   font-weight: 700;
   font-size: 0.9rem;
 }
+
+/* ===== COMPARE BUTTON ===== */
+.pricing-compare-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.pricing-compare-btn:hover {
+  color: #000;
+}
+
+/* ===== COMPARISON TABLE ===== */
+.pricing-comparison-table-wrap {
+  border: 1.5px solid #e8e8e8;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.pricing-comparison-title {
+  padding: 20px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #000;
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.pricing-comparison-scroll {
+  overflow-x: auto;
+}
+
+.pricing-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pricing-comparison-table th {
+  padding: 14px 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #666;
+  text-align: center;
+  border-bottom: 1.5px solid #f0f0f0;
+  background: #fafafa;
+}
+
+.pricing-comparison-feature-col {
+  text-align: left !important;
+  min-width: 180px;
+}
+
+.pricing-comparison-table td {
+  padding: 12px 20px;
+  font-size: 0.85rem;
+  text-align: center;
+  border-bottom: 1px solid #f5f5f5;
+  color: #333;
+}
+
+.pricing-comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pricing-comparison-table tr:hover {
+  background: #fafafa;
+}
+
+.pricing-comparison-feature-label {
+  text-align: left !important;
+  font-weight: 600;
+  color: #333;
+}
+
+.pricing-comparison-yes {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #fef9c3;
+  color: #000;
+}
+
+.pricing-comparison-no {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.pricing-comparison-text {
+  font-weight: 700;
+  color: #000;
+}
