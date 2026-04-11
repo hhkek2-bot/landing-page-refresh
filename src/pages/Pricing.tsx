@@ -528,7 +528,26 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* ═══ FAQ ═══ */}
+        {/* ═══ Feature Comparison ═══ */}
+        <section className="pricing-section" ref={comparisonRef}>
+          <div className="pricing-section-header">
+            <span className="pricing-section-label">Feature Comparison</span>
+            <h2>Compare all features across plans</h2>
+            <p>See exactly what's included in each plan at a glance.</p>
+          </div>
+          <ComparisonTable
+            title="AI Agent Features Comparison"
+            planNames={agentPlans.map((p) => p.name)}
+            features={agentComparisonFeatures}
+          />
+          <div style={{ marginTop: 48 }} />
+          <ComparisonTable
+            title="Webstore + AI Agent Features Comparison"
+            planNames={["Basic", "Premium", "Pro"]}
+            features={webstoreComparisonFeatures}
+          />
+        </section>
+
         <section className="pricing-section">
           <div className="pricing-section-header">
             <span className="pricing-section-label">FAQ</span>
