@@ -384,22 +384,48 @@
 }
 
 /* ---- Multilingual preview ---- */
-.dt-preview-multi { position: relative; height: 100%; }
-.dt-multi-center {
-  position: absolute; left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);
-  border: 1px solid #ddd6fe; border-radius: 14px;
-  padding: 18px 22px; text-align: center;
-  box-shadow: 0 18px 40px -14px rgba(124, 58, 237, 0.35);
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  z-index: 2;
+.dt-preview-multi { position: relative; height: 100%; overflow: hidden; }
+.dt-globe-wrap {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 0;
+  pointer-events: none;
 }
-.dt-multi-center > svg { color: #7c3aed; }
-.dt-multi-center > p { font-size: 13px; font-weight: 600; margin: 0; color: #0b1730; }
-.dt-multi-247 { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; color: #16a34a; background: #ecfdf5; border: 1px solid #bbf7d0; padding: 2px 8px; border-radius: 999px; }
+.dt-globe {
+  position: relative;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(245,243,255,0.6) 55%, rgba(221,214,254,0.25) 100%),
+    radial-gradient(circle at 70% 70%, rgba(236,72,153,0.12), transparent 60%);
+  box-shadow:
+    inset -18px -18px 40px rgba(124,58,237,0.18),
+    inset 14px 14px 30px rgba(255,255,255,0.6),
+    0 20px 50px -20px rgba(124,58,237,0.4);
+  animation: dt-globe-spin 18s linear infinite;
+  opacity: 0.85;
+}
+.dt-globe-meridian {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 1px dashed rgba(124,58,237,0.35);
+  transform: rotateY(0deg);
+}
+.dt-globe-meridian-2 { transform: scaleX(0.55); border-color: rgba(236,72,153,0.3); }
+.dt-globe-meridian-3 { transform: scaleX(0.2); border-color: rgba(59,130,246,0.3); }
+.dt-globe-parallel {
+  position: absolute; left: 0; right: 0; top: 50%;
+  height: 1px; background: rgba(124,58,237,0.3);
+  transform: translateY(-50%);
+}
+.dt-globe-parallel-2 { top: 30%; transform: scaleX(0.85); background: rgba(59,130,246,0.25); }
+.dt-globe-parallel-3 { top: 70%; transform: scaleX(0.85); background: rgba(236,72,153,0.25); }
+@keyframes dt-globe-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
 .dt-lang-chip {
-  position: absolute;
+  position: absolute; z-index: 2;
   transform: translate(-50%, -50%);
   background: #fff; border: 1px solid #e4e8ef; border-radius: 999px;
   padding: 5px 11px; font-size: 11.5px; font-weight: 600; color: #1e40af;
