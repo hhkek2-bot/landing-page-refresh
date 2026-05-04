@@ -177,8 +177,6 @@ export default function SalesIntelligence() {
         </header>
 
         <div className="si-stage">
-          <div className="si-fade si-fade-top" aria-hidden />
-          <div className="si-fade si-fade-bottom" aria-hidden />
 
           <div className="si-grid">
             <MarqueeColumn cards={COLUMNS[0]} duration={42} initialDelay={0} />
