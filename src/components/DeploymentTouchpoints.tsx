@@ -365,16 +365,6 @@ export default function DeploymentTouchpoints() {
             </div>
           </div>
         </div>
-
-        <p className="dt-supporting">
-          From first enquiry to qualified handover, your AI Sales Agent helps every channel
-          work harder for your sales team.
-        </p>
-
-        <div className="dt-cta-row">
-          <a href="#hero-section" className="dt-btn dt-btn-primary">Start Building Your Agent</a>
-          <a href="#hero-section" className="dt-btn dt-btn-secondary">Book Demo</a>
-        </div>
       </div>
     </section>
   );
