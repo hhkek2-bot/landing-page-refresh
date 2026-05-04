@@ -1093,9 +1093,9 @@ export default function Landing() {
         <div className="bright-container">
           <div className="bright-stats-card">
             <div className="bright-stats-intro">
-              <TypewriterHeading text="The backbone of AI-driven equipment sales." as="h2" />
+              <TypewriterHeading text="The New AI Sales Layer" as="h2" />
               <p className="bright-stats-intro-copy">
-                Antbuildz turns every enquiry into a structured, qualified opportunity — giving equipment sales teams the speed, consistency, and intelligence to close more deals.
+                AI Agents are reshaping equipment sales by responding faster, qualifying better, and guiding buyers before your sales team steps in.
               </p>
             </div>
             <div className="bright-stats-metrics" role="list" aria-label="Key statistics">
