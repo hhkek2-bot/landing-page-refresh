@@ -178,9 +178,9 @@ function PreviewSocial() {
       <svg className="dt-source-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
         <defs>
           <linearGradient id="dt-line-grad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#7c3aed" />
-            <stop offset="50%" stopColor="#3b82f6" />
-            <stop offset="100%" stopColor="#f97316" />
+            <stop offset="0%" stopColor="#16a34a" />
+            <stop offset="50%" stopColor="#22c55e" />
+            <stop offset="100%" stopColor="#4ade80" />
           </linearGradient>
         </defs>
         <path d="M50,10 Q50,50 50,50" />
