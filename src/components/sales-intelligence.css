@@ -6,7 +6,7 @@
 .si-section {
   position: relative;
   padding: 7rem 0 8rem;
-  background: transparent;
+  background: #ffffff;
   overflow: hidden;
   isolation: isolate;
 }
