@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Globe,
   MessageCircle,
@@ -12,8 +11,6 @@ import {
   QrCode,
   Send,
   Truck,
-  Tag,
-  Percent,
   Sparkles,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -22,55 +19,71 @@ import "./deployment-touchpoints.css";
 
 type Touchpoint = {
   id: string;
+  label: string;
   title: string;
   description: string;
   icon: LucideIcon;
+  span: "sm" | "md" | "lg" | "xl"; // bento sizing
 };
 
 const touchpoints: Touchpoint[] = [
   {
     id: "website",
+    label: "Web",
     title: "Website & Webstore",
     description:
       "Answer product questions, recommend suitable options, and capture enquiries directly from your website or Antbuildz Webstore.",
     icon: MonitorSmartphone,
+    span: "lg",
   },
   {
     id: "social",
+    label: "Campaigns",
     title: "Social Media, Ads & QR Codes",
     description:
       "Turn campaigns, posts, brochures, catalogues, exhibitions, and QR codes into direct entry points for guided sales conversations.",
     icon: Megaphone,
+    span: "md",
   },
   {
     id: "whatsapp",
+    label: "Chat",
     title: "Business Chat Channels",
     description:
-      "Share your AI Agent link through WhatsApp, Facebook Messenger, WeChat, Telegram, or broadcast messages to guide customers into structured sales conversations.",
+      "Share your AI Agent link through WhatsApp, Messenger, WeChat, Telegram, or broadcast messages to guide customers into structured sales conversations.",
     icon: MessageCircle,
+    span: "sm",
   },
   {
     id: "email",
+    label: "Email",
     title: "Email Marketing & Outreach",
     description:
-      "Turn email marketing, proposals, follow-ups, and signatures into direct sales entry points where customers can ask questions, compare options, and enquire anytime.",
+      "Turn email marketing, proposals, follow-ups, and signatures into direct sales entry points where customers can ask, compare, and enquire anytime.",
     icon: Mail,
+    span: "md",
   },
   {
     id: "multilingual",
+    label: "Global",
     title: "Scale Into New Markets",
     description:
       "Scale across borders with one AI Agent that engages new markets, supports different languages, and responds across time zones.",
     icon: Globe,
+    span: "xl",
   },
   {
     id: "team",
+    label: "Brain",
     title: "Sales Knowledge Brain",
     description:
       "Turn product knowledge, pricing rules, and sales terms into a searchable brain your team can use across every sales conversation.",
     icon: LayoutDashboard,
+    span: "sm",
   },
 ];
+
+/* ---------- Visuals (kept from previous design, used inside each bento card) ---------- */
 
 function PreviewWebsite() {
   return (
@@ -91,7 +104,8 @@ function PreviewWebsite() {
       <motion.div
         className="dt-chat-widget"
         initial={{ x: "110%" }}
-        animate={{ x: 0 }}
+        whileInView={{ x: 0 }}
+        viewport={{ once: true }}
         transition={{ delay: 0.25, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="dt-chat-widget-head">
@@ -104,7 +118,7 @@ function PreviewWebsite() {
         <div className="dt-chat-widget-body">
           <div className="dt-bubble dt-bubble-ai">Hi! Looking for a specific machine today?</div>
           <div className="dt-bubble dt-bubble-user">Need a 3-ton forklift, indoor use</div>
-          <div className="dt-bubble dt-bubble-ai">Got it. I have 4 electric units matching that. Want pricing?</div>
+          <div className="dt-bubble dt-bubble-ai">Got it. I have 4 electric units matching that.</div>
         </div>
       </motion.div>
     </div>
@@ -150,8 +164,8 @@ function PreviewSocial() {
     { label: "TikTok", x: 82, y: 16, Icon: TikTokIcon },
     { label: "LinkedIn", x: 14, y: 50, Icon: LinkedInIcon },
     { label: "Google Ads", x: 86, y: 50, Icon: GoogleAdsIcon },
-    { label: "QR Code", x: 18, y: 84, Icon: ({ size = 26 }) => <QrCode size={size} color="#0b1730" /> },
-    { label: "Instagram", x: 82, y: 84, Icon: ({ size = 22 }) => (
+    { label: "QR Code", x: 18, y: 84, Icon: ({ size = 22 }) => <QrCode size={size} color="#0b1730" /> },
+    { label: "Instagram", x: 82, y: 84, Icon: ({ size = 20 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
         <defs>
           <linearGradient id="dt-ig-grad" x1="0" y1="1" x2="1" y2="0">
@@ -190,8 +204,8 @@ function PreviewSocial() {
           animate={{
             opacity: 1,
             scale: 1,
-            x: [0, i % 2 === 0 ? 5 : -5, 0],
-            y: [0, i % 2 === 0 ? -4 : 4, 0],
+            x: [0, i % 2 === 0 ? 4 : -4, 0],
+            y: [0, i % 2 === 0 ? -3 : 3, 0],
           }}
           transition={{
             opacity: { delay: 0.1 + i * 0.08 },
@@ -200,31 +214,17 @@ function PreviewSocial() {
             y: { duration: 6 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
           }}
         >
-          <s.Icon size={36} />
+          <s.Icon size={26} />
           <span>{s.label}</span>
         </motion.div>
       ))}
       <motion.div
-        className="dt-source-hub dt-source-hub-chat"
+        className="dt-source-hub"
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <p className="dt-shc-status">We're online…</p>
-        <div className="dt-shc-bubble dt-shc-in">
-          Hi there! 👋 We have a 10% promo for new customers — want one?
-        </div>
-        <div className="dt-shc-quick">
-          <span className="dt-shc-pill dt-shc-pill-primary">Yes, sure!</span>
-          <span className="dt-shc-pill">No, thanks</span>
-        </div>
-        <div className="dt-shc-bubble dt-shc-in dt-shc-in-2">
-          Cool! What's your email then?
-        </div>
-        <div className="dt-shc-input">
-          <span>Enter message</span>
-          <Send size={12} />
-        </div>
+        <Sparkles size={14} /> AI Agent
       </motion.div>
     </div>
   );
@@ -241,42 +241,25 @@ function PreviewWhatsApp() {
         </div>
       </div>
       <div className="dt-wa-body">
-        <div className="dt-wa-bubble dt-wa-in">
-          Hi, can I get the price for a 40m boom lift rental?
-        </div>
+        <div className="dt-wa-bubble dt-wa-in">Price for a 40m boom lift?</div>
         <div className="dt-wa-bubble dt-wa-out">
-          Sure! You can get all the info you need — pricing, specs, availability —
-          by chatting with our AI Agent anytime you like 👇
+          Sure! Get pricing & specs from our AI Agent 👇
         </div>
-        <motion.a
-          href="#"
-          onClick={(e) => e.preventDefault()}
+        <motion.div
           className="dt-wa-link-card"
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          whileHover={{ scale: 1.02 }}
         >
           <div className="dt-wa-link-icon">
-            <MessageCircle size={18} />
+            <MessageCircle size={14} />
           </div>
           <div className="dt-wa-link-text">
             <p className="dt-wa-link-title">Chat with Agent</p>
             <p className="dt-wa-link-url">antbuildz.ai/chat</p>
           </div>
-          <motion.div
-            className="dt-wa-link-cta"
-            animate={{
-              boxShadow: [
-                "0 0 0 0 rgba(34,197,94,0.5)",
-                "0 0 0 8px rgba(34,197,94,0)",
-              ],
-            }}
-            transition={{ duration: 1.6, repeat: Infinity }}
-          >
-            Open
-          </motion.div>
-        </motion.a>
+        </motion.div>
       </div>
     </div>
   );
@@ -287,106 +270,63 @@ function PreviewEmail() {
     <div className="dt-preview-email">
       <div className="dt-email-card">
         <div className="dt-email-head">
-          <Mail size={14} />
-          <span className="dt-email-subject">🎉 Special Offer · Up to 30% Off Equipment Rentals</span>
+          <Mail size={12} />
+          <span className="dt-email-subject">🎉 Up to 30% Off Rentals</span>
         </div>
-
         <div className="dt-email-promo-hero">
           <motion.div
             className="dt-email-promo-badge"
             animate={{ rotate: [-4, 4, -4] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           >
-            LIMITED TIME
+            LIMITED
           </motion.div>
-          <p className="dt-email-promo-title">Boost Your Project, Cut Your Costs</p>
-          <p className="dt-email-promo-sub">
-            Exclusive monthly rates on boom lifts, forklifts & scissor lifts.
-          </p>
-
+          <p className="dt-email-promo-title">Cut Your Costs</p>
           <motion.div
             className="dt-email-discount-tag"
-            animate={{ rotate: [-8, -4, -8], y: [0, -3, 0] }}
+            animate={{ rotate: [-8, -4, -8], y: [0, -2, 0] }}
             transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
           >
             <span className="dt-email-discount-num">30%</span>
             <span className="dt-email-discount-label">OFF</span>
           </motion.div>
-          <motion.div
-            className="dt-email-spark dt-email-spark-1"
-            animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.4, 1, 0.4] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <Sparkles size={14} />
-          </motion.div>
-          <motion.div
-            className="dt-email-spark dt-email-spark-2"
-            animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2.4, repeat: Infinity, delay: 0.5 }}
-          >
-            <Sparkles size={10} />
-          </motion.div>
         </div>
-
         <div className="dt-email-products">
           {[
-            { label: "Boom Lift", price: "from $180/d" },
-            { label: "Forklift", price: "from $90/d" },
-            { label: "Scissor Lift", price: "from $120/d" },
+            { label: "Boom" },
+            { label: "Forklift" },
+            { label: "Scissor" },
           ].map((p, i) => (
             <motion.div
               key={p.label}
               className="dt-email-product"
               initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.2 + i * 0.1 }}
             >
               <div className="dt-email-product-icon">
-                <Truck size={16} />
+                <Truck size={12} />
               </div>
-              <div>
-                <p className="dt-email-product-label">{p.label}</p>
-                <p className="dt-email-product-price">{p.price}</p>
-              </div>
+              <p className="dt-email-product-label">{p.label}</p>
             </motion.div>
           ))}
         </div>
-
-        <div className="dt-email-perks">
-          <div><Check size={11} /> Free delivery</div>
-          <div><Check size={11} /> Flexible terms</div>
-          <div><Check size={11} /> 24/7 support</div>
-        </div>
-
         <div className="dt-email-cta-wrap">
           <motion.button
             className="dt-email-cta"
-            whileHover={{ scale: 1.04 }}
             animate={{
               boxShadow: [
                 "0 0 0 0 rgba(220,38,38,0.55)",
-                "0 0 0 10px rgba(220,38,38,0)",
+                "0 0 0 8px rgba(220,38,38,0)",
               ],
             }}
             transition={{ duration: 1.6, repeat: Infinity }}
           >
-            <Send size={13} /> Chat with Agent
+            <Send size={11} /> Chat now
           </motion.button>
-          <p className="dt-email-cta-note">Get instant pricing · No commitment</p>
         </div>
       </div>
-
-      <motion.div
-        className="dt-email-popout"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: [0, -4, 0] }}
-        transition={{
-          opacity: { delay: 0.4 },
-          y: { delay: 0.4, duration: 2.4, repeat: Infinity, ease: "easeInOut" },
-        }}
-      >
-        <div className="dt-bubble dt-bubble-ai">Hi! Want a quote on the promo rates?</div>
-      </motion.div>
     </div>
   );
 }
@@ -394,11 +334,9 @@ function PreviewEmail() {
 function PreviewMultilingual() {
   const langs = [
     "English", "中文", "日本語", "한국어", "Bahasa", "Tiếng Việt", "ภาษาไทย",
-    "Español", "Français", "Deutsch", "Italiano", "Português", "Nederlands",
-    "Русский", "Türkçe", "العربية", "हिन्दी", "বাংলা", "Polski", "Svenska",
-    "Filipino", "ગુજરાતી",
+    "Español", "Français", "Deutsch", "Português", "Русский", "العربية",
+    "हिन्दी", "Filipino",
   ];
-  // Pre-compute scattered positions around the central hub (avoiding center)
   const positions = langs.map((_, i) => {
     const ring = i % 2 === 0 ? 36 : 44;
     const angle = (i / langs.length) * Math.PI * 2 + (i % 2 ? 0.2 : -0.2);
@@ -428,13 +366,11 @@ function PreviewMultilingual() {
               scale: 1,
               x: [0, dx, -dx * 0.6, 0],
               y: [0, dy, -dy * 0.7, 0],
-              rotate: [0, i % 2 ? 3 : -3, 0],
             }}
             transition={{
               opacity: { repeat: Infinity, duration: dur, ease: "easeInOut" },
               x: { repeat: Infinity, duration: dur + 1, ease: "easeInOut" },
               y: { repeat: Infinity, duration: dur + 0.5, ease: "easeInOut" },
-              rotate: { repeat: Infinity, duration: dur + 2, ease: "easeInOut" },
               scale: { delay: 0.05 * i },
             }}
           >
@@ -447,17 +383,11 @@ function PreviewMultilingual() {
 }
 
 function PreviewTeam() {
-  const roles: {
-    label: string;
-    x: number;
-    y: number;
-    color: string;
-    side: "left" | "right";
-  }[] = [
-    { label: "Sales Rep", x: 14, y: 14, color: "#06b6d4", side: "left" },
-    { label: "Branch Team", x: 86, y: 28, color: "#ec4899", side: "right" },
-    { label: "Sales Admin", x: 12, y: 78, color: "#3b82f6", side: "left" },
-    { label: "Manager", x: 84, y: 86, color: "#f97316", side: "right" },
+  const roles: { label: string; x: number; y: number; color: string }[] = [
+    { label: "Sales Rep", x: 14, y: 18, color: "#06b6d4" },
+    { label: "Branch", x: 86, y: 28, color: "#ec4899" },
+    { label: "Admin", x: 14, y: 78, color: "#3b82f6" },
+    { label: "Manager", x: 86, y: 82, color: "#f97316" },
   ];
   return (
     <div className="dt-preview-team">
@@ -479,7 +409,6 @@ function PreviewTeam() {
           );
         })}
       </svg>
-
       <motion.div
         className="dt-brain-center"
         initial={{ scale: 0.85, opacity: 0 }}
@@ -487,7 +416,7 @@ function PreviewTeam() {
         transition={{ delay: 0.2 }}
       >
         <motion.svg
-          width="110" height="100" viewBox="0 0 120 110" aria-hidden="true"
+          width="78" height="70" viewBox="0 0 120 110" aria-hidden="true"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         >
@@ -502,77 +431,23 @@ function PreviewTeam() {
               <stop offset="100%" stopColor="#ffffff" stopOpacity="0.6" />
             </radialGradient>
           </defs>
-
-          {/* Left hemisphere */}
-          <path
-            d="M58 18
-               C46 10 30 12 24 24
-               C12 26 8 40 16 50
-               C8 58 14 72 26 74
-               C28 86 42 92 54 86
-               C58 92 58 92 58 86
-               Z"
-            fill="url(#dt-brain-fill)"
-            stroke="url(#dt-brain-grad)"
-            strokeWidth="2.4"
-            strokeLinejoin="round"
-          />
-          {/* Right hemisphere */}
-          <path
-            d="M62 18
-               C74 10 90 12 96 24
-               C108 26 112 40 104 50
-               C112 58 106 72 94 74
-               C92 86 78 92 66 86
-               C62 92 62 92 62 86
-               Z"
-            fill="url(#dt-brain-fill)"
-            stroke="url(#dt-brain-grad)"
-            strokeWidth="2.4"
-            strokeLinejoin="round"
-          />
-          {/* Center fissure */}
+          <path d="M58 18 C46 10 30 12 24 24 C12 26 8 40 16 50 C8 58 14 72 26 74 C28 86 42 92 54 86 C58 92 58 92 58 86 Z"
+            fill="url(#dt-brain-fill)" stroke="url(#dt-brain-grad)" strokeWidth="2.4" strokeLinejoin="round" />
+          <path d="M62 18 C74 10 90 12 96 24 C108 26 112 40 104 50 C112 58 106 72 94 74 C92 86 78 92 66 86 C62 92 62 92 62 86 Z"
+            fill="url(#dt-brain-fill)" stroke="url(#dt-brain-grad)" strokeWidth="2.4" strokeLinejoin="round" />
           <path d="M60 16 L60 88" stroke="url(#dt-brain-grad)" strokeWidth="2" strokeLinecap="round" />
-
-          {/* Convolutions - left */}
-          <path d="M30 30 C36 34 36 40 30 44" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
-          <path d="M22 48 C30 50 32 56 26 62" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
-          <path d="M40 56 C46 58 48 66 42 72" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
-          <path d="M44 22 C50 26 52 32 48 38" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
-
-          {/* Convolutions - right */}
-          <path d="M90 30 C84 34 84 40 90 44" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
-          <path d="M98 48 C90 50 88 56 94 62" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
-          <path d="M80 56 C74 58 72 66 78 72" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
-          <path d="M76 22 C70 26 68 32 72 38" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
-
-          {/* Sparkle in center */}
-          <motion.g
-            animate={{ opacity: [0.55, 1, 0.55], scale: [0.9, 1.15, 0.9] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-            style={{ transformOrigin: "60px 52px" }}
-          >
-            <path
-              d="M60 42 L64 52 L60 62 L56 52 Z M50 52 L70 52"
-              fill="url(#dt-brain-grad)"
-              stroke="url(#dt-brain-grad)"
-              strokeWidth="1.2"
-              strokeLinejoin="round"
-            />
-          </motion.g>
         </motion.svg>
       </motion.div>
-
       {roles.map((r, i) => (
         <motion.div
           key={r.label}
-          className={`dt-brain-pill dt-brain-pill-${r.side}`}
+          className="dt-brain-pill"
           style={{ left: `${r.x}%`, top: `${r.y}%`, ["--pill-color" as string]: r.color }}
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{
             opacity: 1,
             scale: 1,
-            y: [0, i % 2 ? -4 : 4, 0],
+            y: [0, i % 2 ? -3 : 3, 0],
           }}
           transition={{
             opacity: { delay: 0.3 + i * 0.1 },
@@ -581,27 +456,10 @@ function PreviewTeam() {
           }}
         >
           <span className="dt-brain-pill-icon">
-            <User size={12} />
+            <User size={10} />
           </span>
           {r.label}
         </motion.div>
-      ))}
-
-      {[
-        { x: 30, y: 38, d: 2.2 },
-        { x: 70, y: 42, d: 2.6 },
-        { x: 38, y: 68, d: 3 },
-        { x: 66, y: 64, d: 2.4 },
-        { x: 50, y: 22, d: 3.2 },
-        { x: 50, y: 80, d: 2.8 },
-      ].map((p, i) => (
-        <motion.span
-          key={i}
-          className="dt-brain-dot"
-          style={{ left: `${p.x}%`, top: `${p.y}%` }}
-          animate={{ opacity: [0.2, 0.9, 0.2], scale: [0.8, 1.3, 0.8] }}
-          transition={{ duration: p.d, repeat: Infinity, delay: i * 0.2 }}
-        />
       ))}
     </div>
   );
@@ -617,8 +475,6 @@ const previewMap: Record<string, JSX.Element> = {
 };
 
 export default function DeploymentTouchpoints() {
-  const [activeId, setActiveId] = useState<string>(touchpoints[0].id);
-
   return (
     <section className="dt-section" id="deployment-touchpoints" aria-labelledby="dt-heading">
       <div className="dt-container">
@@ -630,7 +486,7 @@ export default function DeploymentTouchpoints() {
           transition={{ duration: 0.5 }}
         >
           <h2 id="dt-heading" className="dt-title">
-            One <span className="dt-title-gradient">Sale Agent</span>
+            One <span className="dt-title-gradient">Sales Agent</span>
           </h2>
           <p className="dt-subtitle">
             Multiple Languages · Multiple Channels · Multiple Markets
@@ -642,64 +498,32 @@ export default function DeploymentTouchpoints() {
           </p>
         </motion.div>
 
-        <div className="dt-layout">
-          <div className="dt-grid" role="tablist" aria-label="Touchpoints">
-            {touchpoints.map((t, i) => {
-              const Icon = t.icon;
-              const isActive = activeId === t.id;
-              return (
-                <motion.button
-                  key={t.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  className={`dt-card ${isActive ? "dt-card-active" : ""}`}
-                  onClick={() => setActiveId(t.id)}
-                  onMouseEnter={() => setActiveId(t.id)}
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.35, delay: i * 0.05 }}
-                >
-                  <span className="dt-card-icon"><Icon size={20} strokeWidth={1.6} /></span>
-                  <h3 className="dt-card-title">{t.title}</h3>
-                  <p className="dt-card-desc">{t.description}</p>
-
-                  {/* Mobile inline preview */}
-                  <AnimatePresence initial={false}>
-                    {isActive && (
-                      <motion.div
-                        className="dt-mobile-preview"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="dt-mobile-preview-inner">{previewMap[t.id]}</div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.button>
-              );
-            })}
-          </div>
-
-          <div className="dt-preview-panel" aria-live="polite">
-            <div className="dt-preview-frame">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeId}
-                  className="dt-preview-inner"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.35 }}
-                >
-                  {previewMap[activeId]}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
+        <div className="dt-bento">
+          {touchpoints.map((t, i) => {
+            const Icon = t.icon;
+            return (
+              <motion.article
+                key={t.id}
+                className={`dt-bento-card dt-bento-${t.span}`}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="dt-bento-visual">
+                  {previewMap[t.id]}
+                </div>
+                <div className="dt-bento-body">
+                  <span className="dt-bento-label">
+                    <Icon size={12} strokeWidth={2} />
+                    {t.label}
+                  </span>
+                  <h3 className="dt-bento-title">{t.title}</h3>
+                  <p className="dt-bento-desc">{t.description}</p>
+                </div>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>
