@@ -2876,23 +2876,13 @@
 
 /* Tablet */
 @media (max-width: 1024px) {
-  .pain-bento-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "b  b"
-      "a1 c1"
-      "a2 c2"
-      "d  d";
-  }
+  .pain-bento-grid { grid-template-columns: 1fr; }
+  .pain-col { flex-direction: column; }
 }
 
 /* Mobile */
 @media (max-width: 640px) {
-  .pain-bento-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "b" "a1" "a2" "c1" "c2" "d";
-    gap: 14px;
-  }
+  .pain-bento-grid { grid-template-columns: 1fr; gap: 14px; }
+  .pain-col { gap: 14px; }
 }
 
