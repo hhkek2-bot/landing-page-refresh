@@ -145,7 +145,7 @@ function PreviewSocial() {
     { label: "Facebook", x: 8, y: 26, Icon: FacebookIcon },
     { label: "LinkedIn", x: 72, y: 26, Icon: LinkedInIcon },
     { label: "Google Ads", x: 8, y: 78, Icon: GoogleAdsIcon },
-    { label: "QR Code", x: 72, y: 78, Icon: ({ size = 20 }) => <QrCode size={size} color="#0b1730" /> },
+    { label: "QR Code", x: 72, y: 78, Icon: ({ size = 26 }) => <QrCode size={size} color="#0b1730" /> },
   ];
   return (
     <div className="dt-preview-social">
@@ -155,10 +155,20 @@ function PreviewSocial() {
           className="dt-source-tile"
           style={{ left: `${s.x}%`, top: `${s.y}%` }}
           initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.1 + i * 0.08 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            x: [0, i % 2 === 0 ? 6 : -6, 0],
+            y: [0, i % 2 === 0 ? -5 : 5, 0],
+          }}
+          transition={{
+            opacity: { delay: 0.1 + i * 0.08 },
+            scale: { delay: 0.1 + i * 0.08 },
+            x: { duration: 5 + i * 0.6, repeat: Infinity, ease: "easeInOut" },
+            y: { duration: 6 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
+          }}
         >
-          <s.Icon size={18} />
+          <s.Icon size={24} />
           <span>{s.label}</span>
         </motion.div>
       ))}
