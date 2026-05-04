@@ -386,13 +386,14 @@
 .dt-multi-center {
   position: absolute; left: 50%; top: 50%;
   transform: translate(-50%, -50%);
-  background: #fff; border: 1px solid #e4e8ef; border-radius: 14px;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);
+  border: 1px solid #ddd6fe; border-radius: 14px;
   padding: 18px 22px; text-align: center;
-  box-shadow: 0 18px 40px -18px rgba(15,23,42,0.2);
+  box-shadow: 0 18px 40px -14px rgba(124, 58, 237, 0.35);
   display: flex; flex-direction: column; align-items: center; gap: 6px;
   z-index: 2;
 }
-.dt-multi-center > svg { color: #1e40af; }
+.dt-multi-center > svg { color: #7c3aed; }
 .dt-multi-center > p { font-size: 13px; font-weight: 600; margin: 0; color: #0b1730; }
 .dt-multi-247 { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; color: #16a34a; background: #ecfdf5; border: 1px solid #bbf7d0; padding: 2px 8px; border-radius: 999px; }
 .dt-lang-chip {
