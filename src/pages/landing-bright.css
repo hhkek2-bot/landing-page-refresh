@@ -2691,8 +2691,10 @@
 .pain-size-feature .pain-body { padding: 22px 26px 26px; }
 .pain-size-feature h3 { font-size: 1.28rem; }
 .pain-size-feature p  { font-size: 0.94rem; }
-.pain-size-tall .pain-body { padding: 22px 22px 24px; }
-.pain-size-tall h3 { font-size: 1.1rem; }
+.pain-size-stacked .pain-body { padding: 18px 20px 20px; }
+.pain-size-stacked h3 { font-size: 1rem; }
+.pain-size-wide .pain-body { padding: 20px 24px 22px; }
+.pain-size-wide h3 { font-size: 1.1rem; }
 
 /* ---------- Per-visual STATIC graphics ---------- */
 .pv { position: absolute; inset: 0; }
