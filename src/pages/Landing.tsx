@@ -1032,7 +1032,7 @@ export default function Landing() {
             {painPoints.map((p) => {
               const Icon = p.icon;
               return (
-                <article key={p.title} className={`pain-card pain-tone-${p.tone} pain-size-${p.size}`}>
+                <article key={p.title} className={`pain-card pain-tone-${p.tone} pain-size-${p.size} pain-area-${p.area}`}>
                   <div className="pain-visual" aria-hidden="true">
                     <PainVisual visual={p.visual} />
                   </div>
