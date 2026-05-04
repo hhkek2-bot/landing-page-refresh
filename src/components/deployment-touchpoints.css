@@ -218,7 +218,11 @@
   pointer-events: none;
 }
 .dt-source-lines path {
-  fill: none; stroke: #c7d2e8; stroke-width: 0.4; stroke-dasharray: 1.5 1.5;
+  fill: none; stroke: #93a4c7; stroke-width: 0.5; stroke-dasharray: 1.5 1.5;
+  animation: dt-dash-flow 1.2s linear infinite;
+}
+@keyframes dt-dash-flow {
+  to { stroke-dashoffset: -6; }
 }
 .dt-source-hub {
   position: absolute; left: 50%; top: 50%;
