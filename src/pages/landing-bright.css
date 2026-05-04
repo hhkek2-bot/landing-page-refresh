@@ -2198,63 +2198,82 @@
 .bento-size-md,
 .bento-size-sm { grid-column: span 1; grid-row: span 1; }
 
+/* Crisp-style cards: light surface, colored accents only */
 .bento-card {
+  --tone: #2563eb;
+  --tone-soft: #eff6ff;
   position: relative;
-  border-radius: 24px;
+  border-radius: 22px;
   overflow: hidden;
   padding: 0;
   display: flex;
   flex-direction: column;
   isolation: isolate;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px -20px rgba(15, 23, 42, 0.18);
-  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
 }
 .bento-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 24px 48px -20px rgba(15, 23, 42, 0.22);
+  transform: translateY(-3px);
+  border-color: rgba(15, 23, 42, 0.14);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 18px 40px -22px rgba(15, 23, 42, 0.18);
 }
 
-/* Tones */
-.bento-blue     { background: linear-gradient(160deg, #dbeafe 0%, #bfdbfe 100%); }
-.bento-lavender { background: linear-gradient(160deg, #ede9fe 0%, #ddd6fe 100%); }
-.bento-mint     { background: linear-gradient(160deg, #d1fae5 0%, #a7f3d0 100%); }
-.bento-peach    { background: linear-gradient(160deg, #ffe4e6 0%, #fecdd3 100%); }
-.bento-cream    { background: linear-gradient(160deg, #fef3c7 0%, #fde68a 100%); }
-.bento-ink      { background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%); color: #fff; border-color: rgba(255,255,255,0.06); }
+/* Tone tokens — applied as accent color only, not card background */
+.bento-blue     { --tone: #2563eb; --tone-soft: #eff6ff; }
+.bento-lavender { --tone: #7c3aed; --tone-soft: #f5f3ff; }
+.bento-mint     { --tone: #059669; --tone-soft: #ecfdf5; }
+.bento-peach    { --tone: #e11d48; --tone-soft: #fff1f2; }
+.bento-cream    { --tone: #b45309; --tone-soft: #fffbeb; }
+.bento-ink      { --tone: #06b6d4; --tone-soft: #f1f5f9; }
 
-/* Visual area — top half, blends into card (no fade strip) */
+/* Visual area — top portion with a very subtle tinted backdrop */
 .bento-visual {
   position: relative;
-  flex: 0 0 52%;
+  flex: 0 0 54%;
   min-height: 0;
   overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--tone-soft) 0%, #fafbfc 70%, #f7f8fa 100%);
 }
-.bento-visual::after { content: none; }
+.bento-visual::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 60px;
+  background: linear-gradient(0deg, #ffffff 0%, transparent 100%);
+  pointer-events: none;
+}
 
-
-/* Body — below visual */
+/* Body */
 .bento-body {
   position: relative;
   z-index: 2;
-  padding: 20px 24px 24px;
+  padding: 22px 26px 26px;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  background: #ffffff;
 }
-.bento-icon {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 28px; height: 28px;
-  background: transparent;
-  border: 0;
-  color: #0b1220;
-  margin: 0 0 10px -4px;
+.bento-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--tone);
+  margin-bottom: 8px;
 }
-.bento-ink .bento-icon { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); color: #fff; }
-.bento-card h3 { font-size: 1.08rem; font-weight: 650; line-height: 1.25; margin: 0 0 6px; color: #0b1220; letter-spacing: -0.01em; }
-.bento-ink h3 { color: #fff; }
-.bento-card p { font-size: 0.86rem; line-height: 1.5; margin: 0; color: #475569; }
-.bento-ink p { color: rgba(255,255,255,0.72); }
+.bento-card h3 { font-size: 1.16rem; font-weight: 700; line-height: 1.25; margin: 0 0 8px; color: #0b1220; letter-spacing: -0.015em; }
+.bento-card p { font-size: 0.92rem; line-height: 1.6; margin: 0; color: #5b6472; }
+
+/* Workflow Agent — keep dark visual area, light body remains */
+.bento-ink .bento-visual {
+  background:
+    radial-gradient(120% 80% at 50% 0%, #0f172a 0%, #1e293b 70%, #f7f8fa 100%);
+}
+.bento-ink .bento-visual::after {
+  background: linear-gradient(0deg, #ffffff 0%, transparent 100%);
+}
+
 
 
 /* ---- Floating badges (shared) ---- */
