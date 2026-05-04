@@ -293,15 +293,16 @@ export default function DeploymentTouchpoints() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.5 }}
         >
-          <span className="dt-eyebrow">Deployment Touchpoints</span>
           <h2 id="dt-heading" className="dt-title">
-            One AI Sales Agent. Six Ways to Scale Sales Opportunities.
+            One Sale Agent
           </h2>
+          <p className="dt-eyebrow dt-subtitle">
+            Multiple Languages · Multiple Channels · Multiple Markets
+          </p>
           <p className="dt-desc">
-            Your next best salesperson does not need to sit in one country, speak only one
-            language, or work only during office hours. The Antbuildz AI Sales Agent helps
-            your business support multilingual enquiries, engage local and overseas buyers,
-            and turn every customer touchpoint into a structured sales opportunity.
+            The future of sales should not be limited by office hours, channels, markets, or
+            languages. Let your AI Sales Agent capture, qualify, and guide enquiries — so your
+            team can step in for higher-value closing.
           </p>
         </motion.div>
 
