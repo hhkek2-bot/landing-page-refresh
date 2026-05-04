@@ -1565,17 +1565,28 @@
 
 
 .bright-stats-intro h2 {
-  margin: 0 0 16px;
+  margin: 0 0 24px;
   color: #0b1e36;
-  font-size: clamp(2rem, 3.5vw, 3.2rem);
-  line-height: 1.1;
-  letter-spacing: -0.04em;
+  font-size: clamp(2.4rem, 3.8vw, 3.8rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
   font-weight: 800;
   white-space: nowrap;
 }
 
-@media (max-width: 960px) {
-  .bright-stats-intro h2 { white-space: normal; font-size: 2rem; }
+.bright-stats-intro-copy {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 54ch;
+}
+
+@media (max-width: 1100px) {
+  .bright-stats-intro h2 { white-space: normal; }
+}
+@media (max-width: 600px) {
+  .bright-stats-intro h2 { font-size: 2.3rem; }
 }
 
 .bright-stats-intro-copy {
