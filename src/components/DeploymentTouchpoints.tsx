@@ -343,8 +343,8 @@ function PreviewEmail() {
             whileHover={{ scale: 1.04 }}
             animate={{
               boxShadow: [
-                "0 0 0 0 rgba(37,99,235,0.5)",
-                "0 0 0 10px rgba(37,99,235,0)",
+                "0 0 0 0 rgba(220,38,38,0.55)",
+                "0 0 0 10px rgba(220,38,38,0)",
               ],
             }}
             transition={{ duration: 1.6, repeat: Infinity }}
