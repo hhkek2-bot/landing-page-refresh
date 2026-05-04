@@ -2186,17 +2186,17 @@
 
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 220px;
-  gap: 18px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 340px;
+  gap: 20px;
 }
 
-/* Sizes */
-.bento-size-lg   { grid-column: span 2; grid-row: span 2; }
-.bento-size-tall { grid-column: span 2; grid-row: span 2; }
-.bento-size-wide { grid-column: span 2; grid-row: span 1; }
-.bento-size-md   { grid-column: span 2; grid-row: span 1; }
-.bento-size-sm   { grid-column: span 2; grid-row: span 1; }
+/* All tiles equal in 3x2 layout */
+.bento-size-lg,
+.bento-size-tall,
+.bento-size-wide,
+.bento-size-md,
+.bento-size-sm { grid-column: span 1; grid-row: span 1; }
 
 .bento-card {
   position: relative;
