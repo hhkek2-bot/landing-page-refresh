@@ -493,7 +493,7 @@ function PreviewTeam() {
         transition={{ delay: 0.2 }}
       >
         <motion.svg
-          width="92" height="92" viewBox="0 0 100 100" aria-hidden="true"
+          width="110" height="100" viewBox="0 0 120 110" aria-hidden="true"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         >
@@ -503,31 +503,66 @@ function PreviewTeam() {
               <stop offset="50%" stopColor="#a855f7" />
               <stop offset="100%" stopColor="#ec4899" />
             </linearGradient>
+            <radialGradient id="dt-brain-fill" cx="50%" cy="45%" r="60%">
+              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="#ffffff" stopOpacity="0.6" />
+            </radialGradient>
           </defs>
+
+          {/* Left hemisphere */}
           <path
-            d="M35 22 C25 22 18 30 20 40 C12 44 12 56 20 60 C18 70 26 78 36 76 C40 84 50 84 52 76 L52 24 C48 14 38 14 35 22 Z"
-            fill="none"
+            d="M58 18
+               C46 10 30 12 24 24
+               C12 26 8 40 16 50
+               C8 58 14 72 26 74
+               C28 86 42 92 54 86
+               C58 92 58 92 58 86
+               Z"
+            fill="url(#dt-brain-fill)"
             stroke="url(#dt-brain-grad)"
             strokeWidth="2.4"
             strokeLinejoin="round"
           />
+          {/* Right hemisphere */}
           <path
-            d="M65 22 C75 22 82 30 80 40 C88 44 88 56 80 60 C82 70 74 78 64 76 C60 84 52 84 52 76 L52 24 C56 14 62 14 65 22 Z"
-            fill="none"
+            d="M62 18
+               C74 10 90 12 96 24
+               C108 26 112 40 104 50
+               C112 58 106 72 94 74
+               C92 86 78 92 66 86
+               C62 92 62 92 62 86
+               Z"
+            fill="url(#dt-brain-fill)"
             stroke="url(#dt-brain-grad)"
             strokeWidth="2.4"
             strokeLinejoin="round"
           />
+          {/* Center fissure */}
+          <path d="M60 16 L60 88" stroke="url(#dt-brain-grad)" strokeWidth="2" strokeLinecap="round" />
+
+          {/* Convolutions - left */}
+          <path d="M30 30 C36 34 36 40 30 44" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
+          <path d="M22 48 C30 50 32 56 26 62" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
+          <path d="M40 56 C46 58 48 66 42 72" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
+          <path d="M44 22 C50 26 52 32 48 38" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
+
+          {/* Convolutions - right */}
+          <path d="M90 30 C84 34 84 40 90 44" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
+          <path d="M98 48 C90 50 88 56 94 62" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
+          <path d="M80 56 C74 58 72 66 78 72" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
+          <path d="M76 22 C70 26 68 32 72 38" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.4" strokeLinecap="round" />
+
+          {/* Sparkle in center */}
           <motion.g
-            animate={{ opacity: [0.55, 1, 0.55], scale: [0.95, 1.08, 0.95] }}
+            animate={{ opacity: [0.55, 1, 0.55], scale: [0.9, 1.15, 0.9] }}
             transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-            style={{ transformOrigin: "50px 50px" }}
+            style={{ transformOrigin: "60px 52px" }}
           >
             <path
-              d="M50 38 L54 50 L50 62 L46 50 Z M40 50 L60 50"
+              d="M60 42 L64 52 L60 62 L56 52 Z M50 52 L70 52"
               fill="url(#dt-brain-grad)"
               stroke="url(#dt-brain-grad)"
-              strokeWidth="1"
+              strokeWidth="1.2"
               strokeLinejoin="round"
             />
           </motion.g>
