@@ -402,6 +402,12 @@
   padding: 5px 11px; font-size: 11.5px; font-weight: 600; color: #1e40af;
   box-shadow: 0 6px 16px -10px rgba(15,23,42,0.2);
 }
+.dt-lang-chip:nth-child(6n+1) { color: #7c3aed; background: #f5f3ff; border-color: #ddd6fe; }
+.dt-lang-chip:nth-child(6n+2) { color: #ea580c; background: #fff7ed; border-color: #fed7aa; }
+.dt-lang-chip:nth-child(6n+3) { color: #16a34a; background: #f0fdf4; border-color: #bbf7d0; }
+.dt-lang-chip:nth-child(6n+4) { color: #2563eb; background: #eff6ff; border-color: #bfdbfe; }
+.dt-lang-chip:nth-child(6n+5) { color: #db2777; background: #fdf2f8; border-color: #fbcfe8; }
+.dt-lang-chip:nth-child(6n)   { color: #d97706; background: #fffbeb; border-color: #fde68a; }
 
 /* ---- Team preview ---- */
 .dt-preview-team { display: flex; flex-direction: column; gap: 10px; height: 100%; }
