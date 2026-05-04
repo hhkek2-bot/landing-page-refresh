@@ -11,6 +11,10 @@ import {
   QrCode,
   Clock,
   Send,
+  Truck,
+  Tag,
+  Percent,
+  Sparkles,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import "./deployment-touchpoints.css";
