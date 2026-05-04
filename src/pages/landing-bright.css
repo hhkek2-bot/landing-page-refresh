@@ -2636,7 +2636,8 @@
 .pain-tone-slate   { --tone: #475569; --tone-soft: #f1f5f9; }
 
 /* Tall cards (A, C) = vertical with visual on top, text below, must span 2 rows */
-.pain-size-tall { min-height: 520px; }
+.pain-size-stacked { min-height: 240px; }
+.pain-size-wide { min-height: 240px; }
 
 /* Visual area */
 .pain-visual {
