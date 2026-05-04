@@ -365,7 +365,7 @@
 }
 .dt-email-product-icon {
   width: 28px; height: 28px; border-radius: 50%;
-  background: #dbeafe; color: #1e40af;
+  background: #fee2e2; color: #b91c1c;
   display: flex; align-items: center; justify-content: center;
 }
 .dt-email-product-label { margin: 0; font-size: 10px; font-weight: 600; color: #0b1730; }
