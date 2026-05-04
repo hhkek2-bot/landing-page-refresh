@@ -775,21 +775,31 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Features */}
-      <section className="bright-features">
+      {/* Features — Bento Grid */}
+      <section className="bright-features bento-section">
         <div className="bright-container">
           <div className="bright-section-header"><TypewriterHeading text="The Capabilities" /><p>Built specifically for heavy equipment rental, spare parts, and technical sales teams.</p></div>
-          <div className="bright-feature-grid">
-            {featureCards.map((f) => (
-              <article className={`bright-feature-card ${f.variant === "workflow" ? "bright-feature-card-workflow" : ""}`.trim()} key={f.title}>
-                <div className="bright-feature-hover-wave" aria-hidden="true" />
-                <div className="bright-feature-icon"><f.icon size={28} /></div>
-                <h3>{f.title}</h3><p>{f.body}</p>
+          <div className="bento-grid">
+            {bentoFeatures.map((f) => (
+              <article
+                key={f.title}
+                className={`bento-card bento-${f.tone} bento-size-${f.size}`}
+                data-visual={f.visual}
+              >
+                <div className="bento-visual" aria-hidden="true">
+                  <BentoVisual visual={f.visual} />
+                </div>
+                <div className="bento-body">
+                  <div className="bento-icon"><f.icon size={20} strokeWidth={2} /></div>
+                  <h3>{f.title}</h3>
+                  <p>{f.body}</p>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* Comparison / Pain Points */}
       <section className="bright-comparison" id="comparison">
