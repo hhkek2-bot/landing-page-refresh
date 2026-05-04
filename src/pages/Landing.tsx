@@ -1093,7 +1093,7 @@ export default function Landing() {
         <div className="bright-container">
           <div className="bright-stats-card">
             <div className="bright-stats-intro">
-              <TypewriterHeading text="The New AI Sales Layer" as="h2" />
+              <TypewriterHeading text={"The New\nAI Sales Layer"} as="h2" />
               <p className="bright-stats-intro-copy">
                 AI Agents are reshaping equipment sales by responding faster, qualifying better, and guiding buyers before your sales team steps in.
               </p>
