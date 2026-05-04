@@ -1084,17 +1084,21 @@ export default function Landing() {
       <DeploymentTouchpoints />
       <SalesIntelligence />
 
-      {/* Metrics — Stripe-inspired */}
+      {/* Metrics — Unified card */}
       <section className="bright-stats-section">
         <div className="bright-container">
-          <div className="bright-stats-title-block">
-            <TypewriterHeading text="The backbone of AI-driven equipment sales" as="h2" />
-            <div className="bright-stats-accent-line" aria-hidden="true" />
-          </div>
-          <div className="bright-stats-grid" role="list" aria-label="Key statistics">
-            {statItems.map((stat) => (
-              <StatCard key={stat.label} stat={stat} />
-            ))}
+          <div className="bright-stats-card">
+            <div className="bright-stats-intro">
+              <TypewriterHeading text="The backbone of AI-driven equipment sales." as="h2" />
+              <p className="bright-stats-intro-copy">
+                Antbuildz turns every enquiry into a structured, qualified opportunity — giving equipment sales teams the speed, consistency, and intelligence to close more deals.
+              </p>
+            </div>
+            <div className="bright-stats-metrics" role="list" aria-label="Key statistics">
+              {statItems.map((stat, i) => (
+                <StatCard key={stat.label} stat={stat} icon={statIcons[i]} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
