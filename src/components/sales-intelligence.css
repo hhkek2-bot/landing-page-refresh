@@ -368,54 +368,40 @@
   100% { box-shadow: 0 0 0 18px hsl(150 70% 50% / 0); }
 }
 
-
-/* Pause on hover for accessibility / readability */
-.si-stage:hover .si-col-track {
-  animation-play-state: paused;
-}
-
 /* Tablet ------------------------------------------------------------------ */
 @media (max-width: 1024px) {
-  .si-stage {
-    height: auto;
-    max-height: none;
-    overflow: visible;
-    border-radius: 0;
+  .si-bento {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 190px;
   }
-  .si-fade { display: none; }
-  .si-grid {
-    grid-template-columns: repeat(2, 1fr);
-    height: auto;
-  }
-  .si-col { height: auto; overflow: visible; }
-  .si-col-track {
-    animation: none;
-    transform: none !important;
-  }
-  .si-col-group:nth-child(2) { display: none; }
-  .si-card-sm, .si-card-md, .si-card-lg { min-height: 0; }
+  .si-span-col-span-2-row-span-2 { grid-column: span 2; grid-row: span 2; }
+  .si-span-col-span-2-row-span-1 { grid-column: span 2; grid-row: span 1; }
+  .si-span-col-span-3-row-span-1 { grid-column: span 4; grid-row: span 1; }
+  .si-span-col-span-4-row-span-1 { grid-column: span 4; grid-row: span 1; }
 }
 
 /* Mobile ------------------------------------------------------------------ */
 @media (max-width: 640px) {
   .si-section { padding: 4.5rem 0 5rem; }
   .si-header { margin-bottom: 2.5rem; }
-  .si-grid {
+  .si-bento {
     grid-template-columns: 1fr;
+    grid-auto-rows: minmax(280px, auto);
     gap: 1rem;
   }
-  .si-col-track { gap: 1rem; }
+  .si-span-col-span-2-row-span-2,
+  .si-span-col-span-2-row-span-1,
+  .si-span-col-span-3-row-span-1,
+  .si-span-col-span-4-row-span-1 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
 }
 
 /* Reduced motion ---------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  .si-col-track {
-    animation: none;
-    transform: none !important;
-  }
-  .si-col-group:nth-child(2) { display: none; }
-  .si-card {
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  .si-bento-card {
+    transition: box-shadow 0.3s ease;
     opacity: 1;
     transform: none;
   }
