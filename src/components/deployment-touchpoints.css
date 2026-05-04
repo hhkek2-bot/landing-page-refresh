@@ -221,9 +221,11 @@
 .dt-source-lines {
   position: absolute; inset: 0; width: 100%; height: 100%;
   pointer-events: none;
+  z-index: 1;
 }
-.dt-source-lines path {
-  fill: none; stroke-width: 0.6; stroke-dasharray: 1.5 1.5;
+.dt-source-lines path,
+.dt-source-lines line {
+  fill: none; stroke-width: 0.4; stroke-dasharray: 1.5 1.5;
   stroke: url(#dt-line-grad);
   animation: dt-dash-flow 1.2s linear infinite;
 }
