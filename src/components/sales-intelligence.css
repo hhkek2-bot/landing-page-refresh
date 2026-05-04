@@ -72,11 +72,11 @@
 }
 .si-fade-top {
   top: 0;
-  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 35%, rgba(255, 255, 255, 0) 100%);
 }
 .si-fade-bottom {
   bottom: 0;
-  background: linear-gradient(0deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(0deg, #ffffff 0%, #ffffff 35%, rgba(255, 255, 255, 0) 100%);
 }
 
 .si-grid {
