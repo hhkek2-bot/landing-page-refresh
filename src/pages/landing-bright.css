@@ -2187,8 +2187,8 @@
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 340px;
-  gap: 20px;
+  grid-auto-rows: minmax(420px, auto);
+  gap: 22px;
 }
 
 /* All tiles equal in 3x2 layout */
@@ -2228,10 +2228,11 @@
 .bento-cream    { --tone: #b45309; --tone-soft: #fffbeb; }
 .bento-ink      { --tone: #06b6d4; --tone-soft: #f1f5f9; }
 
-/* Visual area — top portion with a very subtle tinted backdrop */
+/* Visual area — fixed top portion */
 .bento-visual {
   position: relative;
-  flex: 0 0 54%;
+  height: 210px;
+  flex: 0 0 210px;
   min-height: 0;
   overflow: hidden;
   background:
@@ -2239,16 +2240,17 @@
 }
 .bento-visual::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: 0;
-  height: 60px;
+  height: 50px;
   background: linear-gradient(0deg, #ffffff 0%, transparent 100%);
   pointer-events: none;
+  z-index: 5;
 }
 
-/* Body */
+/* Body — flex grows, all description visible with generous padding */
 .bento-body {
   position: relative;
   z-index: 2;
-  padding: 22px 26px 26px;
+  padding: 24px 28px 28px;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
@@ -2260,141 +2262,311 @@
   font-weight: 600;
   letter-spacing: -0.005em;
   color: var(--tone);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
-.bento-card h3 { font-size: 1.16rem; font-weight: 700; line-height: 1.25; margin: 0 0 8px; color: #0b1220; letter-spacing: -0.015em; }
-.bento-card p { font-size: 0.92rem; line-height: 1.6; margin: 0; color: #5b6472; }
+.bento-card h3 { font-size: 1.18rem; font-weight: 700; line-height: 1.3; margin: 0 0 10px; color: #0b1220; letter-spacing: -0.015em; }
+.bento-card p { font-size: 0.92rem; line-height: 1.65; margin: 0; color: #5b6472; }
 
-/* Workflow Agent — keep dark visual area, light body remains */
+/* Workflow Agent — keep dark visual area */
 .bento-ink .bento-visual {
   background:
     radial-gradient(120% 80% at 50% 0%, #0f172a 0%, #1e293b 70%, #f7f8fa 100%);
 }
-.bento-ink .bento-visual::after {
-  background: linear-gradient(0deg, #ffffff 0%, transparent 100%);
+
+.bv { position: absolute; inset: 0; }
+.bv-chip { font-size: 0.74rem; font-weight: 600; color: #0b1220; }
+
+/* ============================================================
+   1. KNOWLEDGE — central hub with orbiting specs
+   ============================================================ */
+.bv-knowledge { display: flex; align-items: center; justify-content: center; }
+.bv-orbit-ring {
+  position: absolute; top: 50%; left: 50%;
+  border: 1.5px dashed rgba(37, 99, 235, 0.22);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.bv-orbit-ring-1 { width: 130px; height: 130px; animation: bvSpin 22s linear infinite; }
+.bv-orbit-ring-2 { width: 200px; height: 200px; animation: bvSpin 32s linear infinite reverse; opacity: 0.55; }
+.bv-core {
+  position: relative; z-index: 2;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #fff;
+  font-size: 0.8rem; font-weight: 700;
+  padding: 10px 16px; border-radius: 999px;
+  box-shadow: 0 12px 28px -10px rgba(37, 99, 235, 0.5);
+  animation: bvPulseSoft 3s ease-in-out infinite;
+}
+.bv-orbiter {
+  position: absolute; top: 50%; left: 50%;
+  width: 0; height: 0;
+}
+.bv-orbiter .bv-chip {
+  position: absolute;
+  display: inline-flex; align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 999px; padding: 6px 11px;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px -10px rgba(15, 23, 42, 0.3);
+  transform: translate(-50%, -50%);
+}
+.bv-o-1 .bv-chip { top: -78px; left: 0; }
+.bv-o-2 .bv-chip { top: 0; left: 92px; }
+.bv-o-3 .bv-chip { top: 78px; left: 0; }
+.bv-o-4 .bv-chip { top: 0; left: -92px; }
+.bv-o-1 { animation: bvFloatY 4s ease-in-out infinite; }
+.bv-o-2 { animation: bvFloatX 4.5s ease-in-out infinite -1s; }
+.bv-o-3 { animation: bvFloatY 5s ease-in-out infinite -2s; }
+.bv-o-4 { animation: bvFloatX 4.2s ease-in-out infinite -1.5s; }
+
+@keyframes bvSpin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes bvPulseSoft {
+  0%, 100% { box-shadow: 0 12px 28px -10px rgba(37, 99, 235, 0.5); }
+  50% { box-shadow: 0 12px 36px -8px rgba(37, 99, 235, 0.75); }
+}
+@keyframes bvFloatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes bvFloatX {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-5px); }
 }
 
-
-
-/* ---- Floating badges (shared) ---- */
-.bv { position: absolute; inset: 0; }
-
-.bv-badge {
+/* ============================================================
+   2. TRAINING — documents falling into a "Trained" pulse
+   ============================================================ */
+.bv-doc {
   position: absolute;
   display: inline-flex; align-items: center; gap: 6px;
-  font-size: 0.74rem; font-weight: 600; letter-spacing: -0.005em;
-  color: #0b1220;
-  background: rgba(255, 255, 255, 0.78);
+  font-size: 0.74rem; font-weight: 600; color: #0b1220;
+  background: #ffffff;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 999px;
-  padding: 7px 12px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 8px 22px -14px rgba(15, 23, 42, 0.25);
+  border-radius: 10px; padding: 7px 11px;
+  box-shadow: 0 8px 20px -12px rgba(15, 23, 42, 0.3);
   white-space: nowrap;
-  animation: bvFloat 6s ease-in-out infinite;
+  left: 28px;
+  animation: bvDocDrop 4s ease-in-out infinite;
 }
-.bv-badge b { font-weight: 700; }
-.bv-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #10b981; flex: none; }
-.bv-badge .ext {
-  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em;
+.bv-doc-1 { top: 14px;  animation-delay: 0s; }
+.bv-doc-2 { top: 50px;  animation-delay: -1.3s; }
+.bv-doc-3 { top: 86px;  animation-delay: -2.6s; }
+.bv-funnel {
+  position: absolute; bottom: 56px; right: 24px;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.7rem; font-weight: 600; color: #7c3aed;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px dashed rgba(124, 58, 237, 0.35);
+  padding: 5px 10px; border-radius: 999px;
+}
+.bv-train-pill {
+  position: absolute; bottom: 18px; right: 22px;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.78rem; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  padding: 8px 14px; border-radius: 999px;
+  box-shadow: 0 12px 26px -10px rgba(124, 58, 237, 0.5);
+  animation: bvPulseSoft 2.4s ease-in-out infinite;
+}
+.bv-doc .ext {
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.05em;
   color: #fff; padding: 2px 5px; border-radius: 4px;
 }
-.bv-badge .ext.red   { background: #ef4444; }
-.bv-badge .ext.green { background: #10b981; }
-.bv-badge .ext.blue  { background: #3b82f6; }
+.bv-doc .ext.red   { background: #ef4444; }
+.bv-doc .ext.green { background: #10b981; }
+.bv-doc .ext.blue  { background: #3b82f6; }
 
-.bv-badge.outline {
-  background: transparent;
-  border-style: dashed;
-  color: #475569;
-  box-shadow: none;
-  backdrop-filter: none;
-}
-.bv-badge.solid {
-  color: #fff;
-  background: #0b1220;
-  border-color: transparent;
-  box-shadow: 0 14px 28px -14px rgba(11, 18, 32, 0.55);
+@keyframes bvDocDrop {
+  0%   { opacity: 0; transform: translateY(-14px); }
+  18%  { opacity: 1; transform: translateY(0); }
+  82%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(8px) scale(0.94); }
 }
 
-/* Stagger floating animation */
-.bv-b-1 { animation-delay: 0s; }
-.bv-b-2 { animation-delay: -1.5s; }
-.bv-b-3 { animation-delay: -3s; }
-.bv-b-4 { animation-delay: -2.2s; }
-.bv-b-5 { animation-delay: -0.8s; }
-
-@keyframes bvFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+/* ============================================================
+   3. MATCHING — ranked horizontal bars filling
+   ============================================================ */
+.bv-matching { padding: 22px 24px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+.bv-rank { display: grid; grid-template-columns: 92px 1fr 36px; align-items: center; gap: 10px; }
+.bv-rank-name { font-size: 0.74rem; font-weight: 600; color: #0b1220; white-space: nowrap; }
+.bv-rank-bar { position: relative; height: 7px; background: rgba(5, 150, 105, 0.12); border-radius: 999px; overflow: hidden; }
+.bv-rank-bar i {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  border-radius: 999px;
+  transform-origin: left;
+  animation: bvBarFill 2.4s cubic-bezier(.4,1,.4,1) infinite;
+}
+.bv-rank-pct { font-size: 0.72rem; font-weight: 700; color: #047857; text-align: right; }
+.bv-rank-1 .bv-rank-bar i { animation-delay: 0s; }
+.bv-rank-2 .bv-rank-bar i { animation-delay: -0.4s; }
+.bv-rank-3 .bv-rank-bar i { animation-delay: -0.8s; }
+.bv-best {
+  position: absolute; top: 14px; right: 16px;
+  font-size: 0.7rem; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, #059669, #10b981);
+  padding: 5px 11px; border-radius: 999px;
+  box-shadow: 0 8px 20px -10px rgba(5, 150, 105, 0.5);
+  animation: bvPulseSoft 2.4s ease-in-out infinite;
+}
+@keyframes bvBarFill {
+  0%   { transform: scaleX(0.15); opacity: 0.6; }
+  60%  { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 1; }
 }
 
-/* ---- Per-card layout positions ---- */
-/* Knowledge — equipment specs scattered */
-.bv-knowledge .bv-b-1 { top: 18px; left: 22px; }
-.bv-knowledge .bv-b-2 { top: 60px; right: 24px; }
-.bv-knowledge .bv-b-3 { top: 102px; left: 38px; }
-.bv-knowledge .bv-b-4 { top: 142px; right: 40px; }
-.bv-knowledge .bv-b-5 { top: 18px; right: 22px; }
-
-/* Training — files cascading toward "Trained" */
-.bv-training .bv-b-1 { top: 18px;  left: 22px; }
-.bv-training .bv-b-2 { top: 56px;  left: 38px; }
-.bv-training .bv-b-3 { top: 94px;  left: 22px; }
-.bv-training .bv-b-4 { top: 134px; right: 26px; background: linear-gradient(135deg, #7c3aed, #a78bfa); }
-.bv-training .bv-b-4 svg { color: #fff; }
-
-/* Matching — ranked badges */
-.bv-matching .bv-b-1 { top: 18px;  left: 24px; }
-.bv-matching .bv-b-1 b { color: #047857; }
-.bv-matching .bv-b-2 { top: 58px;  right: 28px; }
-.bv-matching .bv-b-2 b { color: #047857; }
-.bv-matching .bv-b-3 { top: 100px; left: 30px; }
-.bv-matching .bv-b-3 b { color: #047857; }
-.bv-matching .bv-b-4 { top: 142px; right: 26px; background: linear-gradient(135deg, #059669, #10b981); }
-
-/* Signals — qualifying signals + intent score */
-.bv-signals .bv-b-1 { top: 22px; left: 22px; }
-.bv-signals .bv-b-2 { top: 60px; right: 24px; }
-.bv-signals .bv-b-3 { top: 100px; left: 38px; }
-.bv-signals .bv-b-4 { top: 144px; right: 28px; background: linear-gradient(135deg, #e11d48, #fb7185); }
-
-/* Security — compliance badges */
-.bv-security .bv-b-1 { top: 22px; left: 24px; }
-.bv-security .bv-b-2 { top: 22px; right: 24px; }
-.bv-security .bv-b-3 { top: 70px; left: 36px; }
-.bv-security .bv-b-4 { top: 122px; right: 30px; background: linear-gradient(135deg, #b45309, #f59e0b); }
-.bv-security .bv-b-4 svg { color: #fff; }
-
-/* Workflow — agent steps (dark card) */
-.bv-workflow .bv-badge {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.14);
-  color: #fff;
-  box-shadow: 0 8px 22px -14px rgba(0, 0, 0, 0.6);
+/* ============================================================
+   4. SIGNALS — radar pulse + intent gauge
+   ============================================================ */
+.bv-radar {
+  position: absolute; top: 50%; left: 70px;
+  width: 90px; height: 90px;
+  transform: translateY(-50%);
 }
-.bv-workflow .bv-b-1 { top: 22px;  left: 22px; }
-.bv-workflow .bv-b-2 { top: 60px;  right: 24px; }
-.bv-workflow .bv-b-3 { top: 100px; left: 36px; }
-.bv-workflow .bv-b-4 {
-  top: 144px; right: 26px;
+.bv-radar-ring {
+  position: absolute; inset: 0;
+  border: 1.5px solid rgba(225, 29, 72, 0.45);
+  border-radius: 50%;
+  animation: bvRadar 2.4s cubic-bezier(.2,.6,.2,1) infinite;
+  opacity: 0;
+}
+.bv-radar-ring:nth-child(1) { animation-delay: 0s; }
+.bv-radar-ring:nth-child(2) { animation-delay: -0.8s; }
+.bv-radar-ring:nth-child(3) { animation-delay: -1.6s; }
+.bv-radar-dot {
+  position: absolute; top: 50%; left: 50%;
+  width: 12px; height: 12px;
+  background: #e11d48; border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.18);
+}
+.bv-sig-row {
+  position: absolute; right: 18px;
+  display: inline-flex; align-items: center; gap: 7px;
+  background: #ffffff; border: 1px solid rgba(15, 23, 42, 0.08);
+  font-size: 0.72rem; font-weight: 600; color: #0b1220;
+  padding: 5px 10px; border-radius: 999px;
+  box-shadow: 0 6px 16px -10px rgba(15, 23, 42, 0.25);
+}
+.bv-sig-row .dot { width: 6px; height: 6px; border-radius: 50%; background: #10b981; }
+.bv-sig-1 { top: 18px; animation: bvSlideIn 4s ease-in-out infinite; }
+.bv-sig-2 { top: 56px; animation: bvSlideIn 4s ease-in-out infinite -1.3s; }
+.bv-sig-3 { top: 94px; animation: bvSlideIn 4s ease-in-out infinite -2.6s; }
+.bv-intent {
+  position: absolute; bottom: 22px; left: 28px;
+  display: inline-flex; align-items: baseline; gap: 6px;
+  background: linear-gradient(135deg, #e11d48, #fb7185);
+  color: #fff; padding: 6px 14px; border-radius: 999px;
+  box-shadow: 0 12px 26px -10px rgba(225, 29, 72, 0.5);
+}
+.bv-intent-label { font-size: 0.7rem; font-weight: 600; opacity: 0.9; }
+.bv-intent-score { font-size: 1rem; font-weight: 800; }
+@keyframes bvRadar {
+  0%   { transform: scale(0.4); opacity: 0; }
+  20%  { opacity: 0.7; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+@keyframes bvSlideIn {
+  0%, 100% { transform: translateX(0); opacity: 1; }
+  50% { transform: translateX(-4px); opacity: 0.9; }
+}
+
+/* ============================================================
+   5. SECURITY — shield with scan beam + tags
+   ============================================================ */
+.bv-security { display: flex; align-items: center; justify-content: center; }
+.bv-shield {
+  position: relative; z-index: 2;
+  width: 86px; height: 86px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  color: #b45309;
+  border: 1.5px solid rgba(180, 83, 9, 0.25);
+  border-radius: 22px;
+  box-shadow: 0 16px 32px -14px rgba(180, 83, 9, 0.35);
+  overflow: hidden;
+  animation: bvPulseSoft 3s ease-in-out infinite;
+}
+.bv-shield .bv-scan {
+  position: absolute; left: -10%; right: -10%;
+  height: 14px;
+  background: linear-gradient(180deg, transparent, rgba(245, 158, 11, 0.55), transparent);
+  animation: bvScan 2.6s ease-in-out infinite;
+  filter: blur(1px);
+}
+.bv-sec-tag {
+  position: absolute;
+  font-size: 0.7rem; font-weight: 700; color: #92400e;
+  background: #fff;
+  border: 1px solid rgba(180, 83, 9, 0.2);
+  padding: 5px 10px; border-radius: 999px;
+  box-shadow: 0 6px 16px -10px rgba(180, 83, 9, 0.3);
+  animation: bvFloatY 4s ease-in-out infinite;
+}
+.bv-sec-1 { top: 20px;  left: 22px;  animation-delay: 0s; }
+.bv-sec-2 { top: 22px;  right: 22px; animation-delay: -1.3s; }
+.bv-sec-3 { bottom: 22px; left: 50%; transform: translateX(-50%); animation-delay: -2.6s; }
+@keyframes bvScan {
+  0%   { top: -10%; }
+  100% { top: 110%; }
+}
+
+/* ============================================================
+   6. WORKFLOW — animated checklist (dark card)
+   ============================================================ */
+.bv-workflow { padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+.bv-task {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.78rem; font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  animation: bvTaskFade 5s ease-in-out infinite;
+}
+.bv-check {
+  width: 18px; height: 18px; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(34, 211, 238, 0.18);
+  color: #22d3ee;
+  border-radius: 50%;
+}
+.bv-check-active {
   background: linear-gradient(135deg, #22d3ee, #0ea5e9);
-  color: #0b1220; border-color: transparent;
+  color: #0b1220;
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.6);
 }
-
-
+.bv-task-1 { animation-delay: 0s; }
+.bv-task-2 { animation-delay: -1.2s; }
+.bv-task-3 { animation-delay: -2.4s; }
+.bv-task-active {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.18), rgba(14, 165, 233, 0.12));
+  border-color: rgba(34, 211, 238, 0.45);
+  color: #fff;
+  animation: bvTaskGlow 2.4s ease-in-out infinite;
+}
+@keyframes bvTaskFade {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+@keyframes bvTaskGlow {
+  0%, 100% { box-shadow: 0 0 0 rgba(34, 211, 238, 0); }
+  50% { box-shadow: 0 0 24px -4px rgba(34, 211, 238, 0.5); }
+}
 
 /* Tablet */
 @media (max-width: 1024px) {
-  .bento-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
-  .bento-size-lg, .bento-size-tall, .bento-size-wide, .bento-size-md, .bento-size-sm { grid-column: span 2; grid-row: span 1; }
-  .bento-size-lg, .bento-size-tall { grid-row: span 2; }
+  .bento-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: minmax(400px, auto); }
+  .bento-size-lg, .bento-size-tall, .bento-size-wide, .bento-size-md, .bento-size-sm { grid-column: span 1; grid-row: span 1; }
 }
 
 /* Mobile */
 @media (max-width: 640px) {
-  .bento-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; gap: 14px; }
-  .bento-size-lg, .bento-size-tall, .bento-size-wide, .bento-size-md, .bento-size-sm { grid-column: span 1; grid-row: span 1; }
-  .bento-size-lg, .bento-size-tall { grid-row: span 2; }
+  .bento-grid { grid-template-columns: 1fr; grid-auto-rows: minmax(380px, auto); gap: 16px; }
+  .bento-visual { height: 190px; flex-basis: 190px; }
+  .bento-body { padding: 22px 22px 24px; }
 }
+
