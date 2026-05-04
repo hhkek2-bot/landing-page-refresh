@@ -1038,14 +1038,12 @@ export default function Landing() {
               return (
                 <div key={col} className={`pain-col pain-col-${col}`}>
                   {items.map((p) => {
-                    const Icon = p.icon;
                     return (
                       <article key={p.title} className={`pain-card pain-tone-${p.tone} pain-size-${p.size} pain-area-${p.area}`}>
                         <div className="pain-visual" aria-hidden="true">
                           <PainVisual visual={p.visual} />
                         </div>
                         <div className="pain-body">
-                          <div className="pain-icon-wrap"><Icon size={16} strokeWidth={1.8} /></div>
                           <span className="pain-eyebrow">{p.eyebrow}</span>
                           <h3>{p.title}</h3>
                           <p>{p.body}</p>
