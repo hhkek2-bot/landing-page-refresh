@@ -286,12 +286,12 @@ type BentoFeature = {
 };
 
 const bentoFeatures: BentoFeature[] = [
-  { icon: Database, title: "Industry Knowledge", body: "Built on marketplace intelligence from thousands of equipment listings — machine specs, model naming, payload limits, and trade terminology from day one.", tone: "blue", size: "lg", visual: "knowledge" },
-  { icon: UploadCloud, title: "Knowledge Training", body: "Upload catalogues, manuals, PDFs or sync Google Sheets to train the AI on your inventory, pricing logic and policies.", tone: "lavender", size: "md", visual: "training" },
-  { icon: SearchCheck, title: "Equipment Matching", body: "Matches project requirements with the right machines using specs, availability and operating constraints.", tone: "mint", size: "md", visual: "matching" },
-  { icon: Activity, title: "Buyer Signals", body: "Detects purchasing intent from conversation patterns and surfaces high-value opportunities.", tone: "peach", size: "wide", visual: "signals" },
-  { icon: ShieldCheck, title: "Data Security", body: "Tenant-isolated, encrypted knowledge bases keep proprietary data private.", tone: "cream", size: "sm", visual: "security" },
-  { icon: Sparkles, title: "Workflow Agent", body: "Sends quotations, compares specs, generates invoices and creates reservations — straight from the chat.", tone: "ink", size: "tall", visual: "workflow" },
+  { icon: Database, title: "Industry Knowledge", body: "Built on structured marketplace intelligence across extensive equipment data, the AI understands specifications, model conventions, payload limits, and real-world industry terminology from day one.", tone: "blue", size: "lg", visual: "knowledge" },
+  { icon: UploadCloud, title: "Knowledge Training", body: "Upload catalogues, manuals, PDFs, websites, or sync Google Sheets to train the AI with your inventory, pricing logic, policies, and operational workflows — kept continuously updated.", tone: "lavender", size: "md", visual: "training" },
+  { icon: SearchCheck, title: "Recommendation Engine", body: "Understands customer intent and uses AI-powered recommendation and reasoning to suggest the right equipment, tools, and parts based on specifications, availability, and operational constraints.", tone: "mint", size: "md", visual: "matching" },
+  { icon: Activity, title: "Buyer Signals", body: "Analyzes conversations and engagement patterns to detect purchasing intent, qualify leads, and highlight high-value opportunities — helping your sales team prioritize and respond more effectively in real time.", tone: "peach", size: "wide", visual: "signals" },
+  { icon: ShieldCheck, title: "Private Data Vault", body: "Each subscriber's data is encrypted, isolated, and stored in a dedicated vault — ensuring full ownership, zero cross-client exposure, and never used to train external AI models.", tone: "cream", size: "sm", visual: "security" },
+  { icon: Sparkles, title: "Workflow Agent", body: "Executes operational tasks such as sharing quotations, comparing specifications, generating invoices, and creating reservations directly from customer conversations — reducing manual work and response time.", tone: "ink", size: "tall", visual: "workflow" },
 ];
 
 const processSteps: ProcessStep[] = [
