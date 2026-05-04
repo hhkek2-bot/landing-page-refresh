@@ -538,6 +538,82 @@ function ComparisonInteractive({ activeIndex, setActiveIndex, beamTop, beamLeft,
   );
 }
 
+function BentoVisual({ visual }: { visual: BentoFeature["visual"] }) {
+  switch (visual) {
+    case "knowledge":
+      return (
+        <div className="bv bv-knowledge">
+          <div className="bv-doc bv-doc-3" />
+          <div className="bv-doc bv-doc-2" />
+          <div className="bv-doc bv-doc-1">
+            <span /><span /><span className="short" />
+          </div>
+          <div className="bv-tag bv-tag-a">Excavator</div>
+          <div className="bv-tag bv-tag-b">Payload</div>
+        </div>
+      );
+    case "training":
+      return (
+        <div className="bv bv-training">
+          <div className="bv-cloud"><UploadCloud size={26} /></div>
+          <div className="bv-file bv-file-1">PDF</div>
+          <div className="bv-file bv-file-2">XLS</div>
+          <div className="bv-file bv-file-3">DOC</div>
+        </div>
+      );
+    case "matching":
+      return (
+        <div className="bv bv-matching">
+          <div className="bv-match">
+            <div className="bv-match-row"><span className="bv-dot" /><span className="bv-bar" style={{ width: "70%" }} /></div>
+            <div className="bv-match-row"><span className="bv-dot" /><span className="bv-bar" style={{ width: "92%" }} /></div>
+            <div className="bv-match-row bv-match-best"><span className="bv-dot" /><span className="bv-bar" style={{ width: "100%" }} /><span className="bv-check">✓</span></div>
+          </div>
+        </div>
+      );
+    case "signals":
+      return (
+        <div className="bv bv-signals">
+          <svg viewBox="0 0 220 80" preserveAspectRatio="none" className="bv-chart">
+            <defs>
+              <linearGradient id="bvSig" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stopColor="#fb7185" stopOpacity="0.45" />
+                <stop offset="100%" stopColor="#fb7185" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <path d="M0 60 L30 50 L55 55 L85 35 L115 42 L145 22 L175 30 L210 8 L220 8 L220 80 L0 80 Z" fill="url(#bvSig)" />
+            <path d="M0 60 L30 50 L55 55 L85 35 L115 42 L145 22 L175 30 L210 8" fill="none" stroke="#e11d48" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            <circle cx="210" cy="8" r="4" fill="#e11d48" />
+          </svg>
+          <div className="bv-pill">High intent</div>
+        </div>
+      );
+    case "security":
+      return (
+        <div className="bv bv-security">
+          <div className="bv-shield"><ShieldCheck size={28} /></div>
+        </div>
+      );
+    case "workflow":
+      return (
+        <div className="bv bv-workflow">
+          <div className="bv-quote">
+            <div className="bv-quote-head">
+              <span className="bv-quote-title">Quotation</span>
+              <span className="bv-quote-badge">SENT</span>
+            </div>
+            <div className="bv-quote-row"><span /><span className="amt" /></div>
+            <div className="bv-quote-row"><span /><span className="amt" /></div>
+            <div className="bv-quote-row total"><span /><span className="amt" /></div>
+          </div>
+          <div className="bv-spark bv-spark-1" />
+          <div className="bv-spark bv-spark-2" />
+          <div className="bv-spark bv-spark-3" />
+        </div>
+      );
+  }
+}
+
 export default function Landing() {
   const heroSectionRef = useRef<HTMLElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
