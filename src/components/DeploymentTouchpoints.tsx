@@ -64,9 +64,9 @@ const touchpoints: Touchpoint[] = [
   },
   {
     id: "team",
-    title: "Internal Sales Assistant",
+    title: "Sales Knowledge Brain",
     description:
-      "Help your team check pricing, product details, terms, and availability faster — across thousands of SKUs — while keeping sales responses consistent.",
+      "Turn product knowledge, pricing rules, and sales terms into a searchable brain your team can use across every sales conversation.",
     icon: LayoutDashboard,
   },
 ];
