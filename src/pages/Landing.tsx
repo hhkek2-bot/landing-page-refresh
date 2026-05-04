@@ -276,13 +276,22 @@ function ProductCarousel({ cards }: { cards: ProductCardData[] }) {
   );
 }
 
-const featureCards: Feature[] = [
-  { icon: Database, title: "Industry Knowledge", body: "Built on marketplace intelligence from thousands of equipment listings, the AI understands machine specifications, model naming conventions, payload limits, and industry terminology from day one." },
-  { icon: UploadCloud, title: "Knowledge Training", body: "Upload catalogues, manuals, PDFs, or sync Google Sheets to train the AI with your inventory, pricing logic, policies, and operational workflows." },
-  { icon: SearchCheck, title: "Equipment Matching", body: "Matches project requirements with suitable equipment using specifications, availability, and operational constraints to recommend the most relevant options." },
-  { icon: Activity, title: "Buyer Signals", body: "Analyzes conversations and engagement patterns to detect purchasing intent and highlight high-value opportunities for your sales team." },
-  { icon: ShieldCheck, title: "Data Security", body: "Company knowledge bases are encrypted and isolated by organization to ensure proprietary information remains private and protected." },
-  { icon: Sparkles, title: "Workflow Agent", body: "Executes operational tasks such as sharing quotations, comparing specifications, generating invoices, and creating reservations directly from customer conversations.", variant: "workflow" },
+type BentoFeature = {
+  icon: LucideIcon;
+  title: string;
+  body: string;
+  tone: "blue" | "lavender" | "mint" | "peach" | "cream" | "ink";
+  size: "lg" | "md" | "sm" | "wide" | "tall";
+  visual: "knowledge" | "training" | "matching" | "signals" | "security" | "workflow";
+};
+
+const bentoFeatures: BentoFeature[] = [
+  { icon: Database, title: "Industry Knowledge", body: "Built on marketplace intelligence from thousands of equipment listings — machine specs, model naming, payload limits, and trade terminology from day one.", tone: "blue", size: "lg", visual: "knowledge" },
+  { icon: UploadCloud, title: "Knowledge Training", body: "Upload catalogues, manuals, PDFs or sync Google Sheets to train the AI on your inventory, pricing logic and policies.", tone: "lavender", size: "md", visual: "training" },
+  { icon: SearchCheck, title: "Equipment Matching", body: "Matches project requirements with the right machines using specs, availability and operating constraints.", tone: "mint", size: "md", visual: "matching" },
+  { icon: Activity, title: "Buyer Signals", body: "Detects purchasing intent from conversation patterns and surfaces high-value opportunities.", tone: "peach", size: "wide", visual: "signals" },
+  { icon: ShieldCheck, title: "Data Security", body: "Tenant-isolated, encrypted knowledge bases keep proprietary data private.", tone: "cream", size: "sm", visual: "security" },
+  { icon: Sparkles, title: "Workflow Agent", body: "Sends quotations, compares specs, generates invoices and creates reservations — straight from the chat.", tone: "ink", size: "tall", visual: "workflow" },
 ];
 
 const processSteps: ProcessStep[] = [
@@ -529,6 +538,82 @@ function ComparisonInteractive({ activeIndex, setActiveIndex, beamTop, beamLeft,
   );
 }
 
+function BentoVisual({ visual }: { visual: BentoFeature["visual"] }) {
+  switch (visual) {
+    case "knowledge":
+      return (
+        <div className="bv bv-knowledge">
+          <div className="bv-doc bv-doc-3" />
+          <div className="bv-doc bv-doc-2" />
+          <div className="bv-doc bv-doc-1">
+            <span /><span /><span className="short" />
+          </div>
+          <div className="bv-tag bv-tag-a">Excavator</div>
+          <div className="bv-tag bv-tag-b">Payload</div>
+        </div>
+      );
+    case "training":
+      return (
+        <div className="bv bv-training">
+          <div className="bv-cloud"><UploadCloud size={26} /></div>
+          <div className="bv-file bv-file-1">PDF</div>
+          <div className="bv-file bv-file-2">XLS</div>
+          <div className="bv-file bv-file-3">DOC</div>
+        </div>
+      );
+    case "matching":
+      return (
+        <div className="bv bv-matching">
+          <div className="bv-match">
+            <div className="bv-match-row"><span className="bv-dot" /><span className="bv-bar" style={{ width: "70%" }} /></div>
+            <div className="bv-match-row"><span className="bv-dot" /><span className="bv-bar" style={{ width: "92%" }} /></div>
+            <div className="bv-match-row bv-match-best"><span className="bv-dot" /><span className="bv-bar" style={{ width: "100%" }} /><span className="bv-check">✓</span></div>
+          </div>
+        </div>
+      );
+    case "signals":
+      return (
+        <div className="bv bv-signals">
+          <svg viewBox="0 0 220 80" preserveAspectRatio="none" className="bv-chart">
+            <defs>
+              <linearGradient id="bvSig" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stopColor="#fb7185" stopOpacity="0.45" />
+                <stop offset="100%" stopColor="#fb7185" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <path d="M0 60 L30 50 L55 55 L85 35 L115 42 L145 22 L175 30 L210 8 L220 8 L220 80 L0 80 Z" fill="url(#bvSig)" />
+            <path d="M0 60 L30 50 L55 55 L85 35 L115 42 L145 22 L175 30 L210 8" fill="none" stroke="#e11d48" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            <circle cx="210" cy="8" r="4" fill="#e11d48" />
+          </svg>
+          <div className="bv-pill">High intent</div>
+        </div>
+      );
+    case "security":
+      return (
+        <div className="bv bv-security">
+          <div className="bv-shield"><ShieldCheck size={28} /></div>
+        </div>
+      );
+    case "workflow":
+      return (
+        <div className="bv bv-workflow">
+          <div className="bv-quote">
+            <div className="bv-quote-head">
+              <span className="bv-quote-title">Quotation</span>
+              <span className="bv-quote-badge">SENT</span>
+            </div>
+            <div className="bv-quote-row"><span /><span className="amt" /></div>
+            <div className="bv-quote-row"><span /><span className="amt" /></div>
+            <div className="bv-quote-row total"><span /><span className="amt" /></div>
+          </div>
+          <div className="bv-spark bv-spark-1" />
+          <div className="bv-spark bv-spark-2" />
+          <div className="bv-spark bv-spark-3" />
+        </div>
+      );
+  }
+}
+
 export default function Landing() {
   const heroSectionRef = useRef<HTMLElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -766,21 +851,31 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Features */}
-      <section className="bright-features">
+      {/* Features — Bento Grid */}
+      <section className="bright-features bento-section">
         <div className="bright-container">
           <div className="bright-section-header"><TypewriterHeading text="The Capabilities" /><p>Built specifically for heavy equipment rental, spare parts, and technical sales teams.</p></div>
-          <div className="bright-feature-grid">
-            {featureCards.map((f) => (
-              <article className={`bright-feature-card ${f.variant === "workflow" ? "bright-feature-card-workflow" : ""}`.trim()} key={f.title}>
-                <div className="bright-feature-hover-wave" aria-hidden="true" />
-                <div className="bright-feature-icon"><f.icon size={28} /></div>
-                <h3>{f.title}</h3><p>{f.body}</p>
+          <div className="bento-grid">
+            {bentoFeatures.map((f) => (
+              <article
+                key={f.title}
+                className={`bento-card bento-${f.tone} bento-size-${f.size}`}
+                data-visual={f.visual}
+              >
+                <div className="bento-visual" aria-hidden="true">
+                  <BentoVisual visual={f.visual} />
+                </div>
+                <div className="bento-body">
+                  <div className="bento-icon"><f.icon size={20} strokeWidth={2} /></div>
+                  <h3>{f.title}</h3>
+                  <p>{f.body}</p>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* Comparison / Pain Points */}
       <section className="bright-comparison" id="comparison">
