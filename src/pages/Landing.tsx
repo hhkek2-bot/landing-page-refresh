@@ -276,13 +276,22 @@ function ProductCarousel({ cards }: { cards: ProductCardData[] }) {
   );
 }
 
-const featureCards: Feature[] = [
-  { icon: Database, title: "Industry Knowledge", body: "Built on marketplace intelligence from thousands of equipment listings, the AI understands machine specifications, model naming conventions, payload limits, and industry terminology from day one." },
-  { icon: UploadCloud, title: "Knowledge Training", body: "Upload catalogues, manuals, PDFs, or sync Google Sheets to train the AI with your inventory, pricing logic, policies, and operational workflows." },
-  { icon: SearchCheck, title: "Equipment Matching", body: "Matches project requirements with suitable equipment using specifications, availability, and operational constraints to recommend the most relevant options." },
-  { icon: Activity, title: "Buyer Signals", body: "Analyzes conversations and engagement patterns to detect purchasing intent and highlight high-value opportunities for your sales team." },
-  { icon: ShieldCheck, title: "Data Security", body: "Company knowledge bases are encrypted and isolated by organization to ensure proprietary information remains private and protected." },
-  { icon: Sparkles, title: "Workflow Agent", body: "Executes operational tasks such as sharing quotations, comparing specifications, generating invoices, and creating reservations directly from customer conversations.", variant: "workflow" },
+type BentoFeature = {
+  icon: LucideIcon;
+  title: string;
+  body: string;
+  tone: "blue" | "lavender" | "mint" | "peach" | "cream" | "ink";
+  size: "lg" | "md" | "sm" | "wide" | "tall";
+  visual: "knowledge" | "training" | "matching" | "signals" | "security" | "workflow";
+};
+
+const bentoFeatures: BentoFeature[] = [
+  { icon: Database, title: "Industry Knowledge", body: "Built on marketplace intelligence from thousands of equipment listings — machine specs, model naming, payload limits, and trade terminology from day one.", tone: "blue", size: "lg", visual: "knowledge" },
+  { icon: UploadCloud, title: "Knowledge Training", body: "Upload catalogues, manuals, PDFs or sync Google Sheets to train the AI on your inventory, pricing logic and policies.", tone: "lavender", size: "md", visual: "training" },
+  { icon: SearchCheck, title: "Equipment Matching", body: "Matches project requirements with the right machines using specs, availability and operating constraints.", tone: "mint", size: "md", visual: "matching" },
+  { icon: Activity, title: "Buyer Signals", body: "Detects purchasing intent from conversation patterns and surfaces high-value opportunities.", tone: "peach", size: "wide", visual: "signals" },
+  { icon: ShieldCheck, title: "Data Security", body: "Tenant-isolated, encrypted knowledge bases keep proprietary data private.", tone: "cream", size: "sm", visual: "security" },
+  { icon: Sparkles, title: "Workflow Agent", body: "Sends quotations, compares specs, generates invoices and creates reservations — straight from the chat.", tone: "ink", size: "tall", visual: "workflow" },
 ];
 
 const processSteps: ProcessStep[] = [
