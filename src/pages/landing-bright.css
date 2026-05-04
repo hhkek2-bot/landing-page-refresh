@@ -2876,12 +2876,11 @@
   .pain-bento-grid {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-      "a b"
-      "a c"
-      "d e"
-      "f f";
+      "b  b"
+      "a1 c1"
+      "a2 c2"
+      "d  d";
   }
-  .pain-size-tall { min-height: 420px; }
 }
 
 /* Mobile */
@@ -2889,9 +2888,8 @@
   .pain-bento-grid {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "b" "a" "c" "d" "e" "f";
+      "b" "a1" "a2" "c1" "c2" "d";
     gap: 14px;
   }
-  .pain-size-tall { min-height: 360px; }
 }
 
