@@ -17,6 +17,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import RealisticGlobe from "./RealisticGlobe";
 import "./deployment-touchpoints.css";
 
 type Touchpoint = {
