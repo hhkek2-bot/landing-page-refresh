@@ -680,7 +680,7 @@ const painPoints: PainPoint[] = [
   { icon: Inbox,         eyebrow: "Fragmented",   title: "Too Many Entry Points",        body: "Enquiries arrive from websites, WhatsApp, ads, social media, calls, and referrals — but without one clear flow, important conversations become hard to track, assign, and follow up.",                       size: "feature", area: "b",  tone: "blue",    visual: "channels" },
   { icon: MessageCircle, eyebrow: "Missed",       title: "Lost Buyer Intent",            body: "Urgency, budget, location, and real equipment needs are often missed in conversation.",                     size: "stacked", area: "c1", tone: "slate",   visual: "intent" },
   { icon: Repeat,        eyebrow: "Inconsistent", title: "Inconsistent Sales Follow-Up", body: "Some leads are followed up properly, while others are delayed or lost.",                                     size: "stacked", area: "c2", tone: "emerald", visual: "followup" },
-  { icon: Layers,        eyebrow: "Scattered",    title: "Scattered Product Knowledge",  body: "Product details, specs, pricing, and recommendations are spread across files, people, and systems.",       size: "wide",    area: "d",  tone: "violet",  visual: "scatter" },
+  { icon: Layers,        eyebrow: "Scattered",    title: "Scattered Product Knowledge",  body: "Product details, specs, pricing, and recommendations are spread across files, people, and systems, making it harder for sales teams to answer accurately and consistently.",       size: "wide",    area: "d",  tone: "violet",  visual: "scatter" },
 ];
 
 function PainVisual({ visual }: { visual: PainPoint["visual"] }) {
