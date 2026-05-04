@@ -39,9 +39,9 @@ const touchpoints: Touchpoint[] = [
   },
   {
     id: "whatsapp",
-    title: "WhatsApp & Messaging",
+    title: "Business Chat Channels",
     description:
-      "Handle incoming chat enquiries, collect customer needs, and pass qualified leads to your sales team.",
+      "Share your AI Agent link through WhatsApp, Facebook Messenger, WeChat, Telegram, or broadcast messages to guide customers into structured sales conversations.",
     icon: MessageCircle,
   },
   {
