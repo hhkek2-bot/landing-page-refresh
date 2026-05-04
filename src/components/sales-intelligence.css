@@ -6,34 +6,9 @@
 .si-section {
   position: relative;
   padding: 7rem 0 8rem;
-  background:
-    radial-gradient(1200px 600px at 50% -10%, hsl(220 60% 97%) 0%, transparent 60%),
-    linear-gradient(180deg, #ffffff 0%, #fafbff 50%, #ffffff 100%);
+  background: transparent;
   overflow: hidden;
   isolation: isolate;
-}
-
-.si-bg-orb {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(90px);
-  opacity: 0.55;
-  pointer-events: none;
-  z-index: 0;
-}
-.si-bg-orb-1 {
-  top: -120px;
-  left: -120px;
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, hsl(220 90% 88%) 0%, transparent 70%);
-}
-.si-bg-orb-2 {
-  bottom: -160px;
-  right: -120px;
-  width: 460px;
-  height: 460px;
-  background: radial-gradient(circle, hsl(260 80% 92%) 0%, transparent 70%);
 }
 
 .si-container {

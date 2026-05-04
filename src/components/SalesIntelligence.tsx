@@ -164,9 +164,6 @@ function MarqueeColumn({
 export default function SalesIntelligence() {
   return (
     <section className="si-section" aria-labelledby="si-heading">
-      <div className="si-bg-orb si-bg-orb-1" aria-hidden />
-      <div className="si-bg-orb si-bg-orb-2" aria-hidden />
-
       <div className="si-container">
         <header className="si-header">
           <span className="si-eyebrow">AI Sales Agent Capabilities</span>
