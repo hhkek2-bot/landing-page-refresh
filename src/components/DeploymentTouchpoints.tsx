@@ -267,6 +267,53 @@ function PreviewEmail() {
           <p className="dt-email-promo-sub">
             Exclusive monthly rates on boom lifts, forklifts & scissor lifts.
           </p>
+
+          <motion.div
+            className="dt-email-discount-tag"
+            animate={{ rotate: [-8, -4, -8], y: [0, -3, 0] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <span className="dt-email-discount-num">30%</span>
+            <span className="dt-email-discount-label">OFF</span>
+          </motion.div>
+          <motion.div
+            className="dt-email-spark dt-email-spark-1"
+            animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <Sparkles size={14} />
+          </motion.div>
+          <motion.div
+            className="dt-email-spark dt-email-spark-2"
+            animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2.4, repeat: Infinity, delay: 0.5 }}
+          >
+            <Sparkles size={10} />
+          </motion.div>
+        </div>
+
+        <div className="dt-email-products">
+          {[
+            { label: "Boom Lift", price: "from $180/d" },
+            { label: "Forklift", price: "from $90/d" },
+            { label: "Scissor Lift", price: "from $120/d" },
+          ].map((p, i) => (
+            <motion.div
+              key={p.label}
+              className="dt-email-product"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 + i * 0.1 }}
+            >
+              <div className="dt-email-product-icon">
+                <Truck size={16} />
+              </div>
+              <div>
+                <p className="dt-email-product-label">{p.label}</p>
+                <p className="dt-email-product-price">{p.price}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         <div className="dt-email-perks">
