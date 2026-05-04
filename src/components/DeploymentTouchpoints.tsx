@@ -260,7 +260,21 @@ function PreviewEmail() {
 }
 
 function PreviewMultilingual() {
-  const langs = ["EN", "中文", "BM", "عربي", "ES", "हिं"];
+  const langs = [
+    "English", "中文", "日本語", "한국어", "Bahasa", "Tiếng Việt", "ภาษาไทย",
+    "Español", "Français", "Deutsch", "Italiano", "Português", "Nederlands",
+    "Русский", "Türkçe", "العربية", "हिन्दी", "বাংলা", "Polski", "Svenska",
+    "Filipino", "ગુજરાતી",
+  ];
+  // Pre-compute scattered positions around the central hub (avoiding center)
+  const positions = langs.map((_, i) => {
+    const ring = i % 2 === 0 ? 36 : 44;
+    const angle = (i / langs.length) * Math.PI * 2 + (i % 2 ? 0.2 : -0.2);
+    return {
+      x: 50 + Math.cos(angle) * ring,
+      y: 50 + Math.sin(angle) * ring * 0.78,
+    };
+  });
   return (
     <div className="dt-preview-multi">
       <div className="dt-multi-center">
@@ -269,20 +283,29 @@ function PreviewMultilingual() {
         <span className="dt-multi-247"><Clock size={12} /> 24 / 7</span>
       </div>
       {langs.map((l, i) => {
-        const angle = (i / langs.length) * Math.PI * 2;
-        const r = 38;
-        const x = 50 + Math.cos(angle) * r;
-        const y = 50 + Math.sin(angle) * r;
+        const { x, y } = positions[i];
+        const dx = (i * 37) % 18 - 9;
+        const dy = (i * 53) % 16 - 8;
+        const dur = 4 + (i % 5) * 0.7;
         return (
           <motion.span
             key={l}
             className="dt-lang-chip"
             style={{ left: `${x}%`, top: `${y}%` }}
             initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1, y: [0, -4, 0] }}
+            animate={{
+              opacity: [0.7, 1, 0.7],
+              scale: 1,
+              x: [0, dx, -dx * 0.6, 0],
+              y: [0, dy, -dy * 0.7, 0],
+              rotate: [0, i % 2 ? 3 : -3, 0],
+            }}
             transition={{
-              delay: 0.1 + i * 0.07,
-              y: { repeat: Infinity, duration: 2.4 + i * 0.2, ease: "easeInOut" },
+              opacity: { repeat: Infinity, duration: dur, ease: "easeInOut" },
+              x: { repeat: Infinity, duration: dur + 1, ease: "easeInOut" },
+              y: { repeat: Infinity, duration: dur + 0.5, ease: "easeInOut" },
+              rotate: { repeat: Infinity, duration: dur + 2, ease: "easeInOut" },
+              scale: { delay: 0.05 * i },
             }}
           >
             {l}
