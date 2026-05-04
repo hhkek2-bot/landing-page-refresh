@@ -438,10 +438,7 @@ function StatCard({ stat, icon: Icon }: { stat: StatItem; icon: LucideIcon }) {
       role="listitem"
       onMouseEnter={() => { setIsHovered(false); requestAnimationFrame(() => setIsHovered(true)); }}
     >
-      <div className="bright-stat-row">
-        <span className="bright-stat-icon" aria-hidden="true"><Icon size={16} strokeWidth={1.8} /></span>
-        <p className="bright-stat-value">{stat.prefix}{displayNum}{stat.suffix}</p>
-      </div>
+      <p className="bright-stat-value">{stat.prefix}{displayNum}{stat.suffix}</p>
       <p className="bright-stat-label">{stat.label}</p>
     </article>
   );
