@@ -283,7 +283,6 @@ export default function SalesIntelligence() {
     <section className="si-section" aria-labelledby="si-heading">
       <div className="si-container">
         <header className="si-header">
-          <span className="si-eyebrow">AI Sales Agent Capabilities</span>
           <h2 id="si-heading" className="si-headline">
             Sales Intelligence, Built Into Every Conversation
           </h2>
