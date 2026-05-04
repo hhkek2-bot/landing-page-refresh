@@ -409,41 +409,7 @@ function PreviewMultilingual() {
   return (
     <div className="dt-preview-multi">
       <div className="dt-globe-wrap" aria-hidden="true">
-        <div className="dt-globe">
-          <svg className="dt-globe-map" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <clipPath id="dt-globe-clip"><circle cx="100" cy="100" r="98" /></clipPath>
-              <linearGradient id="dt-globe-land" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.85" />
-                <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#ec4899" stopOpacity="0.8" />
-              </linearGradient>
-            </defs>
-            <g clipPath="url(#dt-globe-clip)" fill="url(#dt-globe-land)">
-              {/* North America */}
-              <path d="M22,58 Q30,42 50,40 Q72,38 78,52 L82,68 Q76,78 64,82 L58,96 Q50,100 42,94 L34,82 Q24,76 22,68 Z" />
-              {/* South America */}
-              <path d="M68,108 Q78,104 84,116 L82,138 Q76,156 66,160 Q58,150 60,134 Q62,120 68,108 Z" />
-              {/* Europe */}
-              <path d="M96,52 Q108,46 120,52 L124,64 Q116,70 106,68 Q98,64 96,52 Z" />
-              {/* Africa */}
-              <path d="M104,76 Q120,72 130,84 L130,108 Q124,128 114,134 Q104,128 102,112 Q100,94 104,76 Z" />
-              {/* Asia */}
-              <path d="M126,50 Q150,42 174,52 Q182,66 176,82 L162,90 Q146,86 136,76 Q128,66 126,50 Z" />
-              {/* Southeast Asia / Indonesia */}
-              <path d="M152,98 Q164,96 172,104 Q168,112 158,112 Q150,108 152,98 Z" />
-              {/* Australia */}
-              <path d="M150,126 Q166,122 178,130 Q176,142 162,144 Q150,140 150,126 Z" />
-            </g>
-            <circle cx="100" cy="100" r="98" fill="none" stroke="rgba(124,58,237,0.35)" strokeDasharray="2 3" />
-          </svg>
-          <span className="dt-globe-meridian" />
-          <span className="dt-globe-meridian dt-globe-meridian-2" />
-          <span className="dt-globe-meridian dt-globe-meridian-3" />
-          <span className="dt-globe-parallel" />
-          <span className="dt-globe-parallel dt-globe-parallel-2" />
-          <span className="dt-globe-parallel dt-globe-parallel-3" />
-        </div>
+        <RealisticGlobe />
       </div>
       {langs.map((l, i) => {
         const { x, y } = positions[i];
