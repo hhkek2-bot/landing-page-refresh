@@ -194,29 +194,49 @@ function PreviewWhatsApp() {
   return (
     <div className="dt-preview-whatsapp">
       <div className="dt-wa-head">
-        <div className="dt-chat-avatar dt-chat-avatar-green">AI</div>
+        <div className="dt-chat-avatar dt-chat-avatar-green">AB</div>
         <div>
-          <p className="dt-chat-name">Antbuildz AI</p>
-          <p className="dt-chat-status">typing…</p>
+          <p className="dt-chat-name">Antbuildz Sales</p>
+          <p className="dt-chat-status">online</p>
         </div>
       </div>
       <div className="dt-wa-body">
-        <div className="dt-wa-bubble dt-wa-in">Hi, do you rent boom lifts?</div>
-        <div className="dt-wa-bubble dt-wa-out">Yes! What working height and location?</div>
-        <div className="dt-wa-bubble dt-wa-in">40m, Tuas, 2 weeks</div>
-        <motion.div
-          className="dt-wa-summary"
+        <div className="dt-wa-bubble dt-wa-in">
+          Hi, can I get the price for a 40m boom lift rental?
+        </div>
+        <div className="dt-wa-bubble dt-wa-out">
+          Sure! You can get all the info you need — pricing, specs, availability —
+          by chatting with our AI Agent anytime you like 👇
+        </div>
+        <motion.a
+          href="#"
+          onClick={(e) => e.preventDefault()}
+          className="dt-wa-link-card"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
+          whileHover={{ scale: 1.02 }}
         >
-          <p className="dt-summary-title">Lead Captured</p>
-          <ul>
-            <li><Check size={12} /> 40m Telescopic Boom</li>
-            <li><Check size={12} /> Tuas · 2 weeks</li>
-            <li><Check size={12} /> Sent to sales team</li>
-          </ul>
-        </motion.div>
+          <div className="dt-wa-link-icon">
+            <MessageCircle size={18} />
+          </div>
+          <div className="dt-wa-link-text">
+            <p className="dt-wa-link-title">Chat with Agent</p>
+            <p className="dt-wa-link-url">antbuildz.ai/chat</p>
+          </div>
+          <motion.div
+            className="dt-wa-link-cta"
+            animate={{
+              boxShadow: [
+                "0 0 0 0 rgba(34,197,94,0.5)",
+                "0 0 0 8px rgba(34,197,94,0)",
+              ],
+            }}
+            transition={{ duration: 1.6, repeat: Infinity }}
+          >
+            Open
+          </motion.div>
+        </motion.a>
       </div>
     </div>
   );
