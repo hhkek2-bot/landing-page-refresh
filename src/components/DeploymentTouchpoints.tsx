@@ -46,9 +46,9 @@ const touchpoints: Touchpoint[] = [
   },
   {
     id: "email",
-    title: "Email & Sales Outreach",
+    title: "Email Marketing & Outreach",
     description:
-      "Turn email signatures, proposals, and follow-up messages into always-available sales entry points.",
+      "Turn email marketing, proposals, follow-ups, and signatures into direct sales entry points where customers can ask questions, compare options, and enquire anytime.",
     icon: Mail,
   },
   {
