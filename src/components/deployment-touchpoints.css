@@ -1,6 +1,10 @@
 /* Deployment Touchpoints Section — premium B2B SaaS */
 .dt-section {
-  background: linear-gradient(180deg, #fafbfc 0%, #f4f6f9 100%);
+  background:
+    radial-gradient(ellipse 60% 40% at 12% 8%, rgba(124, 58, 237, 0.10), transparent 60%),
+    radial-gradient(ellipse 55% 40% at 88% 12%, rgba(59, 130, 246, 0.10), transparent 60%),
+    radial-gradient(ellipse 60% 45% at 80% 95%, rgba(249, 115, 22, 0.08), transparent 65%),
+    linear-gradient(180deg, #fafbfc 0%, #f4f6f9 100%);
   padding: 96px 0;
   color: #0f1a2e;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
@@ -26,15 +30,26 @@
   line-height: 1.15;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #0b1730;
   margin: 0 0 18px;
+  color: #0b1730;
+}
+.dt-title-gradient {
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 40%, #f97316 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 .dt-subtitle {
   font-size: 15px;
   font-weight: 700;
-  color: #0b1730;
   letter-spacing: -0.005em;
   margin: 0 0 14px;
+  background: linear-gradient(90deg, #7c3aed 0%, #3b82f6 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 .dt-desc { font-size: 15px; line-height: 1.6; color: #475569; margin: 0 auto; max-width: 720px; }
 
@@ -79,8 +94,20 @@
   display: inline-flex; align-items: center; justify-content: center;
   background: #eef3fb; color: #1e40af;
   border: 1px solid #dde6f5;
+  transition: transform .25s ease, box-shadow .25s ease;
 }
-.dt-card-active .dt-card-icon { background: #1e40af; color: #fff; border-color: #1e40af; }
+.dt-card:nth-child(1) .dt-card-icon { background: #ede9fe; color: #7c3aed; border-color: #ddd6fe; }
+.dt-card:nth-child(2) .dt-card-icon { background: #ffedd5; color: #ea580c; border-color: #fed7aa; }
+.dt-card:nth-child(3) .dt-card-icon { background: #dcfce7; color: #16a34a; border-color: #bbf7d0; }
+.dt-card:nth-child(4) .dt-card-icon { background: #dbeafe; color: #2563eb; border-color: #bfdbfe; }
+.dt-card:nth-child(5) .dt-card-icon { background: #fce7f3; color: #db2777; border-color: #fbcfe8; }
+.dt-card:nth-child(6) .dt-card-icon { background: #fef3c7; color: #d97706; border-color: #fde68a; }
+.dt-card-active .dt-card-icon {
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #f97316 100%);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 8px 20px -8px rgba(124, 58, 237, 0.5);
+}
 .dt-card-title { font-size: 15px; font-weight: 600; margin: 0; color: #0b1730; letter-spacing: -0.01em; }
 .dt-card-desc { font-size: 13px; line-height: 1.55; color: #5b6577; margin: 0; }
 

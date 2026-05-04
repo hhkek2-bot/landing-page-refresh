@@ -294,7 +294,7 @@ export default function DeploymentTouchpoints() {
           transition={{ duration: 0.5 }}
         >
           <h2 id="dt-heading" className="dt-title">
-            One Sale Agent
+            One <span className="dt-title-gradient">Sale Agent</span>
           </h2>
           <p className="dt-subtitle">
             Multiple Languages · Multiple Channels · Multiple Markets
