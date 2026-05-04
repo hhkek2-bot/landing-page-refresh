@@ -118,8 +118,11 @@
   position: relative;
   background: #ffffff;
   border: 1px solid hsl(220 20% 92%);
-  border-radius: 18px;
-  padding: 1.5rem 1.4rem;
+  border-radius: 22px;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   box-shadow:
     0 1px 2px rgba(15, 23, 42, 0.04),
     0 8px 24px -12px rgba(15, 23, 42, 0.08);
@@ -143,7 +146,7 @@
     0 18px 40px -16px rgba(30, 64, 175, 0.18);
 }
 
-/* Different heights create the masonry rhythm */
+/* All cards share the same 2:3 aspect ratio */
 .si-card-sm,
 .si-card-md,
 .si-card-lg {
@@ -151,32 +154,276 @@
   min-height: 0;
 }
 
-.si-card-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, hsl(220 90% 96%) 0%, hsl(260 80% 96%) 100%);
-  color: hsl(220 70% 45%);
-  margin-bottom: 1rem;
-  border: 1px solid hsl(220 60% 92%);
+/* Visual area (top ~55%) */
+.si-card-visual {
+  position: relative;
+  flex: 1 1 55%;
+  min-height: 0;
+  background: linear-gradient(180deg, hsl(220 60% 98%) 0%, hsl(220 50% 96%) 100%);
+  border-bottom: 1px solid hsl(220 30% 94%);
+  overflow: hidden;
+}
+.si-card-visual::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent 0%, #ffffff 95%);
+  pointer-events: none;
+}
+
+/* Body (bottom) */
+.si-card-body {
+  padding: 1.1rem 1.2rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.si-card-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: hsl(220 85% 55%);
 }
 .si-card-title {
-  font-size: 1.0625rem;
+  font-size: 1rem;
   font-weight: 650;
   letter-spacing: -0.01em;
   color: hsl(222 47% 11%);
-  margin: 0 0 0.5rem;
+  margin: 0;
   line-height: 1.3;
 }
 .si-card-desc {
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 0.82rem;
+  line-height: 1.55;
   color: hsl(222 15% 45%);
   margin: 0;
 }
+
+/* ==========================================================================
+   Per-feature visuals
+   ========================================================================== */
+.si-visual {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(220 80% 55%);
+}
+
+/* Knowledge — stacked documents */
+.si-visual-knowledge .si-doc {
+  position: absolute;
+  width: 56%;
+  height: 60%;
+  background: #ffffff;
+  border: 1px solid hsl(220 30% 90%);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px -10px rgba(15, 23, 42, 0.18);
+}
+.si-visual-knowledge .si-doc-3 { transform: rotate(-8deg) translate(-22%, 6%); background: hsl(220 60% 97%); }
+.si-visual-knowledge .si-doc-2 { transform: rotate(5deg) translate(18%, -4%); background: hsl(260 60% 97%); }
+.si-visual-knowledge .si-doc-1 {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 14px 12px;
+}
+.si-visual-knowledge .si-doc-line {
+  height: 5px; border-radius: 3px;
+  background: linear-gradient(90deg, hsl(220 70% 88%), hsl(220 70% 94%));
+}
+.si-visual-knowledge .si-doc-line.short { width: 60%; }
+
+/* Sync — tile grid + circular arrows */
+.si-visual-sync { color: hsl(220 80% 55%); }
+.si-visual-sync .si-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: 70%;
+  height: 70%;
+}
+.si-visual-sync .si-tile {
+  background: #fff;
+  border: 1px solid hsl(220 30% 90%);
+  border-radius: 8px;
+  display: flex; align-items: flex-end;
+  padding: 6px;
+  animation: si-tile-pulse 2.4s ease-in-out infinite;
+}
+.si-visual-sync .si-tile-bar {
+  display: block; height: 4px; width: 70%;
+  background: hsl(220 80% 80%); border-radius: 2px;
+}
+@keyframes si-tile-pulse {
+  0%, 100% { opacity: 0.7; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
+}
+.si-visual-sync .si-sync-arrow {
+  position: absolute; width: 70px; height: 70px;
+  color: hsl(220 80% 55%); opacity: 0.55;
+  animation: si-spin 9s linear infinite;
+}
+@keyframes si-spin { to { transform: rotate(360deg); } }
+
+/* Workflow — branching nodes */
+.si-visual-workflow { color: hsl(220 70% 50%); }
+.si-flow-svg { width: 80%; height: 80%; }
+.si-flow-svg path { animation: si-dash 4s linear infinite; }
+@keyframes si-dash { to { stroke-dashoffset: -28; } }
+
+/* Languages — floating word bubbles */
+.si-visual-languages { color: hsl(220 30% 30%); }
+.si-visual-languages .si-lang {
+  position: absolute;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #fff;
+  border: 1px solid hsl(220 30% 90%);
+  border-radius: 999px;
+  padding: 5px 12px;
+  box-shadow: 0 4px 14px -8px rgba(15, 23, 42, 0.2);
+  animation: si-float 5s ease-in-out infinite;
+}
+.si-lang-0 { top: 8%; left: 6%; color: hsl(220 75% 50%); }
+.si-lang-1 { top: 18%; right: 8%; color: hsl(340 75% 55%); animation-delay: -1s; }
+.si-lang-2 { top: 42%; left: 10%; color: hsl(160 60% 40%); animation-delay: -2s; }
+.si-lang-3 { top: 38%; right: 12%; color: hsl(30 85% 55%); animation-delay: -3s; }
+.si-lang-4 { bottom: 22%; left: 18%; color: hsl(280 60% 55%); animation-delay: -1.5s; }
+.si-lang-5 { bottom: 14%; right: 10%; color: hsl(200 70% 45%); animation-delay: -2.5s; }
+.si-lang-6 { top: 28%; left: 38%; color: hsl(10 75% 55%); animation-delay: -0.5s; opacity: 0.85; }
+.si-lang-7 { bottom: 36%; right: 30%; color: hsl(120 50% 40%); animation-delay: -3.5s; opacity: 0.85; }
+.si-lang-8 { bottom: 6%; left: 36%; color: hsl(240 60% 55%); animation-delay: -4s; }
+@keyframes si-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Lead capture — form lines */
+.si-visual-lead { color: hsl(220 70% 50%); }
+.si-visual-lead .si-form {
+  width: 78%;
+  display: flex; flex-direction: column; gap: 10px;
+  background: #fff;
+  border: 1px solid hsl(220 30% 90%);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 8px 22px -14px rgba(15, 23, 42, 0.2);
+}
+.si-form-row { display: flex; flex-direction: column; gap: 5px; }
+.si-form-label {
+  height: 5px; width: 30%; border-radius: 2px;
+  background: hsl(220 30% 88%);
+}
+.si-form-label.short { width: 22%; }
+.si-form-input {
+  height: 10px; width: 100%; border-radius: 4px;
+  background: hsl(220 30% 95%);
+  border: 1px solid hsl(220 30% 92%);
+}
+.si-form-input.filled {
+  background: linear-gradient(90deg, hsl(220 80% 92%), hsl(220 60% 97%));
+}
+.si-form-cursor {
+  position: absolute;
+  width: 2px; height: 14px;
+  background: hsl(220 80% 55%);
+  bottom: 32%; right: 22%;
+  animation: si-blink 1s steps(2) infinite;
+}
+@keyframes si-blink { 50% { opacity: 0; } }
+
+/* Buyer analysis — line chart */
+.si-visual-analysis { color: hsl(220 80% 55%); }
+.si-chart-svg { width: 84%; height: 80%; }
+
+/* Equipment — chips */
+.si-visual-equipment {
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 10%;
+}
+.si-visual-equipment .si-chip {
+  align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.74rem; font-weight: 500;
+  background: #fff;
+  border: 1px solid hsl(220 30% 90%);
+  border-radius: 999px;
+  padding: 5px 10px;
+  color: hsl(222 30% 30%);
+  box-shadow: 0 3px 10px -6px rgba(15, 23, 42, 0.2);
+  animation: si-chip-in 4s ease-in-out infinite;
+}
+.si-chip-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: hsl(220 80% 60%);
+}
+.si-chip-0 { animation-delay: 0s; }
+.si-chip-1 { align-self: flex-end; animation-delay: -1s; }
+.si-chip-2 { animation-delay: -2s; }
+.si-chip-3 { align-self: flex-end; animation-delay: -3s; }
+.si-chip-match {
+  align-self: center !important;
+  background: linear-gradient(135deg, hsl(150 70% 92%), hsl(150 60% 96%)) !important;
+  border-color: hsl(150 50% 80%) !important;
+  color: hsl(150 60% 28%) !important;
+  font-weight: 600;
+  margin-top: 4px;
+}
+@keyframes si-chip-in {
+  0%, 100% { opacity: 0.65; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(2px); }
+}
+
+/* Quotation — invoice card */
+.si-visual-quotation { color: hsl(220 80% 55%); }
+.si-visual-quotation .si-quote {
+  width: 78%;
+  background: #fff;
+  border: 1px solid hsl(220 30% 90%);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex; flex-direction: column; gap: 9px;
+  box-shadow: 0 10px 24px -14px rgba(15, 23, 42, 0.2);
+}
+.si-quote-head { display: flex; align-items: center; justify-content: space-between; }
+.si-quote-title {
+  height: 7px; width: 50%; border-radius: 3px;
+  background: hsl(222 30% 25%);
+}
+.si-quote-badge {
+  font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em;
+  color: hsl(220 80% 55%);
+  background: hsl(220 90% 96%);
+  border: 1px solid hsl(220 60% 90%);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+.si-quote-row { display: flex; justify-content: space-between; gap: 8px; }
+.si-quote-row span:first-child {
+  height: 6px; width: 55%; border-radius: 2px;
+  background: hsl(220 30% 92%);
+}
+.si-quote-row .amt {
+  height: 6px; width: 25%; border-radius: 2px;
+  background: hsl(220 30% 88%);
+}
+.si-quote-row.total { padding-top: 6px; border-top: 1px dashed hsl(220 30% 88%); }
+.si-quote-row.total .amt { background: hsl(220 80% 55%); }
+.si-pulse {
+  position: absolute;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: hsl(150 70% 50%);
+  bottom: 16%; right: 14%;
+  box-shadow: 0 0 0 0 hsl(150 70% 50% / 0.6);
+  animation: si-pulse-ring 1.8s ease-out infinite;
+}
+@keyframes si-pulse-ring {
+  0% { box-shadow: 0 0 0 0 hsl(150 70% 50% / 0.55); }
+  100% { box-shadow: 0 0 0 18px hsl(150 70% 50% / 0); }
+}
+
 
 /* Pause on hover for accessibility / readability */
 .si-stage:hover .si-col-track {
