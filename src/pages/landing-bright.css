@@ -2652,9 +2652,9 @@
   background: linear-gradient(0deg, #ffffff 0%, transparent 100%);
   pointer-events: none; z-index: 5;
 }
-.pain-size-tall .pain-visual { min-height: 240px; }
-.pain-size-feature .pain-visual { min-height: 200px; }
-.pain-size-sm .pain-visual { min-height: 130px; }
+.pain-size-stacked .pain-visual { min-height: 140px; }
+.pain-size-feature .pain-visual { min-height: 220px; }
+.pain-size-wide .pain-visual { min-height: 140px; }
 
 /* Body — auto height so all text visible */
 .pain-body {
