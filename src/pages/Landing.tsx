@@ -1044,7 +1044,7 @@ export default function Landing() {
                           <PainVisual visual={p.visual} />
                         </div>
                         <div className="pain-body">
-                          <span className="pain-eyebrow">{p.eyebrow}</span>
+                          
                           <h3>{p.title}</h3>
                           <p>{p.body}</p>
                         </div>
