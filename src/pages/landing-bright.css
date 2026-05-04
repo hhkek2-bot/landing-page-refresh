@@ -2223,22 +2223,15 @@
 .bento-cream    { background: linear-gradient(160deg, #fef3c7 0%, #fde68a 100%); }
 .bento-ink      { background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%); color: #fff; border-color: rgba(255,255,255,0.06); }
 
-/* Visual area — top half, in flow (no overlap with body) */
+/* Visual area — top half, blends into card (no fade strip) */
 .bento-visual {
   position: relative;
   flex: 0 0 52%;
   min-height: 0;
   overflow: hidden;
 }
-.bento-visual::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
-  height: 40%;
-  background: linear-gradient(0deg, rgba(255,255,255,0.55) 0%, transparent 100%);
-  pointer-events: none;
-}
-.bento-ink .bento-visual::after {
-  background: linear-gradient(0deg, rgba(15,23,42,0.6) 0%, transparent 100%);
-}
+.bento-visual::after { content: none; }
+
 
 /* Body — below visual */
 .bento-body {
