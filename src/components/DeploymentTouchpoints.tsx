@@ -106,12 +106,36 @@ function PreviewWebsite() {
   );
 }
 
+function FacebookIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="#1877F2" d="M24 12a12 12 0 1 0-13.875 11.854V15.47H7.078V12h3.047V9.356c0-3.007 1.79-4.668 4.532-4.668 1.312 0 2.686.234 2.686.234v2.953H15.83c-1.49 0-1.955.925-1.955 1.875V12h3.328l-.532 3.47h-2.796v8.384A12.003 12.003 0 0 0 24 12Z"/>
+    </svg>
+  );
+}
+function LinkedInIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="#0A66C2" d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
+    </svg>
+  );
+}
+function GoogleAdsIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="#FBBC04" d="M8.86 1.18a3 3 0 0 1 4.1 1.1l8.04 13.93a3 3 0 1 1-5.2 3L7.77 5.28a3 3 0 0 1 1.1-4.1Z"/>
+      <path fill="#4285F4" d="M2.86 19.04 10.9 5.1a3 3 0 1 1 5.2 3L8.06 22.04a3 3 0 1 1-5.2-3Z"/>
+      <circle fill="#34A853" cx="5.46" cy="20.54" r="3"/>
+    </svg>
+  );
+}
+
 function PreviewSocial() {
-  const sources = [
-    { label: "Instagram Ad", x: 8, y: 14 },
-    { label: "QR Code", x: 8, y: 70, qr: true },
-    { label: "Brochure", x: 72, y: 14 },
-    { label: "Catalogue", x: 72, y: 70 },
+  const sources: { label: string; x: number; y: number; Icon: React.FC<{ size?: number }> }[] = [
+    { label: "Facebook", x: 8, y: 14, Icon: FacebookIcon },
+    { label: "QR Code", x: 8, y: 70, Icon: ({ size = 20 }) => <QrCode size={size} color="#0b1730" /> },
+    { label: "LinkedIn", x: 72, y: 14, Icon: LinkedInIcon },
+    { label: "Google Ads", x: 72, y: 70, Icon: GoogleAdsIcon },
   ];
   return (
     <div className="dt-preview-social">
@@ -124,7 +148,7 @@ function PreviewSocial() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 + i * 0.08 }}
         >
-          {s.qr ? <QrCode size={20} /> : <Megaphone size={18} />}
+          <s.Icon size={18} />
           <span>{s.label}</span>
         </motion.div>
       ))}
