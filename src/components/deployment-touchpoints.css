@@ -94,8 +94,20 @@
   display: inline-flex; align-items: center; justify-content: center;
   background: #eef3fb; color: #1e40af;
   border: 1px solid #dde6f5;
+  transition: transform .25s ease, box-shadow .25s ease;
 }
-.dt-card-active .dt-card-icon { background: #1e40af; color: #fff; border-color: #1e40af; }
+.dt-card:nth-child(1) .dt-card-icon { background: #ede9fe; color: #7c3aed; border-color: #ddd6fe; }
+.dt-card:nth-child(2) .dt-card-icon { background: #ffedd5; color: #ea580c; border-color: #fed7aa; }
+.dt-card:nth-child(3) .dt-card-icon { background: #dcfce7; color: #16a34a; border-color: #bbf7d0; }
+.dt-card:nth-child(4) .dt-card-icon { background: #dbeafe; color: #2563eb; border-color: #bfdbfe; }
+.dt-card:nth-child(5) .dt-card-icon { background: #fce7f3; color: #db2777; border-color: #fbcfe8; }
+.dt-card:nth-child(6) .dt-card-icon { background: #fef3c7; color: #d97706; border-color: #fde68a; }
+.dt-card-active .dt-card-icon {
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #f97316 100%);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 8px 20px -8px rgba(124, 58, 237, 0.5);
+}
 .dt-card-title { font-size: 15px; font-weight: 600; margin: 0; color: #0b1730; letter-spacing: -0.01em; }
 .dt-card-desc { font-size: 13px; line-height: 1.55; color: #5b6577; margin: 0; }
 
