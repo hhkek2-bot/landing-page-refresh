@@ -121,7 +121,10 @@
   position: relative;
   height: 100%;
   min-height: 440px;
-  background: #f6f8fc;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(124,58,237,0.10), transparent 55%),
+    radial-gradient(circle at 85% 88%, rgba(249,115,22,0.10), transparent 55%),
+    linear-gradient(180deg, #f5f8fd 0%, #eef2f9 100%);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -218,7 +221,8 @@
   pointer-events: none;
 }
 .dt-source-lines path {
-  fill: none; stroke: #93a4c7; stroke-width: 0.5; stroke-dasharray: 1.5 1.5;
+  fill: none; stroke-width: 0.6; stroke-dasharray: 1.5 1.5;
+  stroke: url(#dt-line-grad);
   animation: dt-dash-flow 1.2s linear infinite;
 }
 @keyframes dt-dash-flow {
@@ -227,11 +231,12 @@
 .dt-source-hub {
   position: absolute; left: 50%; top: 50%;
   transform: translate(-50%, -50%);
-  background: #1e40af; color: #fff;
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 55%, #f97316 100%);
+  color: #fff;
   padding: 12px 16px; border-radius: 12px;
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 12px; font-weight: 600;
-  box-shadow: 0 18px 40px -16px rgba(30, 64, 175, 0.55);
+  box-shadow: 0 18px 40px -12px rgba(124, 58, 237, 0.55);
   z-index: 3;
 }
 
@@ -381,13 +386,14 @@
 .dt-multi-center {
   position: absolute; left: 50%; top: 50%;
   transform: translate(-50%, -50%);
-  background: #fff; border: 1px solid #e4e8ef; border-radius: 14px;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);
+  border: 1px solid #ddd6fe; border-radius: 14px;
   padding: 18px 22px; text-align: center;
-  box-shadow: 0 18px 40px -18px rgba(15,23,42,0.2);
+  box-shadow: 0 18px 40px -14px rgba(124, 58, 237, 0.35);
   display: flex; flex-direction: column; align-items: center; gap: 6px;
   z-index: 2;
 }
-.dt-multi-center > svg { color: #1e40af; }
+.dt-multi-center > svg { color: #7c3aed; }
 .dt-multi-center > p { font-size: 13px; font-weight: 600; margin: 0; color: #0b1730; }
 .dt-multi-247 { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; color: #16a34a; background: #ecfdf5; border: 1px solid #bbf7d0; padding: 2px 8px; border-radius: 999px; }
 .dt-lang-chip {
@@ -397,6 +403,12 @@
   padding: 5px 11px; font-size: 11.5px; font-weight: 600; color: #1e40af;
   box-shadow: 0 6px 16px -10px rgba(15,23,42,0.2);
 }
+.dt-lang-chip:nth-child(6n+1) { color: #7c3aed; background: #f5f3ff; border-color: #ddd6fe; }
+.dt-lang-chip:nth-child(6n+2) { color: #ea580c; background: #fff7ed; border-color: #fed7aa; }
+.dt-lang-chip:nth-child(6n+3) { color: #16a34a; background: #f0fdf4; border-color: #bbf7d0; }
+.dt-lang-chip:nth-child(6n+4) { color: #2563eb; background: #eff6ff; border-color: #bfdbfe; }
+.dt-lang-chip:nth-child(6n+5) { color: #db2777; background: #fdf2f8; border-color: #fbcfe8; }
+.dt-lang-chip:nth-child(6n)   { color: #d97706; background: #fffbeb; border-color: #fde68a; }
 
 /* ---- Team preview ---- */
 .dt-preview-team { display: flex; flex-direction: column; gap: 10px; height: 100%; }
@@ -416,9 +428,11 @@
 }
 .dt-team-action { margin-top: auto; }
 .dt-team-btn {
-  margin-top: 10px; background: #1e40af; color: #fff; border: none;
-  padding: 8px 14px; border-radius: 7px; font-size: 12px; font-weight: 500;
-  cursor: pointer;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+  color: #fff; border: none;
+  padding: 8px 14px; border-radius: 7px; font-size: 12px; font-weight: 600;
+  cursor: pointer; box-shadow: 0 8px 20px -10px rgba(124, 58, 237, 0.5);
 }
 
 /* Supporting + CTA */
