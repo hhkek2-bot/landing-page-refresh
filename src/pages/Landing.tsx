@@ -1029,20 +1029,31 @@ export default function Landing() {
             <p>Modern B2B enquiries come from many channels, move quickly, and often get delayed, missed, or poorly handled across the sales process.</p>
           </div>
           <div className="pain-bento-grid">
-            {painPoints.map((p) => {
-              const Icon = p.icon;
+            {(["left", "middle", "right"] as const).map((col) => {
+              const items = painPoints.filter((p) =>
+                col === "left" ? p.area === "a1" || p.area === "a2"
+                : col === "middle" ? p.area === "b" || p.area === "d"
+                : p.area === "c1" || p.area === "c2"
+              );
               return (
-                <article key={p.title} className={`pain-card pain-tone-${p.tone} pain-size-${p.size} pain-area-${p.area}`}>
-                  <div className="pain-visual" aria-hidden="true">
-                    <PainVisual visual={p.visual} />
-                  </div>
-                  <div className="pain-body">
-                    <div className="pain-icon-wrap"><Icon size={16} strokeWidth={1.8} /></div>
-                    <span className="pain-eyebrow">{p.eyebrow}</span>
-                    <h3>{p.title}</h3>
-                    <p>{p.body}</p>
-                  </div>
-                </article>
+                <div key={col} className={`pain-col pain-col-${col}`}>
+                  {items.map((p) => {
+                    const Icon = p.icon;
+                    return (
+                      <article key={p.title} className={`pain-card pain-tone-${p.tone} pain-size-${p.size} pain-area-${p.area}`}>
+                        <div className="pain-visual" aria-hidden="true">
+                          <PainVisual visual={p.visual} />
+                        </div>
+                        <div className="pain-body">
+                          <div className="pain-icon-wrap"><Icon size={16} strokeWidth={1.8} /></div>
+                          <span className="pain-eyebrow">{p.eyebrow}</span>
+                          <h3>{p.title}</h3>
+                          <p>{p.body}</p>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
               );
             })}
           </div>
