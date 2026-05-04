@@ -1,0 +1,253 @@
+/* ==========================================================================
+   Sales Intelligence Section
+   Premium B2B SaaS — vertical masonry marquee with infinite upward scroll
+   ========================================================================== */
+
+.si-section {
+  position: relative;
+  padding: 7rem 0 8rem;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, hsl(220 60% 97%) 0%, transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #fafbff 50%, #ffffff 100%);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.si-bg-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+}
+.si-bg-orb-1 {
+  top: -120px;
+  left: -120px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, hsl(220 90% 88%) 0%, transparent 70%);
+}
+.si-bg-orb-2 {
+  bottom: -160px;
+  right: -120px;
+  width: 460px;
+  height: 460px;
+  background: radial-gradient(circle, hsl(260 80% 92%) 0%, transparent 70%);
+}
+
+.si-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Header ------------------------------------------------------------------ */
+.si-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 4rem;
+}
+.si-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: hsl(220 70% 45%);
+  background: hsl(220 90% 96%);
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(220 60% 90%);
+  margin-bottom: 1.25rem;
+}
+.si-headline {
+  font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: hsl(222 47% 11%);
+  margin: 0 0 1rem;
+}
+.si-sub {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: hsl(222 15% 42%);
+  margin: 0;
+}
+
+/* Stage / marquee --------------------------------------------------------- */
+.si-stage {
+  position: relative;
+  height: 720px;
+  max-height: 80vh;
+  overflow: hidden;
+  border-radius: 28px;
+}
+
+.si-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 160px;
+  z-index: 3;
+  pointer-events: none;
+}
+.si-fade-top {
+  top: 0;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0) 100%);
+}
+.si-fade-bottom {
+  bottom: 0;
+  background: linear-gradient(0deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0) 100%);
+}
+
+.si-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  height: 100%;
+  align-items: start;
+}
+
+.si-col {
+  height: 100%;
+  overflow: hidden;
+}
+.si-col-track {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: si-scroll-up linear infinite;
+  will-change: transform;
+}
+.si-col-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@keyframes si-scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(-50% - 0.625rem));
+  }
+}
+
+/* Cards ------------------------------------------------------------------- */
+.si-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid hsl(220 20% 92%);
+  border-radius: 18px;
+  padding: 1.5rem 1.4rem;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 8px 24px -12px rgba(15, 23, 42, 0.08);
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.7s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+  opacity: 0;
+  transform: translateY(18px);
+}
+.si-card-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.si-card:hover {
+  transform: translateY(-4px);
+  border-color: hsl(220 60% 82%);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 18px 40px -16px rgba(30, 64, 175, 0.18);
+}
+
+/* Different heights create the masonry rhythm */
+.si-card-sm { min-height: 180px; }
+.si-card-md { min-height: 220px; }
+.si-card-lg { min-height: 260px; }
+
+.si-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, hsl(220 90% 96%) 0%, hsl(260 80% 96%) 100%);
+  color: hsl(220 70% 45%);
+  margin-bottom: 1rem;
+  border: 1px solid hsl(220 60% 92%);
+}
+.si-card-title {
+  font-size: 1.0625rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: hsl(222 47% 11%);
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+.si-card-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: hsl(222 15% 45%);
+  margin: 0;
+}
+
+/* Pause on hover for accessibility / readability */
+.si-stage:hover .si-col-track {
+  animation-play-state: paused;
+}
+
+/* Tablet ------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+  .si-stage {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    border-radius: 0;
+  }
+  .si-fade { display: none; }
+  .si-grid {
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+  }
+  .si-col { height: auto; overflow: visible; }
+  .si-col-track {
+    animation: none;
+    transform: none !important;
+  }
+  .si-col-group:nth-child(2) { display: none; }
+  .si-card-sm, .si-card-md, .si-card-lg { min-height: 0; }
+}
+
+/* Mobile ------------------------------------------------------------------ */
+@media (max-width: 640px) {
+  .si-section { padding: 4.5rem 0 5rem; }
+  .si-header { margin-bottom: 2.5rem; }
+  .si-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .si-col-track { gap: 1rem; }
+}
+
+/* Reduced motion ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .si-col-track {
+    animation: none;
+    transform: none !important;
+  }
+  .si-col-group:nth-child(2) { display: none; }
+  .si-card {
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    opacity: 1;
+    transform: none;
+  }
+}
