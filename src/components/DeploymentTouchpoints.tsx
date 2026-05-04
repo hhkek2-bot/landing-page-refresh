@@ -8,6 +8,7 @@ import {
   MonitorSmartphone,
   LayoutDashboard,
   Check,
+  User,
   QrCode,
   Send,
   Truck,
