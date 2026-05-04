@@ -51,7 +51,7 @@
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
-.dt-desc { font-size: 15px; line-height: 1.6; color: #475569; margin: 0 auto; max-width: 720px; }
+.dt-desc { font-size: 15px; line-height: 1.6; color: #475569; margin: 0 auto; max-width: 1120px; }
 
 .dt-layout {
   display: grid;
