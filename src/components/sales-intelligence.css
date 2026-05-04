@@ -144,9 +144,12 @@
 }
 
 /* Different heights create the masonry rhythm */
-.si-card-sm { min-height: 180px; }
-.si-card-md { min-height: 220px; }
-.si-card-lg { min-height: 260px; }
+.si-card-sm,
+.si-card-md,
+.si-card-lg {
+  aspect-ratio: 2 / 3;
+  min-height: 0;
+}
 
 .si-card-icon {
   display: inline-flex;
