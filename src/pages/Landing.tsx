@@ -668,18 +668,19 @@ type PainPoint = {
   eyebrow: string;
   title: string;
   body: string;
-  size: "feature" | "wide" | "sm";
+  size: "tall" | "feature" | "sm";
+  area: "a" | "b" | "c" | "d" | "e" | "f";
   tone: "blue" | "rose" | "amber" | "violet" | "emerald" | "slate";
   visual: "channels" | "clock" | "funnel" | "scatter" | "followup" | "intent";
 };
 
 const painPoints: PainPoint[] = [
-  { icon: Inbox,         eyebrow: "Fragmented",   title: "Too Many Entry Points",        body: "Enquiries come from websites, WhatsApp, ads, social media, calls, and referrals.",                       size: "feature", tone: "blue",    visual: "channels" },
-  { icon: Clock,         eyebrow: "Delayed",      title: "Slow First Response",          body: "High-intent buyers expect fast replies, but sales teams are not always available.",                          size: "sm",      tone: "rose",    visual: "clock" },
-  { icon: TrendingDown,  eyebrow: "Leaking",      title: "Weak Traffic Conversion",      body: "Marketing drives traffic, but many visitors leave before becoming qualified enquiries.",                    size: "sm",      tone: "amber",   visual: "funnel" },
-  { icon: Layers,        eyebrow: "Scattered",    title: "Scattered Product Knowledge",  body: "Product details, specs, pricing, and recommendations are spread across files, people, and systems.",       size: "wide",    tone: "violet",  visual: "scatter" },
-  { icon: Repeat,        eyebrow: "Inconsistent", title: "Inconsistent Sales Follow-Up", body: "Some leads are followed up properly, while others are delayed or lost.",                                     size: "sm",      tone: "emerald", visual: "followup" },
-  { icon: MessageCircle, eyebrow: "Missed",       title: "Lost Buyer Intent",            body: "Urgency, budget, location, and real equipment needs are often missed in conversation.",                     size: "sm",      tone: "slate",   visual: "intent" },
+  { icon: Clock,         eyebrow: "Delayed",      title: "Slow First Response",          body: "High-intent buyers expect fast replies, but sales teams are not always available.",                          size: "tall",    area: "a", tone: "rose",    visual: "clock" },
+  { icon: Inbox,         eyebrow: "Fragmented",   title: "Too Many Entry Points",        body: "Enquiries come from websites, WhatsApp, ads, social media, calls, and referrals.",                       size: "feature", area: "b", tone: "blue",    visual: "channels" },
+  { icon: MessageCircle, eyebrow: "Missed",       title: "Lost Buyer Intent",            body: "Urgency, budget, location, and real equipment needs are often missed in conversation.",                     size: "tall",    area: "c", tone: "slate",   visual: "intent" },
+  { icon: TrendingDown,  eyebrow: "Leaking",      title: "Weak Traffic Conversion",      body: "Marketing drives traffic, but many visitors leave before becoming qualified enquiries.",                    size: "sm",      area: "d", tone: "amber",   visual: "funnel" },
+  { icon: Repeat,        eyebrow: "Inconsistent", title: "Inconsistent Sales Follow-Up", body: "Some leads are followed up properly, while others are delayed or lost.",                                     size: "sm",      area: "e", tone: "emerald", visual: "followup" },
+  { icon: Layers,        eyebrow: "Scattered",    title: "Scattered Product Knowledge",  body: "Product details, specs, pricing, and recommendations are spread across files, people, and systems.",       size: "sm",      area: "f", tone: "violet",  visual: "scatter" },
 ];
 
 function PainVisual({ visual }: { visual: PainPoint["visual"] }) {
