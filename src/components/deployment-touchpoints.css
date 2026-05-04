@@ -221,7 +221,8 @@
   pointer-events: none;
 }
 .dt-source-lines path {
-  fill: none; stroke: #93a4c7; stroke-width: 0.5; stroke-dasharray: 1.5 1.5;
+  fill: none; stroke-width: 0.6; stroke-dasharray: 1.5 1.5;
+  stroke: url(#dt-line-grad);
   animation: dt-dash-flow 1.2s linear infinite;
 }
 @keyframes dt-dash-flow {
@@ -230,11 +231,12 @@
 .dt-source-hub {
   position: absolute; left: 50%; top: 50%;
   transform: translate(-50%, -50%);
-  background: #1e40af; color: #fff;
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 55%, #f97316 100%);
+  color: #fff;
   padding: 12px 16px; border-radius: 12px;
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 12px; font-weight: 600;
-  box-shadow: 0 18px 40px -16px rgba(30, 64, 175, 0.55);
+  box-shadow: 0 18px 40px -12px rgba(124, 58, 237, 0.55);
   z-index: 3;
 }
 
