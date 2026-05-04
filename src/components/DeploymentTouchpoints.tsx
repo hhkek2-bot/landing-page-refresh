@@ -57,9 +57,9 @@ const touchpoints: Touchpoint[] = [
   },
   {
     id: "multilingual",
-    title: "Multilingual 24/7 Support",
+    title: "Scale Into New Markets",
     description:
-      "Help local and overseas customers communicate in their preferred language, across different time zones, even outside business hours.",
+      "Scale across borders with one AI Agent that engages new markets, supports different languages, and responds across time zones.",
     icon: Globe,
   },
   {
