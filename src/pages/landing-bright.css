@@ -2585,15 +2585,33 @@
   padding: clamp(80px, 10vw, 120px) 0;
   border-top: 1px solid var(--border-subtle);
 }
-.pain-bento-header { margin-bottom: 56px; }
-.pain-bento-header h2 { color: #0b1220; }
+.pain-bento-header { margin-bottom: 64px; }
+.pain-bento-header h2 {
+  color: #0b1220;
+  font-size: clamp(2.4rem, 4.6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  background: linear-gradient(180deg, #0b1220 0%, #1f2937 70%, #475569 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.pain-bento-header p {
+  font-size: 1.12rem;
+  color: #5b6472;
+  line-height: 1.7;
+  max-width: 720px;
+  margin: 0 auto;
+}
 
 .pain-bento-grid {
   display: grid;
   grid-template-columns: 1fr 2.4fr 1fr;
   gap: 18px;
   align-items: stretch;
-  min-height: clamp(620px, 48vw, 700px);
+  min-height: clamp(680px, 52vw, 760px);
 }
 .pain-col {
   display: flex;
@@ -2604,10 +2622,10 @@
 }
 /* Left & right: equal halves */
 .pain-col-left .pain-card,
-.pain-col-right .pain-card { flex: 1 1 0; min-height: 300px; }
+.pain-col-right .pain-card { flex: 1 1 0; min-height: 320px; }
 /* Middle: top bigger than bottom (~2:1) */
-.pain-col-middle .pain-area-b { flex: 2 1 0; min-height: 390px; }
-.pain-col-middle .pain-area-d { flex: 1 1 0; min-height: 210px; }
+.pain-col-middle .pain-area-b { flex: 2 1 0; min-height: 420px; }
+.pain-col-middle .pain-area-d { flex: 1 1 0; min-height: 260px; }
 
 /* Card */
 .pain-card {
