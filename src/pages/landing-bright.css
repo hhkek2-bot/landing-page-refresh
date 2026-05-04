@@ -2587,44 +2587,19 @@
 
 .pain-bento-grid {
   display: grid;
-  grid-template-columns: 1fr 1.15fr 1.15fr 1fr;
-  grid-template-rows: 280px 240px;
-  grid-template-areas:
-    "a b b c"
-    "a d e c"
-    "a f f c";
-  gap: 18px;
-}
-/* Override: 3 rows so featured spans 1 row & A/C span all 3, bottom = d e f across cols 2-4 in row 2-3.
-   Simpler: use 4×3 grid */
-.pain-bento-grid {
-  grid-template-rows: 240px 120px 200px;
-  grid-template-areas:
-    "a b b c"
-    "a b b c"
-    "a d e c";
-}
-.pain-area-a { grid-area: a; }
-.pain-area-b { grid-area: b; }
-.pain-area-c { grid-area: c; }
-.pain-area-d { grid-area: d; }
-.pain-area-e { grid-area: e; }
-.pain-area-f { grid-area: e; } /* not used in 3-area bottom; we extend below */
-
-/* Use 6 areas across the bottom: d e f */
-.pain-bento-grid {
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1.2fr 1.2fr 1fr;
   grid-template-rows: auto auto;
   grid-template-areas:
-    "a b b c"
-    "a d e f";
+    "a1 b  b  c1"
+    "a2 d  d  c2";
+  gap: 18px;
 }
-.pain-area-a { grid-area: a; }
-.pain-area-b { grid-area: b; }
-.pain-area-c { grid-area: c; }
-.pain-area-d { grid-area: d; }
-.pain-area-e { grid-area: e; }
-.pain-area-f { grid-area: f; }
+.pain-area-a1 { grid-area: a1; }
+.pain-area-a2 { grid-area: a2; }
+.pain-area-b  { grid-area: b; }
+.pain-area-c1 { grid-area: c1; }
+.pain-area-c2 { grid-area: c2; }
+.pain-area-d  { grid-area: d; }
 
 /* Card */
 .pain-card {
