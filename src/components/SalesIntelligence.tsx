@@ -284,7 +284,9 @@ export default function SalesIntelligence() {
       <div className="si-container">
         <header className="si-header">
           <h2 id="si-heading" className="si-headline">
-            Sales Intelligence, Built Into Every Conversation
+            Sales Intelligence
+            <br />
+            Built Into Every Conversation
           </h2>
           <p className="si-sub">
             Equip your AI Sales Agent with business knowledge, lead capture, buyer analysis,
