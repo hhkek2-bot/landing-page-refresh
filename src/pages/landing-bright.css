@@ -1571,7 +1571,7 @@
   line-height: 1.12;
   letter-spacing: -0.03em;
   font-weight: 800;
-  white-space: nowrap;
+  white-space: pre-line;
 }
 
 .bright-stats-intro-copy {
