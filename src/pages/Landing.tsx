@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import "./landing-bright.css";
+import DeploymentTouchpoints from "@/components/DeploymentTouchpoints";
 
 import boomLiftImg from "@/assets/boom-lift.jpg";
 import boomLift2Img from "@/assets/boom-lift-2.jpg";
@@ -813,6 +814,8 @@ export default function Landing() {
           </div>
         </div>
       </section>
+
+      <DeploymentTouchpoints />
 
       {/* Metrics — Stripe-inspired */}
       <section className="bright-stats-section">
