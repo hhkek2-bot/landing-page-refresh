@@ -1,20 +1,16 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import "./sales-intelligence.css";
 
-type Tone = "blue" | "mint" | "peach" | "lilac" | "sand" | "sky" | "rose" | "lemon";
-
 type Feature = {
   label: string;
   title: string;
   description: string;
   Visual: () => ReactNode;
-  tone: Tone;
-  /** bento span on desktop: "col span / row span" */
-  span: string;
+  size: "sm" | "md" | "lg";
 };
 
 /* -------------------------------------------------------------------------- */
-/* Visuals                                                                    */
+/* Visuals — one per feature, kept lightweight and on-brand                   */
 /* -------------------------------------------------------------------------- */
 
 const KnowledgeVisual = () => (
@@ -138,8 +134,7 @@ const FEATURES: Feature[] = [
     description:
       "Train your AI Agent with catalogues, FAQs, pricing documents, policies, and company knowledge.",
     Visual: KnowledgeVisual,
-    tone: "blue",
-    span: "col-span-2 row-span-2",
+    size: "md",
   },
   {
     label: "Synced",
@@ -147,17 +142,7 @@ const FEATURES: Feature[] = [
     description:
       "Sync structured product listings, specs, images, categories, and links from Webstore or Antbuildz data.",
     Visual: SyncVisual,
-    tone: "mint",
-    span: "col-span-2 row-span-1",
-  },
-  {
-    label: "Localised",
-    title: "Multilingual Support",
-    description:
-      "Support customers across different languages, markets, and time zones for local and overseas enquiries.",
-    Visual: LanguagesVisual,
-    tone: "peach",
-    span: "col-span-2 row-span-1",
+    size: "lg",
   },
   {
     label: "Configurable",
@@ -165,17 +150,23 @@ const FEATURES: Feature[] = [
     description:
       "Define how your AI qualifies leads, handles pricing, recommends options, and escalates complex cases.",
     Visual: WorkflowVisual,
-    tone: "lilac",
-    span: "col-span-2 row-span-2",
+    size: "sm",
+  },
+  {
+    label: "Localised",
+    title: "Multilingual Support",
+    description:
+      "Support customers across different languages, markets, and time zones for local and overseas enquiries.",
+    Visual: LanguagesVisual,
+    size: "md",
   },
   {
     label: "Capture",
     title: "Lead Capture",
     description:
-      "Collect customer details, requirements, location, budget, quantity, timeline, and product interest.",
+      "Collect customer details, requirements, location, budget, quantity, timeline, and product interest from conversations.",
     Visual: LeadVisual,
-    tone: "sand",
-    span: "col-span-2 row-span-1",
+    size: "lg",
   },
   {
     label: "Intelligence",
@@ -183,30 +174,34 @@ const FEATURES: Feature[] = [
     description:
       "Understand buyer intent, urgency, enquiry quality, product interest, and sales readiness.",
     Visual: AnalysisVisual,
-    tone: "sky",
-    span: "col-span-2 row-span-1",
+    size: "sm",
   },
   {
     label: "Recommendation",
     title: "Equipment Recommendation",
     description:
-      "Recommend suitable equipment, tools, spare parts, or vehicles based on usage, specs, and budget.",
+      "Recommend suitable equipment, tools, spare parts, or vehicles based on usage, specs, budget, and job requirements.",
     Visual: EquipmentVisual,
-    tone: "rose",
-    span: "col-span-3 row-span-1",
+    size: "md",
   },
   {
     label: "Conversion",
     title: "Quotation Intent Capture",
     description:
-      "Detect serious buying signals and collect key details for quotation, booking, or handover.",
+      "Detect serious buying signals and collect key details for quotation, booking, reservation, or handover.",
     Visual: QuotationVisual,
-    tone: "lemon",
-    span: "col-span-3 row-span-1",
+    size: "lg",
   },
 ];
 
-function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
+const COLUMNS: Feature[][] = [
+  [FEATURES[0], FEATURES[4]],
+  [FEATURES[1], FEATURES[5]],
+  [FEATURES[2], FEATURES[6]],
+  [FEATURES[3], FEATURES[7]],
+];
+
+function FeatureCard({ feature, delay }: { feature: Feature; delay: number }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
 
@@ -230,20 +225,56 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
 
   const { Visual } = feature;
   return (
-    <article
+    <div
       ref={ref}
-      className={`si-bento-card si-tone-${feature.tone} si-span-${feature.span.replace(/\s/g, "-")} ${visible ? "si-card-in" : ""}`}
-      style={{ transitionDelay: `${index * 60}ms` }}
+      className={`si-card si-card-${feature.size} ${visible ? "si-card-in" : ""}`}
+      style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className="si-bento-visual">
+      <div className="si-card-visual">
         <Visual />
       </div>
-      <div className="si-bento-body">
-        <span className="si-bento-label">{feature.label}</span>
-        <h3 className="si-bento-title">{feature.title}</h3>
-        <p className="si-bento-desc">{feature.description}</p>
+      <div className="si-card-body">
+        <span className="si-card-label">{feature.label}</span>
+        <h3 className="si-card-title">{feature.title}</h3>
+        <p className="si-card-desc">{feature.description}</p>
       </div>
-    </article>
+    </div>
+  );
+}
+
+function MarqueeColumn({
+  cards,
+  duration,
+  reverse = false,
+  initialDelay,
+}: {
+  cards: Feature[];
+  duration: number;
+  reverse?: boolean;
+  initialDelay: number;
+}) {
+  return (
+    <div className="si-col">
+      <div
+        className="si-col-track"
+        style={{
+          animationDuration: `${duration}s`,
+          animationDirection: reverse ? "reverse" : "normal",
+        }}
+      >
+        {[0, 1].map((loop) => (
+          <div className="si-col-group" key={loop} aria-hidden={loop === 1}>
+            {cards.map((c, idx) => (
+              <FeatureCard
+                key={`${loop}-${c.title}`}
+                feature={c}
+                delay={initialDelay + idx * 80}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -263,10 +294,16 @@ export default function SalesIntelligence() {
           </p>
         </header>
 
-        <div className="si-bento">
-          {FEATURES.map((f, i) => (
-            <FeatureCard key={f.title} feature={f} index={i} />
-          ))}
+        <div className="si-stage">
+          <div className="si-fade si-fade-top" aria-hidden />
+          <div className="si-fade si-fade-bottom" aria-hidden />
+
+          <div className="si-grid">
+            <MarqueeColumn cards={COLUMNS[0]} duration={42} initialDelay={0} />
+            <MarqueeColumn cards={COLUMNS[1]} duration={56} initialDelay={80} reverse />
+            <MarqueeColumn cards={COLUMNS[2]} duration={48} initialDelay={160} />
+            <MarqueeColumn cards={COLUMNS[3]} duration={60} initialDelay={240} reverse />
+          </div>
         </div>
       </div>
     </section>
