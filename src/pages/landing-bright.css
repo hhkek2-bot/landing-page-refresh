@@ -1632,7 +1632,6 @@
 
 .bright-stat-label {
   margin: 0;
-  padding-left: 56px;
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-muted);
