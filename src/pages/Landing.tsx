@@ -1020,17 +1020,34 @@ export default function Landing() {
       </section>
 
 
-      {/* Comparison / Pain Points */}
-      <section className="bright-comparison" id="comparison">
+      {/* Pain Points — Bento Grid */}
+      <section className="pain-bento-section" id="comparison">
         <div className="bright-container">
-          <div className="bright-section-header bright-comparison-header">
-            <TypewriterHeading text="You're Losing Sales Before Your Team Even Responds" />
-            <p>Every missed reply, delayed response, or inconsistent answer creates friction in your sales process. Not because your team isn't capable—but because human-led workflows cannot scale with demand.</p>
+          <div className="bright-section-header pain-bento-header">
+            <TypewriterHeading text="Why Enquiries Still Slip Through" />
+            <p>Modern B2B enquiries come from many channels, move quickly, and often get delayed, missed, or poorly handled across the sales process.</p>
           </div>
-          <ComparisonInteractive activeIndex={activePainIndex} setActiveIndex={setActivePainIndex} beamTop={connectorPosition.top} beamLeft={connectorPosition.left} beamWidth={connectorPosition.width} reduceMotion={!!reduceMotion} painRefs={painRefs} solutionRef={solutionColumnRef} />
-          
+          <div className="pain-bento-grid">
+            {painPoints.map((p) => {
+              const Icon = p.icon;
+              return (
+                <article key={p.title} className={`pain-card pain-tone-${p.tone} pain-size-${p.size}`}>
+                  <div className="pain-visual" aria-hidden="true">
+                    <PainVisual visual={p.visual} />
+                  </div>
+                  <div className="pain-body">
+                    <div className="pain-icon-wrap"><Icon size={16} strokeWidth={1.8} /></div>
+                    <span className="pain-eyebrow">{p.eyebrow}</span>
+                    <h3>{p.title}</h3>
+                    <p>{p.body}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </section>
+
 
       {/* Process Steps */}
       <section className="bright-process" id="process">
