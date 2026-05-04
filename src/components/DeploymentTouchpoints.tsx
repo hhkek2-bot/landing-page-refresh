@@ -60,9 +60,9 @@ const touchpoints: Touchpoint[] = [
   },
   {
     id: "team",
-    title: "Sales Team Support",
+    title: "Internal Sales Assistant",
     description:
-      "Equip your salespeople with faster product answers, clearer customer summaries, and better support when preparing quotations or bookings.",
+      "Help your team check pricing, product details, terms, and availability faster — across thousands of SKUs — while keeping sales responses consistent.",
     icon: LayoutDashboard,
   },
 ];
