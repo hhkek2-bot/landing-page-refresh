@@ -428,9 +428,11 @@
 }
 .dt-team-action { margin-top: auto; }
 .dt-team-btn {
-  margin-top: 10px; background: #1e40af; color: #fff; border: none;
-  padding: 8px 14px; border-radius: 7px; font-size: 12px; font-weight: 500;
-  cursor: pointer;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+  color: #fff; border: none;
+  padding: 8px 14px; border-radius: 7px; font-size: 12px; font-weight: 600;
+  cursor: pointer; box-shadow: 0 8px 20px -10px rgba(124, 58, 237, 0.5);
 }
 
 /* Supporting + CTA */
