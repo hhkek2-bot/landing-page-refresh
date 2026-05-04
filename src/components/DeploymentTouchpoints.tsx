@@ -227,33 +227,58 @@ function PreviewEmail() {
     <div className="dt-preview-email">
       <div className="dt-email-card">
         <div className="dt-email-head">
-          <Mail size={16} />
-          <span>Re: Equipment quotation follow-up</span>
+          <Mail size={14} />
+          <span className="dt-email-subject">🎉 Special Offer · Up to 30% Off Equipment Rentals</span>
         </div>
-        <div className="dt-email-body">
-          <p>Hi James,</p>
-          <p>Following up on your enquiry — happy to discuss specs or pricing anytime.</p>
-          <div className="dt-email-sig">
-            <p className="dt-sig-name">Sarah Tan</p>
-            <p className="dt-sig-role">Sales · Antbuildz</p>
-            <motion.button
-              className="dt-sig-cta"
-              whileHover={{ scale: 1.03 }}
-              animate={{ boxShadow: ["0 0 0 0 rgba(37,99,235,0.4)", "0 0 0 8px rgba(37,99,235,0)"] }}
-              transition={{ duration: 1.6, repeat: Infinity }}
-            >
-              <Send size={12} /> Chat with our AI Agent
-            </motion.button>
-          </div>
+
+        <div className="dt-email-promo-hero">
+          <motion.div
+            className="dt-email-promo-badge"
+            animate={{ rotate: [-4, 4, -4] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          >
+            LIMITED TIME
+          </motion.div>
+          <p className="dt-email-promo-title">Boost Your Project, Cut Your Costs</p>
+          <p className="dt-email-promo-sub">
+            Exclusive monthly rates on boom lifts, forklifts & scissor lifts.
+          </p>
+        </div>
+
+        <div className="dt-email-perks">
+          <div><Check size={11} /> Free delivery</div>
+          <div><Check size={11} /> Flexible terms</div>
+          <div><Check size={11} /> 24/7 support</div>
+        </div>
+
+        <div className="dt-email-cta-wrap">
+          <motion.button
+            className="dt-email-cta"
+            whileHover={{ scale: 1.04 }}
+            animate={{
+              boxShadow: [
+                "0 0 0 0 rgba(37,99,235,0.5)",
+                "0 0 0 10px rgba(37,99,235,0)",
+              ],
+            }}
+            transition={{ duration: 1.6, repeat: Infinity }}
+          >
+            <Send size={13} /> Chat with Agent
+          </motion.button>
+          <p className="dt-email-cta-note">Get instant pricing · No commitment</p>
         </div>
       </div>
+
       <motion.div
         className="dt-email-popout"
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.4 }}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: [0, -4, 0] }}
+        transition={{
+          opacity: { delay: 0.4 },
+          y: { delay: 0.4, duration: 2.4, repeat: Infinity, ease: "easeInOut" },
+        }}
       >
-        <div className="dt-bubble dt-bubble-ai">How can I help with your quote?</div>
+        <div className="dt-bubble dt-bubble-ai">Hi! Want a quote on the promo rates?</div>
       </motion.div>
     </div>
   );
