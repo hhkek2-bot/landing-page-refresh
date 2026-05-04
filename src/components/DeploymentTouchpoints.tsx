@@ -199,7 +199,7 @@ function PreviewSocial() {
             y: { duration: 6 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
           }}
         >
-          <s.Icon size={22} />
+          <s.Icon size={44} />
           <span>{s.label}</span>
         </motion.div>
       ))}
