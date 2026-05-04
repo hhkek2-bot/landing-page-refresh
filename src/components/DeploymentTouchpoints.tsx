@@ -204,20 +204,24 @@ function PreviewSocial() {
       ))}
       <motion.div
         className="dt-source-hub dt-source-hub-chat"
-        initial={{ scale: 0.85, opacity: 0 }}
+        initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <div className="dt-source-hub-head">
-          <div className="dt-chat-avatar">AI</div>
-          <div>
-            <p className="dt-chat-name">Sales Agent</p>
-            <p className="dt-chat-status"><span className="dt-online-dot" /> Online</p>
-          </div>
+        <p className="dt-shc-status">We're online…</p>
+        <div className="dt-shc-bubble dt-shc-in">
+          Hi there! 👋 We have a 10% promo for new customers — want one?
         </div>
-        <div className="dt-source-hub-body">
-          <div className="dt-bubble dt-bubble-ai">Hi! How can I help today?</div>
-          <div className="dt-bubble dt-bubble-user">Looking for a forklift</div>
+        <div className="dt-shc-quick">
+          <span className="dt-shc-pill dt-shc-pill-primary">Yes, sure!</span>
+          <span className="dt-shc-pill">No, thanks</span>
+        </div>
+        <div className="dt-shc-bubble dt-shc-in dt-shc-in-2">
+          Cool! What's your email then?
+        </div>
+        <div className="dt-shc-input">
+          <span>Enter message</span>
+          <Send size={12} />
         </div>
       </motion.div>
     </div>
