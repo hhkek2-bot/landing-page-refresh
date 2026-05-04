@@ -541,64 +541,115 @@ function ComparisonInteractive({ activeIndex, setActiveIndex, beamTop, beamLeft,
 
 function BentoVisual({ visual }: { visual: BentoFeature["visual"] }) {
   switch (visual) {
+    // KNOWLEDGE — central equipment hub with specs orbiting around it
     case "knowledge":
       return (
         <div className="bv bv-knowledge">
-          <span className="bv-badge bv-b-1">CAT 320 GC</span>
-          <span className="bv-badge bv-b-2">22,200 kg</span>
-          <span className="bv-badge bv-b-3">1.19 m³ bucket</span>
-          <span className="bv-badge bv-b-4">121 kW</span>
-          <span className="bv-badge bv-b-5 outline">Hydraulic excavator</span>
+          <div className="bv-orbit-ring bv-orbit-ring-1" />
+          <div className="bv-orbit-ring bv-orbit-ring-2" />
+          <div className="bv-core">
+            <Database size={16} />
+            <span>CAT 320 GC</span>
+          </div>
+          <div className="bv-orbiter bv-o-1"><span className="bv-chip">22,200 kg</span></div>
+          <div className="bv-orbiter bv-o-2"><span className="bv-chip">1.19 m³</span></div>
+          <div className="bv-orbiter bv-o-3"><span className="bv-chip">121 kW</span></div>
+          <div className="bv-orbiter bv-o-4"><span className="bv-chip">Tier 4</span></div>
         </div>
       );
 
+    // TRAINING — documents falling into a stack with a "Trained" pulse
     case "training":
       return (
         <div className="bv bv-training">
-          <span className="bv-badge bv-b-1"><b className="ext red">PDF</b> Catalogue_2025</span>
-          <span className="bv-badge bv-b-2"><b className="ext green">XLS</b> Pricing_Q4</span>
-          <span className="bv-badge bv-b-3"><b className="ext blue">DOC</b> Rental_Policy</span>
-          <span className="bv-badge bv-b-4 solid"><Sparkles size={12} /> Trained</span>
+          <div className="bv-doc bv-doc-1"><b className="ext red">PDF</b> Catalogue_2025</div>
+          <div className="bv-doc bv-doc-2"><b className="ext green">XLS</b> Pricing_Q4</div>
+          <div className="bv-doc bv-doc-3"><b className="ext blue">DOC</b> Rental_Policy</div>
+          <div className="bv-funnel">
+            <UploadCloud size={14} />
+            <span>Ingesting…</span>
+          </div>
+          <div className="bv-train-pill"><Sparkles size={12} /> Trained</div>
         </div>
       );
 
+    // MATCHING — ranked horizontal bars filling up
     case "matching":
       return (
         <div className="bv bv-matching">
-          <span className="bv-badge bv-b-1">JCB 3CX · <b>98%</b></span>
-          <span className="bv-badge bv-b-2">CAT 420F2 · <b>86%</b></span>
-          <span className="bv-badge bv-b-3">Komatsu WB97 · <b>74%</b></span>
-          <span className="bv-badge bv-b-4 solid">✓ Best fit</span>
+          <div className="bv-rank bv-rank-1">
+            <span className="bv-rank-name">JCB 3CX</span>
+            <span className="bv-rank-bar"><i style={{ width: "98%" }} /></span>
+            <span className="bv-rank-pct">98%</span>
+          </div>
+          <div className="bv-rank bv-rank-2">
+            <span className="bv-rank-name">CAT 420F2</span>
+            <span className="bv-rank-bar"><i style={{ width: "86%" }} /></span>
+            <span className="bv-rank-pct">86%</span>
+          </div>
+          <div className="bv-rank bv-rank-3">
+            <span className="bv-rank-name">Komatsu WB97</span>
+            <span className="bv-rank-bar"><i style={{ width: "74%" }} /></span>
+            <span className="bv-rank-pct">74%</span>
+          </div>
+          <div className="bv-best">✓ Best fit</div>
         </div>
       );
 
+    // SIGNALS — radar pulse with intent gauge
     case "signals":
       return (
         <div className="bv bv-signals">
-          <span className="bv-badge bv-b-1"><i className="dot" /> Specs requested</span>
-          <span className="bv-badge bv-b-2"><i className="dot" /> Timeline shared</span>
-          <span className="bv-badge bv-b-3"><i className="dot" /> Budget confirmed</span>
-          <span className="bv-badge bv-b-4 solid">Intent · 87</span>
+          <div className="bv-radar">
+            <span className="bv-radar-ring" />
+            <span className="bv-radar-ring" />
+            <span className="bv-radar-ring" />
+            <span className="bv-radar-dot" />
+          </div>
+          <div className="bv-sig-row bv-sig-1"><i className="dot" /> Specs requested</div>
+          <div className="bv-sig-row bv-sig-2"><i className="dot" /> Timeline shared</div>
+          <div className="bv-sig-row bv-sig-3"><i className="dot" /> Budget confirmed</div>
+          <div className="bv-intent">
+            <span className="bv-intent-label">Intent</span>
+            <span className="bv-intent-score">87</span>
+          </div>
         </div>
       );
 
+    // SECURITY — shield with scanning beam + lock
     case "security":
       return (
         <div className="bv bv-security">
-          <span className="bv-badge bv-b-1">AES-256</span>
-          <span className="bv-badge bv-b-2">SOC 2</span>
-          <span className="bv-badge bv-b-3">Tenant isolated</span>
-          <span className="bv-badge bv-b-4 solid"><ShieldCheck size={12} /> Encrypted</span>
+          <div className="bv-shield">
+            <ShieldCheck size={48} strokeWidth={1.6} />
+            <span className="bv-scan" />
+          </div>
+          <div className="bv-sec-tag bv-sec-1">AES-256</div>
+          <div className="bv-sec-tag bv-sec-2">SOC 2</div>
+          <div className="bv-sec-tag bv-sec-3">Isolated</div>
         </div>
       );
 
+    // WORKFLOW — animated checklist sequencing
     case "workflow":
       return (
         <div className="bv bv-workflow">
-          <span className="bv-badge bv-b-1">Quotation sent</span>
-          <span className="bv-badge bv-b-2">Specs compared</span>
-          <span className="bv-badge bv-b-3">Invoice generated</span>
-          <span className="bv-badge bv-b-4 solid">Reservation ✓</span>
+          <div className="bv-task bv-task-1">
+            <span className="bv-check"><Check size={11} strokeWidth={3} /></span>
+            <span>Quotation sent</span>
+          </div>
+          <div className="bv-task bv-task-2">
+            <span className="bv-check"><Check size={11} strokeWidth={3} /></span>
+            <span>Specs compared</span>
+          </div>
+          <div className="bv-task bv-task-3">
+            <span className="bv-check"><Check size={11} strokeWidth={3} /></span>
+            <span>Invoice generated</span>
+          </div>
+          <div className="bv-task bv-task-4 bv-task-active">
+            <span className="bv-check bv-check-active"><Check size={11} strokeWidth={3} /></span>
+            <span>Reservation ✓</span>
+          </div>
         </div>
       );
   }
