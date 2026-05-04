@@ -321,9 +321,9 @@
 .dt-email-promo-hero {
   position: relative;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18), transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.2), transparent 40%),
     radial-gradient(circle at 80% 80%, rgba(253,224,71,0.18), transparent 45%),
-    linear-gradient(135deg, #1e40af 0%, #3b82f6 60%, #60a5fa 100%);
+    linear-gradient(135deg, #7f1d1d 0%, #dc2626 55%, #f97316 100%);
   color: #fff;
   padding: 16px 16px 14px;
   text-align: center;
