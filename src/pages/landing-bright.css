@@ -2588,7 +2588,7 @@
 .pain-bento-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr 1.2fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: 2fr 1fr;
   grid-template-areas:
     "a1 b  b  c1"
     "a2 d  d  c2";
