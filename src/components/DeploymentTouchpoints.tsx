@@ -144,14 +144,41 @@ function TikTokIcon({ size = 18 }: { size?: number }) {
 
 function PreviewSocial() {
   const sources: { label: string; x: number; y: number; Icon: React.FC<{ size?: number }> }[] = [
-    { label: "TikTok", x: 50, y: 6, Icon: TikTokIcon },
-    { label: "Facebook", x: 8, y: 26, Icon: FacebookIcon },
-    { label: "LinkedIn", x: 72, y: 26, Icon: LinkedInIcon },
-    { label: "Google Ads", x: 8, y: 78, Icon: GoogleAdsIcon },
-    { label: "QR Code", x: 72, y: 78, Icon: ({ size = 26 }) => <QrCode size={size} color="#0b1730" /> },
+    { label: "Facebook", x: 10, y: 14, Icon: FacebookIcon },
+    { label: "TikTok", x: 90, y: 14, Icon: TikTokIcon },
+    { label: "LinkedIn", x: 8, y: 50, Icon: LinkedInIcon },
+    { label: "Google Ads", x: 92, y: 50, Icon: GoogleAdsIcon },
+    { label: "QR Code", x: 10, y: 86, Icon: ({ size = 26 }) => <QrCode size={size} color="#0b1730" /> },
+    { label: "Instagram", x: 90, y: 86, Icon: ({ size = 22 }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+        <defs>
+          <linearGradient id="dt-ig-grad" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stopColor="#feda75" />
+            <stop offset="35%" stopColor="#fa7e1e" />
+            <stop offset="65%" stopColor="#d62976" />
+            <stop offset="100%" stopColor="#4f5bd5" />
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#dt-ig-grad)"/>
+        <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" strokeWidth="1.6"/>
+        <circle cx="17.5" cy="6.5" r="1.1" fill="#fff"/>
+      </svg>
+    ) },
   ];
   return (
     <div className="dt-preview-social">
+      <svg className="dt-source-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="dt-line-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#16a34a" />
+            <stop offset="50%" stopColor="#22c55e" />
+            <stop offset="100%" stopColor="#4ade80" />
+          </linearGradient>
+        </defs>
+        {sources.map((s) => (
+          <line key={s.label} x1={s.x} y1={s.y} x2={50} y2={50} />
+        ))}
+      </svg>
       {sources.map((s, i) => (
         <motion.div
           key={s.label}
@@ -161,8 +188,8 @@ function PreviewSocial() {
           animate={{
             opacity: 1,
             scale: 1,
-            x: [0, i % 2 === 0 ? 6 : -6, 0],
-            y: [0, i % 2 === 0 ? -5 : 5, 0],
+            x: [0, i % 2 === 0 ? 5 : -5, 0],
+            y: [0, i % 2 === 0 ? -4 : 4, 0],
           }}
           transition={{
             opacity: { delay: 0.1 + i * 0.08 },
@@ -171,22 +198,10 @@ function PreviewSocial() {
             y: { duration: 6 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
           }}
         >
-          <s.Icon size={24} />
+          <s.Icon size={22} />
           <span>{s.label}</span>
         </motion.div>
       ))}
-      <svg className="dt-source-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="dt-line-grad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#16a34a" />
-            <stop offset="50%" stopColor="#22c55e" />
-            <stop offset="100%" stopColor="#4ade80" />
-          </linearGradient>
-        </defs>
-        <path d="M50,10 Q50,50 50,50" />
-        <path d="M18,30 Q50,50 50,50" /><path d="M82,30 Q50,50 50,50" />
-        <path d="M18,78 Q50,50 50,50" /><path d="M82,78 Q50,50 50,50" />
-      </svg>
       <motion.div
         className="dt-source-hub dt-source-hub-chat"
         initial={{ scale: 0.85, opacity: 0 }}
