@@ -2717,10 +2717,12 @@
 .pain-size-feature .pain-body { padding: 18px 22px 22px; }
 .pain-size-feature h3 { font-size: 1.02rem; }
 .pain-size-feature p  { font-size: 0.86rem; }
-.pain-size-stacked .pain-body { padding: 18px 20px 20px; }
-.pain-size-stacked h3 { font-size: 1rem; }
-.pain-size-wide .pain-body { padding: 20px 24px 22px; }
-.pain-size-wide h3 { font-size: 1.1rem; }
+.pain-size-stacked .pain-body { padding: 18px 22px 22px; }
+.pain-size-stacked h3 { font-size: 1.02rem; }
+.pain-size-wide .pain-body { padding: 18px 22px 22px; }
+.pain-size-wide h3 { font-size: 1.02rem; }
+.pain-size-wide p  { font-size: 0.86rem; }
+.pain-size-stacked p { font-size: 0.86rem; }
 
 /* ---------- Per-visual STATIC graphics ---------- */
 .pv { position: absolute; inset: 0; }
