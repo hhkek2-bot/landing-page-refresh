@@ -9,7 +9,6 @@ import {
   LayoutDashboard,
   Check,
   QrCode,
-  Clock,
   Send,
   Truck,
   Tag,
