@@ -1620,10 +1620,30 @@
 
 .bright-stat-value {
   margin: 0;
-  font-size: clamp(2.4rem, 3.8vw, 3.6rem);
+  font-size: clamp(3.4rem, 5.5vw, 5.4rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: linear-gradient(135deg, #0b1e36 0%, #1f3556 50%, #475569 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s ease;
+  transform-origin: left center;
+}
+
+.bright-stat-cell { cursor: default; }
+
+.bright-stat-cell:hover .bright-stat-value {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #635bff 0%, #a855f7 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bright-stat-cell:hover .bright-stat-label {
   color: #0b1e36;
 }
 
