@@ -380,10 +380,15 @@ function PreviewMultilingual() {
   });
   return (
     <div className="dt-preview-multi">
-      <div className="dt-multi-center">
-        <Globe size={28} />
-        <p>AI Sales Agent</p>
-        <span className="dt-multi-247"><Clock size={12} /> 24 / 7</span>
+      <div className="dt-globe-wrap" aria-hidden="true">
+        <div className="dt-globe">
+          <span className="dt-globe-meridian" />
+          <span className="dt-globe-meridian dt-globe-meridian-2" />
+          <span className="dt-globe-meridian dt-globe-meridian-3" />
+          <span className="dt-globe-parallel" />
+          <span className="dt-globe-parallel dt-globe-parallel-2" />
+          <span className="dt-globe-parallel dt-globe-parallel-3" />
+        </div>
       </div>
       {langs.map((l, i) => {
         const { x, y } = positions[i];
