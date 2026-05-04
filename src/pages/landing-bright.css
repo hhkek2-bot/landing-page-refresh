@@ -2910,5 +2910,6 @@
 @media (max-width: 640px) {
   .pain-bento-grid { grid-template-columns: 1fr; gap: 14px; }
   .pain-col { gap: 14px; }
+  .pain-bento-header h2 { white-space: normal; font-size: 2rem; }
 }
 
