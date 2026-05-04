@@ -1546,7 +1546,7 @@
 /* ===== Stats Section — Unified Card ===== */
 .bright-stats-section {
   padding: clamp(80px, 12vw, 140px) 0;
-  background: linear-gradient(180deg, #eef1f6 0%, #dde2ec 100%);
+  background: #ffffff;
 }
 
 .bright-stats-card {
@@ -1555,27 +1555,14 @@
   grid-template-columns: 1.05fr 1fr;
   gap: clamp(40px, 6vw, 88px);
   align-items: center;
-  padding: clamp(48px, 6vw, 80px) clamp(40px, 5vw, 72px);
-  border-radius: 36px;
-  background: linear-gradient(180deg, #ffffff 0%, #f4f5f8 100%);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.9) inset,
-    0 30px 60px -30px rgba(15, 23, 42, 0.18),
-    0 12px 24px -12px rgba(15, 23, 42, 0.12);
+  padding: clamp(24px, 3vw, 40px) 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
 }
 
-.bright-stats-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(15,23,42,0.06));
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  pointer-events: none;
-}
+.bright-stats-card::before { display: none; }
+
 
 .bright-stats-intro h2 {
   margin: 0 0 18px;
