@@ -45,11 +45,7 @@
   font-weight: 700;
   letter-spacing: -0.01em;
   margin: 0 0 18px;
-  background: linear-gradient(90deg, #7c3aed 0%, #3b82f6 50%, #f97316 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: #0b1730;
 }
 .dt-desc { font-size: 15px; line-height: 1.6; color: #475569; margin: 0 auto; max-width: 1120px; text-wrap: balance; }
 
