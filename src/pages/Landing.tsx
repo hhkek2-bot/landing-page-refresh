@@ -400,7 +400,7 @@ function StepGraphic({ visual }: { visual: ProcessStep["visual"] }) {
     </div>
   );
 }
-function StatCard({ stat }: { stat: StatItem }) {
+function StatCard({ stat, icon: Icon }: { stat: StatItem; icon: LucideIcon }) {
   const [isHovered, setIsHovered] = useState(false);
   const [displayNum, setDisplayNum] = useState(0);
   const animRef = useRef<number | null>(null);
@@ -411,7 +411,7 @@ function StatCard({ stat }: { stat: StatItem }) {
   useEffect(() => {
     if (isInView && !hasAnimated) {
       setHasAnimated(true);
-      setIsHovered(true); // trigger initial count
+      setIsHovered(true);
     }
   }, [isInView, hasAnimated]);
 
@@ -434,13 +434,15 @@ function StatCard({ stat }: { stat: StatItem }) {
   return (
     <article
       ref={cardRef}
-      className="bright-stat-card"
+      className="bright-stat-cell"
       role="listitem"
       onMouseEnter={() => { setIsHovered(false); requestAnimationFrame(() => setIsHovered(true)); }}
     >
-      <p className="bright-stat-value">{stat.prefix}{displayNum}{stat.suffix}</p>
+      <div className="bright-stat-row">
+        <span className="bright-stat-icon" aria-hidden="true"><Icon size={16} strokeWidth={1.8} /></span>
+        <p className="bright-stat-value">{stat.prefix}{displayNum}{stat.suffix}</p>
+      </div>
       <p className="bright-stat-label">{stat.label}</p>
-      <p className="bright-stat-sublabel">{stat.sublabel}</p>
     </article>
   );
 }
