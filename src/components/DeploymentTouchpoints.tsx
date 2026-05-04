@@ -129,13 +129,23 @@ function GoogleAdsIcon({ size = 18 }: { size?: number }) {
     </svg>
   );
 }
+function TikTokIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="#25F4EE" d="M19.6 6.7a5.6 5.6 0 0 1-3.3-1.9V15a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v2.8a2.7 2.7 0 1 0 1.9 2.6V2h2.8a5.6 5.6 0 0 0 3.2 4.7v0Z"/>
+      <path fill="#FE2C55" d="M20.6 7.7a5.6 5.6 0 0 1-3.3-1.9V16a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v2.8a2.7 2.7 0 1 0 1.9 2.6V3h2.8a5.6 5.6 0 0 0 3.2 4.7v0Z"/>
+      <path fill="#000" d="M20.1 7.2a5.6 5.6 0 0 1-3.3-1.9v10.2a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v2.8a2.7 2.7 0 1 0 1.9 2.6V2.5h2.8a5.6 5.6 0 0 0 3.2 4.7Z"/>
+    </svg>
+  );
+}
 
 function PreviewSocial() {
   const sources: { label: string; x: number; y: number; Icon: React.FC<{ size?: number }> }[] = [
-    { label: "Facebook", x: 8, y: 14, Icon: FacebookIcon },
-    { label: "QR Code", x: 8, y: 70, Icon: ({ size = 20 }) => <QrCode size={size} color="#0b1730" /> },
-    { label: "LinkedIn", x: 72, y: 14, Icon: LinkedInIcon },
-    { label: "Google Ads", x: 72, y: 70, Icon: GoogleAdsIcon },
+    { label: "TikTok", x: 50, y: 6, Icon: TikTokIcon },
+    { label: "Facebook", x: 8, y: 26, Icon: FacebookIcon },
+    { label: "LinkedIn", x: 72, y: 26, Icon: LinkedInIcon },
+    { label: "Google Ads", x: 8, y: 78, Icon: GoogleAdsIcon },
+    { label: "QR Code", x: 72, y: 78, Icon: ({ size = 20 }) => <QrCode size={size} color="#0b1730" /> },
   ];
   return (
     <div className="dt-preview-social">
@@ -153,8 +163,9 @@ function PreviewSocial() {
         </motion.div>
       ))}
       <svg className="dt-source-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M18,20 Q50,50 50,50" /><path d="M18,75 Q50,50 50,50" />
-        <path d="M82,20 Q50,50 50,50" /><path d="M82,75 Q50,50 50,50" />
+        <path d="M50,10 Q50,50 50,50" />
+        <path d="M18,30 Q50,50 50,50" /><path d="M82,30 Q50,50 50,50" />
+        <path d="M18,78 Q50,50 50,50" /><path d="M82,78 Q50,50 50,50" />
       </svg>
       <motion.div
         className="dt-source-hub"
