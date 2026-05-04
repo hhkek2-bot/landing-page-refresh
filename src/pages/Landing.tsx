@@ -7,6 +7,7 @@ import {
   ArrowRight,
   Bot,
   CheckCircle2,
+  Check,
   Database,
   SearchCheck,
   ShieldCheck,
