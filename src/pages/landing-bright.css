@@ -2587,44 +2587,19 @@
 
 .pain-bento-grid {
   display: grid;
-  grid-template-columns: 1fr 1.15fr 1.15fr 1fr;
-  grid-template-rows: 280px 240px;
-  grid-template-areas:
-    "a b b c"
-    "a d e c"
-    "a f f c";
-  gap: 18px;
-}
-/* Override: 3 rows so featured spans 1 row & A/C span all 3, bottom = d e f across cols 2-4 in row 2-3.
-   Simpler: use 4×3 grid */
-.pain-bento-grid {
-  grid-template-rows: 240px 120px 200px;
-  grid-template-areas:
-    "a b b c"
-    "a b b c"
-    "a d e c";
-}
-.pain-area-a { grid-area: a; }
-.pain-area-b { grid-area: b; }
-.pain-area-c { grid-area: c; }
-.pain-area-d { grid-area: d; }
-.pain-area-e { grid-area: e; }
-.pain-area-f { grid-area: e; } /* not used in 3-area bottom; we extend below */
-
-/* Use 6 areas across the bottom: d e f */
-.pain-bento-grid {
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1.2fr 1.2fr 1fr;
   grid-template-rows: auto auto;
   grid-template-areas:
-    "a b b c"
-    "a d e f";
+    "a1 b  b  c1"
+    "a2 d  d  c2";
+  gap: 18px;
 }
-.pain-area-a { grid-area: a; }
-.pain-area-b { grid-area: b; }
-.pain-area-c { grid-area: c; }
-.pain-area-d { grid-area: d; }
-.pain-area-e { grid-area: e; }
-.pain-area-f { grid-area: f; }
+.pain-area-a1 { grid-area: a1; }
+.pain-area-a2 { grid-area: a2; }
+.pain-area-b  { grid-area: b; }
+.pain-area-c1 { grid-area: c1; }
+.pain-area-c2 { grid-area: c2; }
+.pain-area-d  { grid-area: d; }
 
 /* Card */
 .pain-card {
@@ -2661,7 +2636,8 @@
 .pain-tone-slate   { --tone: #475569; --tone-soft: #f1f5f9; }
 
 /* Tall cards (A, C) = vertical with visual on top, text below, must span 2 rows */
-.pain-size-tall { min-height: 520px; }
+.pain-size-stacked { min-height: 240px; }
+.pain-size-wide { min-height: 240px; }
 
 /* Visual area */
 .pain-visual {
@@ -2676,9 +2652,9 @@
   background: linear-gradient(0deg, #ffffff 0%, transparent 100%);
   pointer-events: none; z-index: 5;
 }
-.pain-size-tall .pain-visual { min-height: 240px; }
-.pain-size-feature .pain-visual { min-height: 200px; }
-.pain-size-sm .pain-visual { min-height: 130px; }
+.pain-size-stacked .pain-visual { min-height: 140px; }
+.pain-size-feature .pain-visual { min-height: 220px; }
+.pain-size-wide .pain-visual { min-height: 140px; }
 
 /* Body — auto height so all text visible */
 .pain-body {
@@ -2715,8 +2691,10 @@
 .pain-size-feature .pain-body { padding: 22px 26px 26px; }
 .pain-size-feature h3 { font-size: 1.28rem; }
 .pain-size-feature p  { font-size: 0.94rem; }
-.pain-size-tall .pain-body { padding: 22px 22px 24px; }
-.pain-size-tall h3 { font-size: 1.1rem; }
+.pain-size-stacked .pain-body { padding: 18px 20px 20px; }
+.pain-size-stacked h3 { font-size: 1rem; }
+.pain-size-wide .pain-body { padding: 20px 24px 22px; }
+.pain-size-wide h3 { font-size: 1.1rem; }
 
 /* ---------- Per-visual STATIC graphics ---------- */
 .pv { position: absolute; inset: 0; }
@@ -2898,12 +2876,11 @@
   .pain-bento-grid {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-      "a b"
-      "a c"
-      "d e"
-      "f f";
+      "b  b"
+      "a1 c1"
+      "a2 c2"
+      "d  d";
   }
-  .pain-size-tall { min-height: 420px; }
 }
 
 /* Mobile */
@@ -2911,9 +2888,8 @@
   .pain-bento-grid {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "b" "a" "c" "d" "e" "f";
+      "b" "a1" "a2" "c1" "c2" "d";
     gap: 14px;
   }
-  .pain-size-tall { min-height: 360px; }
 }
 
