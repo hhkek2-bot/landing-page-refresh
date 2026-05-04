@@ -1,6 +1,10 @@
 /* Deployment Touchpoints Section — premium B2B SaaS */
 .dt-section {
-  background: linear-gradient(180deg, #fafbfc 0%, #f4f6f9 100%);
+  background:
+    radial-gradient(ellipse 60% 40% at 12% 8%, rgba(124, 58, 237, 0.10), transparent 60%),
+    radial-gradient(ellipse 55% 40% at 88% 12%, rgba(59, 130, 246, 0.10), transparent 60%),
+    radial-gradient(ellipse 60% 45% at 80% 95%, rgba(249, 115, 22, 0.08), transparent 65%),
+    linear-gradient(180deg, #fafbfc 0%, #f4f6f9 100%);
   padding: 96px 0;
   color: #0f1a2e;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
