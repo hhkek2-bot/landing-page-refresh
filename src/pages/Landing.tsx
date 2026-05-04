@@ -344,6 +344,8 @@ const statItems: StatItem[] = [
   { value: "65%+", numericEnd: 65, suffix: "%+", prefix: "", label: "Shift to AI Decisions", sublabel: "Buyers increasingly rely on AI when backed by real data" },
 ];
 
+const statIcons: LucideIcon[] = [Target, Zap, Sparkles, TrendingDown];
+
 const faqHighlights: FaqHighlight[] = [
   { question: "What is the Antbuildz AI Agent?", answer: "It is an AI sales agent built for equipment businesses to answer technical questions, guide discovery, and move enquiries toward quotation." },
   { question: "How long does setup typically take?", answer: "Basic deployment can be done quickly, while more advanced setups depend on catalog size, data quality, and scenario complexity." },
