@@ -857,7 +857,7 @@ export default function Landing() {
                   <BentoVisual visual={f.visual} />
                 </div>
                 <div className="bento-body">
-                  <div className="bento-icon"><f.icon size={20} strokeWidth={2} /></div>
+                  <span className="bento-eyebrow">{f.eyebrow}</span>
                   <h3>{f.title}</h3>
                   <p>{f.body}</p>
                 </div>
