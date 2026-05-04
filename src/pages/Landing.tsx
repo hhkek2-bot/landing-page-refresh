@@ -344,6 +344,8 @@ const statItems: StatItem[] = [
   { value: "65%+", numericEnd: 65, suffix: "%+", prefix: "", label: "Shift to AI Decisions", sublabel: "Buyers increasingly rely on AI when backed by real data" },
 ];
 
+const statIcons: LucideIcon[] = [Target, Zap, Sparkles, TrendingDown];
+
 const faqHighlights: FaqHighlight[] = [
   { question: "What is the Antbuildz AI Agent?", answer: "It is an AI sales agent built for equipment businesses to answer technical questions, guide discovery, and move enquiries toward quotation." },
   { question: "How long does setup typically take?", answer: "Basic deployment can be done quickly, while more advanced setups depend on catalog size, data quality, and scenario complexity." },
@@ -398,7 +400,7 @@ function StepGraphic({ visual }: { visual: ProcessStep["visual"] }) {
     </div>
   );
 }
-function StatCard({ stat }: { stat: StatItem }) {
+function StatCard({ stat, icon: Icon }: { stat: StatItem; icon: LucideIcon }) {
   const [isHovered, setIsHovered] = useState(false);
   const [displayNum, setDisplayNum] = useState(0);
   const animRef = useRef<number | null>(null);
@@ -409,7 +411,7 @@ function StatCard({ stat }: { stat: StatItem }) {
   useEffect(() => {
     if (isInView && !hasAnimated) {
       setHasAnimated(true);
-      setIsHovered(true); // trigger initial count
+      setIsHovered(true);
     }
   }, [isInView, hasAnimated]);
 
@@ -432,13 +434,15 @@ function StatCard({ stat }: { stat: StatItem }) {
   return (
     <article
       ref={cardRef}
-      className="bright-stat-card"
+      className="bright-stat-cell"
       role="listitem"
       onMouseEnter={() => { setIsHovered(false); requestAnimationFrame(() => setIsHovered(true)); }}
     >
-      <p className="bright-stat-value">{stat.prefix}{displayNum}{stat.suffix}</p>
+      <div className="bright-stat-row">
+        <span className="bright-stat-icon" aria-hidden="true"><Icon size={16} strokeWidth={1.8} /></span>
+        <p className="bright-stat-value">{stat.prefix}{displayNum}{stat.suffix}</p>
+      </div>
       <p className="bright-stat-label">{stat.label}</p>
-      <p className="bright-stat-sublabel">{stat.sublabel}</p>
     </article>
   );
 }
@@ -1084,17 +1088,21 @@ export default function Landing() {
       <DeploymentTouchpoints />
       <SalesIntelligence />
 
-      {/* Metrics — Stripe-inspired */}
+      {/* Metrics — Unified card */}
       <section className="bright-stats-section">
         <div className="bright-container">
-          <div className="bright-stats-title-block">
-            <TypewriterHeading text="The backbone of AI-driven equipment sales" as="h2" />
-            <div className="bright-stats-accent-line" aria-hidden="true" />
-          </div>
-          <div className="bright-stats-grid" role="list" aria-label="Key statistics">
-            {statItems.map((stat) => (
-              <StatCard key={stat.label} stat={stat} />
-            ))}
+          <div className="bright-stats-card">
+            <div className="bright-stats-intro">
+              <TypewriterHeading text="The backbone of AI-driven equipment sales." as="h2" />
+              <p className="bright-stats-intro-copy">
+                Antbuildz turns every enquiry into a structured, qualified opportunity — giving equipment sales teams the speed, consistency, and intelligence to close more deals.
+              </p>
+            </div>
+            <div className="bright-stats-metrics" role="list" aria-label="Key statistics">
+              {statItems.map((stat, i) => (
+                <StatCard key={stat.label} stat={stat} icon={statIcons[i]} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
