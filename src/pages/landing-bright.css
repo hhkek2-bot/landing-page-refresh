@@ -1589,13 +1589,6 @@
   .bright-stats-intro h2 { font-size: 2.3rem; }
 }
 
-.bright-stats-intro-copy {
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--text-muted);
-  max-width: 54ch;
-}
 
 .bright-stats-metrics {
   display: grid;
