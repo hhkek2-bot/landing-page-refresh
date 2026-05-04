@@ -296,7 +296,7 @@ export default function DeploymentTouchpoints() {
           <h2 id="dt-heading" className="dt-title">
             One Sale Agent
           </h2>
-          <p className="dt-eyebrow dt-subtitle">
+          <p className="dt-subtitle">
             Multiple Languages · Multiple Channels · Multiple Markets
           </p>
           <p className="dt-desc">
