@@ -541,78 +541,149 @@ function ComparisonInteractive({ activeIndex, setActiveIndex, beamTop, beamLeft,
 function BentoVisual({ visual }: { visual: BentoFeature["visual"] }) {
   switch (visual) {
     case "knowledge":
+      // Equipment spec sheet — what "industry knowledge" actually looks like
       return (
         <div className="bv bv-knowledge">
-          <div className="bv-doc bv-doc-3" />
-          <div className="bv-doc bv-doc-2" />
-          <div className="bv-doc bv-doc-1">
-            <span /><span /><span className="short" />
+          <div className="bv-spec-card">
+            <div className="bv-spec-head">
+              <div className="bv-spec-thumb">
+                <svg viewBox="0 0 32 24" fill="none" aria-hidden="true">
+                  <rect x="2" y="14" width="22" height="6" rx="1" fill="#1e3a8a"/>
+                  <rect x="6" y="10" width="10" height="6" rx="1" fill="#3b82f6"/>
+                  <path d="M16 12 L26 6 L29 11 L20 16 Z" fill="#60a5fa"/>
+                  <circle cx="7" cy="20" r="2.5" fill="#0f172a"/>
+                  <circle cx="20" cy="20" r="2.5" fill="#0f172a"/>
+                </svg>
+              </div>
+              <div className="bv-spec-titles">
+                <span className="bv-spec-model">CAT 320 GC</span>
+                <span className="bv-spec-sub">Hydraulic Excavator</span>
+              </div>
+              <span className="bv-spec-tag">In stock · 4</span>
+            </div>
+            <div className="bv-spec-rows">
+              <div className="bv-spec-row"><span>Operating weight</span><b>22,200 kg</b></div>
+              <div className="bv-spec-row"><span>Bucket capacity</span><b>1.19 m³</b></div>
+              <div className="bv-spec-row"><span>Max dig depth</span><b>6.72 m</b></div>
+              <div className="bv-spec-row"><span>Engine power</span><b>121 kW</b></div>
+            </div>
           </div>
-          <div className="bv-tag bv-tag-a">Excavator</div>
-          <div className="bv-tag bv-tag-b">Payload</div>
         </div>
       );
+
     case "training":
+      // Source → AI brain pipeline
       return (
         <div className="bv bv-training">
-          <div className="bv-cloud"><UploadCloud size={26} /></div>
-          <div className="bv-file bv-file-1">PDF</div>
-          <div className="bv-file bv-file-2">XLS</div>
-          <div className="bv-file bv-file-3">DOC</div>
+          <div className="bv-train-sources">
+            <div className="bv-src"><span className="bv-src-ext">PDF</span><span className="bv-src-name">Catalogue_2025.pdf</span></div>
+            <div className="bv-src"><span className="bv-src-ext xls">XLS</span><span className="bv-src-name">Pricing_Q4.xlsx</span></div>
+            <div className="bv-src"><span className="bv-src-ext doc">DOC</span><span className="bv-src-name">Rental_Policy.docx</span></div>
+          </div>
+          <svg className="bv-train-pipe" viewBox="0 0 120 120" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 18 Q 60 18 60 60 Q 60 102 120 102" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="3 4" fill="none"/>
+            <path d="M0 60 Q 60 60 60 60" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="3 4" fill="none"/>
+            <path d="M0 102 Q 60 102 60 60" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="3 4" fill="none"/>
+          </svg>
+          <div className="bv-train-brain">
+            <Sparkles size={16} />
+            <span>Trained</span>
+          </div>
         </div>
       );
+
     case "matching":
+      // Ranked equipment match list with fit scores
       return (
         <div className="bv bv-matching">
-          <div className="bv-match">
-            <div className="bv-match-row"><span className="bv-dot" /><span className="bv-bar" style={{ width: "70%" }} /></div>
-            <div className="bv-match-row"><span className="bv-dot" /><span className="bv-bar" style={{ width: "92%" }} /></div>
-            <div className="bv-match-row bv-match-best"><span className="bv-dot" /><span className="bv-bar" style={{ width: "100%" }} /><span className="bv-check">✓</span></div>
+          <div className="bv-match-card">
+            <div className="bv-match-head">
+              <span>Best match for project</span>
+              <span className="bv-match-count">3 of 47</span>
+            </div>
+            <div className="bv-match-row bv-match-best">
+              <span className="bv-match-name">JCB 3CX</span>
+              <span className="bv-match-bar"><i style={{ width: "98%" }} /></span>
+              <b>98%</b>
+            </div>
+            <div className="bv-match-row">
+              <span className="bv-match-name">CAT 420F2</span>
+              <span className="bv-match-bar"><i style={{ width: "86%" }} /></span>
+              <b>86%</b>
+            </div>
+            <div className="bv-match-row">
+              <span className="bv-match-name">Komatsu WB97</span>
+              <span className="bv-match-bar"><i style={{ width: "74%" }} /></span>
+              <b>74%</b>
+            </div>
           </div>
         </div>
       );
+
     case "signals":
+      // Buyer intent gauge + qualifying signals
       return (
         <div className="bv bv-signals">
-          <svg viewBox="0 0 220 80" preserveAspectRatio="none" className="bv-chart">
-            <defs>
-              <linearGradient id="bvSig" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stopColor="#fb7185" stopOpacity="0.45" />
-                <stop offset="100%" stopColor="#fb7185" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            <path d="M0 60 L30 50 L55 55 L85 35 L115 42 L145 22 L175 30 L210 8 L220 8 L220 80 L0 80 Z" fill="url(#bvSig)" />
-            <path d="M0 60 L30 50 L55 55 L85 35 L115 42 L145 22 L175 30 L210 8" fill="none" stroke="#e11d48" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-            <circle cx="210" cy="8" r="4" fill="#e11d48" />
-          </svg>
-          <div className="bv-pill">High intent</div>
+          <div className="bv-gauge">
+            <svg viewBox="0 0 100 60" aria-hidden="true">
+              <path d="M10 55 A 40 40 0 0 1 90 55" stroke="#fecdd3" strokeWidth="8" fill="none" strokeLinecap="round"/>
+              <path d="M10 55 A 40 40 0 0 1 82 22" stroke="#e11d48" strokeWidth="8" fill="none" strokeLinecap="round"/>
+            </svg>
+            <div className="bv-gauge-val">87<i>/100</i></div>
+            <div className="bv-gauge-label">Intent score</div>
+          </div>
+          <div className="bv-sig-list">
+            <div className="bv-sig"><i className="dot ok" /> Specs requested</div>
+            <div className="bv-sig"><i className="dot ok" /> Timeline shared</div>
+            <div className="bv-sig"><i className="dot ok" /> Budget confirmed</div>
+          </div>
         </div>
       );
+
     case "security":
+      // Compliance / audit panel
       return (
         <div className="bv bv-security">
-          <div className="bv-shield"><ShieldCheck size={28} /></div>
+          <div className="bv-sec-card">
+            <div className="bv-sec-head">
+              <ShieldCheck size={18} />
+              <span>Tenant isolation</span>
+              <span className="bv-sec-badge">ACTIVE</span>
+            </div>
+            <div className="bv-sec-row"><span>AES-256 encryption</span><i className="check">✓</i></div>
+            <div className="bv-sec-row"><span>SOC 2 controls</span><i className="check">✓</i></div>
+            <div className="bv-sec-row"><span>Per-org knowledge base</span><i className="check">✓</i></div>
+          </div>
         </div>
       );
+
     case "workflow":
+      // Action log — what the agent actually executes
       return (
         <div className="bv bv-workflow">
-          <div className="bv-quote">
-            <div className="bv-quote-head">
-              <span className="bv-quote-title">Quotation</span>
-              <span className="bv-quote-badge">SENT</span>
+          <div className="bv-flow-card">
+            <div className="bv-flow-head">
+              <span className="bv-flow-dot" />
+              <span>Agent · live run</span>
             </div>
-            <div className="bv-quote-row"><span /><span className="amt" /></div>
-            <div className="bv-quote-row"><span /><span className="amt" /></div>
-            <div className="bv-quote-row total"><span /><span className="amt" /></div>
+            <div className="bv-flow-step done">
+              <i>1</i><span>Quotation #Q-2841 sent</span><b>2.3s</b>
+            </div>
+            <div className="bv-flow-step done">
+              <i>2</i><span>Specs compared (3 units)</span><b>1.1s</b>
+            </div>
+            <div className="bv-flow-step done">
+              <i>3</i><span>Invoice INV-1180 generated</span><b>0.9s</b>
+            </div>
+            <div className="bv-flow-step active">
+              <i>4</i><span>Reservation confirmed</span><b className="now">now</b>
+            </div>
           </div>
-          <div className="bv-spark bv-spark-1" />
-          <div className="bv-spark bv-spark-2" />
-          <div className="bv-spark bv-spark-3" />
         </div>
       );
   }
 }
+
 
 export default function Landing() {
   const heroSectionRef = useRef<HTMLElement | null>(null);
