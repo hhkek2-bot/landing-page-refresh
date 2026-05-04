@@ -452,24 +452,127 @@ function PreviewMultilingual() {
 }
 
 function PreviewTeam() {
+  const roles: {
+    label: string;
+    x: number;
+    y: number;
+    color: string;
+    side: "left" | "right";
+  }[] = [
+    { label: "Sales Rep", x: 14, y: 14, color: "#06b6d4", side: "left" },
+    { label: "Branch Team", x: 86, y: 28, color: "#ec4899", side: "right" },
+    { label: "Sales Admin", x: 12, y: 78, color: "#3b82f6", side: "left" },
+    { label: "Manager", x: 84, y: 86, color: "#f97316", side: "right" },
+  ];
   return (
     <div className="dt-preview-team">
-      <div className="dt-team-block">
-        <p className="dt-team-label">Customer Need</p>
-        <p className="dt-team-value">3-ton electric forklift, 5m mast, indoor warehouse</p>
-      </div>
-      <div className="dt-team-block">
-        <p className="dt-team-label">Suggested Option</p>
-        <div className="dt-team-options">
-          <span>Toyota 8FBN30</span>
-          <span>Hyster E2.5XN</span>
-        </div>
-      </div>
-      <div className="dt-team-block dt-team-action">
-        <p className="dt-team-label">Next Action</p>
-        <p className="dt-team-value">Prepare 12-month rental quotation · Confirm delivery slot</p>
-        <button type="button" className="dt-team-btn">Generate Quote</button>
-      </div>
+      <div className="dt-brain-glow" aria-hidden="true" />
+      <svg className="dt-brain-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        {roles.map((r) => {
+          const cx = (r.x + 50) / 2;
+          return (
+            <path
+              key={r.label}
+              d={`M${r.x},${r.y} C${cx},${r.y} ${cx},50 50,50`}
+              stroke={r.color}
+              fill="none"
+              strokeWidth="0.5"
+              strokeDasharray="1.4 1.6"
+              strokeLinecap="round"
+              style={{ animation: "dt-dash-flow 1.4s linear infinite" }}
+            />
+          );
+        })}
+      </svg>
+
+      <motion.div
+        className="dt-brain-center"
+        initial={{ scale: 0.85, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        <motion.svg
+          width="92" height="92" viewBox="0 0 100 100" aria-hidden="true"
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <defs>
+            <linearGradient id="dt-brain-grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#3b82f6" />
+              <stop offset="50%" stopColor="#a855f7" />
+              <stop offset="100%" stopColor="#ec4899" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M35 22 C25 22 18 30 20 40 C12 44 12 56 20 60 C18 70 26 78 36 76 C40 84 50 84 52 76 L52 24 C48 14 38 14 35 22 Z"
+            fill="none"
+            stroke="url(#dt-brain-grad)"
+            strokeWidth="2.4"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M65 22 C75 22 82 30 80 40 C88 44 88 56 80 60 C82 70 74 78 64 76 C60 84 52 84 52 76 L52 24 C56 14 62 14 65 22 Z"
+            fill="none"
+            stroke="url(#dt-brain-grad)"
+            strokeWidth="2.4"
+            strokeLinejoin="round"
+          />
+          <motion.g
+            animate={{ opacity: [0.55, 1, 0.55], scale: [0.95, 1.08, 0.95] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+            style={{ transformOrigin: "50px 50px" }}
+          >
+            <path
+              d="M50 38 L54 50 L50 62 L46 50 Z M40 50 L60 50"
+              fill="url(#dt-brain-grad)"
+              stroke="url(#dt-brain-grad)"
+              strokeWidth="1"
+              strokeLinejoin="round"
+            />
+          </motion.g>
+        </motion.svg>
+      </motion.div>
+
+      {roles.map((r, i) => (
+        <motion.div
+          key={r.label}
+          className={`dt-brain-pill dt-brain-pill-${r.side}`}
+          style={{ left: `${r.x}%`, top: `${r.y}%`, ["--pill-color" as string]: r.color }}
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            y: [0, i % 2 ? -4 : 4, 0],
+          }}
+          transition={{
+            opacity: { delay: 0.3 + i * 0.1 },
+            scale: { delay: 0.3 + i * 0.1 },
+            y: { duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
+          }}
+        >
+          <span className="dt-brain-pill-icon">
+            <User size={12} />
+          </span>
+          {r.label}
+        </motion.div>
+      ))}
+
+      {[
+        { x: 30, y: 38, d: 2.2 },
+        { x: 70, y: 42, d: 2.6 },
+        { x: 38, y: 68, d: 3 },
+        { x: 66, y: 64, d: 2.4 },
+        { x: 50, y: 22, d: 3.2 },
+        { x: 50, y: 80, d: 2.8 },
+      ].map((p, i) => (
+        <motion.span
+          key={i}
+          className="dt-brain-dot"
+          style={{ left: `${p.x}%`, top: `${p.y}%` }}
+          animate={{ opacity: [0.2, 0.9, 0.2], scale: [0.8, 1.3, 0.8] }}
+          transition={{ duration: p.d, repeat: Infinity, delay: i * 0.2 }}
+        />
+      ))}
     </div>
   );
 }
