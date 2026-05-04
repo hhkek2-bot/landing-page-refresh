@@ -188,13 +188,22 @@ function PreviewSocial() {
         <path d="M18,78 Q50,50 50,50" /><path d="M82,78 Q50,50 50,50" />
       </svg>
       <motion.div
-        className="dt-source-hub"
+        className="dt-source-hub dt-source-hub-chat"
         initial={{ scale: 0.85, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <MessageCircle size={22} />
-        <span>AI Conversation</span>
+        <div className="dt-source-hub-head">
+          <div className="dt-chat-avatar">AI</div>
+          <div>
+            <p className="dt-chat-name">Sales Agent</p>
+            <p className="dt-chat-status"><span className="dt-online-dot" /> Online</p>
+          </div>
+        </div>
+        <div className="dt-source-hub-body">
+          <div className="dt-bubble dt-bubble-ai">Hi! How can I help today?</div>
+          <div className="dt-bubble dt-bubble-user">Looking for a forklift</div>
+        </div>
       </motion.div>
     </div>
   );
