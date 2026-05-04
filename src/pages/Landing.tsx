@@ -998,7 +998,7 @@ export default function Landing() {
       {/* Features — Bento Grid */}
       <section className="bright-features bento-section">
         <div className="bright-container">
-          <div className="bright-section-header"><TypewriterHeading text="Not Just Answers. The Agent Acts." /><p>Built to turn equipment enquiries into qualified sales opportunities through smarter recommendations, buyer signals, quotations, comparisons, and workflow automation.</p></div>
+          <div className="bright-section-header bright-section-header-wide"><TypewriterHeading text="Not Just Answers. The Agent Acts." /><p>Built to turn equipment enquiries into qualified sales opportunities through smarter recommendations, buyer signals, quotations, comparisons, and workflow automation.</p></div>
           <div className="bento-grid">
             {bentoFeatures.map((f) => (
               <article

@@ -1012,6 +1012,8 @@
 }
 
 .bright-section-header { max-width: 760px; margin: 0 auto 60px; text-align: center; }
+.bright-section-header-wide { max-width: 1100px; }
+.bright-section-header-wide h2 { white-space: nowrap; }
 .bright-section-header h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); margin-bottom: 16px; letter-spacing: -0.04em; line-height: 1.1; }
 .bright-section-header p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.75; }
 
@@ -1933,6 +1935,7 @@
   .bright-faq-summary { padding: 84px 0 74px; }
   .bright-faq-summary-grid { grid-template-columns: 1fr; }
   .bright-section-header h2 { font-size: 2rem; }
+  .bright-section-header-wide h2 { white-space: normal; }
   .bright-feature-grid { grid-template-columns: 1fr; }
 }
 
