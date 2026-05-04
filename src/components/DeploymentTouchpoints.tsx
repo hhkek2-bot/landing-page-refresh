@@ -89,9 +89,9 @@ function PreviewWebsite() {
       </div>
       <motion.div
         className="dt-chat-widget"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15, duration: 0.4 }}
+        initial={{ x: "110%" }}
+        animate={{ x: 0 }}
+        transition={{ delay: 0.25, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="dt-chat-widget-head">
           <div className="dt-chat-avatar">AI</div>
