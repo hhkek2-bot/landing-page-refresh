@@ -72,11 +72,11 @@
 }
 .si-fade-top {
   top: 0;
-  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 35%, rgba(255, 255, 255, 0) 100%);
 }
 .si-fade-bottom {
   bottom: 0;
-  background: linear-gradient(0deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 40%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(0deg, #ffffff 0%, #ffffff 35%, rgba(255, 255, 255, 0) 100%);
 }
 
 .si-grid {
@@ -144,9 +144,12 @@
 }
 
 /* Different heights create the masonry rhythm */
-.si-card-sm { min-height: 180px; }
-.si-card-md { min-height: 220px; }
-.si-card-lg { min-height: 260px; }
+.si-card-sm,
+.si-card-md,
+.si-card-lg {
+  aspect-ratio: 2 / 3;
+  min-height: 0;
+}
 
 .si-card-icon {
   display: inline-flex;
