@@ -663,6 +663,99 @@ function BentoVisual({ visual }: { visual: BentoFeature["visual"] }) {
 }
 
 
+type PainPoint = {
+  icon: LucideIcon;
+  eyebrow: string;
+  title: string;
+  body: string;
+  size: "feature" | "wide" | "sm";
+  tone: "blue" | "rose" | "amber" | "violet" | "emerald" | "slate";
+  visual: "channels" | "clock" | "funnel" | "scatter" | "followup" | "intent";
+};
+
+const painPoints: PainPoint[] = [
+  { icon: Inbox,         eyebrow: "Fragmented",   title: "Too Many Entry Points",        body: "Enquiries come from websites, WhatsApp, ads, social media, calls, and referrals.",                       size: "feature", tone: "blue",    visual: "channels" },
+  { icon: Clock,         eyebrow: "Delayed",      title: "Slow First Response",          body: "High-intent buyers expect fast replies, but sales teams are not always available.",                          size: "sm",      tone: "rose",    visual: "clock" },
+  { icon: TrendingDown,  eyebrow: "Leaking",      title: "Weak Traffic Conversion",      body: "Marketing drives traffic, but many visitors leave before becoming qualified enquiries.",                    size: "sm",      tone: "amber",   visual: "funnel" },
+  { icon: Layers,        eyebrow: "Scattered",    title: "Scattered Product Knowledge",  body: "Product details, specs, pricing, and recommendations are spread across files, people, and systems.",       size: "wide",    tone: "violet",  visual: "scatter" },
+  { icon: Repeat,        eyebrow: "Inconsistent", title: "Inconsistent Sales Follow-Up", body: "Some leads are followed up properly, while others are delayed or lost.",                                     size: "sm",      tone: "emerald", visual: "followup" },
+  { icon: MessageCircle, eyebrow: "Missed",       title: "Lost Buyer Intent",            body: "Urgency, budget, location, and real equipment needs are often missed in conversation.",                     size: "sm",      tone: "slate",   visual: "intent" },
+];
+
+function PainVisual({ visual }: { visual: PainPoint["visual"] }) {
+  switch (visual) {
+    case "channels":
+      return (
+        <div className="pv pv-channels">
+          <div className="pv-hub"><Inbox size={20} /></div>
+          <span className="pv-line pv-line-1" /><span className="pv-line pv-line-2" />
+          <span className="pv-line pv-line-3" /><span className="pv-line pv-line-4" />
+          <span className="pv-line pv-line-5" /><span className="pv-line pv-line-6" />
+          <span className="pv-node pv-node-1">Website</span>
+          <span className="pv-node pv-node-2">WhatsApp</span>
+          <span className="pv-node pv-node-3">Ads</span>
+          <span className="pv-node pv-node-4">Social</span>
+          <span className="pv-node pv-node-5">Calls</span>
+          <span className="pv-node pv-node-6">Referrals</span>
+        </div>
+      );
+    case "clock":
+      return (
+        <div className="pv pv-clock">
+          <div className="pv-clock-face">
+            <span className="pv-clock-tick" />
+            <span className="pv-clock-hand pv-clock-hour" />
+            <span className="pv-clock-hand pv-clock-minute" />
+            <span className="pv-clock-center" />
+          </div>
+          <span className="pv-late-pill">+12 min</span>
+        </div>
+      );
+    case "funnel":
+      return (
+        <div className="pv pv-funnel">
+          <span className="pv-funnel-row pv-funnel-1">Visitors</span>
+          <span className="pv-funnel-row pv-funnel-2">Browsing</span>
+          <span className="pv-funnel-row pv-funnel-3">Qualified</span>
+          <span className="pv-drop">↓ 78% drop</span>
+        </div>
+      );
+    case "scatter":
+      return (
+        <div className="pv pv-scatter">
+          <span className="pv-tile pv-tile-1">PDF Spec</span>
+          <span className="pv-tile pv-tile-2">Pricing.xlsx</span>
+          <span className="pv-tile pv-tile-3">Sales rep</span>
+          <span className="pv-tile pv-tile-4">CRM note</span>
+          <span className="pv-tile pv-tile-5">Email thread</span>
+          <span className="pv-tile pv-tile-6">WhatsApp</span>
+          <span className="pv-tile pv-tile-7">Catalogue</span>
+          <span className="pv-question">?</span>
+        </div>
+      );
+    case "followup":
+      return (
+        <div className="pv pv-followup">
+          <span className="pv-fu-row pv-fu-done"><Check size={11} strokeWidth={3} /> Lead A · replied</span>
+          <span className="pv-fu-row pv-fu-done"><Check size={11} strokeWidth={3} /> Lead B · replied</span>
+          <span className="pv-fu-row pv-fu-miss">✕ Lead C · missed</span>
+          <span className="pv-fu-row pv-fu-miss">✕ Lead D · missed</span>
+        </div>
+      );
+    case "intent":
+      return (
+        <div className="pv pv-intent">
+          <div className="pv-bubble pv-bubble-user">"Need 20-ton excavator next month, Penang site"</div>
+          <div className="pv-loss">
+            <span className="pv-loss-tag">Urgency lost</span>
+            <span className="pv-loss-tag">Budget lost</span>
+            <span className="pv-loss-tag">Location lost</span>
+          </div>
+        </div>
+      );
+  }
+}
+
 
 export default function Landing() {
   const heroSectionRef = useRef<HTMLElement | null>(null);
