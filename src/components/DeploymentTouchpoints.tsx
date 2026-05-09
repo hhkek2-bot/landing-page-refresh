@@ -215,20 +215,54 @@ function PreviewSocial() {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <p className="dt-shc-status">We're online…</p>
-          <div className="dt-shc-bubble dt-shc-in">
-            Hi there! 👋 We have a 10% promo for new customers — want one?
+          <div className="dt-shc-header">
+            <span className="dt-shc-back">‹</span>
+            <div className="dt-shc-avatar">
+              <span className="dt-shc-avatar-dot" />
+            </div>
+            <div className="dt-shc-headtxt">
+              <p className="dt-shc-title">AI Sales Specialist</p>
+              <p className="dt-shc-sub">Antbuildz</p>
+            </div>
           </div>
-          <div className="dt-shc-quick">
-            <span className="dt-shc-pill dt-shc-pill-primary">Yes, sure!</span>
-            <span className="dt-shc-pill">No, thanks</span>
-          </div>
-          <div className="dt-shc-bubble dt-shc-in dt-shc-in-2">
-            Cool! What's your email then?
+          <div className="dt-shc-body">
+            <div className="dt-shc-row dt-shc-row-user">
+              <div className="dt-shc-bubble dt-shc-user">
+                i want to rent scissor lift 12m, do you have in singapore
+              </div>
+              <div className="dt-shc-userav" />
+            </div>
+            <div className="dt-shc-airow">
+              <div className="dt-shc-avatar dt-shc-avatar-sm">
+                <span className="dt-shc-avatar-dot" />
+              </div>
+              <span className="dt-shc-ailabel">AI</span>
+            </div>
+            <p className="dt-shc-aitext">
+              Hi! Thanks for reaching out. A 12 m scissor lift is a great choice for working at height in Singapore.
+            </p>
+            <p className="dt-shc-aih">Recommended Options for Rental</p>
+            <div className="dt-shc-table">
+              <div className="dt-shc-trow dt-shc-thead">
+                <span>Equipment</span>
+                <span>Daily</span>
+                <span>Weekly</span>
+              </div>
+              <div className="dt-shc-trow">
+                <span>LGMG AS1212 Scissor Lift</span>
+                <span>SGD 600</span>
+                <span>SGD 2.4k</span>
+              </div>
+              <div className="dt-shc-trow">
+                <span>Genie GS-3246 Scissor Lift</span>
+                <span>SGD 580</span>
+                <span>SGD 2.3k</span>
+              </div>
+            </div>
           </div>
           <div className="dt-shc-input">
-            <span>Enter message</span>
-            <Send size={12} />
+            <span>Ask about equipment, rentals…</span>
+            <span className="dt-shc-send"><Send size={11} /></span>
           </div>
         </motion.div>
       </div>
