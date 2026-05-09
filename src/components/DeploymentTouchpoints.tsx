@@ -555,7 +555,8 @@ function PreviewTeam() {
             <animate attributeName="opacity" values="0.55;1;0.55" dur="2.2s" repeatCount="indefinite" />
           </path>
         </svg>
-      </motion.div>
+        </motion.div>
+      </div>
 
       {roles.map((r, i) => (
         <div
