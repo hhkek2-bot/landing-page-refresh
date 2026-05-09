@@ -144,28 +144,49 @@ function TikTokIcon({ size = 18 }: { size?: number }) {
   );
 }
 
+function InstagramIcon({ size = 22 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+      <defs>
+        <linearGradient id="dt-ig-grad" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stopColor="#feda75" />
+          <stop offset="35%" stopColor="#fa7e1e" />
+          <stop offset="65%" stopColor="#d62976" />
+          <stop offset="100%" stopColor="#4f5bd5" />
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#dt-ig-grad)" />
+      <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" strokeWidth="1.8" />
+      <circle cx="17.5" cy="6.5" r="1.2" fill="#fff" />
+    </svg>
+  );
+}
+
+function RednoteIcon({ size = 22 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5" fill="#ff2442" />
+      <text
+        x="12" y="15.5"
+        textAnchor="middle"
+        fontFamily="ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif"
+        fontSize="9"
+        fontWeight="800"
+        fill="#fff"
+      >小红书</text>
+    </svg>
+  );
+}
+
 function PreviewSocial() {
   const sources: { label: string; x: number; y: number; side: "left" | "right"; Icon: React.FC<{ size?: number }> }[] = [
-    { label: "Facebook", x: 16, y: 16, side: "left", Icon: FacebookIcon },
-    { label: "TikTok", x: 84, y: 16, side: "right", Icon: TikTokIcon },
-    { label: "LinkedIn", x: 12, y: 50, side: "left", Icon: LinkedInIcon },
-    { label: "Google Ads", x: 88, y: 50, side: "right", Icon: GoogleAdsIcon },
-    { label: "QR Code", x: 16, y: 84, side: "left", Icon: ({ size = 26 }) => <QrCode size={size} color="#0b1730" /> },
-    { label: "Instagram", x: 84, y: 84, side: "right", Icon: ({ size = 22 }) => (
-      <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
-        <defs>
-          <linearGradient id="dt-ig-grad" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%" stopColor="#feda75" />
-            <stop offset="35%" stopColor="#fa7e1e" />
-            <stop offset="65%" stopColor="#d62976" />
-            <stop offset="100%" stopColor="#4f5bd5" />
-          </linearGradient>
-        </defs>
-        <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#dt-ig-grad)"/>
-        <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" strokeWidth="1.6"/>
-        <circle cx="17.5" cy="6.5" r="1.1" fill="#fff"/>
-      </svg>
-    ) },
+    { label: "Facebook",   x: 16, y: 12, side: "left",  Icon: FacebookIcon },
+    { label: "TikTok",     x: 84, y: 12, side: "right", Icon: TikTokIcon },
+    { label: "LinkedIn",   x: 12, y: 38, side: "left",  Icon: LinkedInIcon },
+    { label: "Rednote",    x: 88, y: 38, side: "right", Icon: RednoteIcon },
+    { label: "Instagram",  x: 12, y: 64, side: "left",  Icon: InstagramIcon },
+    { label: "Google Ads", x: 88, y: 64, side: "right", Icon: GoogleAdsIcon },
+    { label: "QR Code",    x: 16, y: 88, side: "left",  Icon: ({ size = 26 }) => <QrCode size={size} color="#0b1730" /> },
   ];
   return (
     <div className="dt-preview-social">
