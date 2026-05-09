@@ -182,27 +182,31 @@ function PreviewSocial() {
         ))}
       </svg>
       {sources.map((s, i) => (
-        <motion.div
+        <div
           key={s.label}
-          className={`dt-source-tile dt-source-tile-${s.side}`}
+          className={`dt-source-anchor dt-source-anchor-${s.side}`}
           style={{ left: `${s.x}%`, top: `${s.y}%` }}
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            x: [0, i % 2 === 0 ? 5 : -5, 0],
-            y: [0, i % 2 === 0 ? -4 : 4, 0],
-          }}
-          transition={{
-            opacity: { delay: 0.1 + i * 0.08 },
-            scale: { delay: 0.1 + i * 0.08 },
-            x: { duration: 5 + i * 0.6, repeat: Infinity, ease: "easeInOut" },
-            y: { duration: 6 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
-          }}
         >
-          <s.Icon size={36} />
-          <span>{s.label}</span>
-        </motion.div>
+          <motion.div
+            className="dt-source-tile"
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              x: [0, i % 2 === 0 ? 5 : -5, 0],
+              y: [0, i % 2 === 0 ? -4 : 4, 0],
+            }}
+            transition={{
+              opacity: { delay: 0.1 + i * 0.08 },
+              scale: { delay: 0.1 + i * 0.08 },
+              x: { duration: 5 + i * 0.6, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 6 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
+            }}
+          >
+            <s.Icon size={36} />
+            <span>{s.label}</span>
+          </motion.div>
+        </div>
       ))}
       <motion.div
         className="dt-source-hub dt-source-hub-chat"
