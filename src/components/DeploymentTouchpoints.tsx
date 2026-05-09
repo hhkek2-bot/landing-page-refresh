@@ -513,13 +513,13 @@ function PreviewTeam() {
 
           {/* Solid circular backdrop with gradient ring so brain stays visible against any background */}
           <circle cx="60" cy="60" r="54" fill="url(#dt-brain-fill)" />
-          <circle cx="60" cy="60" r="54" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="2" strokeOpacity="0.55" />
+          <circle cx="60" cy="60" r="54" fill="none" stroke="#a855f7" strokeWidth="2" strokeOpacity="0.55" />
 
           {/* Left hemisphere */}
           <path
             d="M60 24 C48 16 32 18 26 30 C14 32 10 46 18 56 C10 64 16 78 28 80 C30 92 44 96 56 90 L60 90 Z"
             fill="#ffffff"
-            stroke="url(#dt-brain-grad)"
+            stroke="#a855f7"
             strokeWidth="2.6"
             strokeLinejoin="round"
           />
@@ -527,28 +527,28 @@ function PreviewTeam() {
           <path
             d="M60 24 C72 16 88 18 94 30 C106 32 110 46 102 56 C110 64 104 78 92 80 C90 92 76 96 64 90 L60 90 Z"
             fill="#ffffff"
-            stroke="url(#dt-brain-grad)"
+            stroke="#a855f7"
             strokeWidth="2.6"
             strokeLinejoin="round"
           />
           {/* Center fissure */}
-          <path d="M60 22 L60 92" stroke="url(#dt-brain-grad)" strokeWidth="2" strokeLinecap="round" />
+          <path d="M60 22 L60 92" stroke="#a855f7" strokeWidth="2" strokeLinecap="round" />
 
           {/* Convolutions */}
-          <path d="M32 36 C38 40 38 46 32 50" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
-          <path d="M24 54 C32 56 34 62 28 68" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
-          <path d="M42 62 C48 64 50 72 44 78" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
-          <path d="M46 28 C52 32 54 38 50 44" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
-          <path d="M88 36 C82 40 82 46 88 50" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
-          <path d="M96 54 C88 56 86 62 92 68" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
-          <path d="M78 62 C72 64 70 72 76 78" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
-          <path d="M74 28 C68 32 66 38 70 44" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M32 36 C38 40 38 46 32 50" fill="none" stroke="#a855f7" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M24 54 C32 56 34 62 28 68" fill="none" stroke="#a855f7" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M42 62 C48 64 50 72 44 78" fill="none" stroke="#a855f7" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M46 28 C52 32 54 38 50 44" fill="none" stroke="#a855f7" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M88 36 C82 40 82 46 88 50" fill="none" stroke="#a855f7" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M96 54 C88 56 86 62 92 68" fill="none" stroke="#a855f7" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M78 62 C72 64 70 72 76 78" fill="none" stroke="#a855f7" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M74 28 C68 32 66 38 70 44" fill="none" stroke="#a855f7" strokeWidth="1.6" strokeLinecap="round" />
 
           {/* Sparkle in center */}
           <path
             d="M60 48 L64 58 L60 68 L56 58 Z M50 58 L70 58"
-            fill="url(#dt-brain-grad)"
-            stroke="url(#dt-brain-grad)"
+            fill="#a855f7"
+            stroke="#a855f7"
             strokeWidth="1.4"
             strokeLinejoin="round"
           >
