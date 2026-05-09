@@ -145,13 +145,13 @@ function TikTokIcon({ size = 18 }: { size?: number }) {
 }
 
 function PreviewSocial() {
-  const sources: { label: string; x: number; y: number; Icon: React.FC<{ size?: number }> }[] = [
-    { label: "Facebook", x: 18, y: 16, Icon: FacebookIcon },
-    { label: "TikTok", x: 82, y: 16, Icon: TikTokIcon },
-    { label: "LinkedIn", x: 14, y: 50, Icon: LinkedInIcon },
-    { label: "Google Ads", x: 86, y: 50, Icon: GoogleAdsIcon },
-    { label: "QR Code", x: 18, y: 84, Icon: ({ size = 26 }) => <QrCode size={size} color="#0b1730" /> },
-    { label: "Instagram", x: 82, y: 84, Icon: ({ size = 22 }) => (
+  const sources: { label: string; x: number; y: number; side: "left" | "right"; Icon: React.FC<{ size?: number }> }[] = [
+    { label: "Facebook", x: 16, y: 16, side: "left", Icon: FacebookIcon },
+    { label: "TikTok", x: 84, y: 16, side: "right", Icon: TikTokIcon },
+    { label: "LinkedIn", x: 12, y: 50, side: "left", Icon: LinkedInIcon },
+    { label: "Google Ads", x: 88, y: 50, side: "right", Icon: GoogleAdsIcon },
+    { label: "QR Code", x: 16, y: 84, side: "left", Icon: ({ size = 26 }) => <QrCode size={size} color="#0b1730" /> },
+    { label: "Instagram", x: 84, y: 84, side: "right", Icon: ({ size = 22 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
         <defs>
           <linearGradient id="dt-ig-grad" x1="0" y1="1" x2="1" y2="0">
@@ -182,50 +182,56 @@ function PreviewSocial() {
         ))}
       </svg>
       {sources.map((s, i) => (
-        <motion.div
+        <div
           key={s.label}
-          className="dt-source-tile"
+          className={`dt-source-anchor dt-source-anchor-${s.side}`}
           style={{ left: `${s.x}%`, top: `${s.y}%` }}
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            x: [0, i % 2 === 0 ? 5 : -5, 0],
-            y: [0, i % 2 === 0 ? -4 : 4, 0],
-          }}
-          transition={{
-            opacity: { delay: 0.1 + i * 0.08 },
-            scale: { delay: 0.1 + i * 0.08 },
-            x: { duration: 5 + i * 0.6, repeat: Infinity, ease: "easeInOut" },
-            y: { duration: 6 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
-          }}
         >
-          <s.Icon size={36} />
-          <span>{s.label}</span>
-        </motion.div>
+          <motion.div
+            className="dt-source-tile"
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              x: [0, i % 2 === 0 ? 5 : -5, 0],
+              y: [0, i % 2 === 0 ? -4 : 4, 0],
+            }}
+            transition={{
+              opacity: { delay: 0.1 + i * 0.08 },
+              scale: { delay: 0.1 + i * 0.08 },
+              x: { duration: 5 + i * 0.6, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 6 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
+            }}
+          >
+            <s.Icon size={36} />
+            <span>{s.label}</span>
+          </motion.div>
+        </div>
       ))}
-      <motion.div
-        className="dt-source-hub dt-source-hub-chat"
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.3 }}
-      >
-        <p className="dt-shc-status">We're online…</p>
-        <div className="dt-shc-bubble dt-shc-in">
-          Hi there! 👋 We have a 10% promo for new customers — want one?
-        </div>
-        <div className="dt-shc-quick">
-          <span className="dt-shc-pill dt-shc-pill-primary">Yes, sure!</span>
-          <span className="dt-shc-pill">No, thanks</span>
-        </div>
-        <div className="dt-shc-bubble dt-shc-in dt-shc-in-2">
-          Cool! What's your email then?
-        </div>
-        <div className="dt-shc-input">
-          <span>Enter message</span>
-          <Send size={12} />
-        </div>
-      </motion.div>
+      <div className="dt-source-hub-anchor">
+        <motion.div
+          className="dt-source-hub dt-source-hub-chat"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          <p className="dt-shc-status">We're online…</p>
+          <div className="dt-shc-bubble dt-shc-in">
+            Hi there! 👋 We have a 10% promo for new customers — want one?
+          </div>
+          <div className="dt-shc-quick">
+            <span className="dt-shc-pill dt-shc-pill-primary">Yes, sure!</span>
+            <span className="dt-shc-pill">No, thanks</span>
+          </div>
+          <div className="dt-shc-bubble dt-shc-in dt-shc-in-2">
+            Cool! What's your email then?
+          </div>
+          <div className="dt-shc-input">
+            <span>Enter message</span>
+            <Send size={12} />
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }
