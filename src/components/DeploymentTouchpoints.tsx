@@ -145,13 +145,13 @@ function TikTokIcon({ size = 18 }: { size?: number }) {
 }
 
 function PreviewSocial() {
-  const sources: { label: string; x: number; y: number; Icon: React.FC<{ size?: number }> }[] = [
-    { label: "Facebook", x: 18, y: 16, Icon: FacebookIcon },
-    { label: "TikTok", x: 82, y: 16, Icon: TikTokIcon },
-    { label: "LinkedIn", x: 14, y: 50, Icon: LinkedInIcon },
-    { label: "Google Ads", x: 86, y: 50, Icon: GoogleAdsIcon },
-    { label: "QR Code", x: 18, y: 84, Icon: ({ size = 26 }) => <QrCode size={size} color="#0b1730" /> },
-    { label: "Instagram", x: 82, y: 84, Icon: ({ size = 22 }) => (
+  const sources: { label: string; x: number; y: number; side: "left" | "right"; Icon: React.FC<{ size?: number }> }[] = [
+    { label: "Facebook", x: 16, y: 16, side: "left", Icon: FacebookIcon },
+    { label: "TikTok", x: 84, y: 16, side: "right", Icon: TikTokIcon },
+    { label: "LinkedIn", x: 12, y: 50, side: "left", Icon: LinkedInIcon },
+    { label: "Google Ads", x: 88, y: 50, side: "right", Icon: GoogleAdsIcon },
+    { label: "QR Code", x: 16, y: 84, side: "left", Icon: ({ size = 26 }) => <QrCode size={size} color="#0b1730" /> },
+    { label: "Instagram", x: 84, y: 84, side: "right", Icon: ({ size = 22 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
         <defs>
           <linearGradient id="dt-ig-grad" x1="0" y1="1" x2="1" y2="0">
