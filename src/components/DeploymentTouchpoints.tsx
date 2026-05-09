@@ -484,12 +484,13 @@ function PreviewTeam() {
         })}
       </svg>
 
-      <motion.div
-        className="dt-brain-center"
-        initial={{ scale: 0.85, opacity: 0 }}
-        animate={{ scale: [0.85, 1.05, 1], opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
+      <div className="dt-brain-center">
+        <motion.div
+          initial={{ scale: 0.85, opacity: 0 }}
+          animate={{ scale: [0.85, 1.05, 1], opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          style={{ display: "flex" }}
+        >
         <svg
           width="180"
           height="180"
