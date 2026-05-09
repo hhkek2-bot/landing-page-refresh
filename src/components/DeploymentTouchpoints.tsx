@@ -184,7 +184,7 @@ function PreviewSocial() {
       {sources.map((s, i) => (
         <motion.div
           key={s.label}
-          className="dt-source-tile"
+          className={`dt-source-tile dt-source-tile-${s.side}`}
           style={{ left: `${s.x}%`, top: `${s.y}%` }}
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{
