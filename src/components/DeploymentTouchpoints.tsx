@@ -566,27 +566,32 @@ function PreviewTeam() {
       </motion.div>
 
       {roles.map((r, i) => (
-        <motion.div
+        <div
           key={r.label}
-          className={`dt-brain-pill dt-brain-pill-${r.side}`}
-          style={{ left: `${r.x}%`, top: `${r.y}%`, ["--pill-color" as string]: r.color }}
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            y: [0, i % 2 ? -4 : 4, 0],
-          }}
-          transition={{
-            opacity: { delay: 0.3 + i * 0.1 },
-            scale: { delay: 0.3 + i * 0.1 },
-            y: { duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
-          }}
+          className={`dt-brain-pill-anchor dt-brain-pill-${r.side}`}
+          style={{ left: `${r.x}%`, top: `${r.y}%` }}
         >
-          <span className="dt-brain-pill-icon">
-            <User size={12} />
-          </span>
-          {r.label}
-        </motion.div>
+          <motion.div
+            className="dt-brain-pill"
+            style={{ ["--pill-color" as string]: r.color }}
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              y: [0, i % 2 ? -4 : 4, 0],
+            }}
+            transition={{
+              opacity: { delay: 0.3 + i * 0.1 },
+              scale: { delay: 0.3 + i * 0.1 },
+              y: { duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
+            }}
+          >
+            <span className="dt-brain-pill-icon">
+              <User size={12} />
+            </span>
+            {r.label}
+          </motion.div>
+        </div>
       ))}
 
       {[
