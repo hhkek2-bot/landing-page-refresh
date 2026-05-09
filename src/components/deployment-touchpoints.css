@@ -522,7 +522,6 @@
 }
 .dt-brain-pill {
   position: absolute;
-  transform: translate(-50%, -50%);
   display: inline-flex; align-items: center; gap: 8px;
   background: #fff;
   border: 1px solid #eef0f7;
@@ -532,7 +531,12 @@
   box-shadow: 0 10px 24px -14px rgba(15,23,42,0.25), 0 0 0 1px rgba(124,58,237,0.04);
   z-index: 3;
   white-space: nowrap;
+  max-width: 42%;
 }
+/* Left-side pills: anchor by their LEFT edge so they never overflow right of container */
+.dt-brain-pill-left  { transform: translate(0, -50%); }
+/* Right-side pills: anchor by their RIGHT edge so they never overflow left of container */
+.dt-brain-pill-right { transform: translate(-100%, -50%); }
 .dt-brain-pill-icon {
   width: 22px; height: 22px; border-radius: 50%;
   background: color-mix(in srgb, var(--pill-color) 18%, #fff);
