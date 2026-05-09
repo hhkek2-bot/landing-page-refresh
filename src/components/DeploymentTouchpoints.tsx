@@ -145,19 +145,22 @@ function TikTokIcon({ size = 18 }: { size?: number }) {
 }
 
 function InstagramIcon({ size = 22 }: { size?: number }) {
+  const id = "dt-ig-grad-" + Math.random().toString(36).slice(2, 8);
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
       <defs>
-        <linearGradient id="dt-ig-grad" x1="0" y1="1" x2="1" y2="0">
+        <radialGradient id={id} cx="0.3" cy="1" r="1.1">
           <stop offset="0%" stopColor="#feda75" />
-          <stop offset="35%" stopColor="#fa7e1e" />
-          <stop offset="65%" stopColor="#d62976" />
+          <stop offset="25%" stopColor="#fa7e1e" />
+          <stop offset="55%" stopColor="#d62976" />
+          <stop offset="80%" stopColor="#962fbf" />
           <stop offset="100%" stopColor="#4f5bd5" />
-        </linearGradient>
+        </radialGradient>
       </defs>
-      <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#dt-ig-grad)" />
-      <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" strokeWidth="1.8" />
-      <circle cx="17.5" cy="6.5" r="1.2" fill="#fff" />
+      <rect x="2" y="2" width="20" height="20" rx="5" fill={`url(#${id})`} />
+      <rect x="6" y="6" width="12" height="12" rx="3.5" fill="none" stroke="#fff" strokeWidth="1.6" />
+      <circle cx="12" cy="12" r="3.2" fill="none" stroke="#fff" strokeWidth="1.6" />
+      <circle cx="17" cy="7" r="1.1" fill="#fff" />
     </svg>
   );
 }
@@ -167,27 +170,59 @@ function RednoteIcon({ size = 22 }: { size?: number }) {
     <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
       <rect x="2" y="2" width="20" height="20" rx="5" fill="#ff2442" />
       <text
-        x="12" y="15.5"
+        x="12" y="16"
         textAnchor="middle"
-        fontFamily="ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif"
-        fontSize="9"
-        fontWeight="800"
+        fontFamily="ui-sans-serif, system-ui, -apple-system, sans-serif"
+        fontSize="11"
+        fontWeight="900"
         fill="#fff"
-      >小红书</text>
+        letterSpacing="-0.4"
+      >RED</text>
     </svg>
   );
 }
 
+// Deterministic pseudo-random so positions stay stable across renders
+function seeded(seed: number) {
+  let t = seed + 0x6D2B79F5;
+  return () => {
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
 function PreviewSocial() {
-  const sources: { label: string; x: number; y: number; side: "left" | "right"; Icon: React.FC<{ size?: number }> }[] = [
-    { label: "Facebook",   x: 16, y: 12, side: "left",  Icon: FacebookIcon },
-    { label: "TikTok",     x: 84, y: 12, side: "right", Icon: TikTokIcon },
-    { label: "LinkedIn",   x: 12, y: 38, side: "left",  Icon: LinkedInIcon },
-    { label: "Rednote",    x: 88, y: 38, side: "right", Icon: RednoteIcon },
-    { label: "Instagram",  x: 12, y: 64, side: "left",  Icon: InstagramIcon },
-    { label: "Google Ads", x: 88, y: 64, side: "right", Icon: GoogleAdsIcon },
-    { label: "QR Code",    x: 16, y: 88, side: "left",  Icon: ({ size = 26 }) => <QrCode size={size} color="#0b1730" /> },
+  const baseSources = [
+    { label: "Facebook",   Icon: FacebookIcon },
+    { label: "TikTok",     Icon: TikTokIcon },
+    { label: "LinkedIn",   Icon: LinkedInIcon },
+    { label: "Rednote",    Icon: RednoteIcon },
+    { label: "Instagram",  Icon: InstagramIcon },
+    { label: "Google Ads", Icon: GoogleAdsIcon },
+    { label: "QR Code",    Icon: ({ size = 26 }: { size?: number }) => <QrCode size={size} color="#0b1730" /> },
   ];
+
+  // Random-looking scattered placements (stable, hand-tuned to avoid overlap with center chat)
+  const rand = seeded(7);
+  const sources = baseSources.map((s, i) => {
+    const side: "left" | "right" = i % 2 === 0 ? "left" : "right";
+    // Vertical bands so icons never overlap each other
+    const band = i;
+    const totalBands = baseSources.length;
+    const bandTop = (100 / totalBands) * band;
+    const bandH = 100 / totalBands;
+    const y = bandTop + bandH * (0.25 + rand() * 0.5); // jitter inside the band
+    const x = side === "left"
+      ? 6 + rand() * 14   // 6% – 20%
+      : 80 + rand() * 14; // 80% – 94%
+    const dx = (rand() * 30 + 18) * (rand() > 0.5 ? 1 : -1);
+    const dy = (rand() * 28 + 16) * (rand() > 0.5 ? 1 : -1);
+    const dur = 5 + rand() * 4;
+    const delay = rand() * 1.5;
+    return { ...s, x, y, side, dx, dy, dur, delay };
+  });
+
   return (
     <div className="dt-preview-social">
       <svg className="dt-source-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
@@ -214,14 +249,14 @@ function PreviewSocial() {
             animate={{
               opacity: 1,
               scale: 1,
-              x: [0, i % 2 === 0 ? 22 : -22, 0],
-              y: [0, i % 2 === 0 ? -18 : 18, 0],
+              x: [0, s.dx, s.dx * 0.3, -s.dx * 0.6, 0],
+              y: [0, s.dy * 0.4, s.dy, -s.dy * 0.3, 0],
             }}
             transition={{
               opacity: { delay: 0.1 + i * 0.08 },
               scale: { delay: 0.1 + i * 0.08 },
-              x: { duration: 6 + i * 0.6, repeat: Infinity, ease: "easeInOut" },
-              y: { duration: 7 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
+              x: { duration: s.dur, repeat: Infinity, ease: "easeInOut", delay: s.delay },
+              y: { duration: s.dur + 1.2, repeat: Infinity, ease: "easeInOut", delay: s.delay },
             }}
           >
             <s.Icon size={36} />
