@@ -466,11 +466,13 @@ function PreviewTeam() {
       <div className="dt-brain-glow" aria-hidden="true" />
       <svg className="dt-brain-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
         {roles.map((r) => {
-          const cx = (r.x + 50) / 2;
+          // Start the line from the pill's inner edge so it doesn't pass through the pill
+          const startX = r.side === "left" ? r.x + 18 : r.x - 18;
+          const cx = (startX + 50) / 2;
           return (
             <path
               key={r.label}
-              d={`M${r.x},${r.y} C${cx},${r.y} ${cx},50 50,50`}
+              d={`M${startX},${r.y} C${cx},${r.y} ${cx},50 50,50`}
               stroke={r.color}
               fill="none"
               strokeWidth="0.5"
