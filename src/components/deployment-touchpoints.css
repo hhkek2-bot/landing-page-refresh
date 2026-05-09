@@ -238,16 +238,18 @@
 @keyframes dt-dash-flow {
   to { stroke-dashoffset: -6; }
 }
-.dt-source-hub {
+.dt-source-hub-anchor {
   position: absolute; left: 50%; top: 50%;
   transform: translate(-50%, -50%);
+  z-index: 3;
+}
+.dt-source-hub {
   background: linear-gradient(135deg, #16a34a 0%, #22c55e 55%, #4ade80 100%);
   color: #fff;
   padding: 12px 16px; border-radius: 12px;
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 12px; font-weight: 600;
   box-shadow: 0 18px 40px -12px rgba(22, 163, 74, 0.55);
-  z-index: 3;
 }
 .dt-source-hub-chat {
   width: 180px;
