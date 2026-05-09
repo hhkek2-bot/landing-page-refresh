@@ -454,10 +454,12 @@ function PreviewTeam() {
     color: string;
     side: "left" | "right";
   }[] = [
-    { label: "Sales Rep", x: 14, y: 14, color: "#06b6d4", side: "left" },
-    { label: "Branch Team", x: 86, y: 28, color: "#ec4899", side: "right" },
-    { label: "Sales Admin", x: 12, y: 78, color: "#3b82f6", side: "left" },
-    { label: "Manager", x: 84, y: 86, color: "#f97316", side: "right" },
+    { label: "Sales Rep",   x: 18, y: 14, color: "#06b6d4", side: "left" },
+    { label: "Branch Team", x: 82, y: 14, color: "#ec4899", side: "right" },
+    { label: "Marketing",   x: 10, y: 50, color: "#8b5cf6", side: "left" },
+    { label: "Service",     x: 90, y: 50, color: "#10b981", side: "right" },
+    { label: "Sales Admin", x: 18, y: 86, color: "#3b82f6", side: "left" },
+    { label: "Manager",     x: 82, y: 86, color: "#f97316", side: "right" },
   ];
   return (
     <div className="dt-preview-team">
