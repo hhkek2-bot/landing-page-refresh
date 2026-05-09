@@ -193,14 +193,14 @@ function PreviewSocial() {
             animate={{
               opacity: 1,
               scale: 1,
-              x: [0, i % 2 === 0 ? 5 : -5, 0],
-              y: [0, i % 2 === 0 ? -4 : 4, 0],
+              x: [0, i % 2 === 0 ? 22 : -22, 0],
+              y: [0, i % 2 === 0 ? -18 : 18, 0],
             }}
             transition={{
               opacity: { delay: 0.1 + i * 0.08 },
               scale: { delay: 0.1 + i * 0.08 },
-              x: { duration: 5 + i * 0.6, repeat: Infinity, ease: "easeInOut" },
-              y: { duration: 6 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
+              x: { duration: 6 + i * 0.6, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 7 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
             }}
           >
             <s.Icon size={36} />
