@@ -487,13 +487,15 @@ function PreviewTeam() {
       <motion.div
         className="dt-brain-center"
         initial={{ scale: 0.85, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.2 }}
+        animate={{ scale: [0.85, 1.05, 1], opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <motion.svg
-          width="180" height="170" viewBox="0 0 120 120" aria-hidden="true"
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        <svg
+          width="180"
+          height="180"
+          viewBox="0 0 120 120"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
           <defs>
             <linearGradient id="dt-brain-grad" x1="0" y1="0" x2="1" y2="1">
@@ -501,74 +503,57 @@ function PreviewTeam() {
               <stop offset="50%" stopColor="#a855f7" />
               <stop offset="100%" stopColor="#ec4899" />
             </linearGradient>
-            <radialGradient id="dt-brain-fill" cx="50%" cy="45%" r="60%">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-              <stop offset="60%" stopColor="#f5f3ff" stopOpacity="1" />
-              <stop offset="100%" stopColor="#ede9fe" stopOpacity="1" />
+            <radialGradient id="dt-brain-fill" cx="50%" cy="45%" r="65%">
+              <stop offset="0%" stopColor="#ffffff" />
+              <stop offset="70%" stopColor="#f5f3ff" />
+              <stop offset="100%" stopColor="#e9d5ff" />
             </radialGradient>
           </defs>
 
-          {/* Soft circular backdrop so brain stands out from page glow */}
-          <circle cx="60" cy="60" r="52" fill="url(#dt-brain-fill)" stroke="url(#dt-brain-grad)" strokeWidth="1.2" strokeOpacity="0.3" />
+          {/* Solid circular backdrop with gradient ring so brain stays visible against any background */}
+          <circle cx="60" cy="60" r="54" fill="url(#dt-brain-fill)" />
+          <circle cx="60" cy="60" r="54" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="2" strokeOpacity="0.55" />
 
           {/* Left hemisphere */}
           <path
-            d="M60 22
-               C48 14 32 16 26 28
-               C14 30 10 44 18 54
-               C10 62 16 76 28 78
-               C30 90 44 96 56 90
-               C60 96 60 96 60 90
-               Z"
-            fill="url(#dt-brain-fill)"
+            d="M60 24 C48 16 32 18 26 30 C14 32 10 46 18 56 C10 64 16 78 28 80 C30 92 44 96 56 90 L60 90 Z"
+            fill="#ffffff"
             stroke="url(#dt-brain-grad)"
             strokeWidth="2.6"
             strokeLinejoin="round"
           />
           {/* Right hemisphere */}
           <path
-            d="M60 22
-               C72 14 88 16 94 28
-               C106 30 110 44 102 54
-               C110 62 104 76 92 78
-               C90 90 76 96 64 90
-               C60 96 60 96 60 90
-               Z"
-            fill="url(#dt-brain-fill)"
+            d="M60 24 C72 16 88 18 94 30 C106 32 110 46 102 56 C110 64 104 78 92 80 C90 92 76 96 64 90 L60 90 Z"
+            fill="#ffffff"
             stroke="url(#dt-brain-grad)"
             strokeWidth="2.6"
             strokeLinejoin="round"
           />
           {/* Center fissure */}
-          <path d="M60 20 L60 92" stroke="url(#dt-brain-grad)" strokeWidth="2" strokeLinecap="round" />
+          <path d="M60 22 L60 92" stroke="url(#dt-brain-grad)" strokeWidth="2" strokeLinecap="round" />
 
-          {/* Convolutions - left */}
-          <path d="M32 34 C38 38 38 44 32 48" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M24 52 C32 54 34 60 28 66" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M42 60 C48 62 50 70 44 76" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M46 26 C52 30 54 36 50 42" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.5" strokeLinecap="round" />
-
-          {/* Convolutions - right */}
-          <path d="M88 34 C82 38 82 44 88 48" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M96 52 C88 54 86 60 92 66" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M78 60 C72 62 70 70 76 76" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M74 26 C68 30 66 36 70 42" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.5" strokeLinecap="round" />
+          {/* Convolutions */}
+          <path d="M32 36 C38 40 38 46 32 50" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M24 54 C32 56 34 62 28 68" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M42 62 C48 64 50 72 44 78" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M46 28 C52 32 54 38 50 44" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M88 36 C82 40 82 46 88 50" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M96 54 C88 56 86 62 92 68" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M78 62 C72 64 70 72 76 78" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M74 28 C68 32 66 38 70 44" fill="none" stroke="url(#dt-brain-grad)" strokeWidth="1.6" strokeLinecap="round" />
 
           {/* Sparkle in center */}
-          <motion.g
-            animate={{ opacity: [0.55, 1, 0.55], scale: [0.9, 1.15, 0.9] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-            style={{ transformOrigin: "60px 56px" }}
+          <path
+            d="M60 48 L64 58 L60 68 L56 58 Z M50 58 L70 58"
+            fill="url(#dt-brain-grad)"
+            stroke="url(#dt-brain-grad)"
+            strokeWidth="1.4"
+            strokeLinejoin="round"
           >
-            <path
-              d="M60 46 L64 56 L60 66 L56 56 Z M50 56 L70 56"
-              fill="url(#dt-brain-grad)"
-              stroke="url(#dt-brain-grad)"
-              strokeWidth="1.4"
-              strokeLinejoin="round"
-            />
-          </motion.g>
-        </motion.svg>
+            <animate attributeName="opacity" values="0.55;1;0.55" dur="2.2s" repeatCount="indefinite" />
+          </path>
+        </svg>
       </motion.div>
 
       {roles.map((r, i) => (
