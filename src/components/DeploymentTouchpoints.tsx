@@ -208,28 +208,30 @@ function PreviewSocial() {
           </motion.div>
         </div>
       ))}
-      <motion.div
-        className="dt-source-hub dt-source-hub-chat"
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.3 }}
-      >
-        <p className="dt-shc-status">We're online…</p>
-        <div className="dt-shc-bubble dt-shc-in">
-          Hi there! 👋 We have a 10% promo for new customers — want one?
-        </div>
-        <div className="dt-shc-quick">
-          <span className="dt-shc-pill dt-shc-pill-primary">Yes, sure!</span>
-          <span className="dt-shc-pill">No, thanks</span>
-        </div>
-        <div className="dt-shc-bubble dt-shc-in dt-shc-in-2">
-          Cool! What's your email then?
-        </div>
-        <div className="dt-shc-input">
-          <span>Enter message</span>
-          <Send size={12} />
-        </div>
-      </motion.div>
+      <div className="dt-source-hub-anchor">
+        <motion.div
+          className="dt-source-hub dt-source-hub-chat"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          <p className="dt-shc-status">We're online…</p>
+          <div className="dt-shc-bubble dt-shc-in">
+            Hi there! 👋 We have a 10% promo for new customers — want one?
+          </div>
+          <div className="dt-shc-quick">
+            <span className="dt-shc-pill dt-shc-pill-primary">Yes, sure!</span>
+            <span className="dt-shc-pill">No, thanks</span>
+          </div>
+          <div className="dt-shc-bubble dt-shc-in dt-shc-in-2">
+            Cool! What's your email then?
+          </div>
+          <div className="dt-shc-input">
+            <span>Enter message</span>
+            <Send size={12} />
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }
