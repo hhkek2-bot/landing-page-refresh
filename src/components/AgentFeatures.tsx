@@ -264,41 +264,36 @@ export default function AgentFeatures() {
   return (
     <section className="af-section">
       <div className="bright-container">
-        <div className="af-headline af-headline-top">
-          <h2>Turn AI Conversations Into Sales Opportunities</h2>
-          <p>
-            Set up your agent, train it with your business knowledge, monitor every enquiry,
-            and identify high-intent buyers your sales team should follow up.
-          </p>
-        </div>
-
-        <div className="af-tabbar-wrap">
-          <div className="af-tabbar" role="tablist">
-            {FEATURES.map((f) => {
-              const Icon = f.icon;
-              const isActive = f.key === active;
-              return (
-                <button
-                  key={f.key}
-                  role="tab"
-                  aria-selected={isActive}
-                  className={`af-pill ${isActive ? "af-pill-active" : ""}`}
-                  onClick={() => setActive(f.key)}
-                >
-                  <Icon size={16} />
-                  <span>{f.tab}</span>
-                </button>
-              );
-            })}
+        <div className="af-box">
+          <div className="af-tabbar-wrap">
+            <div className="af-tabbar" role="tablist">
+              {FEATURES.map((f) => {
+                const Icon = f.icon;
+                const isActive = f.key === active;
+                return (
+                  <button
+                    key={f.key}
+                    role="tab"
+                    aria-selected={isActive}
+                    className={`af-pill ${isActive ? "af-pill-active" : ""}`}
+                    onClick={() => setActive(f.key)}
+                  >
+                    <Icon size={16} />
+                    <span>{f.tab}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
 
-        <div className="af-stage" key={active}>
-          <div className="af-panel-visual">
-            <Visual />
+          <div className="af-stage" key={active}>
+            <div className="af-panel-visual">
+              <Visual />
+            </div>
           </div>
-          <div className="af-panel-text">
-            <h3>{feature.title}</h3>
+
+          <div className="af-headline af-headline-bottom">
+            <h2>{feature.title}</h2>
             <p>{feature.description}</p>
           </div>
         </div>
