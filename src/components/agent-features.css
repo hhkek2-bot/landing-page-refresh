@@ -116,15 +116,15 @@
 }
 .af-fields { display: flex; flex-direction: column; gap: 10px; }
 .af-field {
-  display: flex; justify-content: space-between; align-items: flex-start;
+  display: flex; justify-content: flex-start; align-items: flex-start;
   gap: 16px;
   padding: 10px 12px;
   background: #f8fafc;
   border-radius: 8px;
   font-size: 13px;
 }
-.af-field-label { color: #64748b; font-weight: 500; flex-shrink: 0; padding-top: 1px; }
-.af-field-val { color: #0f172a; font-weight: 600; text-align: right; line-height: 1.5; }
+.af-field-label { color: #64748b; font-weight: 500; flex-shrink: 0; padding-top: 1px; width: 110px; }
+.af-field-val { color: #475569; font-weight: 400; text-align: left; line-height: 1.5; flex: 1; }
 
 /* Knowledge */
 .af-upload-zone {
