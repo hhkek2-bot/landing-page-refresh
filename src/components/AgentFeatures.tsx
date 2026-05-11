@@ -281,29 +281,44 @@ function VisualVisibility() {
 }
 
 function VisualProfiling() {
-  const fields = [
-    ["Company", "BuildPro Sdn Bhd"],
-    ["Location", "Kuala Lumpur"],
-    ["Need", "20m Boom Lift × 2"],
-    ["Urgency", "Within 5 days"],
-    ["Interest Level", "High"],
+  const leads = [
+    { company: "BuildPro Sdn Bhd", need: "20m Boom Lift × 2", urgency: "Within 5 days", behaviour: "High", score: 87 },
+    { company: "MegaCon Builders", need: "Forklift 3-ton × 1", urgency: "This week", behaviour: "High", score: 82 },
+    { company: "GreenSpace Co.", need: "Floor Scrubber", urgency: "Next month", behaviour: "Medium", score: 61 },
+    { company: "Skyline Interiors", need: "Scissor Lift × 1", urgency: "Comparing vendors", behaviour: "Medium", score: 54 },
+    { company: "Lim Renovation", need: "Generator 20kVA", urgency: "Just browsing", behaviour: "Low", score: 28 },
   ];
   return (
     <div className="af-visual af-visual-profiling">
-      <div className="af-card af-profile-card">
-        <div className="af-profile-head">
-          <div className="af-avatar af-avatar-blue">B</div>
+      <div className="af-card afp-card">
+        <div className="afp-head">
           <div>
-            <div className="af-profile-name">Buyer Profile</div>
-            <div className="af-profile-sub">Lead Score · 87 / 100</div>
+            <div className="afp-title">Lead Capture</div>
+            <div className="afp-sub">5 new leads · last 24h</div>
           </div>
-          <span className="af-quality-tag">Hot Lead</span>
+          <span className="af-quality-tag">2 Hot Leads</span>
         </div>
-        <div className="af-fields">
-          {fields.map(([label, val]) => (
-            <div key={label} className="af-field">
-              <span className="af-field-label">{label}</span>
-              <span className="af-field-val">{val}</span>
+        <div className="afp-table">
+          <div className="afp-row afp-row-head">
+            <span>Company</span>
+            <span>Need</span>
+            <span>Urgency</span>
+            <span className="afp-cell-right">Behaviour</span>
+          </div>
+          {leads.map((l) => (
+            <div key={l.company} className="afp-row">
+              <span className="afp-company">
+                <span className="afp-dot" />
+                <span>
+                  <span className="afp-company-name">{l.company}</span>
+                  <span className="afp-company-meta">Score {l.score}/100</span>
+                </span>
+              </span>
+              <span className="afp-need">{l.need}</span>
+              <span className="afp-urgency">{l.urgency}</span>
+              <span className="afp-cell-right">
+                <span className={`afp-badge afp-badge-${l.behaviour.toLowerCase()}`}>{l.behaviour}</span>
+              </span>
             </div>
           ))}
         </div>
