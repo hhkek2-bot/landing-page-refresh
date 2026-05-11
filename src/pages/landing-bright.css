@@ -1567,10 +1567,10 @@
 .bright-stats-intro h2 {
   margin: 0 0 24px;
   color: #0b1e36;
-  font-size: clamp(2.4rem, 3.8vw, 3.8rem);
+  font-size: clamp(2.4rem, 4vw, 4rem);
   line-height: 1.12;
   letter-spacing: -0.03em;
-  font-weight: 800;
+  font-weight: 700;
   white-space: pre-line;
 }
 
