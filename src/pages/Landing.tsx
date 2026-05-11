@@ -362,10 +362,38 @@ const painResolutions: PainResolution[] = [
   { title: "People Dependency", description: "Critical sales knowledge lives in people — not in scalable systems or processes", impact: "", solutionTitle: "Centralized Sales Intelligence", solutionDescription: "Standardize specs, pricing logic, and workflows into one intelligent system. Ensure consistent, accurate responses without relying on individual team members.", keyword: "Intel" },
 ];
 function StepGraphic({ visual }: { visual: ProcessStep["visual"] }) {
-  if (visual === "profile") return (<div className="bright-step-graphic"><div className="bright-anim-ring" /><div className="bright-anim-avatar"><User size={20} /></div></div>);
-  if (visual === "ingest") return (<div className="bright-step-graphic"><div className="bright-anim-doc bright-doc-one" /><div className="bright-anim-doc bright-doc-two" /><div className="bright-anim-folder" /></div>);
-  if (visual === "rules") return (<div className="bright-step-graphic"><div className="bright-anim-slider-bg" /><div className="bright-anim-slider-knob" /></div>);
-  if (visual === "test") return (<div className="bright-step-graphic"><div className="bright-anim-chat-bubble"><span className="bright-dot" /><span className="bright-dot" /><span className="bright-dot" /></div></div>);
+  if (visual === "profile") return (
+    <div className="bright-step-graphic bright-step-graphic-profile">
+      <span className="bright-anim-spark bright-anim-spark-1" />
+      <span className="bright-anim-spark bright-anim-spark-2" />
+      <span className="bright-anim-spark bright-anim-spark-3" />
+      <div className="bright-anim-ring bright-anim-ring-outer" />
+      <div className="bright-anim-ring bright-anim-ring-inner" />
+      <div className="bright-anim-avatar"><User size={22} /></div>
+    </div>
+  );
+  if (visual === "ingest") return (
+    <div className="bright-step-graphic bright-step-graphic-ingest">
+      <div className="bright-anim-doc bright-doc-one"><span /><span /><span /></div>
+      <div className="bright-anim-doc bright-doc-two"><span /><span /><span /></div>
+      <div className="bright-anim-doc bright-doc-three"><span /><span /><span /></div>
+      <div className="bright-anim-folder" />
+    </div>
+  );
+  if (visual === "rules") return (
+    <div className="bright-step-graphic bright-step-graphic-rules">
+      <div className="bright-anim-toggle bright-anim-toggle-1"><span /></div>
+      <div className="bright-anim-slider-bg"><div className="bright-anim-slider-fill" /></div>
+      <div className="bright-anim-slider-knob" />
+      <div className="bright-anim-toggle bright-anim-toggle-2"><span /></div>
+    </div>
+  );
+  if (visual === "test") return (
+    <div className="bright-step-graphic bright-step-graphic-test">
+      <div className="bright-anim-chat-bubble bright-anim-chat-user">Hi!</div>
+      <div className="bright-anim-chat-bubble bright-anim-chat-ai"><span className="bright-dot" /><span className="bright-dot" /><span className="bright-dot" /></div>
+    </div>
+  );
   return (
     <div className="bright-step-graphic bright-step-graphic-launch">
       <svg className="bright-launch-rocket-graphic" viewBox="0 0 220 170" role="img" aria-label="Rocket launch">
@@ -1065,7 +1093,7 @@ export default function Landing() {
       {/* Process Steps */}
       <section className="bright-process" id="process">
         <div className="bright-container">
-          <div className="bright-section-header"><h2>Implementation in Minutes</h2><p>The exact process to deploy your digital sales expert.</p></div>
+          <div className="bright-section-header"><h2>Build. Test. Launch.</h2><p>The exact process to deploy your digital sales expert.</p></div>
           <div className="bright-vertical-steps">
             {processSteps.map((step, idx) => (
               <div key={step.id}>
