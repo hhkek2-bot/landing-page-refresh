@@ -1593,9 +1593,9 @@
 .bright-anim-toggle-2 { background: linear-gradient(90deg, #22c55e, #84cc16); }
 .bright-anim-toggle-2 span { animation-delay: 1.1s; }
 
-@keyframes brightSlideKnob { from { transform: translateX(0); } to { transform: translateX(66px); } }
+@keyframes brightSlideKnob { from { transform: translateX(0); } to { transform: translateX(94px); } }
 @keyframes brightSliderFill { from { width: 18%; } to { width: 88%; } }
-@keyframes brightToggleSlide { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(22px); } }
+@keyframes brightToggleSlide { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(18px); } }
 
 /* ---- Step 4: Test ---- */
 .bright-step-graphic-test {
