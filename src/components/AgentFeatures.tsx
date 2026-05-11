@@ -422,6 +422,10 @@ export default function AgentFeatures() {
   return (
     <section className="af-section">
       <div className="bright-container">
+        <div className="bright-section-header">
+          <h2>Your AI Sales <span className="bright-hero-gradient-text">Control Center</span></h2>
+          <p>Explore the key features that help you control your agent, train it with business knowledge, monitor buyer conversations, and identify high-intent opportunities for follow-up.</p>
+        </div>
         <div className="af-box">
           <div className="af-tabbar-wrap">
             <div className="af-tabbar" role="tablist">
