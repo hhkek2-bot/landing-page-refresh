@@ -725,16 +725,14 @@ export default function DeploymentTouchpoints() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.5 }}
         >
+          <p className="dt-eyebrow">Multi-Channel Sales</p>
           <h2 id="dt-heading" className="dt-title">
-            One <span className="dt-title-gradient">Sale Agent</span>
+            AI Agent <span className="dt-title-gradient">Deployment</span>
           </h2>
-          <p className="dt-subtitle">
-            Multiple Languages · Multiple Channels · Multiple Markets
-          </p>
           <p className="dt-desc">
-            The future of sales should not be limited by office hours, channels, markets, or
-            languages. Let your AI Sales Agent capture, qualify, and guide enquiries — so your
-            team can step in for higher-value closing.
+            Use your AI Sales Agent across your Webstore, website, social media, ads, QR codes,
+            chat channels, email campaigns, and new markets — turning every customer touchpoint
+            into a guided enquiry path.
           </p>
         </motion.div>
 
