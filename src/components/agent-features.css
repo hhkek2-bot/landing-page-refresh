@@ -540,7 +540,7 @@
 }
 .afp-row {
   display: grid;
-  grid-template-columns: 1.6fr 1.3fr 1.1fr 0.9fr;
+  grid-template-columns: 1.4fr 1.9fr 0.8fr 0.7fr;
   gap: 12px;
   align-items: center;
   padding: 12px 14px;
