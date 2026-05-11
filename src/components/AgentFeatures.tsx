@@ -19,7 +19,7 @@ import {
   MessageSquareText,
   Package,
   ContactRound,
-  HandshakeIcon,
+  Handshake,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import "./agent-features.css";
