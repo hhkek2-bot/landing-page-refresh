@@ -1091,6 +1091,8 @@ export default function Landing() {
       </section>
 
 
+      <AgentFeatures />
+
       {/* Process Steps */}
       <section className="bright-process" id="process">
         <div className="bright-container">
