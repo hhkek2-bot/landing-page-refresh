@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import "./agent-features.css";
+import ariaAvatar from "@/assets/agent-aria.jpg";
 
 type FeatureKey =
   | "identity"
