@@ -1141,15 +1141,49 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bright-cta-section">
-        <div className="bright-container">
-          <div className="bright-cta-content">
-            <h2>Build Your AI Sales Agent</h2>
-            <p className="bright-cta-supporting">Turn enquiries into qualified deals and quotations — automatically.</p>
-            <div className="bright-cta-actions">
-              <Link to="/" className="bright-btn-outline-light">Get Started</Link>
+      {/* AI CTA section — ported from Webstore Landing */}
+      <section className="ws-cta-section">
+        {/* subtle grid backdrop */}
+        <div className="ws-cta-grid" aria-hidden="true" />
+        {/* Bottom-up brand gradient fade */}
+        <div className="ws-cta-fade" aria-hidden="true" />
+
+        {/* Floating equipment / industry feature cards */}
+        {[
+          { Icon: Search, label: "Find Equipment", sub: "Excavators, cranes, loaders", top: "6%", left: "4%", rotate: "-6deg", color: "#7c3aed" },
+          { Icon: Wrench, label: "Spare Parts Lookup", sub: "OEM & aftermarket SKUs", top: "38%", left: "2%", rotate: "4deg", color: "#3b82f6" },
+          { Icon: Boxes, label: "Rental & Sales", sub: "Daily, weekly, monthly", top: "70%", left: "6%", rotate: "-3deg", color: "#f97316" },
+          { Icon: FileText, label: "Instant Quotation", sub: "Tools & hardware quotes", top: "8%", right: "4%", rotate: "5deg", color: "#ec4899" },
+          { Icon: Languages, label: "Multilingual Catalog", sub: "Reach global buyers", top: "40%", right: "2%", rotate: "-4deg", color: "#10b981" },
+          { Icon: Sparkles, label: "Smart Recommendations", sub: "Right tool for the job", top: "72%", right: "5%", rotate: "6deg", color: "#f59e0b" },
+        ].map((c, i) => (
+          <div
+            key={i}
+            className="ws-cta-float"
+            style={{ top: c.top, left: (c as any).left, right: (c as any).right, transform: `rotate(${c.rotate})` }}
+          >
+            <div className="ws-cta-float-icon" style={{ backgroundColor: `${c.color}1A`, color: c.color }}>
+              <c.Icon size={20} />
             </div>
+            <div className="ws-cta-float-body">
+              <p className="ws-cta-float-label">{c.label}</p>
+              <div className="ws-cta-float-bar" style={{ background: `linear-gradient(90deg, ${c.color}, ${c.color}33)` }} />
+              <p className="ws-cta-float-sub">{c.sub}</p>
+            </div>
+          </div>
+        ))}
+
+        <div className="ws-cta-inner">
+          <h2 className="ws-cta-title">
+            <span style={{ whiteSpace: "nowrap" }}>Build Your AI Sales Agent</span>
+            <br />
+            <span className="ws-cta-title-grad" style={{ whiteSpace: "nowrap" }}>For the Equipment Industry</span>
+          </h2>
+          <div className="ws-cta-actions">
+            <Link to="/" className="ws-cta-btn-primary">
+              Get Started <ArrowRight size={16} />
+            </Link>
+            <Link to="/" className="ws-cta-btn-outline">Contact Sales</Link>
           </div>
         </div>
       </section>
