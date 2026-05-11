@@ -6,31 +6,22 @@ import {
   MessagesSquare,
   UserSearch,
   Target,
-  ArrowRight,
-  Upload,
   FileText,
+  ArrowRight,
   Bell,
-  CheckCircle2,
-  Circle,
-  HardDrive,
-  Link2,
-  ClipboardList,
-  Database,
-  MessageSquareText,
-  Package,
-  ContactRound,
-  Handshake,
+  Flame,
+  Clock,
+  DollarSign,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import "./agent-features.css";
-import ariaAvatar from "@/assets/agent-aria.jpg";
 
 type FeatureKey =
-  | "identity"
+  | "agent"
   | "knowledge"
-  | "flow"
-  | "visibility"
-  | "profiling"
+  | "workflow"
+  | "conversation"
+  | "leads"
   | "intent";
 
 type Feature = {
@@ -43,48 +34,48 @@ type Feature = {
 
 const FEATURES: Feature[] = [
   {
-    key: "identity",
-    tab: "Agent Identity",
+    key: "agent",
+    tab: "Agent",
     icon: UserCircle,
     title: "Define How Your AI Agent Represents Your Business",
     description:
-      "Set the agent's role, introduction, tone, response boundaries, and business rules so it behaves according to your company direction.",
+      "Set the agent's role, introduction, response boundaries, tone, and business rules so it behaves according to your company direction.",
   },
   {
     key: "knowledge",
-    tab: "Business Knowledge",
+    tab: "Knowledge",
     icon: BookOpen,
     title: "Train AI With Your Business Knowledge",
     description:
-      "Upload product catalogues, FAQs, rental terms, pricing guides, and company information for the AI to use in real customer enquiries.",
+      "Upload product catalogues, FAQs, rental terms, pricing guides, company information, and service details for the AI to use in real customer enquiries.",
   },
   {
-    key: "flow",
-    tab: "Sales Flow",
+    key: "workflow",
+    tab: "Workflow",
     icon: GitBranch,
-    title: "Guide Every Enquiry With a Structured Sales Flow",
+    title: "Guide Every Enquiry With a Structured Sales Workflow",
     description:
-      "Define how the AI handles recommendations, quotation requests, technical questions, and sales handover.",
+      "Define how the AI handles product recommendations, quotation requests, technical questions, booking interest, and sales handover.",
   },
   {
-    key: "visibility",
-    tab: "Conversation Visibility",
+    key: "conversation",
+    tab: "Conversation",
     icon: MessagesSquare,
     title: "Monitor Every Buyer Conversation Clearly",
     description:
       "Record and review AI conversations so your team can track interactions, receive alerts, and follow up when needed.",
   },
   {
-    key: "profiling",
-    tab: "Buyer Profiling",
+    key: "leads",
+    tab: "Leads",
     icon: UserSearch,
-    title: "Understand Buyer Quality and Intent Better",
+    title: "Capture and Profile Every Potential Buyer",
     description:
-      "Capture buyer details, project needs, urgency, and behaviour to help your team assess lead quality.",
+      "Capture buyer details, company information, project needs, product interest, location, urgency, and behaviour to help your team understand lead quality.",
   },
   {
     key: "intent",
-    tab: "Deal Intent",
+    tab: "Intent",
     icon: Target,
     title: "Spot High-Intent Buyers Before They Slip Away",
     description:
@@ -92,77 +83,32 @@ const FEATURES: Feature[] = [
   },
 ];
 
-function VisualIdentity() {
-  return (
-    <div className="af-visual af-visual-identity">
-      <div className="af-card af-profile-card">
-        <div className="af-profile-head">
-          <img src={ariaAvatar} alt="Aria, sales agent" className="af-avatar af-avatar-photo" width={64} height={64} loading="lazy" />
-          <div>
-            <div className="af-profile-name">Aria · Sales Agent</div>
-            <div className="af-profile-sub">Active · Configured</div>
-          </div>
-        </div>
-        <div className="af-fields">
-          {[
-            ["Role", "Sales Specialist"],
-            ["Tone", "Friendly · Professional"],
-            ["Introduction", "Hi, I'm Aria from Antbuildz. We rent and sell all types of construction equipment in Singapore — how can I help you today?"],
-            ["Boundaries", "Represent Antbuildz only. Never mention or recommend competing brands in conversations with customers."],
-          ].map(([label, val]) => (
-            <div key={label} className="af-field">
-              <span className="af-field-label">{label}</span>
-              <span className="af-field-val">{val}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+/* ============== Simple Graphics ============== */
 
-function VisualKnowledge() {
-  const sources = [
-    { Icon: FileText, name: "Product Catalogue.pdf", meta: "PDF · 4.2 MB · 128 segments", color: "#7c3aed" },
-    { Icon: Link2, name: "company-website.com/faq", meta: "Website · 36 pages crawled", color: "#3b82f6" },
-    { Icon: ClipboardList, name: "Rental Terms & Pricing", meta: "Pasted text · 2,140 words", color: "#f97316" },
-    { Icon: FileText, name: "Spare Parts Master List.xlsx", meta: "Spreadsheet · 1.1 MB · 84 segments", color: "#10b981" },
+function GfxAgent() {
+  const fields = [
+    { label: "Role", value: "Sales Assistant" },
+    { label: "Introduction", value: "Hi, I'm from Antbuildz" },
+    { label: "Tone", value: "Friendly · Professional" },
+    { label: "Boundaries", value: "Represent XYZ only" },
+    { label: "Business Rules", value: "Quote within 1 hour" },
   ];
   return (
-    <div className="af-visual af-visual-knowledge">
-      <p className="afk-lede">Add sources for your AI agent — PDFs, websites, docs, or pasted text.</p>
-
-      <div className="afk-storage">
-        <div className="afk-storage-head">
-          <div className="afk-storage-title">
-            <Database size={16} className="afk-storage-icon" />
-            <strong>Storage</strong>
-            <span className="afk-storage-meta">7.4 MB / 50.0 MB</span>
-          </div>
-          <span className="afk-drag">Drag files here</span>
+    <div className="gfx-card gfx-agent">
+      <div className="gfx-agent-head">
+        <div className="gfx-avatar">
+          <UserCircle size={28} />
         </div>
-        <div className="afk-storage-sub">4 sources · 2 files · 1 website · 1 note</div>
-        <div className="afk-progress"><span style={{ width: "15%" }} /></div>
-        <div className="afk-actions">
-          <button className="afk-btn"><Upload size={14} /> Upload</button>
-          <button className="afk-btn"><HardDrive size={14} /> Drive</button>
-          <button className="afk-btn"><Link2 size={14} /> Website</button>
-          <button className="afk-btn"><ClipboardList size={14} /> Text</button>
+        <div>
+          <div className="gfx-agent-name">Agent Profile</div>
+          <div className="gfx-agent-sub">Configuration</div>
         </div>
       </div>
-
-      <div className="afk-saved-head">SAVED SOURCES (4)</div>
-      <div className="afk-saved-list">
-        {sources.map((s) => (
-          <div key={s.name} className="afk-source">
-            <div className="afk-source-icon" style={{ background: `${s.color}1A`, color: s.color }}>
-              <s.Icon size={16} />
-            </div>
-            <div className="afk-source-body">
-              <div className="afk-source-name">{s.name}</div>
-              <div className="afk-source-meta">{s.meta}</div>
-            </div>
-            <CheckCircle2 size={16} className="afk-source-check" />
+      <div className="gfx-agent-fields">
+        {fields.map((f) => (
+          <div className="gfx-agent-row" key={f.label}>
+            <span className="gfx-agent-label">{f.label}</span>
+            <span className="gfx-agent-value">{f.value}</span>
           </div>
         ))}
       </div>
@@ -170,245 +116,187 @@ function VisualKnowledge() {
   );
 }
 
-function VisualFlow() {
+function GfxKnowledge() {
+  const docs = [
+    "Product Catalogue",
+    "FAQ",
+    "Rental Terms",
+    "Pricing Guide",
+    "Company Info",
+  ];
+  return (
+    <div className="gfx-knowledge">
+      {docs.map((d) => (
+        <div className="gfx-doc" key={d}>
+          <div className="gfx-doc-icon">
+            <FileText size={20} />
+          </div>
+          <div className="gfx-doc-name">{d}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function GfxWorkflow() {
   const steps = [
-    { n: 1, title: "Ask Need", instr: "Greet the buyer, then ask what equipment, project, and timeline they need.", Icon: MessageSquareText, color: "#7c3aed" },
-    { n: 2, title: "Recommend Product", instr: "Match request against catalogue and propose 1–3 best-fit models with key specs.", Icon: Package, color: "#3b82f6" },
-    { n: 3, title: "Capture Details", instr: "Collect company name, contact, location, and quantity for the quotation.", Icon: ContactRound, color: "#f97316" },
-    { n: 4, title: "Handover", instr: "Summarise the request and route the qualified lead to the human sales team.", Icon: Handshake, color: "#10b981" },
+    "Understand Need",
+    "Recommend Product",
+    "Capture Details",
+    "Handover to Sales",
   ];
   return (
-    <div className="af-visual af-visual-flow">
-      <div className="afw-flow">
-        {steps.map((s, i) => (
-          <div key={s.n} className="afw-row">
-            <div className="afw-card">
-              <div className="afw-rail" style={{ background: s.color }} />
-              <div className="afw-num" style={{ background: `${s.color}1A`, color: s.color }}>{s.n}</div>
-              <div className="afw-body">
-                <div className="afw-title-row">
-                  <s.Icon size={14} style={{ color: s.color }} />
-                  <span className="afw-title">{s.title}</span>
-                  <span className="afw-tag">Task</span>
-                </div>
-                <div className="afw-instr">{s.instr}</div>
-              </div>
-            </div>
-            {i < steps.length - 1 && (
-              <div className="afw-connector" aria-hidden="true">
-                <span className="afw-line" />
-                <ArrowRight size={14} className="afw-arrow" />
-              </div>
-            )}
+    <div className="gfx-workflow">
+      {steps.map((s, i) => (
+        <div className="gfx-step-wrap" key={s}>
+          <div className="gfx-step">
+            <div className="gfx-step-num">{i + 1}</div>
+            <div className="gfx-step-label">{s}</div>
           </div>
-        ))}
-      </div>
+          {i < steps.length - 1 && (
+            <ArrowRight className="gfx-step-arrow" size={18} />
+          )}
+        </div>
+      ))}
     </div>
   );
 }
 
-function VisualVisibility() {
-  const convos = [
-    { name: "Sarah Lim", preview: "Hi Sarah! For a 20m boom lift in KL, here are the best-fit options…", time: "2m", agent: "AI Sales Specialist", active: true },
-    { name: "David Tan", preview: "We have 3-ton forklifts available for monthly rental starting…", time: "14m", agent: "AI Sales Specialist", active: false },
-    { name: "Amanda Koh", preview: "Thanks for confirming. I've shared the quotation PDF with…", time: "1h", agent: "AI Sales Specialist", active: false },
-    { name: "MegaCon Builders", preview: "Yes, the telehandler can lift above 15m. Models below all have…", time: "3h", agent: "AI Sales Specialist", active: false },
-  ];
-  return (
-    <div className="af-visual af-visual-visibility">
-      <div className="afv-shell">
-        {/* Left: list */}
-        <div className="afv-list">
-          <div className="afv-search">
-            <span className="afv-search-icon">⌕</span>
-            <span className="afv-search-ph">Search conversations…</span>
-          </div>
-          <div className="afv-filters">
-            <span className="afv-chip afv-chip-active">● 12</span>
-            <span className="afv-chip">◷ 8</span>
-            <span className="afv-chip">⚠ 1</span>
-            <span className="afv-chip">✓ 3</span>
-          </div>
-          {convos.map((c) => (
-            <div key={c.name} className={`afv-item ${c.active ? "afv-item-active" : ""}`}>
-              <div className="afv-item-top">
-                <span className="afv-item-name">{c.name}</span>
-                <span className="afv-item-time">⏱ {c.time}</span>
-              </div>
-              <div className="afv-item-msg">{c.preview}</div>
-              <div className="afv-item-agent">{c.agent}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Right: detail */}
-        <div className="afv-detail">
-          <div className="afv-detail-head">
-            <div className="afv-detail-who">
-              <div className="afv-detail-avatar">S</div>
-              <div>
-                <div className="afv-detail-name">Sarah Lim</div>
-                <div className="afv-detail-role">AI Sales Specialist</div>
-              </div>
-            </div>
-            <div className="afv-detail-actions">
-              <span className="afv-act">⚑ Flag</span>
-              <span className="afv-act afv-act-end">✕ End Chat</span>
-            </div>
-          </div>
-
-          <div className="afv-thread">
-            <div className="afv-bubble afv-bubble-user">
-              20m boom lift for a project in KL next week
-            </div>
-            <div className="afv-ai">
-              <div className="afv-ai-tag">● AI</div>
-              <p>Hi Sarah! Here are the best-fit 20m boom lifts available in Kuala Lumpur:</p>
-              <div className="afv-table">
-                <div className="afv-tr afv-tr-head">
-                  <span>Equipment</span><span>Rate</span><span>Status</span>
-                </div>
-                <div className="afv-tr"><span>Genie Z-62/40 Boom Lift</span><span>RM 850/day</span><span className="afv-ok">Available</span></div>
-                <div className="afv-tr"><span>JLG 660SJ Boom Lift</span><span>RM 920/day</span><span className="afv-ok">Available</span></div>
-              </div>
-              <p className="afv-followup">Would you like me to prepare a formal quotation or check delivery for next Monday?</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function VisualProfiling() {
-  const leads = [
-    { company: "BuildPro Sdn Bhd", need: "20m Boom Lift × 2", urgency: "Within 5 days", behaviour: "High", score: 87 },
-    { company: "MegaCon Builders", need: "Forklift 3-ton × 1", urgency: "This week", behaviour: "High", score: 82 },
-    { company: "GreenSpace Co.", need: "Floor Scrubber", urgency: "Next month", behaviour: "Medium", score: 61 },
-    { company: "Skyline Interiors", need: "Scissor Lift × 1", urgency: "Comparing vendors", behaviour: "Medium", score: 54 },
-    { company: "Lim Renovation", need: "Generator 20kVA", urgency: "Just browsing", behaviour: "Low", score: 28 },
-  ];
-  return (
-    <div className="af-visual af-visual-profiling">
-      <div className="af-card afp-card">
-        <div className="afp-head">
-          <div>
-            <div className="afp-title">Lead Capture</div>
-            <div className="afp-sub">5 new leads · last 24h</div>
-          </div>
-          <span className="af-quality-tag">2 Hot Leads</span>
-        </div>
-        <div className="afp-table">
-          <div className="afp-row afp-row-head">
-            <span>Company</span>
-            <span>Need</span>
-            <span>Urgency</span>
-            <span className="afp-cell-right">Behaviour</span>
-          </div>
-          {leads.map((l) => (
-            <div key={l.company} className="afp-row">
-              <span className="afp-company">
-                <span className="afp-dot" />
-                <span>
-                  <span className="afp-company-name">{l.company}</span>
-                  <span className="afp-company-meta">Score {l.score}/100</span>
-                </span>
-              </span>
-              <span className="afp-need">{l.need}</span>
-              <span className="afp-urgency">{l.urgency}</span>
-              <span className="afp-cell-right">
-                <span className={`afp-badge afp-badge-${l.behaviour.toLowerCase()}`}>{l.behaviour}</span>
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function VisualIntent() {
-  const deals = [
+function GfxConversation() {
+  const items = [
     {
       name: "BuildPro Sdn Bhd",
-      equipment: "20-ton Excavator × 1",
-      period: "12 Jun – 26 Jun (2 weeks)",
-      location: "Tuas West Worksite",
-      price: "S$ 6,400",
-      action: "Send rental agreement",
-      due: "Today, 5pm",
-      urgent: true,
+      preview: "Need excavator for next month project...",
+      badge: 2,
+      time: "2m",
     },
     {
       name: "MegaCon Builders",
-      equipment: "3-ton Forklift × 2",
-      period: "10 Jun – 30 Sep (rental)",
-      location: "Jurong Industrial Park",
-      price: "S$ 11,800",
-      action: "Confirm delivery slot",
-      due: "Tomorrow",
-      urgent: false,
+      preview: "Can I get pricing for boom lift rental?",
+      badge: 1,
+      time: "14m",
     },
     {
       name: "Skyline Interiors",
-      equipment: "Scissor Lift 12m × 1",
-      period: "08 Jun – 15 Jun",
-      location: "Orchard Road site",
-      price: "S$ 1,950",
-      action: "Share insurance docs",
-      due: "Within 2 days",
-      urgent: false,
+      preview: "Confirmed booking — please send invoice.",
+      badge: 0,
+      followUp: true,
+      time: "1h",
     },
   ];
   return (
-    <div className="af-visual af-visual-intent">
-      <div className="afd-list">
-        {deals.map((d) => (
-          <div key={d.name} className="afd-card">
-            <div className="afd-main">
-              <div className="afd-head">
-                <span className="afd-badge"><CheckCircle2 size={12} /> Confirmed Rental</span>
-                <span className="afd-name">{d.name}</span>
-              </div>
-              <div className="afd-grid">
-                <div className="afd-cell">
-                  <span className="afd-label">Equipment</span>
-                  <span className="afd-val">{d.equipment}</span>
-                </div>
-                <div className="afd-cell">
-                  <span className="afd-label">Period</span>
-                  <span className="afd-val">{d.period}</span>
-                </div>
-                <div className="afd-cell">
-                  <span className="afd-label">Location</span>
-                  <span className="afd-val">{d.location}</span>
-                </div>
-                <div className="afd-cell">
-                  <span className="afd-label">Quoted Price</span>
-                  <span className="afd-val afd-price">{d.price}</span>
-                </div>
-              </div>
+    <div className="gfx-card gfx-conv">
+      {items.map((it) => (
+        <div className="gfx-conv-row" key={it.name}>
+          <div className="gfx-conv-avatar">{it.name[0]}</div>
+          <div className="gfx-conv-body">
+            <div className="gfx-conv-top">
+              <span className="gfx-conv-name">{it.name}</span>
+              <span className="gfx-conv-time">{it.time}</span>
             </div>
-            <div className="afd-action">
-              <span className="afd-action-label">Pending Action</span>
-              <span className="afd-action-title">{d.action}</span>
-              <span className={`afd-due ${d.urgent ? "afd-due-urgent" : ""}`}>{d.due}</span>
-              <button className="afd-btn">Follow Up <ArrowRight size={14} /></button>
-            </div>
+            <div className="gfx-conv-preview">{it.preview}</div>
+          </div>
+          <div className="gfx-conv-meta">
+            {it.badge ? <span className="gfx-conv-badge">{it.badge}</span> : null}
+            {it.followUp ? (
+              <span className="gfx-conv-follow">
+                <Bell size={12} /> Follow up
+              </span>
+            ) : null}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function GfxLeads() {
+  const fields = [
+    { label: "Company", value: "BuildPro Sdn Bhd" },
+    { label: "Contact", value: "Mr. Tan · +65 9123 4567" },
+    { label: "Location", value: "Tuas, Singapore" },
+    { label: "Product Interest", value: "20-ton Excavator" },
+    { label: "Urgency", value: "Within 7 days" },
+  ];
+  return (
+    <div className="gfx-card gfx-lead">
+      <div className="gfx-lead-head">
+        <div className="gfx-lead-avatar">B</div>
+        <div>
+          <div className="gfx-lead-name">Buyer Profile</div>
+          <div className="gfx-lead-sub">Lead captured · today</div>
+        </div>
+        <span className="gfx-lead-quality">High Quality</span>
+      </div>
+      <div className="gfx-lead-fields">
+        {fields.map((f) => (
+          <div className="gfx-lead-row" key={f.label}>
+            <span className="gfx-lead-label">{f.label}</span>
+            <span className="gfx-lead-value">{f.value}</span>
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+function GfxIntent() {
+  const cards = [
+    {
+      level: "High Intent",
+      tone: "high",
+      icon: Flame,
+      tags: ["Urgent Rental", "Quotation Request"],
+      text: "Confirm excavator rental for 5–20 May",
+    },
+    {
+      level: "Medium Intent",
+      tone: "medium",
+      icon: DollarSign,
+      tags: ["Price Asked"],
+      text: "Asked about boom lift pricing",
+    },
+    {
+      level: "Follow Up",
+      tone: "low",
+      icon: Clock,
+      tags: ["Follow Up Needed"],
+      text: "Pending response on quotation #1042",
+    },
+  ];
+  return (
+    <div className="gfx-intent">
+      {cards.map((c) => {
+        const Icon = c.icon;
+        return (
+          <div className={`gfx-intent-card gfx-intent-${c.tone}`} key={c.level}>
+            <div className="gfx-intent-head">
+              <span className={`gfx-intent-pill gfx-intent-pill-${c.tone}`}>
+                <Icon size={12} /> {c.level}
+              </span>
+            </div>
+            <div className="gfx-intent-text">{c.text}</div>
+            <div className="gfx-intent-tags">
+              {c.tags.map((t) => (
+                <span className="gfx-intent-tag" key={t}>
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
 
 const VISUALS: Record<FeatureKey, () => JSX.Element> = {
-  identity: VisualIdentity,
-  knowledge: VisualKnowledge,
-  flow: VisualFlow,
-  visibility: VisualVisibility,
-  profiling: VisualProfiling,
-  intent: VisualIntent,
+  agent: GfxAgent,
+  knowledge: GfxKnowledge,
+  workflow: GfxWorkflow,
+  conversation: GfxConversation,
+  leads: GfxLeads,
+  intent: GfxIntent,
 };
 
 export default function AgentFeatures() {
@@ -419,37 +307,49 @@ export default function AgentFeatures() {
   return (
     <section className="af-section">
       <div className="bright-container">
-        <div className="af-box">
-          <div className="af-tabbar-wrap">
-            <div className="af-tabbar" role="tablist">
-              {FEATURES.map((f) => {
-                const Icon = f.icon;
-                const isActive = f.key === active;
-                return (
-                  <button
-                    key={f.key}
-                    role="tab"
-                    aria-selected={isActive}
-                    className={`af-pill ${isActive ? "af-pill-active" : ""}`}
-                    onClick={() => setActive(f.key)}
-                  >
-                    <Icon size={16} />
-                    <span>{f.tab}</span>
-                  </button>
-                );
-              })}
-            </div>
+        <div className="af-header">
+          <h2 className="af-title">Your AI Sales Control Center</h2>
+          <p className="af-desc">
+            Explore the key features that help you control your agent, train it
+            with business knowledge, monitor buyer conversations, and identify
+            high-intent opportunities for follow-up.
+          </p>
+        </div>
+
+        <div className="af-browser">
+          <div className="af-browser-bar">
+            <span className="af-dot af-dot-r" />
+            <span className="af-dot af-dot-y" />
+            <span className="af-dot af-dot-g" />
           </div>
 
-          <div className="af-stage" key={active}>
-            <div className="af-panel-visual">
+          <div className="af-tabs" role="tablist">
+            {FEATURES.map((f) => {
+              const Icon = f.icon;
+              const isActive = f.key === active;
+              return (
+                <button
+                  key={f.key}
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`af-tab ${isActive ? "af-tab-active" : ""}`}
+                  onClick={() => setActive(f.key)}
+                >
+                  <Icon size={16} />
+                  <span>{f.tab}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="af-content" key={active}>
+            <div className="af-graphic">
               <Visual />
             </div>
-          </div>
-
-          <div className="af-headline af-headline-bottom">
-            <h2>{feature.title}</h2>
-            <p>{feature.description}</p>
+            <div className="af-text">
+              <h3 className="af-feature-title">{feature.title}</h3>
+              <p className="af-feature-desc">{feature.description}</p>
+            </div>
           </div>
         </div>
       </div>
