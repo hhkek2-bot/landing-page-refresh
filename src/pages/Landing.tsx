@@ -1065,7 +1065,7 @@ export default function Landing() {
       {/* Process Steps */}
       <section className="bright-process" id="process">
         <div className="bright-container">
-          <div className="bright-section-header"><h2>Implementation in Minutes</h2><p>The exact process to deploy your digital sales expert.</p></div>
+          <div className="bright-section-header"><h2>Build. Test. Launch.</h2><p>The exact process to deploy your digital sales expert.</p></div>
           <div className="bright-vertical-steps">
             {processSteps.map((step, idx) => (
               <div key={step.id}>
