@@ -44,7 +44,7 @@ type Feature = {
 const FEATURES: Feature[] = [
   {
     key: "identity",
-    tab: "Agent Identity",
+    tab: "Agent",
     icon: UserCircle,
     title: "Define How Your AI Agent Represents Your Business",
     description:
@@ -52,7 +52,7 @@ const FEATURES: Feature[] = [
   },
   {
     key: "knowledge",
-    tab: "Business Knowledge",
+    tab: "Knowledge",
     icon: BookOpen,
     title: "Train AI With Your Business Knowledge",
     description:
@@ -60,7 +60,7 @@ const FEATURES: Feature[] = [
   },
   {
     key: "flow",
-    tab: "Sales Flow",
+    tab: "Workflow",
     icon: GitBranch,
     title: "Guide Every Enquiry With a Structured Sales Flow",
     description:
@@ -68,7 +68,7 @@ const FEATURES: Feature[] = [
   },
   {
     key: "visibility",
-    tab: "Conversation Visibility",
+    tab: "Conversation",
     icon: MessagesSquare,
     title: "Monitor Every Buyer Conversation Clearly",
     description:
@@ -76,7 +76,7 @@ const FEATURES: Feature[] = [
   },
   {
     key: "profiling",
-    tab: "Buyer Profiling",
+    tab: "Leads",
     icon: UserSearch,
     title: "Understand Buyer Quality and Intent Better",
     description:
@@ -84,7 +84,7 @@ const FEATURES: Feature[] = [
   },
   {
     key: "intent",
-    tab: "Deal Intent",
+    tab: "Intent",
     icon: Target,
     title: "Spot High-Intent Buyers Before They Slip Away",
     description:
