@@ -289,3 +289,117 @@
   .af-pill { padding: 10px 12px; }
   .af-doc-grid { grid-template-columns: 1fr; }
 }
+
+/* ===== Knowledge (sources panel) ===== */
+.af-visual-knowledge { width: 100%; max-width: 760px; }
+.afk-lede { font-size: 13.5px; color: #475569; margin: 0 0 14px; text-align: left; }
+.afk-storage {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  padding: 16px 18px;
+  box-shadow: 0 8px 24px -16px rgba(15, 23, 42, 0.18);
+  margin-bottom: 18px;
+}
+.afk-storage-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.afk-storage-title { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #0f172a; }
+.afk-storage-icon { color: #f59e0b; }
+.afk-storage-meta { font-weight: 500; color: #64748b; font-size: 13px; margin-left: 4px; }
+.afk-drag {
+  font-size: 12px; color: #64748b;
+  border: 1px dashed rgba(15, 23, 42, 0.2);
+  padding: 6px 12px; border-radius: 999px;
+}
+.afk-storage-sub { font-size: 12px; color: #64748b; margin-top: 6px; }
+.afk-progress {
+  height: 4px; background: #eef2ff; border-radius: 999px; overflow: hidden;
+  margin: 10px 0 14px;
+}
+.afk-progress span {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, #6366f1, #3b82f6);
+}
+.afk-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.afk-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #ffffff;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  color: #4f46e5;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 12.5px; font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.afk-btn:hover { background: rgba(99, 102, 241, 0.06); }
+
+.afk-saved-head {
+  font-size: 11px; font-weight: 700; color: #0f172a;
+  letter-spacing: 0.08em; margin-bottom: 8px;
+}
+.afk-saved-list { display: flex; flex-direction: column; gap: 8px; }
+.afk-source {
+  display: flex; align-items: center; gap: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 12px -10px rgba(15, 23, 42, 0.12);
+}
+.afk-source-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.afk-source-body { flex: 1; min-width: 0; }
+.afk-source-name { font-size: 13px; font-weight: 600; color: #0f172a; }
+.afk-source-meta { font-size: 11.5px; color: #64748b; margin-top: 2px; }
+.afk-source-check { color: #10b981; flex-shrink: 0; }
+
+/* ===== Flow (workflow with task instructions) ===== */
+.af-visual-flow { width: 100%; max-width: 720px; }
+.afw-flow { display: flex; flex-direction: column; gap: 0; }
+.afw-row { display: flex; flex-direction: column; align-items: stretch; }
+.afw-card {
+  position: relative;
+  display: flex; align-items: flex-start; gap: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  border-radius: 14px;
+  padding: 14px 16px 14px 22px;
+  box-shadow: 0 6px 18px -12px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
+}
+.afw-rail {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+}
+.afw-num {
+  width: 28px; height: 28px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  flex-shrink: 0;
+}
+.afw-body { flex: 1; min-width: 0; }
+.afw-title-row { display: flex; align-items: center; gap: 8px; }
+.afw-title { font-size: 14px; font-weight: 700; color: #0f172a; }
+.afw-tag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+  color: #64748b; background: #f1f5f9;
+  padding: 2px 8px; border-radius: 999px;
+  margin-left: auto;
+}
+.afw-instr { font-size: 12.5px; color: #475569; margin-top: 4px; line-height: 1.5; }
+.afw-connector {
+  display: flex; align-items: center; justify-content: center;
+  height: 22px;
+  position: relative;
+}
+.afw-line {
+  width: 2px; height: 100%;
+  background: linear-gradient(180deg, rgba(99,102,241,0.35), rgba(59,130,246,0.35));
+}
+.afw-arrow {
+  position: absolute; color: #6366f1;
+  background: #eef2ff; border-radius: 999px; padding: 2px;
+  width: 18px; height: 18px;
+}
