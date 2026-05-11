@@ -1026,7 +1026,7 @@ export default function Landing() {
       <section className="pain-bento-section" id="comparison">
         <div className="bright-container">
           <div className="bright-section-header pain-bento-header">
-            <TypewriterHeading text="Why Enquiries Still Slip Through" />
+            <h2>Why Enquiries Still Slip Through</h2>
             <p>Modern B2B enquiries come from many channels, move quickly, and often get delayed, missed, or poorly handled across the sales process.</p>
           </div>
           <div className="pain-bento-grid">
