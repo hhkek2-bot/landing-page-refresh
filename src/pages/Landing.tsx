@@ -999,7 +999,7 @@ export default function Landing() {
       {/* Features — Bento Grid */}
       <section className="bright-features bento-section">
         <div className="bright-container">
-          <div className="bright-section-header bright-section-header-wide"><TypewriterHeading text="Not Just Answers. The Agent Acts." /><p>Built to turn equipment enquiries into qualified sales opportunities through smarter recommendations, buyer signals, quotations, comparisons, and workflow automation.</p></div>
+          <div className="bright-section-header bright-section-header-wide"><h2>Not Just Answers. The Agent Acts.</h2><p>Built to turn equipment enquiries into qualified sales opportunities through smarter recommendations, buyer signals, quotations, comparisons, and workflow automation.</p></div>
           <div className="bento-grid">
             {bentoFeatures.map((f) => (
               <article
@@ -1026,7 +1026,7 @@ export default function Landing() {
       <section className="pain-bento-section" id="comparison">
         <div className="bright-container">
           <div className="bright-section-header pain-bento-header">
-            <TypewriterHeading text="Why Enquiries Still Slip Through" />
+            <h2>Why Enquiries Still Slip Through</h2>
             <p>Modern B2B enquiries come from many channels, move quickly, and often get delayed, missed, or poorly handled across the sales process.</p>
           </div>
           <div className="pain-bento-grid">
@@ -1063,7 +1063,7 @@ export default function Landing() {
       {/* Process Steps */}
       <section className="bright-process" id="process">
         <div className="bright-container">
-          <div className="bright-section-header"><TypewriterHeading text="Implementation in Minutes" /><p>The exact process to deploy your digital sales expert.</p></div>
+          <div className="bright-section-header"><h2>Implementation in Minutes</h2><p>The exact process to deploy your digital sales expert.</p></div>
           <div className="bright-vertical-steps">
             {processSteps.map((step, idx) => (
               <div key={step.id}>
@@ -1090,7 +1090,7 @@ export default function Landing() {
         <div className="bright-container">
           <div className="bright-stats-card">
             <div className="bright-stats-intro">
-              <TypewriterHeading text={"The New\nAI Sales Layer"} as="h2" />
+              <h2>The New<br />AI Sales Layer</h2>
               <p className="bright-stats-intro-copy">
                 AI Agents are reshaping equipment sales by responding faster, qualifying better, and guiding buyers before your sales team steps in.
               </p>
