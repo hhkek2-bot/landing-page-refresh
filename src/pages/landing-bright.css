@@ -1470,7 +1470,7 @@
   width: 180px;
   height: 130px;
   border-radius: 16px;
-  border: 1px solid rgba(34, 21, 0, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.05);
   background: linear-gradient(140deg, #fff8df 0%, #ffe9c2 100%);
   position: relative;
   flex-shrink: 0;
@@ -1478,7 +1478,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 10px 28px -18px rgba(227, 24, 10, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 24px -16px rgba(15, 23, 42, 0.18);
 }
 
 /* ---- Step 1: Profile ---- */
@@ -1488,27 +1488,27 @@
               linear-gradient(140deg, #fff5fb 0%, #ffe9c2 100%);
 }
 .bright-anim-avatar {
-  width: 52px; height: 52px; border-radius: 999px;
+  width: 48px; height: 48px; border-radius: 999px;
   background: linear-gradient(135deg, var(--accent-red), #ff8a3d);
   color: #fff; display: inline-flex; align-items: center; justify-content: center;
   position: relative; z-index: 2;
-  box-shadow: 0 8px 20px -6px rgba(227, 24, 10, 0.55), inset 0 0 0 3px #fff;
+  box-shadow: 0 6px 16px -6px rgba(227, 24, 10, 0.45), inset 0 0 0 2px #fff;
   animation: brightAvatarPulse 2.4s ease-in-out infinite;
 }
 .bright-anim-ring { border-radius: 999px; position: absolute; }
 .bright-anim-ring-outer {
-  width: 102px; height: 102px;
-  border: 2px dashed rgba(124, 58, 237, 0.55);
+  width: 100px; height: 100px;
+  border: 1px dashed rgba(124, 58, 237, 0.45);
   animation: brightSpinRing 6s linear infinite;
 }
 .bright-anim-ring-inner {
-  width: 76px; height: 76px;
-  border: 2px solid rgba(255, 197, 1, 0.85);
+  width: 74px; height: 74px;
+  border: 1px solid rgba(255, 197, 1, 0.7);
   border-right-color: transparent;
   border-bottom-color: transparent;
   animation: brightSpinRing 3s linear infinite reverse;
 }
-.bright-anim-spark { position: absolute; width: 8px; height: 8px; border-radius: 999px; }
+.bright-anim-spark { position: absolute; width: 6px; height: 6px; border-radius: 999px; }
 .bright-anim-spark-1 { top: 14px; left: 22px; background: #7c3aed; animation: brightSparkFloat 2.6s ease-in-out infinite; }
 .bright-anim-spark-2 { top: 22px; right: 24px; background: var(--accent-yellow); animation: brightSparkFloat 2.2s ease-in-out infinite 0.4s; }
 .bright-anim-spark-3 { bottom: 18px; left: 30px; background: var(--accent-red); animation: brightSparkFloat 2.8s ease-in-out infinite 0.8s; }
@@ -1562,8 +1562,8 @@
   flex-direction: column; gap: 12px;
 }
 .bright-anim-slider-bg {
-  width: 110px; height: 8px; border-radius: 999px;
-  background: rgba(15, 23, 42, 0.08); position: relative; overflow: hidden;
+  width: 110px; height: 6px; border-radius: 999px;
+  background: rgba(15, 23, 42, 0.06); position: relative; overflow: hidden;
 }
 .bright-anim-slider-fill {
   position: absolute; inset: 0; width: 60%;
@@ -1571,21 +1571,21 @@
   animation: brightSliderFill 2.2s ease-in-out infinite alternate;
 }
 .bright-anim-slider-knob {
-  width: 22px; height: 22px; border-radius: 999px;
-  background: #fff; border: 3px solid var(--accent-red);
-  position: absolute; top: 50%; left: 50%; margin: -11px 0 0 -55px;
-  box-shadow: 0 4px 10px -2px rgba(227, 24, 10, 0.45);
+  width: 16px; height: 16px; border-radius: 999px;
+  background: #fff; border: 1.5px solid var(--accent-red);
+  position: absolute; top: 50%; left: 50%; margin: -8px 0 0 -55px;
+  box-shadow: 0 2px 6px -1px rgba(227, 24, 10, 0.35);
   animation: brightSlideKnob 2.2s ease-in-out infinite alternate;
 }
 .bright-anim-toggle {
-  width: 44px; height: 22px; border-radius: 999px;
-  background: rgba(15, 23, 42, 0.1);
+  width: 36px; height: 18px; border-radius: 999px;
+  background: rgba(15, 23, 42, 0.08);
   position: relative; transition: background 0.4s;
 }
 .bright-anim-toggle span {
-  position: absolute; top: 3px; left: 3px;
-  width: 16px; height: 16px; border-radius: 999px; background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+  position: absolute; top: 2px; left: 2px;
+  width: 14px; height: 14px; border-radius: 999px; background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
   animation: brightToggleSlide 2.6s ease-in-out infinite;
 }
 .bright-anim-toggle-1 { background: linear-gradient(90deg, #7c3aed, #c084fc); }
@@ -1593,9 +1593,9 @@
 .bright-anim-toggle-2 { background: linear-gradient(90deg, #22c55e, #84cc16); }
 .bright-anim-toggle-2 span { animation-delay: 1.1s; }
 
-@keyframes brightSlideKnob { from { transform: translateX(0); } to { transform: translateX(66px); } }
+@keyframes brightSlideKnob { from { transform: translateX(0); } to { transform: translateX(94px); } }
 @keyframes brightSliderFill { from { width: 18%; } to { width: 88%; } }
-@keyframes brightToggleSlide { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(22px); } }
+@keyframes brightToggleSlide { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(18px); } }
 
 /* ---- Step 4: Test ---- */
 .bright-step-graphic-test {
