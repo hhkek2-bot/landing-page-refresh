@@ -264,6 +264,14 @@ export default function AgentFeatures() {
   return (
     <section className="af-section">
       <div className="bright-container">
+        <div className="af-headline af-headline-top">
+          <h2>Turn AI Conversations Into Sales Opportunities</h2>
+          <p>
+            Set up your agent, train it with your business knowledge, monitor every enquiry,
+            and identify high-intent buyers your sales team should follow up.
+          </p>
+        </div>
+
         <div className="af-browser">
           <div className="af-browser-bar">
             <div className="af-browser-dots">
@@ -300,14 +308,6 @@ export default function AgentFeatures() {
               <p>{feature.description}</p>
             </div>
           </div>
-        </div>
-
-        <div className="af-headline">
-          <h2>Turn AI Conversations Into Sales Opportunities</h2>
-          <p>
-            Set up your agent, train it with your business knowledge, monitor every enquiry,
-            and identify high-intent buyers your sales team should follow up.
-          </p>
         </div>
       </div>
     </section>
