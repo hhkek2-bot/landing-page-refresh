@@ -2590,10 +2590,10 @@
 .pain-bento-header { margin-bottom: 64px; max-width: none; }
 .pain-bento-header h2 {
   color: #0b1220;
-  font-size: clamp(2.4rem, 4.6vw, 4rem);
-  font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 1.15;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
   margin-bottom: 20px;
   padding-bottom: 0.15em;
   white-space: nowrap;
