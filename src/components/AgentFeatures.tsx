@@ -272,15 +272,8 @@ export default function AgentFeatures() {
           </p>
         </div>
 
-        <div className="af-browser">
-          <div className="af-browser-bar">
-            <div className="af-browser-dots">
-              <span /><span /><span />
-            </div>
-            <div className="af-browser-url">app.salesagent.ai / features</div>
-          </div>
-
-          <div className="af-tabs" role="tablist">
+        <div className="af-tabbar-wrap">
+          <div className="af-tabbar" role="tablist">
             {FEATURES.map((f) => {
               const Icon = f.icon;
               const isActive = f.key === active;
@@ -289,7 +282,7 @@ export default function AgentFeatures() {
                   key={f.key}
                   role="tab"
                   aria-selected={isActive}
-                  className={`af-tab ${isActive ? "af-tab-active" : ""}`}
+                  className={`af-pill ${isActive ? "af-pill-active" : ""}`}
                   onClick={() => setActive(f.key)}
                 >
                   <Icon size={16} />
@@ -298,15 +291,15 @@ export default function AgentFeatures() {
               );
             })}
           </div>
+        </div>
 
-          <div className="af-panel" key={active}>
-            <div className="af-panel-visual">
-              <Visual />
-            </div>
-            <div className="af-panel-text">
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
-            </div>
+        <div className="af-stage" key={active}>
+          <div className="af-panel-visual">
+            <Visual />
+          </div>
+          <div className="af-panel-text">
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
           </div>
         </div>
       </div>
