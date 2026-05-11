@@ -1176,8 +1176,6 @@ export default function Landing() {
         <div className="ws-cta-inner">
           <h2 className="ws-cta-title">
             <span style={{ whiteSpace: "nowrap" }}>Build Your AI Sales Agent</span>
-            <br />
-            <span className="ws-cta-title-grad" style={{ whiteSpace: "nowrap" }}>For the Equipment Industry</span>
           </h2>
           <div className="ws-cta-actions">
             <Link to="/" className="ws-cta-btn-primary">
