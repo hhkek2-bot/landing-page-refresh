@@ -28,6 +28,7 @@ import type { LucideIcon } from "lucide-react";
 import "./landing-bright.css";
 import DeploymentTouchpoints from "@/components/DeploymentTouchpoints";
 import SalesIntelligence from "@/components/SalesIntelligence";
+import AgentFeatures from "@/components/AgentFeatures";
 
 import boomLiftImg from "@/assets/boom-lift.jpg";
 import boomLift2Img from "@/assets/boom-lift-2.jpg";
@@ -1089,6 +1090,8 @@ export default function Landing() {
         </div>
       </section>
 
+
+      <AgentFeatures />
 
       {/* Process Steps */}
       <section className="bright-process" id="process">
