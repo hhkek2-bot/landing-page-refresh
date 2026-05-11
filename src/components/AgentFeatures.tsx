@@ -208,26 +208,72 @@ function VisualFlow() {
 
 function VisualVisibility() {
   const convos = [
-    { name: "Sarah Lim", msg: "Need a 20m boom lift quote for next week", time: "2m", unread: true },
-    { name: "David Tan", msg: "Is the forklift available for monthly rental?", time: "14m", unread: true },
-    { name: "Amanda Koh", msg: "Thanks, I'll check with my team and revert", time: "1h", unread: false },
+    { name: "Sarah Lim", preview: "Hi Sarah! For a 20m boom lift in KL, here are the best-fit options…", time: "2m", agent: "AI Sales Specialist", active: true },
+    { name: "David Tan", preview: "We have 3-ton forklifts available for monthly rental starting…", time: "14m", agent: "AI Sales Specialist", active: false },
+    { name: "Amanda Koh", preview: "Thanks for confirming. I've shared the quotation PDF with…", time: "1h", agent: "AI Sales Specialist", active: false },
+    { name: "MegaCon Builders", preview: "Yes, the telehandler can lift above 15m. Models below all have…", time: "3h", agent: "AI Sales Specialist", active: false },
   ];
   return (
     <div className="af-visual af-visual-visibility">
-      <div className="af-conv-list">
-        {convos.map((c) => (
-          <div key={c.name} className="af-conv">
-            <div className="af-conv-avatar">{c.name[0]}</div>
-            <div className="af-conv-body">
-              <div className="af-conv-top">
-                <span className="af-conv-name">{c.name}</span>
-                <span className="af-conv-time">{c.time}</span>
-              </div>
-              <div className="af-conv-msg">{c.msg}</div>
-            </div>
-            {c.unread && <Bell size={14} className="af-conv-bell" />}
+      <div className="afv-shell">
+        {/* Left: list */}
+        <div className="afv-list">
+          <div className="afv-search">
+            <span className="afv-search-icon">⌕</span>
+            <span className="afv-search-ph">Search conversations…</span>
           </div>
-        ))}
+          <div className="afv-filters">
+            <span className="afv-chip afv-chip-active">● 12</span>
+            <span className="afv-chip">◷ 8</span>
+            <span className="afv-chip">⚠ 1</span>
+            <span className="afv-chip">✓ 3</span>
+          </div>
+          {convos.map((c) => (
+            <div key={c.name} className={`afv-item ${c.active ? "afv-item-active" : ""}`}>
+              <div className="afv-item-top">
+                <span className="afv-item-name">{c.name}</span>
+                <span className="afv-item-time">⏱ {c.time}</span>
+              </div>
+              <div className="afv-item-msg">{c.preview}</div>
+              <div className="afv-item-agent">{c.agent}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Right: detail */}
+        <div className="afv-detail">
+          <div className="afv-detail-head">
+            <div className="afv-detail-who">
+              <div className="afv-detail-avatar">S</div>
+              <div>
+                <div className="afv-detail-name">Sarah Lim</div>
+                <div className="afv-detail-role">AI Sales Specialist</div>
+              </div>
+            </div>
+            <div className="afv-detail-actions">
+              <span className="afv-act">⚑ Flag</span>
+              <span className="afv-act afv-act-end">✕ End Chat</span>
+            </div>
+          </div>
+
+          <div className="afv-thread">
+            <div className="afv-bubble afv-bubble-user">
+              20m boom lift for a project in KL next week
+            </div>
+            <div className="afv-ai">
+              <div className="afv-ai-tag">● AI</div>
+              <p>Hi Sarah! Here are the best-fit 20m boom lifts available in Kuala Lumpur:</p>
+              <div className="afv-table">
+                <div className="afv-tr afv-tr-head">
+                  <span>Equipment</span><span>Rate</span><span>Status</span>
+                </div>
+                <div className="afv-tr"><span>Genie Z-62/40 Boom Lift</span><span>RM 850/day</span><span className="afv-ok">Available</span></div>
+                <div className="afv-tr"><span>JLG 660SJ Boom Lift</span><span>RM 920/day</span><span className="afv-ok">Available</span></div>
+              </div>
+              <p className="afv-followup">Would you like me to prepare a formal quotation or check delivery for next Monday?</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
