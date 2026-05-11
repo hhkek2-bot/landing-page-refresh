@@ -273,8 +273,8 @@
 /* Responsive */
 @media (max-width: 900px) {
   .af-section { padding: 64px 0 48px; }
-  .af-stage { padding: 40px 24px; gap: 32px; min-height: 0; }
-  .af-panel-text h3 { font-size: 22px; }
+  .af-box { padding: 36px 20px 48px; border-radius: 24px; }
+  .af-stage { min-height: 0; }
   .af-pill { padding: 9px 14px; font-size: 13px; }
 }
 @media (max-width: 560px) {
