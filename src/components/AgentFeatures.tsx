@@ -301,7 +301,7 @@ function VisualProfiling() {
         <div className="afp-table">
           <div className="afp-row afp-row-head">
             <span>Company</span>
-            <span>Need</span>
+            <span>Deal</span>
             <span>Urgency</span>
             <span className="afp-cell-right">Behaviour</span>
           </div>
