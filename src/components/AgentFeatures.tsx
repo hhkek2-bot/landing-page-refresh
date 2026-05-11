@@ -328,26 +328,73 @@ function VisualProfiling() {
 }
 
 function VisualIntent() {
-  const cards = [
-    { name: "BuildPro Sdn Bhd", intent: "High", tag: "Quotation Request", summary: "Requested quote for 20m boom lift × 2, needs delivery by Friday." },
-    { name: "MegaCon Builders", intent: "High", tag: "Urgent Rental", summary: "Asking for forklift availability this week, project starts Monday." },
-    { name: "GreenSpace Co.", intent: "Medium", tag: "Price Asked", summary: "Asked about monthly pricing for floor scrubber, comparing options." },
+  const deals = [
+    {
+      name: "BuildPro Sdn Bhd",
+      equipment: "20-ton Excavator × 1",
+      period: "12 Jun – 26 Jun (2 weeks)",
+      location: "Tuas West Worksite",
+      price: "S$ 6,400",
+      action: "Send rental agreement",
+      due: "Today, 5pm",
+      urgent: true,
+    },
+    {
+      name: "MegaCon Builders",
+      equipment: "3-ton Forklift × 2",
+      period: "10 Jun – 30 Sep (rental)",
+      location: "Jurong Industrial Park",
+      price: "S$ 11,800",
+      action: "Confirm delivery slot",
+      due: "Tomorrow",
+      urgent: false,
+    },
+    {
+      name: "Skyline Interiors",
+      equipment: "Scissor Lift 12m × 1",
+      period: "08 Jun – 15 Jun",
+      location: "Orchard Road site",
+      price: "S$ 1,950",
+      action: "Share insurance docs",
+      due: "Within 2 days",
+      urgent: false,
+    },
   ];
   return (
     <div className="af-visual af-visual-intent">
-      <div className="af-intent-grid">
-        {cards.map((c) => (
-          <div key={c.name} className="af-intent-card">
-            <div className="af-intent-head">
-              <span className={`af-intent-badge af-intent-${c.intent.toLowerCase()}`}>
-                {c.intent === "High" ? <CheckCircle2 size={12} /> : <Circle size={12} />}
-                {c.intent} Intent
-              </span>
-              <span className="af-intent-tag">{c.tag}</span>
+      <div className="afd-list">
+        {deals.map((d) => (
+          <div key={d.name} className="afd-card">
+            <div className="afd-main">
+              <div className="afd-head">
+                <span className="afd-badge"><CheckCircle2 size={12} /> Confirmed Rental</span>
+                <span className="afd-name">{d.name}</span>
+              </div>
+              <div className="afd-grid">
+                <div className="afd-cell">
+                  <span className="afd-label">Equipment</span>
+                  <span className="afd-val">{d.equipment}</span>
+                </div>
+                <div className="afd-cell">
+                  <span className="afd-label">Period</span>
+                  <span className="afd-val">{d.period}</span>
+                </div>
+                <div className="afd-cell">
+                  <span className="afd-label">Location</span>
+                  <span className="afd-val">{d.location}</span>
+                </div>
+                <div className="afd-cell">
+                  <span className="afd-label">Quoted Price</span>
+                  <span className="afd-val afd-price">{d.price}</span>
+                </div>
+              </div>
             </div>
-            <div className="af-intent-name">{c.name}</div>
-            <div className="af-intent-summary">{c.summary}</div>
-            <button className="af-intent-btn">Follow Up <ArrowRight size={14} /></button>
+            <div className="afd-action">
+              <span className="afd-action-label">Pending Action</span>
+              <span className="afd-action-title">{d.action}</span>
+              <span className={`afd-due ${d.urgent ? "afd-due-urgent" : ""}`}>{d.due}</span>
+              <button className="afd-btn">Follow Up <ArrowRight size={14} /></button>
+            </div>
           </div>
         ))}
       </div>
