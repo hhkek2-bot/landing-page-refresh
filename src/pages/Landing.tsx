@@ -1021,6 +1021,8 @@ export default function Landing() {
         </div>
       </section>
 
+      <SalesIntelligence />
+
 
       {/* Pain Points — Bento Grid */}
       <section className="pain-bento-section" id="comparison">
@@ -1083,7 +1085,6 @@ export default function Landing() {
       </section>
 
       <DeploymentTouchpoints />
-      <SalesIntelligence />
 
       {/* Metrics — Unified card */}
       <section className="bright-stats-section">
