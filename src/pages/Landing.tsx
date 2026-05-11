@@ -1085,7 +1085,6 @@ export default function Landing() {
       </section>
 
       <DeploymentTouchpoints />
-      <SalesIntelligence />
 
       {/* Metrics — Unified card */}
       <section className="bright-stats-section">
