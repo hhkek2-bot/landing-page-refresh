@@ -48,7 +48,7 @@ const FEATURES: Feature[] = [
     icon: UserCircle,
     title: "Define How Your AI Agent Represents Your Business",
     description:
-      "Set the agent's role, introduction, tone, response boundaries, and business rules so it behaves according to your company direction.",
+      "Set the agent's role, introduction, response boundaries, tone, and business rules so it behaves according to your company direction.",
   },
   {
     key: "knowledge",
@@ -56,15 +56,15 @@ const FEATURES: Feature[] = [
     icon: BookOpen,
     title: "Train AI With Your Business Knowledge",
     description:
-      "Upload product catalogues, FAQs, rental terms, pricing guides, and company information for the AI to use in real customer enquiries.",
+      "Upload product catalogues, FAQs, rental terms, pricing guides, company information, and service details for the AI to use in real customer enquiries.",
   },
   {
     key: "flow",
     tab: "Workflow",
     icon: GitBranch,
-    title: "Guide Every Enquiry With a Structured Sales Flow",
+    title: "Guide Every Enquiry With a Structured Sales Workflow",
     description:
-      "Define how the AI handles recommendations, quotation requests, technical questions, and sales handover.",
+      "Define how the AI handles product recommendations, quotation requests, technical questions, booking interest, and sales handover.",
   },
   {
     key: "visibility",
@@ -78,9 +78,9 @@ const FEATURES: Feature[] = [
     key: "profiling",
     tab: "Leads",
     icon: UserSearch,
-    title: "Understand Buyer Quality and Intent Better",
+    title: "Capture and Profile Every Potential Buyer",
     description:
-      "Capture buyer details, project needs, urgency, and behaviour to help your team assess lead quality.",
+      "Capture buyer details, company information, project needs, product interest, location, urgency, and behaviour to help your team understand lead quality.",
   },
   {
     key: "intent",
