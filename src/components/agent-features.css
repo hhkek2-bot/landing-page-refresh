@@ -21,7 +21,7 @@
 .af-tabbar-wrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 24px;
+  margin-bottom: 56px;
 }
 .af-tabbar {
   display: inline-flex;
