@@ -63,9 +63,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex: 1;
-  min-height: 460px;
+  min-height: 620px;
   animation: af-fade 0.35s ease-out;
 }
 @keyframes af-fade {
@@ -75,9 +75,9 @@
 .af-panel-visual {
   width: 100%;
   max-width: 880px;
-  min-height: 440px;
+  min-height: 620px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
