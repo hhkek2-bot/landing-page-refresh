@@ -1488,27 +1488,27 @@
               linear-gradient(140deg, #fff5fb 0%, #ffe9c2 100%);
 }
 .bright-anim-avatar {
-  width: 52px; height: 52px; border-radius: 999px;
+  width: 48px; height: 48px; border-radius: 999px;
   background: linear-gradient(135deg, var(--accent-red), #ff8a3d);
   color: #fff; display: inline-flex; align-items: center; justify-content: center;
   position: relative; z-index: 2;
-  box-shadow: 0 8px 20px -6px rgba(227, 24, 10, 0.55), inset 0 0 0 3px #fff;
+  box-shadow: 0 6px 16px -6px rgba(227, 24, 10, 0.45), inset 0 0 0 2px #fff;
   animation: brightAvatarPulse 2.4s ease-in-out infinite;
 }
 .bright-anim-ring { border-radius: 999px; position: absolute; }
 .bright-anim-ring-outer {
-  width: 102px; height: 102px;
-  border: 2px dashed rgba(124, 58, 237, 0.55);
+  width: 100px; height: 100px;
+  border: 1px dashed rgba(124, 58, 237, 0.45);
   animation: brightSpinRing 6s linear infinite;
 }
 .bright-anim-ring-inner {
-  width: 76px; height: 76px;
-  border: 2px solid rgba(255, 197, 1, 0.85);
+  width: 74px; height: 74px;
+  border: 1px solid rgba(255, 197, 1, 0.7);
   border-right-color: transparent;
   border-bottom-color: transparent;
   animation: brightSpinRing 3s linear infinite reverse;
 }
-.bright-anim-spark { position: absolute; width: 8px; height: 8px; border-radius: 999px; }
+.bright-anim-spark { position: absolute; width: 6px; height: 6px; border-radius: 999px; }
 .bright-anim-spark-1 { top: 14px; left: 22px; background: #7c3aed; animation: brightSparkFloat 2.6s ease-in-out infinite; }
 .bright-anim-spark-2 { top: 22px; right: 24px; background: var(--accent-yellow); animation: brightSparkFloat 2.2s ease-in-out infinite 0.4s; }
 .bright-anim-spark-3 { bottom: 18px; left: 30px; background: var(--accent-red); animation: brightSparkFloat 2.8s ease-in-out infinite 0.8s; }
