@@ -97,7 +97,7 @@ function VisualIdentity() {
     <div className="af-visual af-visual-identity">
       <div className="af-card af-profile-card">
         <div className="af-profile-head">
-          <div className="af-avatar">A</div>
+          <img src={ariaAvatar} alt="Aria, sales agent" className="af-avatar af-avatar-photo" width={64} height={64} loading="lazy" />
           <div>
             <div className="af-profile-name">Aria · Sales Agent</div>
             <div className="af-profile-sub">Active · Configured</div>
@@ -107,8 +107,8 @@ function VisualIdentity() {
           {[
             ["Role", "Sales Specialist"],
             ["Tone", "Friendly · Professional"],
-            ["Introduction", "Hi, I'm Aria from Acme..."],
-            ["Boundaries", "No price negotiation"],
+            ["Introduction", "Hi, I'm Aria from Antbuildz. We rent and sell all types of construction equipment in Singapore — how can I help you today?"],
+            ["Boundaries", "Represent Antbuildz only. Never mention or recommend competing brands in conversations with customers."],
           ].map(([label, val]) => (
             <div key={label} className="af-field">
               <span className="af-field-label">{label}</span>
