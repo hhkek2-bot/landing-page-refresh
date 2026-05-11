@@ -282,11 +282,11 @@ function VisualVisibility() {
 
 function VisualProfiling() {
   const leads = [
-    { company: "BuildPro Sdn Bhd", need: "20m Boom Lift × 2", urgency: "Within 5 days", behaviour: "High", score: 87 },
-    { company: "MegaCon Builders", need: "Forklift 3-ton × 1", urgency: "This week", behaviour: "High", score: 82 },
-    { company: "GreenSpace Co.", need: "Floor Scrubber", urgency: "Next month", behaviour: "Medium", score: 61 },
-    { company: "Skyline Interiors", need: "Scissor Lift × 1", urgency: "Comparing vendors", behaviour: "Medium", score: 54 },
-    { company: "Lim Renovation", need: "Generator 20kVA", urgency: "Just browsing", behaviour: "Low", score: 28 },
+    { contact: "Sarah Lim", role: "Project Manager", company: "BuildPro Sdn Bhd", industry: "Construction · 120 staff", location: "Tuas, Singapore", behaviour: "High" },
+    { contact: "David Tan", role: "Site Supervisor", company: "MegaCon Builders", industry: "Civil Works · 85 staff", location: "Jurong, Singapore", behaviour: "High" },
+    { contact: "Amanda Koh", role: "Facilities Lead", company: "GreenSpace Co.", industry: "Landscaping · 40 staff", location: "Woodlands, Singapore", behaviour: "Medium" },
+    { contact: "Marcus Lee", role: "Operations Director", company: "Skyline Interiors", industry: "Interior Fit-out · 60 staff", location: "Orchard, Singapore", behaviour: "Medium" },
+    { contact: "Janice Wong", role: "Owner", company: "Lim Renovation", industry: "Home Reno · 12 staff", location: "Bedok, Singapore", behaviour: "Low" },
   ];
   return (
     <div className="af-visual af-visual-profiling">
@@ -300,22 +300,25 @@ function VisualProfiling() {
         </div>
         <div className="afp-table">
           <div className="afp-row afp-row-head">
+            <span>Contact</span>
             <span>Company</span>
-            <span>Deal</span>
-            <span>Urgency</span>
+            <span>Location</span>
             <span className="afp-cell-right">Behaviour</span>
           </div>
           {leads.map((l) => (
-            <div key={l.company} className="afp-row">
+            <div key={l.contact} className="afp-row">
               <span className="afp-company">
                 <span className="afp-dot" />
                 <span>
-                  <span className="afp-company-name">{l.company}</span>
-                  <span className="afp-company-meta">Score {l.score}/100</span>
+                  <span className="afp-company-name">{l.contact}</span>
+                  <span className="afp-company-meta">{l.role}</span>
                 </span>
               </span>
-              <span className="afp-need">{l.need}</span>
-              <span className="afp-urgency">{l.urgency}</span>
+              <span>
+                <span className="afp-company-name">{l.company}</span>
+                <span className="afp-company-meta">{l.industry}</span>
+              </span>
+              <span className="afp-urgency">{l.location}</span>
               <span className="afp-cell-right">
                 <span className={`afp-badge afp-badge-${l.behaviour.toLowerCase()}`}>{l.behaviour}</span>
               </span>
