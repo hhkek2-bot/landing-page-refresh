@@ -1098,7 +1098,7 @@ export default function Landing() {
             {processSteps.map((step, idx) => (
               <div key={step.id}>
                 <div className="bright-step bright-step-hidden">
-                  <div className="bright-step-num">{step.id}</div>
+                  <div className={`bright-step-num bright-step-num-${step.id}`}>{step.id}</div>
                   <div className="bright-step-content"><div className="bright-step-text"><h4>{step.title}</h4><p>{step.body}</p></div><StepGraphic visual={step.visual} /></div>
                 </div>
                 {idx < processSteps.length - 1 && (

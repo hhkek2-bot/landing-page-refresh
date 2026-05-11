@@ -1408,9 +1408,6 @@
   width: 68px;
   height: 68px;
   border-radius: 999px;
-  background: #fff;
-  border: 4px solid #ffe08f;
-  color: #8a6200;
   font-size: 1.4rem;
   font-weight: 700;
   display: inline-flex;
@@ -1420,13 +1417,20 @@
   z-index: 2;
   flex-shrink: 0;
   transition: all 0.5s ease;
+  border: none;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
 
+.bright-step-num-1 { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+.bright-step-num-2 { background: linear-gradient(135deg, #e3180a, #f87171); }
+.bright-step-num-3 { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+.bright-step-num-4 { background: linear-gradient(135deg, #2563eb, #60a5fa); }
+.bright-step-num-5 { background: linear-gradient(135deg, #059669, #34d399); }
+
 .bright-step-visible .bright-step-num {
-  border-color: var(--brand-accent);
-  color: var(--brand-accent);
-  background: rgb(var(--color-secondary-rgb) / 0.06);
-  box-shadow: 0 4px 18px rgb(var(--color-secondary-rgb) / 0.18);
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.22);
 }
 
 .bright-step-content {
