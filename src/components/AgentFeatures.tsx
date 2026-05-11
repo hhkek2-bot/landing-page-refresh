@@ -12,6 +12,14 @@ import {
   Bell,
   CheckCircle2,
   Circle,
+  HardDrive,
+  Link2,
+  ClipboardList,
+  Database,
+  MessageSquareText,
+  Package,
+  ContactRound,
+  HandshakeIcon,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import "./agent-features.css";
