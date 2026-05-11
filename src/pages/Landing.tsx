@@ -1021,6 +1021,8 @@ export default function Landing() {
         </div>
       </section>
 
+      <SalesIntelligence />
+
 
       {/* Pain Points — Bento Grid */}
       <section className="pain-bento-section" id="comparison">
