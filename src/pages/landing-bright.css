@@ -1936,7 +1936,7 @@
   .bright-cta-section { padding: 92px 0; }
   .bright-faq-summary { padding: 84px 0 74px; }
   .bright-faq-summary-grid { grid-template-columns: 1fr; }
-  .bright-section-header h2 { font-size: 2rem; }
+  .bright-section-header h2 { font-size: 2.3rem; }
   .bright-section-header-wide h2 { white-space: normal; }
   .bright-feature-grid { grid-template-columns: 1fr; }
 }
